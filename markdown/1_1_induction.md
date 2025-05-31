@@ -9,27 +9,27 @@ Section 1.1 introduces the Well-Ordered Axiom and the principle of mathmematical
 
 However, we can use the _Well-Ordering Axiom_ to prove that any non-empty subset of negative integers has a _greatest_ element.
 
-````{prf:proof}
-Every non-empty subset of the negative integers has a greatest element.
+> **PROOF: Every non-empty subset of the negative integers has a greatest element.**
+> 
+> Let $S$ be a non-empty subset of the negative integers ( $ S \neq \emptyset$ ).
+> 
+> Let $S'$ be the set obtained by multiplying each element of $S$ by $-1$.  
+> 
+> By the _**Well-Ordering Axiom**_, $S'$ contains a least element.  Let's call that element, $n'$.  Thus,
+> 
+> $$
+  n' \le k', \quad \forall \ k' \in S'
+> $$
+> 
+> But, multiplying each side of that inequality by $-1$  means that
+> 
+> $$
+  n \ge k, \quad \forall  \ k \in S 
+> $$
+> 
+> and so, $n$ is the greatest element in $S$.
 
-Let $S$ be a non-empty subset of the negative integers ( $ S \neq \varnothing$ ).
-
-Let $S'$ be the set obtained by multiplying each element of $S$ by $-1$.  
-
-By the _Well-Ordering Axiom_, $S'$ contains a least element.  Let's call that element, $n'$.  Thus,
-
-$$
-n' \le k', \quad \forall \; k' \in S'
-$$
-
-But, multiplying each side of that inequality by $-1$  means that
-
-$$
-n \ge k, \quad \forall  \; k \in S 
-$$
-
-and so, $n$ is the greatest element in $S$.
-````
+<br><br>
 
 ### 2. Prove $1+3+5+...+(2n-1) = n^2$ for all integers $n \ge 1$.
 
