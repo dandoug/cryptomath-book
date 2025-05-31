@@ -1,0 +1,52 @@
+footer.bd-footer-content {
+    display: none !important;
+}
+
+/* Hide the right sidebar by default */
+.bd-sidebar-secondary {
+    display: none;
+}
+
+/* Add a toggle button to the top navbar */
+#toggle-secondary-sidebar {
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+/* Light mode styles */
+html[data-theme="light"] #toggle-secondary-sidebar {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    color: #333;
+}
+
+/* Dark mode styles */
+html[data-theme="dark"] #toggle-secondary-sidebar {
+    background-color: #2b2b2b;
+    border: 1px solid #444;
+    color: #fff;
+}
+
+/* Layout adjustments when sidebar is hidden */
+body.sidebar-hidden .bd-main {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    max-width: none !important;
+}
+
+body.sidebar-hidden .bd-article-container {
+    max-width: none !important;
+    width: 100% !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    padding-right: 2em !important;
+    padding-left: 2em !important;
+}
+
+/* Smooth transitions */
+.bd-main,
+.bd-article-container {
+    transition: all 0.3s ease-in-out;
+}
