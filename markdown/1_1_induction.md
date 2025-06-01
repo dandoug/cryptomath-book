@@ -96,3 +96,24 @@ $$
 \end{aligned}
 $$
 
+_Skipping exercises 4, 5, 6... too much algebra._
+
+### 7. Prove $n \lt 2^n$ for all integers $n \ge 1$
+
+For $n=1$, we have
+
+$$ 
+1 < 2^1 = 2
+$$
+
+So, the base case holds.  We want to show that $n+1 < 2^{n+1}$ given $n < 2^n$.
+
+$$
+\begin{aligned}
+n+1 < 2^{n+1} & \iff n+1 < 2(2^n) \\
+              & \iff n+1 < 2^n + 2^n \\
+              & \iff n < 2^n 
+\end{aligned}
+$$
+
+We know the last step above is true because  $1 < 2^n$ for all $n \ge 1$.  Since the last statement is our induction hypothesis we have shown to be true in the base case, the begining statement, $n+1 < 2^{n+1}$ must be also be true.
