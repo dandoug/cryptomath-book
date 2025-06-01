@@ -58,5 +58,41 @@ $$
 
 So, $S(k)$ is true for positive integers $k$,  $k \ge 1$.
 
+<br><br>
 
+### 3. Prove $1^2+3^2+5^2+...+(2n-1)^2 = \frac{n(4n^2-1)}{3}$ for all integers $n \ge 1$.
+
+We want to prove the sum of the squares of the first $n$ integers is $\frac{n(4n^2-1)}{3}$ for all $n \ge 1$.  The general statement, $S(k)$ is
+
+$$
+S(k): \ 1^2+3^2+5^2+...+(2k-1)^2 = \frac{k(4k^2-1)}{3}
+$$
+
+The base case, $S(1)$ is
+
+$$
+\begin{aligned}
+S(1): \ 1^2 &= \frac{1(4 (1)^2-1)}{3} \\
+ &= \frac{3}{3} \\
+ &= 1
+\end{aligned}
+$$
+
+So, the base case is true.
+
+We're left to show that $S(k+1)$ is true assuming that $S(k)$ is true.
+
+$$
+\begin{aligned}
+ 1^2+3^2+5^2+...+(2k-1)^2+(2k+1)^2 &= S(k) + (2k+1)^2 \\
+ &= \frac{k(4k^2-1)}{3} + (2k+1)^2 \\
+ &= \frac{4k^3-k}{3} + \frac{3(4k^2+4k+1)}{3} \\
+ &= \frac{4k^3 - k +12k^2 +12k + 3 }{3} \\
+ &= \frac{4k^3 + 12k^2 +11k + 3 }{3} \\
+ &= \frac{(k+1)(4k^2 +8k + 3)}{3} \\
+ &= \frac{(k+1)(4k^2 +8k + 4 - 1 )}{3} \\
+ &= \frac{(k+1)(4(k+1)^2 -1 )}{3} \\
+ &= S(k+1)
+\end{aligned}
+$$
 
