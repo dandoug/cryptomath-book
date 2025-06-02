@@ -4,7 +4,7 @@ As I was reading {cite}`cryptomath`, I found myself wanting to do the exercises 
 
 Besides, I wanted to get more experience using those tools.
 
-The book content is oganized around how the exercises are presented in {cite}`cryptomath`.
+The book content is organized around how the exercises are presented in {cite}`cryptomath`.  The exercises completed here are ones I thought were interstesting to do and represent my own personal choices.  
 
 ```{tableofcontents}
 ```
