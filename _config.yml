@@ -4,7 +4,7 @@
 title: Cryptological Mathematics Exercises
 author: Dan Douglas
 #logo: images/logo.png
-exclude_patterns: [_build, .venv, src, css, tests, requirements.txt, .git, .gitignore, README.md, .DS_Store, "**.ipynb_checkpoints"]
+exclude_patterns: [_build, .venv, src, css, tests, requirements.txt, .git, .gitignore, .pytest_cache, README.md, .DS_Store, "**.ipynb_checkpoints"]
 only_build_toc_files: true
 
 # Force re-execution of notebooks on each build.

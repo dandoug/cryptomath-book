@@ -16,7 +16,7 @@ def format_factors(factors: list[int]) -> str:
     :return: A string representation of the prime factorization in the form
         "factor^exponent * ...", where repeated factors are grouped and represented with exponents.
     """
-    if len(factors) == 0:
+    if not factors:
         raise ValueError("empty list of factors")
 
     last_factor = 0
