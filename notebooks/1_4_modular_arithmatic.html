@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1.2 Prime Numbers, Division Algorithm, Greatest Common Divisor Exercises &#8212; Cryptological Mathematics Exercises</title>
+    <title>1.4 Modular Arithmatic &#8212; Cryptological Mathematics Exercises</title>
   
   
   
@@ -61,12 +61,12 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/1_2_primes_gcd';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/1_4_modular_arithmatic';</script>
     <script src="../_static/sidebar-togle.js?v=2b3ca58f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1.3 Relatively Prime Integers, Fundamental Theorem of Arithmatic" href="1_3_relative_primes.html" />
-    <link rel="prev" title="1.1 Induction Exercises" href="../markdown/1_1_induction.html" />
+    <link rel="next" title="1.5 Simple Ciphers" href="1_5_simple_ciphers.html" />
+    <link rel="prev" title="1.3 Relatively Prime Integers, Fundamental Theorem of Arithmatic" href="1_3_relative_primes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,9 +181,9 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Monoalphabetic Substitution Ciphers</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../markdown/1_1_induction.html">1.1 Induction Exercises</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">1.2 Prime Numbers, Division Algorithm, Greatest Common Divisor Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_2_primes_gcd.html">1.2 Prime Numbers, Division Algorithm, Greatest Common Divisor Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="1_3_relative_primes.html">1.3 Relatively Prime Integers, Fundamental Theorem of Arithmatic</a></li>
-<li class="toctree-l1"><a class="reference internal" href="1_4_modular_arithmatic.html">1.4 Modular Arithmatic</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1.4 Modular Arithmatic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="1_5_simple_ciphers.html">1.5 Simple Ciphers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="1_6_cryptoanalysis_monoalphabetic_substitution_ciphers.html">1.6 Cryptoanalysis of Monoalphabetic Substitution Ciphers</a></li>
 </ul>
@@ -261,7 +261,7 @@
       
       
       
-      <li><a href="../_sources/notebooks/1_2_primes_gcd.ipynb" target="_blank"
+      <li><a href="../_sources/notebooks/1_4_modular_arithmatic.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -345,7 +345,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>1.2 Prime Numbers, Division Algorithm, Greatest Common Divisor Exercises</h1>
+    <h1>1.4 Modular Arithmatic</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -355,12 +355,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-1-2">Exercises 1.2</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#find-the-prime-factors-of-901-894-500-1100-765">3. Find the prime factors of 901, 894, 500, 1100, 765.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#find-the-quotient-and-remainder-when-the-first-of-each-of-these-pairs-of-numbers-is-divided-by-the-second-3435-16-747-12-3674-28-105-15-412-16">4. Find the quotient and remainder when the first of each of these pairs of numbers is divided by the second: (3435,16), (747,12), (3674,28), (105,15), (412,16).</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#find-the-greatest-common-divisor-of-each-of-the-pairs-of-integers-from-problem-4">5. Find the greatest common divisor of each of the pairs of integers from Problem 4.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-computer-program-to-implement-the-division-algorithm">11. Write a computer program to implement the Division Algorithm.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-computer-program-to-implement-the-greatest-common-divisor-of-two-integers">12. Write a computer program to implement the greatest common divisor of two integers.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">1.4 Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-any-integer-x-prove-that-either-x-2-equiv-0-pmod-4-or-x-2-equiv-1-pmod-4">7. For any integer <span class="math notranslate nohighlight">\(x\)</span>, prove that either <span class="math notranslate nohighlight">\(x^2 \equiv 0\pmod{4}\)</span> or <span class="math notranslate nohighlight">\(x^2 \equiv 1\pmod{4}\)</span>.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-computer-program-that-acceps-as-input-two-integers-a-and-n-and-outputs-the-additive-inverse-of-a-pmod-n">9. Write a computer program that acceps as input two integers <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(n\)</span>, and outputs the additive inverse of <span class="math notranslate nohighlight">\(a\pmod{n}\)</span>.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-program-that-accepts-three-integers-a-b-and-n-as-input-and-then-outputs-a-n-b-and-a-times-n-b">10. Write a program that accepts three integers <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(n\)</span> as input and then outputs <span class="math notranslate nohighlight">\(a +_n b\)</span> and <span class="math notranslate nohighlight">\(a \times_n b\)</span>.</a></li>
 </ul>
 </li>
 </ul>
@@ -374,151 +372,103 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="prime-numbers-division-algorithm-greatest-common-divisor-exercises">
-<h1>1.2 Prime Numbers, Division Algorithm, Greatest Common Divisor Exercises<a class="headerlink" href="#prime-numbers-division-algorithm-greatest-common-divisor-exercises" title="Link to this heading">#</a></h1>
-<p>Selected solutions to exercises in this section</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="modular-arithmatic">
+<h1>1.4 Modular Arithmatic<a class="headerlink" href="#modular-arithmatic" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span><span class="p">))</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">src.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">format_factors</span><span class="p">,</span> <span class="n">display_prime_factors_table</span><span class="p">,</span> <span class="n">display_quotient_and_remainders_table</span><span class="p">,</span> <span class="n">display_gcd_table</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">display_mod_inverse_table</span><span class="p">,</span> <span class="n">display_sum_prod_mod_table</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section id="exercises-1-2">
-<h2>Exercises 1.2<a class="headerlink" href="#exercises-1-2" title="Link to this heading">#</a></h2>
-<section id="find-the-prime-factors-of-901-894-500-1100-765">
-<h3>3. Find the prime factors of 901, 894, 500, 1100, 765.<a class="headerlink" href="#find-the-prime-factors-of-901-894-500-1100-765" title="Link to this heading">#</a></h3>
-<p>For this exercise, we will implement the trial division algorithm for deriving prime factorizations.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">prime_factors</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n must be a positive integer &gt; 1&quot;</span><span class="p">)</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># starting with the smallest prime</span>
-    <span class="n">factors</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">while</span> <span class="n">d</span> <span class="o">*</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">:</span>  <span class="c1"># no need to go beyond the square root</span>
-        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">d</span><span class="p">:</span>  <span class="c1"># check if d divides n, if not, move to the next divisor</span>
-            <span class="n">d</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>  <span class="c1"># d divides n, so n is divisible by d</span>
-            <span class="n">n</span> <span class="o">//=</span> <span class="n">d</span>  <span class="c1"># replace n with the quotient from this divisor</span>
-            <span class="n">factors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>  <span class="c1"># save this divisor</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">factors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">factors</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">901</span><span class="p">,</span> <span class="mi">894</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">1100</span><span class="p">,</span> <span class="mi">765</span><span class="p">]</span>
-<span class="n">outputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">format_factors</span><span class="p">(</span><span class="n">prime_factors</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">]</span>
-<span class="n">display_prime_factors_table</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\begin{split}\displaystyle \begin{array}{c|l}
-n &amp; \text{Prime Factorization of } n \\
-\hline
-901 &amp; 17 \cdot 53 \\
-894 &amp; 2 \cdot 3 \cdot 149 \\
-500 &amp; 2^2 \cdot 5^3 \\
-1100 &amp; 2^2 \cdot 5^2 \cdot 11 \\
-765 &amp; 3^2 \cdot 5 \cdot 17 \\
-\end{array}\end{split}\]</div>
-</div>
-</div>
+<section id="exercises">
+<h2>1.4 Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<section id="for-any-integer-x-prove-that-either-x-2-equiv-0-pmod-4-or-x-2-equiv-1-pmod-4">
+<h3>7. For any integer <span class="math notranslate nohighlight">\(x\)</span>, prove that either <span class="math notranslate nohighlight">\(x^2 \equiv 0\pmod{4}\)</span> or <span class="math notranslate nohighlight">\(x^2 \equiv 1\pmod{4}\)</span>.<a class="headerlink" href="#for-any-integer-x-prove-that-either-x-2-equiv-0-pmod-4-or-x-2-equiv-1-pmod-4" title="Link to this heading">#</a></h3>
+<p>Either <span class="math notranslate nohighlight">\(x\)</span> is even or odd.  We consider both cases.</p>
+<p>If <span class="math notranslate nohighlight">\(x\)</span> is even, then there exists <span class="math notranslate nohighlight">\(a\)</span> such that <span class="math notranslate nohighlight">\(2a = x\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+ x^2 &amp; = (2a)^2 \\
+     &amp; = 4a^2 \\
+     &amp; \equiv 0\pmod{4}
+\end{aligned}
+\end{split}\]</div>
+<p>since <span class="math notranslate nohighlight">\(4|4a^2\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(x\)</span> is odd, then there exists <span class="math notranslate nohighlight">\(a\)</span> such that <span class="math notranslate nohighlight">\(2a + 1 = x\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+ x^2 &amp; = (2a + 1)^2 \\
+     &amp; = 4a^2 + 4a + 1 \\
+     &amp; = 4(a^2 + a) + 1 \\
+     &amp; \equiv 0 + 1 \pmod{4} \\
+     &amp; \equiv 1 \pmod{4}
+\end{aligned}
+\end{split}\]</div>
 </section>
-<section id="find-the-quotient-and-remainder-when-the-first-of-each-of-these-pairs-of-numbers-is-divided-by-the-second-3435-16-747-12-3674-28-105-15-412-16">
-<span id="problem-4"></span><h3>4. Find the quotient and remainder when the first of each of these pairs of numbers is divided by the second: (3435,16), (747,12), (3674,28), (105,15), (412,16).<a class="headerlink" href="#find-the-quotient-and-remainder-when-the-first-of-each-of-these-pairs-of-numbers-is-divided-by-the-second-3435-16-747-12-3674-28-105-15-412-16" title="Link to this heading">#</a></h3>
-<p>This is a simple chore for Python.</p>
+<section id="write-a-computer-program-that-acceps-as-input-two-integers-a-and-n-and-outputs-the-additive-inverse-of-a-pmod-n">
+<h3>9. Write a computer program that acceps as input two integers <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(n\)</span>, and outputs the additive inverse of <span class="math notranslate nohighlight">\(a\pmod{n}\)</span>.<a class="headerlink" href="#write-a-computer-program-that-acceps-as-input-two-integers-a-and-n-and-outputs-the-additive-inverse-of-a-pmod-n" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">divide</span><span class="p">(</span><span class="n">dividend</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">divisor</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-    <span class="c1"># just some quick sanity checks</span>
-    <span class="k">if</span> <span class="n">dividend</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">divisor</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">dividend</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">divisor</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid input&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">dividend</span> <span class="o">//</span> <span class="n">divisor</span><span class="p">,</span> <span class="n">dividend</span> <span class="o">%</span> <span class="n">divisor</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">inverse_mod_n</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pairs</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3435</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="p">(</span><span class="mi">747</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="mi">3674</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span> <span class="p">(</span><span class="mi">105</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="p">(</span><span class="mi">412</span><span class="p">,</span> <span class="mi">16</span><span class="p">)]</span>
-<span class="n">quotients_remainders</span> <span class="o">=</span> <span class="p">[</span><span class="n">divide</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">]</span>
-<span class="n">display_quotient_and_remainders_table</span><span class="p">(</span><span class="n">pairs</span><span class="p">,</span> <span class="n">quotients_remainders</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\begin{split}\displaystyle \begin{array}{c|c|c|c}
-\text{dividend} &amp; \text{divisor} &amp; \text{quotient} &amp; \text{remainder} \\
-\hline
-3435 &amp; 16 &amp; 214 &amp; 11 \\
-747 &amp; 12 &amp; 62 &amp; 3 \\
-3674 &amp; 28 &amp; 131 &amp; 6 \\
-105 &amp; 15 &amp; 7 &amp; 0 \\
-412 &amp; 16 &amp; 25 &amp; 12 \\
-\end{array}\end{split}\]</div>
-</div>
-</div>
-</section>
-<section id="find-the-greatest-common-divisor-of-each-of-the-pairs-of-integers-from-problem-4">
-<span id="problem-5"></span><h3>5. Find the greatest common divisor of each of the pairs of integers from <a class="reference internal" href="#problem-4">Problem 4</a>.<a class="headerlink" href="#find-the-greatest-common-divisor-of-each-of-the-pairs-of-integers-from-problem-4" title="Link to this heading">#</a></h3>
-<p>We will implement the Euclidean Algorithm, using the <code class="docutils literal notranslate"><span class="pre">divide</span></code> program from the previous problem.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gcd</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="n">q</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">divide</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">y</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">gcd</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gcds</span> <span class="o">=</span> <span class="p">[</span><span class="n">gcd</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">]</span>
-<span class="n">display_gcd_table</span><span class="p">(</span><span class="n">pairs</span><span class="p">,</span> <span class="n">gcds</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a_and_n</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">26</span><span class="p">)]</span>
+<span class="n">inv_mod_n</span> <span class="o">=</span> <span class="p">[</span><span class="n">inverse_mod_n</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">a_and_n</span><span class="p">]</span>
+<span class="n">display_mod_inverse_table</span><span class="p">(</span><span class="n">a_and_n</span><span class="p">,</span> <span class="n">inv_mod_n</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
 \[\begin{split}\displaystyle \begin{array}{c|c|c}
-x &amp; y &amp; \text{gcd(} x , y \text{)} \\
+a &amp; n &amp; \text{additive inverse of}\ a \pmod{n} \\
 \hline
-3435 &amp; 16 &amp; 1 \\
-747 &amp; 12 &amp; 3 \\
-3674 &amp; 28 &amp; 2 \\
-105 &amp; 15 &amp; 15 \\
-412 &amp; 16 &amp; 4 \\
+4 &amp; 7 &amp; 3 \\
+7 &amp; 11 &amp; 4 \\
+16 &amp; 26 &amp; 10 \\
 \end{array}\end{split}\]</div>
 </div>
 </div>
 </section>
-<section id="write-a-computer-program-to-implement-the-division-algorithm">
-<h3>11. Write a computer program to implement the Division Algorithm.<a class="headerlink" href="#write-a-computer-program-to-implement-the-division-algorithm" title="Link to this heading">#</a></h3>
-<p>See <a class="reference internal" href="#problem-4">Problem 4</a>, above.</p>
-</section>
-<section id="write-a-computer-program-to-implement-the-greatest-common-divisor-of-two-integers">
-<h3>12. Write a computer program to implement the greatest common divisor of two integers.<a class="headerlink" href="#write-a-computer-program-to-implement-the-greatest-common-divisor-of-two-integers" title="Link to this heading">#</a></h3>
-<p>See <a class="reference internal" href="#problem-5">Problem 5</a>, above.</p>
+<section id="write-a-program-that-accepts-three-integers-a-b-and-n-as-input-and-then-outputs-a-n-b-and-a-times-n-b">
+<h3>10. Write a program that accepts three integers <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(n\)</span> as input and then outputs <span class="math notranslate nohighlight">\(a +_n b\)</span> and <span class="math notranslate nohighlight">\(a \times_n b\)</span>.<a class="headerlink" href="#write-a-program-that-accepts-three-integers-a-b-and-n-as-input-and-then-outputs-a-n-b-and-a-times-n-b" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;prime_factors&#39;</span><span class="p">,</span> <span class="s1">&#39;gcd&#39;</span><span class="p">,</span> <span class="s1">&#39;divide&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sum_and_prod_mod_n</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span><span class="p">,</span> <span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span>
 </pre></div>
 </div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a_b_n</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">26</span><span class="p">),</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">12</span><span class="p">]]</span>
+<span class="n">sum_prod_mod_n</span> <span class="o">=</span> <span class="p">[</span><span class="n">sum_and_prod_mod_n</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">a_b_n</span><span class="p">]</span>
+<span class="n">display_sum_prod_mod_table</span><span class="p">(</span><span class="n">a_b_n</span><span class="p">,</span> <span class="n">sum_prod_mod_n</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \begin{array}{c|c|c|c|c}
+a &amp; b &amp; n &amp; a +_n b &amp; a \times_n b \\
+\hline
+3 &amp; 5 &amp; 7 &amp; 1 &amp; 1 \\
+11 &amp; 17 &amp; 26 &amp; 2 &amp; 5 \\
+10 &amp; 4 &amp; 12 &amp; 2 &amp; 4 \\
+\end{array}\end{split}\]</div>
 </div>
 </div>
 </section>
@@ -556,20 +506,20 @@ x &amp; y &amp; \text{gcd(} x , y \text{)} \\
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../markdown/1_1_induction.html"
+       href="1_3_relative_primes.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">1.1 Induction Exercises</p>
+        <p class="prev-next-title">1.3 Relatively Prime Integers, Fundamental Theorem of Arithmatic</p>
       </div>
     </a>
     <a class="right-next"
-       href="1_3_relative_primes.html"
+       href="1_5_simple_ciphers.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">1.3 Relatively Prime Integers, Fundamental Theorem of Arithmatic</p>
+        <p class="prev-next-title">1.5 Simple Ciphers</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -589,12 +539,10 @@ x &amp; y &amp; \text{gcd(} x , y \text{)} \\
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-1-2">Exercises 1.2</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#find-the-prime-factors-of-901-894-500-1100-765">3. Find the prime factors of 901, 894, 500, 1100, 765.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#find-the-quotient-and-remainder-when-the-first-of-each-of-these-pairs-of-numbers-is-divided-by-the-second-3435-16-747-12-3674-28-105-15-412-16">4. Find the quotient and remainder when the first of each of these pairs of numbers is divided by the second: (3435,16), (747,12), (3674,28), (105,15), (412,16).</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#find-the-greatest-common-divisor-of-each-of-the-pairs-of-integers-from-problem-4">5. Find the greatest common divisor of each of the pairs of integers from Problem 4.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-computer-program-to-implement-the-division-algorithm">11. Write a computer program to implement the Division Algorithm.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-computer-program-to-implement-the-greatest-common-divisor-of-two-integers">12. Write a computer program to implement the greatest common divisor of two integers.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">1.4 Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-any-integer-x-prove-that-either-x-2-equiv-0-pmod-4-or-x-2-equiv-1-pmod-4">7. For any integer <span class="math notranslate nohighlight">\(x\)</span>, prove that either <span class="math notranslate nohighlight">\(x^2 \equiv 0\pmod{4}\)</span> or <span class="math notranslate nohighlight">\(x^2 \equiv 1\pmod{4}\)</span>.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-computer-program-that-acceps-as-input-two-integers-a-and-n-and-outputs-the-additive-inverse-of-a-pmod-n">9. Write a computer program that acceps as input two integers <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(n\)</span>, and outputs the additive inverse of <span class="math notranslate nohighlight">\(a\pmod{n}\)</span>.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-program-that-accepts-three-integers-a-b-and-n-as-input-and-then-outputs-a-n-b-and-a-times-n-b">10. Write a program that accepts three integers <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(n\)</span> as input and then outputs <span class="math notranslate nohighlight">\(a +_n b\)</span> and <span class="math notranslate nohighlight">\(a \times_n b\)</span>.</a></li>
 </ul>
 </li>
 </ul>

@@ -1,0 +1,805 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>4.4 Other Illustrations of Public Key Cryptography &#8212; Cryptological Mathematics Exercises</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/crypto-book.css?v=761dc443" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/4_4_other_pk_cryptography';</script>
+    <script src="../_static/sidebar-togle.js?v=2b3ca58f"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="4.3 Two Examples" href="4_3_two_examples.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../markdown/intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Cryptological Mathematics Exercises</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../markdown/intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Monoalphabetic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/1_1_induction.html">1.1 Induction Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_2_primes_gcd.html">1.2 Prime Numbers, Division Algorithm, Greatest Common Divisor Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_3_relative_primes.html">1.3 Relatively Prime Integers, Fundamental Theorem of Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_4_modular_arithmatic.html">1.4 Modular Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_5_simple_ciphers.html">1.5 Simple Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_6_cryptoanalysis_monoalphabetic_substitution_ciphers.html">1.6 Cryptoanalysis of Monoalphabetic Substitution Ciphers</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Polyalphabetic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_1_multiplication_principle.html">2.1 The Multiplication Principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_2_permutations_and_combinations.html">2.2 Permutations and Combinations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_3_probability.html">2.3 Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_4_independent_events_expected_number.html">2.4 Independent Events and Expected Number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_5_disguising_the_frequencies.html">2.5 Disguising the Frequencies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Polygraphic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3_1_elementary_polygraphic_substitution_ciphers.html">3.1 Elementary Polygraphic Substitution Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_2_elementary_matrix_theory.html">3.2 Elementary Matrix Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_3_hills_system.html">3.3 Hill’s System</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Public Key Cryptography</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="4_1_more_number_theory.html">4.1 More Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_2_rsa_algorithm.html">4.2 The RSA Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_3_two_examples.html">4.3 Two Examples</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4.4 Other Illustrations of Public Key Cryptography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/4_4_other_pk_cryptography.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>4.4 Other Illustrations of Public Key Cryptography</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-4-4">Exercises 4.4</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#that-s-the-signature-of-a-former-special-agent-for-the-fbi-in-the-1960s-it-has-been-encoded-using-the-agent-s-private-key-which-is-none-of-your-business-verify-the-signature-by-using-his-public-key-7-with-n-77-the-text-numeric-correspondence-is-the-one-relating-a-letter-to-its-alphabetic-position-each-integer-corresponds-to-a-single-letter">1. <code class="docutils literal notranslate"><span class="pre">[26,</span> <span class="pre">12,</span> <span class="pre">22,</span> <span class="pre">58,</span> <span class="pre">61]</span></code>. That’s the signature of a former Special Agent for the FBI in the 1960s. It has been encoded using the agent’s private key, which is none of your business. Verify the signature by using his public key <span class="math notranslate nohighlight">\(7\)</span> with <span class="math notranslate nohighlight">\(n = 77\)</span>. The text-numeric correspondence is the one relating a letter to its alphabetic position. Each integer corresponds to a single letter.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-individuals-decide-to-use-the-diffie-hellman-key-exchange-system-to-communicate-a-keyword-they-agree-that-p-11-and-q-8-one-chooses-private-key-3-and-the-other-private-key-4-verify-that-they-each-wind-up-with-the-same-keyword">2. Two individuals decide to use the Diffie-Hellman Key Exchange System to communicate a keyword. They agree that <span class="math notranslate nohighlight">\(p = 11\)</span> and <span class="math notranslate nohighlight">\(q = 8\)</span>. One chooses private key <span class="math notranslate nohighlight">\(3\)</span> and the other private key <span class="math notranslate nohighlight">\(4\)</span>. Verify that they each wind up with the same keyword.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repeat-exercise-2-except-this-time-assume-that-p-4653848293-q-65478390-one-s-private-key-is-76350293-and-the-other-s-is-233451876">3. Repeat Exercise #2 except this time assume that <span class="math notranslate nohighlight">\(p = 4653848293\)</span>, <span class="math notranslate nohighlight">\(q = 65478390\)</span>, one’s private key is <span class="math notranslate nohighlight">\(76350293\)</span> and the other’s is <span class="math notranslate nohighlight">\(233451876\)</span>.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-individual-wants-to-send-a-message-consisting-of-the-single-number-25-to-another-using-the-massey-omura-system-both-agree-on-the-prime-p-31-the-sender-chooses-two-private-keys-13-and-7-the-receiver-chooses-two-private-keys-17-and-23-verify-that-the-receiver-actually-receives-the-number-25">4. One individual wants to send a message consisting of the single number <span class="math notranslate nohighlight">\(25\)</span> to another using the Massey-Omura System. Both agree on the prime <span class="math notranslate nohighlight">\(p = 31\)</span>. The sender chooses two private keys: <span class="math notranslate nohighlight">\(13\)</span> and <span class="math notranslate nohighlight">\(7\)</span>; the receiver chooses two private keys: <span class="math notranslate nohighlight">\(17\)</span> and <span class="math notranslate nohighlight">\(23\)</span>. Verify that the receiver actually receives the number <span class="math notranslate nohighlight">\(25\)</span>.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repeat-exercise-4-except-this-time-assume-that-p-4658349003443-the-sender-s-private-keys-are-65477368573-and-3513574598399-and-the-receiver-s-private-keys-are-763485413-and-4441762259265-and-the-message-is-joplin">5. Repeat Exercise #4 except this time assume that <span class="math notranslate nohighlight">\(p = 4658349003443\)</span>, the sender’s private keys are <span class="math notranslate nohighlight">\(65477368573\)</span> and <span class="math notranslate nohighlight">\(3513574598399\)</span> and the receiver’s private keys are <span class="math notranslate nohighlight">\(763485413\)</span> and <span class="math notranslate nohighlight">\(4441762259265\)</span>. And the message is: <code class="docutils literal notranslate"><span class="pre">Joplin</span></code>.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-practice-messages-are-often-encrypted-several-times-before-being-sent-suppose-beth-sends-a-message-to-stephanie-that-beth-first-encrypts-twice-once-using-stephanie-s-public-key-as-in-the-rsa-algorithm-and-once-using-beth-s-private-key-in-other-words-assuming">6. In practice, messages are often encrypted several times before being sent. Suppose Beth sends a message to Stephanie that Beth first encrypts twice: once using Stephanie’s <em>public</em> key (as in the RSA algorithm) and once using Beth’s <em>private</em> key. In other words, assuming</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="other-illustrations-of-public-key-cryptography">
+<h1>4.4 Other Illustrations of Public Key Cryptography<a class="headerlink" href="#other-illustrations-of-public-key-cryptography" title="Link to this heading">#</a></h1>
+<section id="exercises-4-4">
+<h2>Exercises 4.4<a class="headerlink" href="#exercises-4-4" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="o">%</span><span class="n">run</span> <span class="o">./</span><span class="mi">4_3</span><span class="n">_two_examples</span><span class="o">.</span><span class="n">ipynb</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="kn">import</span> <span class="n">isprime</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__main__</span><span class="w"> </span><span class="kn">import</span> <span class="n">EncodingScheme</span><span class="p">,</span> <span class="n">pk_encrypt</span><span class="p">,</span> <span class="n">pk_decrypt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="that-s-the-signature-of-a-former-special-agent-for-the-fbi-in-the-1960s-it-has-been-encoded-using-the-agent-s-private-key-which-is-none-of-your-business-verify-the-signature-by-using-his-public-key-7-with-n-77-the-text-numeric-correspondence-is-the-one-relating-a-letter-to-its-alphabetic-position-each-integer-corresponds-to-a-single-letter">
+<h3>1. <code class="docutils literal notranslate"><span class="pre">[26,</span> <span class="pre">12,</span> <span class="pre">22,</span> <span class="pre">58,</span> <span class="pre">61]</span></code>. That’s the signature of a former Special Agent for the FBI in the 1960s. It has been encoded using the agent’s private key, which is none of your business. Verify the signature by using his public key <span class="math notranslate nohighlight">\(7\)</span> with <span class="math notranslate nohighlight">\(n = 77\)</span>. The text-numeric correspondence is the one relating a letter to its alphabetic position. Each integer corresponds to a single letter.<a class="headerlink" href="#that-s-the-signature-of-a-former-special-agent-for-the-fbi-in-the-1960s-it-has-been-encoded-using-the-agent-s-private-key-which-is-none-of-your-business-verify-the-signature-by-using-his-public-key-7-with-n-77-the-text-numeric-correspondence-is-the-one-relating-a-letter-to-its-alphabetic-position-each-integer-corresponds-to-a-single-letter" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Tuple1Char</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">CharStr</span><span class="p">,</span> <span class="n">Literal</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">OneCharEncoder</span><span class="p">(</span><span class="n">EncodingScheme</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="mi">1</span><span class="p">]]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Single character encoder using alphabetic position one charater at a time.&quot;&quot;&quot;</span>
+    <span class="n">_CHARS</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">abcdefghijklmnopqrstuvwxyz&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">char</span><span class="p">:</span> <span class="n">CharStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">char</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CHARS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected valid char, got </span><span class="si">{</span><span class="n">char</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CHARS</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">char</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">char_at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CharStr</span><span class="p">:</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">pos</span> <span class="o">%</span> <span class="mi">26</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">index</span> <span class="o">+=</span> <span class="mi">26</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CHARS</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chars</span><span class="p">:</span> <span class="n">Tuple1Char</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected valid 1 char tuple, got </span><span class="si">{</span><span class="n">chars</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">(</span><span class="n">chars</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encoded_chars</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple1Char</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">char_at</span><span class="p">(</span><span class="n">encoded_chars</span><span class="p">))</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">block_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+<span class="n">encoder_1</span> <span class="o">=</span> <span class="n">OneCharEncoder</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sig_1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">26</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">58</span><span class="p">,</span> <span class="mi">61</span><span class="p">]</span>
+<span class="n">verified_sig</span> <span class="o">=</span> <span class="n">pk_decrypt</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span> <span class="n">encoder_1</span><span class="p">,</span> <span class="n">sig_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Verified signature: </span><span class="si">{</span><span class="n">verified_sig</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Verified signature: elvis
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">DiffieHellmanExchange</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Diffie-Hellman Key Exchange&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">isprime</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected prime p, p&gt;2, got </span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">p</span> <span class="o">=</span> <span class="n">p</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">q</span> <span class="o">&lt;</span> <span class="n">p</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected q, 1&lt;q&lt;p, got </span><span class="si">{</span><span class="n">q</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">q</span> <span class="o">=</span> <span class="n">q</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">init_msg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Compute the initial message for a DF exchange &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected key, 2&lt;key&lt;p, got </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">pow</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">final_msg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Compute the intermediate message for a DF exchange &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected key, 2&lt;key&lt;p, got </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">msg</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected msg, 0&lt;msg&lt;p, got </span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">pow</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="two-individuals-decide-to-use-the-diffie-hellman-key-exchange-system-to-communicate-a-keyword-they-agree-that-p-11-and-q-8-one-chooses-private-key-3-and-the-other-private-key-4-verify-that-they-each-wind-up-with-the-same-keyword">
+<h3>2. Two individuals decide to use the Diffie-Hellman Key Exchange System to communicate a keyword. They agree that <span class="math notranslate nohighlight">\(p = 11\)</span> and <span class="math notranslate nohighlight">\(q = 8\)</span>. One chooses private key <span class="math notranslate nohighlight">\(3\)</span> and the other private key <span class="math notranslate nohighlight">\(4\)</span>. Verify that they each wind up with the same keyword.<a class="headerlink" href="#two-individuals-decide-to-use-the-diffie-hellman-key-exchange-system-to-communicate-a-keyword-they-agree-that-p-11-and-q-8-one-chooses-private-key-3-and-the-other-private-key-4-verify-that-they-each-wind-up-with-the-same-keyword" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">DiffieHellmanExchange</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">A_key</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">B_key</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="n">A_init_msg</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">init_msg</span><span class="p">(</span><span class="n">A_key</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A&#39;s init msg: </span><span class="si">{</span><span class="n">A_init_msg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">B_init_msg</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">init_msg</span><span class="p">(</span><span class="n">B_key</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;B&#39;s init msg: </span><span class="si">{</span><span class="n">B_init_msg</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A&#39;s final msg: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">final_msg</span><span class="p">(</span><span class="n">B_init_msg</span><span class="p">,</span><span class="w"> </span><span class="n">A_key</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;B&#39;s final msg: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">final_msg</span><span class="p">(</span><span class="n">A_init_msg</span><span class="p">,</span><span class="w"> </span><span class="n">B_key</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A&#39;s init msg: 6
+B&#39;s init msg: 4
+
+A&#39;s final msg: 9
+B&#39;s final msg: 9
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="repeat-exercise-2-except-this-time-assume-that-p-4653848293-q-65478390-one-s-private-key-is-76350293-and-the-other-s-is-233451876">
+<h3>3. Repeat Exercise #2 except this time assume that <span class="math notranslate nohighlight">\(p = 4653848293\)</span>, <span class="math notranslate nohighlight">\(q = 65478390\)</span>, one’s private key is <span class="math notranslate nohighlight">\(76350293\)</span> and the other’s is <span class="math notranslate nohighlight">\(233451876\)</span>.<a class="headerlink" href="#repeat-exercise-2-except-this-time-assume-that-p-4653848293-q-65478390-one-s-private-key-is-76350293-and-the-other-s-is-233451876" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">DiffieHellmanExchange</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mi">4653848293</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="mi">65478390</span><span class="p">)</span>
+<span class="n">A_key</span> <span class="o">=</span> <span class="mi">76350293</span>
+<span class="n">B_key</span> <span class="o">=</span> <span class="mi">233451876</span>
+
+<span class="n">A_init_msg</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">init_msg</span><span class="p">(</span><span class="n">A_key</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A&#39;s init msg: </span><span class="si">{</span><span class="n">A_init_msg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">B_init_msg</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">init_msg</span><span class="p">(</span><span class="n">B_key</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;B&#39;s init msg: </span><span class="si">{</span><span class="n">B_init_msg</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A&#39;s final msg: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">final_msg</span><span class="p">(</span><span class="n">B_init_msg</span><span class="p">,</span><span class="w"> </span><span class="n">A_key</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;B&#39;s final msg: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">final_msg</span><span class="p">(</span><span class="n">A_init_msg</span><span class="p">,</span><span class="w"> </span><span class="n">B_key</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A&#39;s init msg: 2721419856
+B&#39;s init msg: 4077302202
+
+A&#39;s final msg: 2014163551
+B&#39;s final msg: 2014163551
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="one-individual-wants-to-send-a-message-consisting-of-the-single-number-25-to-another-using-the-massey-omura-system-both-agree-on-the-prime-p-31-the-sender-chooses-two-private-keys-13-and-7-the-receiver-chooses-two-private-keys-17-and-23-verify-that-the-receiver-actually-receives-the-number-25">
+<h3>4. One individual wants to send a message consisting of the single number <span class="math notranslate nohighlight">\(25\)</span> to another using the Massey-Omura System. Both agree on the prime <span class="math notranslate nohighlight">\(p = 31\)</span>. The sender chooses two private keys: <span class="math notranslate nohighlight">\(13\)</span> and <span class="math notranslate nohighlight">\(7\)</span>; the receiver chooses two private keys: <span class="math notranslate nohighlight">\(17\)</span> and <span class="math notranslate nohighlight">\(23\)</span>. Verify that the receiver actually receives the number <span class="math notranslate nohighlight">\(25\)</span>.<a class="headerlink" href="#one-individual-wants-to-send-a-message-consisting-of-the-single-number-25-to-another-using-the-massey-omura-system-both-agree-on-the-prime-p-31-the-sender-chooses-two-private-keys-13-and-7-the-receiver-chooses-two-private-keys-17-and-23-verify-that-the-receiver-actually-receives-the-number-25" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">msg_to_nums</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Convert a message to a list of numbers &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">encoder_1</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">msg</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="mi">31</span>
+
+<span class="n">sender_e</span> <span class="o">=</span> <span class="mi">13</span>
+<span class="n">sender_d</span> <span class="o">=</span> <span class="mi">7</span>
+
+<span class="n">receiver_e</span> <span class="o">=</span> <span class="mi">17</span>
+<span class="n">receiver_d</span> <span class="o">=</span> <span class="mi">23</span>
+
+<span class="n">msg</span> <span class="o">=</span> <span class="p">[</span><span class="mi">25</span><span class="p">]</span>
+
+<span class="n">msg1</span> <span class="o">=</span> <span class="n">msg_to_nums</span><span class="p">(</span><span class="n">pk_decrypt</span><span class="p">(</span><span class="n">sender_e</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">encoder_1</span><span class="p">,</span> <span class="n">msg</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sender&#39;s first encrypted message: </span><span class="si">{</span><span class="n">msg1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">msg2</span> <span class="o">=</span> <span class="n">msg_to_nums</span><span class="p">(</span><span class="n">pk_decrypt</span><span class="p">(</span><span class="n">receiver_e</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">encoder_1</span><span class="p">,</span> <span class="n">msg1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Receiver&#39;s intermediate encrypted message: </span><span class="si">{</span><span class="n">msg2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">msg3</span> <span class="o">=</span> <span class="n">msg_to_nums</span><span class="p">(</span><span class="n">pk_decrypt</span><span class="p">(</span><span class="n">sender_d</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">encoder_1</span><span class="p">,</span> <span class="n">msg2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sender&#39;s second encrypted message: </span><span class="si">{</span><span class="n">msg3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">msg4</span> <span class="o">=</span> <span class="n">msg_to_nums</span><span class="p">(</span><span class="n">pk_decrypt</span><span class="p">(</span><span class="n">receiver_d</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">encoder_1</span><span class="p">,</span> <span class="n">msg3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Receiver&#39;s decrypted message: </span><span class="si">{</span><span class="n">msg4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sender&#39;s first encrypted message: [25]
+Receiver&#39;s intermediate encrypted message: [5]
+Sender&#39;s second encrypted message: [5]
+Receiver&#39;s decrypted message: [25]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="repeat-exercise-4-except-this-time-assume-that-p-4658349003443-the-sender-s-private-keys-are-65477368573-and-3513574598399-and-the-receiver-s-private-keys-are-763485413-and-4441762259265-and-the-message-is-joplin">
+<h3>5. Repeat Exercise #4 except this time assume that <span class="math notranslate nohighlight">\(p = 4658349003443\)</span>, the sender’s private keys are <span class="math notranslate nohighlight">\(65477368573\)</span> and <span class="math notranslate nohighlight">\(3513574598399\)</span> and the receiver’s private keys are <span class="math notranslate nohighlight">\(763485413\)</span> and <span class="math notranslate nohighlight">\(4441762259265\)</span>. And the message is: <code class="docutils literal notranslate"><span class="pre">Joplin</span></code>.<a class="headerlink" href="#repeat-exercise-4-except-this-time-assume-that-p-4658349003443-the-sender-s-private-keys-are-65477368573-and-3513574598399-and-the-receiver-s-private-keys-are-763485413-and-4441762259265-and-the-message-is-joplin" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># use a 7 bit ascii encoder for this exercise.  Will preserve capitalization</span>
+<span class="c1"># and get six chars in a block for p like 4658349003443 (which requires 43 bits)</span>
+<span class="n">Ascii7BitEncoderTupleChars</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">CharStr</span><span class="p">,</span> <span class="n">Literal</span><span class="p">[</span><span class="mi">6</span><span class="p">]]</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Ascii7BitEncoder</span><span class="p">(</span><span class="n">EncodingScheme</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="mi">6</span><span class="p">]]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_BLOCKSIZE</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chars</span><span class="p">:</span> <span class="n">Ascii7BitEncoderTupleChars</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_BLOCKSIZE</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;chars must be of length </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_BLOCKSIZE</span><span class="si">}</span><span class="s2">, not </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># Take each of the chars, get its ascii code and build the block</span>
+        <span class="c1"># block is reversed so we can shift out more naturally during decode</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>  <span class="c1"># reverse order</span>
+            <span class="k">if</span> <span class="nb">ord</span><span class="p">(</span><span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">127</span><span class="p">:</span>
+                <span class="c1"># raise an error if input contains character that is not 7 bits</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;character </span><span class="si">{</span><span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> is not in range(256)&quot;</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="n">result</span> <span class="o">&lt;&lt;</span> <span class="mi">7</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&amp;</span> <span class="mh">0x7F</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encoded_chars</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsciiEncoderTupleChars</span><span class="p">:</span>
+        <span class="n">chars</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_BLOCKSIZE</span><span class="p">):</span>
+            <span class="n">chars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="n">encoded_chars</span> <span class="o">&amp;</span> <span class="mh">0x7F</span><span class="p">))</span>
+            <span class="n">encoded_chars</span> <span class="o">&gt;&gt;=</span> <span class="mi">7</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">block_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_BLOCKSIZE</span>
+<span class="n">encoder_5</span> <span class="o">=</span> <span class="n">Ascii7BitEncoder</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="mi">4658349003443</span>
+
+<span class="n">sender_e</span> <span class="o">=</span> <span class="mi">65477368573</span>
+<span class="n">sender_d</span> <span class="o">=</span> <span class="mi">3513574598399</span>
+
+<span class="n">receiver_e</span> <span class="o">=</span> <span class="mi">763485413</span>
+<span class="n">receiver_d</span> <span class="o">=</span> <span class="mi">4441762259265</span>
+
+<span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Joplin&quot;</span>
+
+<span class="n">msg1</span> <span class="o">=</span> <span class="n">pk_encrypt</span><span class="p">(</span><span class="n">sender_e</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">encoder_5</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sender&#39;s first encrypted message: </span><span class="si">{</span><span class="n">msg1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">msg2</span> <span class="o">=</span> <span class="n">pk_decrypt</span><span class="p">(</span><span class="n">receiver_e</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">encoder_5</span><span class="p">,</span> <span class="n">msg1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Receiver&#39;s intermediate encrypted message: &quot;</span> <span class="o">+</span>
+      <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">[</span><span class="n">encoder_5</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">msg2</span><span class="p">))]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">msg3</span> <span class="o">=</span> <span class="n">pk_encrypt</span><span class="p">(</span><span class="n">sender_d</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">encoder_5</span><span class="p">,</span> <span class="n">msg2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sender&#39;s second encrypted message: </span><span class="si">{</span><span class="n">msg3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">msg4</span> <span class="o">=</span> <span class="n">pk_decrypt</span><span class="p">(</span><span class="n">receiver_d</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">encoder_5</span><span class="p">,</span> <span class="n">msg3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Receiver&#39;s decrypted message: &#39;</span><span class="si">{</span><span class="n">msg4</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sender&#39;s first encrypted message: [2041298202570]
+Receiver&#39;s intermediate encrypted message: [4151522335983]
+Sender&#39;s second encrypted message: [1825433649931]
+Receiver&#39;s decrypted message: &#39;Joplin&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="in-practice-messages-are-often-encrypted-several-times-before-being-sent-suppose-beth-sends-a-message-to-stephanie-that-beth-first-encrypts-twice-once-using-stephanie-s-public-key-as-in-the-rsa-algorithm-and-once-using-beth-s-private-key-in-other-words-assuming">
+<h3>6. In practice, messages are often encrypted several times before being sent. Suppose Beth sends a message to Stephanie that Beth first encrypts twice: once using Stephanie’s <em>public</em> key (as in the RSA algorithm) and once using Beth’s <em>private</em> key. In other words, assuming<a class="headerlink" href="#in-practice-messages-are-often-encrypted-several-times-before-being-sent-suppose-beth-sends-a-message-to-stephanie-that-beth-first-encrypts-twice-once-using-stephanie-s-public-key-as-in-the-rsa-algorithm-and-once-using-beth-s-private-key-in-other-words-assuming" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Entity</p></th>
+<th class="head"><p>Symbol</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Beth’s message to Stephanie</p></td>
+<td><p><span class="math notranslate nohighlight">\(m\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Beth’s private key</p></td>
+<td><p><span class="math notranslate nohighlight">\(d_B\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Beth’s public key</p></td>
+<td><p><span class="math notranslate nohighlight">\(e_B\)</span>, <span class="math notranslate nohighlight">\(n_B\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Stephanie’s private key</p></td>
+<td><p><span class="math notranslate nohighlight">\(d_S\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Stephanie’s public key</p></td>
+<td><p><span class="math notranslate nohighlight">\(e_S\)</span>, <span class="math notranslate nohighlight">\(n_S\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Beth’s enciphered message is <span class="math notranslate nohighlight">\(m' = (m^{e_S} \pmod{n_S})^{d_B} \pmod{n_B}\)</span>. Explain
+how Stephanie would go about deciphering <span class="math notranslate nohighlight">\(m'\)</span>.</p>
+<p>First, Stephanie encrypts <span class="math notranslate nohighlight">\(m'\)</span> using Beth’s public key, <span class="math notranslate nohighlight">\(e_B\)</span> and <span class="math notranslate nohighlight">\(n_B\)</span>, then she decrypts the result of that with her own decrypt key, <span class="math notranslate nohighlight">\(d_S\)</span> and <span class="math notranslate nohighlight">\(n_S\)</span>.  The result is the original message, as shown here.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+       \bigg[ \Big[(m^{e_S} \pmod{n_S})^{d_B} \pmod{n_B}\Big]^{e_B} \pmod{n_B} \bigg]^{d_S} \pmod{n_S} &amp;=
+          \Big[ (m^{e_S} \pmod{n_S})^{d_Be_B} \pmod{n_B} \Big]^{d_S} \pmod{n_S} \\
+         &amp;= \left[ m^{e_S} \pmod{n_S} \right]^{d_S} \pmod{n_S} \\
+         &amp;= m^{e_Sd_S} \pmod{n_S} \\
+         &amp;= m
+\end{aligned}
+\end{split}\]</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="4_3_two_examples.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">4.3 Two Examples</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-4-4">Exercises 4.4</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#that-s-the-signature-of-a-former-special-agent-for-the-fbi-in-the-1960s-it-has-been-encoded-using-the-agent-s-private-key-which-is-none-of-your-business-verify-the-signature-by-using-his-public-key-7-with-n-77-the-text-numeric-correspondence-is-the-one-relating-a-letter-to-its-alphabetic-position-each-integer-corresponds-to-a-single-letter">1. <code class="docutils literal notranslate"><span class="pre">[26,</span> <span class="pre">12,</span> <span class="pre">22,</span> <span class="pre">58,</span> <span class="pre">61]</span></code>. That’s the signature of a former Special Agent for the FBI in the 1960s. It has been encoded using the agent’s private key, which is none of your business. Verify the signature by using his public key <span class="math notranslate nohighlight">\(7\)</span> with <span class="math notranslate nohighlight">\(n = 77\)</span>. The text-numeric correspondence is the one relating a letter to its alphabetic position. Each integer corresponds to a single letter.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-individuals-decide-to-use-the-diffie-hellman-key-exchange-system-to-communicate-a-keyword-they-agree-that-p-11-and-q-8-one-chooses-private-key-3-and-the-other-private-key-4-verify-that-they-each-wind-up-with-the-same-keyword">2. Two individuals decide to use the Diffie-Hellman Key Exchange System to communicate a keyword. They agree that <span class="math notranslate nohighlight">\(p = 11\)</span> and <span class="math notranslate nohighlight">\(q = 8\)</span>. One chooses private key <span class="math notranslate nohighlight">\(3\)</span> and the other private key <span class="math notranslate nohighlight">\(4\)</span>. Verify that they each wind up with the same keyword.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repeat-exercise-2-except-this-time-assume-that-p-4653848293-q-65478390-one-s-private-key-is-76350293-and-the-other-s-is-233451876">3. Repeat Exercise #2 except this time assume that <span class="math notranslate nohighlight">\(p = 4653848293\)</span>, <span class="math notranslate nohighlight">\(q = 65478390\)</span>, one’s private key is <span class="math notranslate nohighlight">\(76350293\)</span> and the other’s is <span class="math notranslate nohighlight">\(233451876\)</span>.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-individual-wants-to-send-a-message-consisting-of-the-single-number-25-to-another-using-the-massey-omura-system-both-agree-on-the-prime-p-31-the-sender-chooses-two-private-keys-13-and-7-the-receiver-chooses-two-private-keys-17-and-23-verify-that-the-receiver-actually-receives-the-number-25">4. One individual wants to send a message consisting of the single number <span class="math notranslate nohighlight">\(25\)</span> to another using the Massey-Omura System. Both agree on the prime <span class="math notranslate nohighlight">\(p = 31\)</span>. The sender chooses two private keys: <span class="math notranslate nohighlight">\(13\)</span> and <span class="math notranslate nohighlight">\(7\)</span>; the receiver chooses two private keys: <span class="math notranslate nohighlight">\(17\)</span> and <span class="math notranslate nohighlight">\(23\)</span>. Verify that the receiver actually receives the number <span class="math notranslate nohighlight">\(25\)</span>.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repeat-exercise-4-except-this-time-assume-that-p-4658349003443-the-sender-s-private-keys-are-65477368573-and-3513574598399-and-the-receiver-s-private-keys-are-763485413-and-4441762259265-and-the-message-is-joplin">5. Repeat Exercise #4 except this time assume that <span class="math notranslate nohighlight">\(p = 4658349003443\)</span>, the sender’s private keys are <span class="math notranslate nohighlight">\(65477368573\)</span> and <span class="math notranslate nohighlight">\(3513574598399\)</span> and the receiver’s private keys are <span class="math notranslate nohighlight">\(763485413\)</span> and <span class="math notranslate nohighlight">\(4441762259265\)</span>. And the message is: <code class="docutils literal notranslate"><span class="pre">Joplin</span></code>.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-practice-messages-are-often-encrypted-several-times-before-being-sent-suppose-beth-sends-a-message-to-stephanie-that-beth-first-encrypts-twice-once-using-stephanie-s-public-key-as-in-the-rsa-algorithm-and-once-using-beth-s-private-key-in-other-words-assuming">6. In practice, messages are often encrypted several times before being sent. Suppose Beth sends a message to Stephanie that Beth first encrypts twice: once using Stephanie’s <em>public</em> key (as in the RSA algorithm) and once using Beth’s <em>private</em> key. In other words, assuming</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Dan Douglas
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

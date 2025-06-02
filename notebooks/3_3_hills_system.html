@@ -1,0 +1,780 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3.3 Hill’s System &#8212; Cryptological Mathematics Exercises</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/crypto-book.css?v=761dc443" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/3_3_hills_system';</script>
+    <script src="../_static/sidebar-togle.js?v=2b3ca58f"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4.1 More Number Theory" href="4_1_more_number_theory.html" />
+    <link rel="prev" title="3.2 Elementary Matrix Theory" href="3_2_elementary_matrix_theory.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../markdown/intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Cryptological Mathematics Exercises</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../markdown/intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Monoalphabetic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/1_1_induction.html">1.1 Induction Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_2_primes_gcd.html">1.2 Prime Numbers, Division Algorithm, Greatest Common Divisor Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_3_relative_primes.html">1.3 Relatively Prime Integers, Fundamental Theorem of Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_4_modular_arithmatic.html">1.4 Modular Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_5_simple_ciphers.html">1.5 Simple Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_6_cryptoanalysis_monoalphabetic_substitution_ciphers.html">1.6 Cryptoanalysis of Monoalphabetic Substitution Ciphers</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Polyalphabetic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_1_multiplication_principle.html">2.1 The Multiplication Principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_2_permutations_and_combinations.html">2.2 Permutations and Combinations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_3_probability.html">2.3 Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_4_independent_events_expected_number.html">2.4 Independent Events and Expected Number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_5_disguising_the_frequencies.html">2.5 Disguising the Frequencies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Polygraphic Substitution Ciphers</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3_1_elementary_polygraphic_substitution_ciphers.html">3.1 Elementary Polygraphic Substitution Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_2_elementary_matrix_theory.html">3.2 Elementary Matrix Theory</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3.3 Hill’s System</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Public Key Cryptography</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="4_1_more_number_theory.html">4.1 More Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_2_rsa_algorithm.html">4.2 The RSA Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_3_two_examples.html">4.3 Two Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_4_other_pk_cryptography.html">4.4 Other Illustrations of Public Key Cryptography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/3_3_hills_system.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>3.3 Hill’s System</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-3-3">Exercises 3.3</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-computer-program-to-both-encipher-and-decipher-a-message-using-hill-s-digraph-system">5. Write a computer program to both encipher and decipher a message using Hill’s (digraph) System.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-hill-s-system-with-key-begin-pmatrix-6-3-7-8-end-pmatrix-encipher-the-message">1. Using Hill’s System with <span class="math notranslate nohighlight">\(key = \begin{pmatrix} 6 &amp; 3 \\ 7 &amp; 8 \end{pmatrix}\)</span> encipher the message:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decipher-the-following-message-that-was-enciphered-using-hill-s-system-with-key-begin-pmatrix-3-2-8-5-end-pmatrix">2. Decipher the following message that was enciphered using Hill’s System with <span class="math notranslate nohighlight">\(key = \begin{pmatrix} 3 &amp; 2 \\ 8 &amp; 5 \end{pmatrix}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-extending-hill-s-digraph-system-to-a-trigraph-system-that-is-rather-than-enciphering-and-deciphering-characters-in-pairs-you-wish-to-encipher-them-three-at-a-time-describe-how-you-would-proceed-be-sure-to-consider-whatever-restrictions-are-necessary-to-impose-on-the-key-to-assure-that-a-message-is-decipherable-hint-see-exercises-3-2-9">4. Consider extending Hill’s (digraph) System to a trigraph system. That is, rather than enciphering and deciphering characters in pairs, you wish to encipher them three at a time. Describe how you would proceed. Be sure to consider whatever restrictions are necessary to impose on the key to assure that a message is decipherable. (Hint: See Exercises 3.2, #9.)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#molly-has-intercepted-the-following-message-that-was-enciphered-using-hill-s-system-digraph-version">3. Molly has intercepted the following message that was enciphered using Hill’s System (digraph version):</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="hill-s-system">
+<h1>3.3 Hill’s System<a class="headerlink" href="#hill-s-system" title="Link to this heading">#</a></h1>
+<section id="exercises-3-3">
+<h2>Exercises 3.3<a class="headerlink" href="#exercises-3-3" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span><span class="p">))</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">islice</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.hills_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">matrix_inverse_mod26</span><span class="p">,</span> <span class="n">validate_hills_key</span><span class="p">,</span> <span class="n">is_invertible_mod_26</span><span class="p">,</span> <span class="n">TopResults</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.ngrams_scorer</span><span class="w"> </span><span class="kn">import</span> <span class="n">NgramScorer</span><span class="p">,</span> <span class="n">iter_over_ngram_data_file</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">CHARACTERS</span><span class="p">,</span> <span class="n">strip_text</span><span class="p">,</span> <span class="n">format_ciphertext</span><span class="p">,</span> <span class="n">format_plaintext</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">char_at</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="write-a-computer-program-to-both-encipher-and-decipher-a-message-using-hill-s-digraph-system">
+<h3>5. Write a computer program to both encipher and decipher a message using Hill’s (digraph) System.<a class="headerlink" href="#write-a-computer-program-to-both-encipher-and-decipher-a-message-using-hill-s-digraph-system" title="Link to this heading">#</a></h3>
+<p>We implement the general case which includes <span class="math notranslate nohighlight">\(2\times2\)</span> (digraph).  See <a class="reference external" href="https://github.com/dandoug/cryptomath-book/blob/main/src/hills_system.py">hills_system.py</a> for the validation logic and the computation of the inverse key.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">hills_transform</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">typing</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">],</span> <span class="n">input_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This is the heart of the Hill&#39;s cipher system.  It takes a key and a string and returns the</span>
+<span class="sd">    encrypted/decrypted string.  No validation or cleanup is done here.  This method is intended</span>
+<span class="sd">    to be wrapped by other code that does any necessary checking or preparation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">output_chars</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_str</span><span class="p">),</span> <span class="n">n</span><span class="p">):</span>
+        <span class="n">input_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">pos</span><span class="p">(</span><span class="n">c</span><span class="p">)]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">input_str</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">n</span><span class="p">]])</span>
+        <span class="n">output_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">input_vector</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">output_vector</span><span class="p">:</span>
+            <span class="n">output_chars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">char_at</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_chars</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">HillsCipher</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Implements the Hill&#39;s cipher system.  It takes a key and a padding character.</span>
+<span class="sd">    Some simple validation is done.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">pad_char</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;q&#39;</span><span class="p">):</span>
+        <span class="n">validate_hills_key</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inv_key</span> <span class="o">=</span> <span class="n">matrix_inverse_mod26</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Key is not invertible mod 26&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pad_char</span> <span class="o">=</span> <span class="n">pad_char</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pad_char</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">pad_char</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CHARACTERS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;pad_char must be a single character&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">encipher</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plaintext</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Encipher a message using Hill&#39;s cipher system.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">plaintext</span> <span class="o">=</span> <span class="n">strip_text</span><span class="p">(</span><span class="n">plaintext</span><span class="p">)</span>
+        <span class="c1">#  pad plaintext if the length is a multiple of n</span>
+        <span class="n">padding_length</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">-</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">plaintext</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">))</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span>
+        <span class="n">plaintext</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pad_char</span> <span class="o">*</span> <span class="n">padding_length</span>
+        <span class="n">ciphertext</span> <span class="o">=</span> <span class="n">hills_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">plaintext</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ciphertext</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">decipher</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ciphertext</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deciphers the given ciphertext using Hill cipher decryption.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ciphertext</span> <span class="o">=</span> <span class="n">strip_text</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Ciphertext length must be a multiple of n&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">hills_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inv_key</span><span class="p">,</span> <span class="n">ciphertext</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-hill-s-system-with-key-begin-pmatrix-6-3-7-8-end-pmatrix-encipher-the-message">
+<h3>1. Using Hill’s System with <span class="math notranslate nohighlight">\(key = \begin{pmatrix} 6 &amp; 3 \\ 7 &amp; 8 \end{pmatrix}\)</span> encipher the message:<a class="headerlink" href="#using-hill-s-system-with-key-begin-pmatrix-6-3-7-8-end-pmatrix-encipher-the-message" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="n">It</span> <span class="ow">is</span> <span class="n">lonely</span> <span class="n">at</span> <span class="n">the</span> <span class="n">top</span><span class="p">;</span> <span class="n">but</span> <span class="n">you</span> <span class="n">eat</span> <span class="n">better</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cipher_1</span> <span class="o">=</span> <span class="n">HillsCipher</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]]))</span>
+<span class="n">plaintext_1</span> <span class="o">=</span> <span class="s2">&quot;It is lonely at the top; but you eat better.&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ciphertext_1</span> <span class="o">=</span> <span class="n">cipher_1</span><span class="o">.</span><span class="n">encipher</span><span class="p">(</span><span class="n">plaintext_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">format_ciphertext</span><span class="p">(</span><span class="n">ciphertext_1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>JOGGM VUHQX NKNVL MHYWZ MBWMG QVZLM EXCB
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="decipher-the-following-message-that-was-enciphered-using-hill-s-system-with-key-begin-pmatrix-3-2-8-5-end-pmatrix">
+<h3>2. Decipher the following message that was enciphered using Hill’s System with <span class="math notranslate nohighlight">\(key = \begin{pmatrix} 3 &amp; 2 \\ 8 &amp; 5 \end{pmatrix}\)</span><a class="headerlink" href="#decipher-the-following-message-that-was-enciphered-using-hill-s-system-with-key-begin-pmatrix-3-2-8-5-end-pmatrix" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="n">MUBYA</span> <span class="n">QIQGN</span> <span class="n">AEWOS</span> <span class="n">RZQJI</span> <span class="n">RZQKC</span> <span class="n">LIZAG</span> <span class="n">SXCJA</span> <span class="n">AQFRM</span> <span class="n">HO</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cipher_2</span> <span class="o">=</span> <span class="n">HillsCipher</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]))</span>
+<span class="n">ciphertext_2</span> <span class="o">=</span> <span class="s2">&quot;MUBYA QIQGN AEWOS RZQJI RZQKC LIZAG SXCJA AQFRM HO&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plaintext_2</span> <span class="o">=</span> <span class="n">cipher_2</span><span class="o">.</span><span class="n">decipher</span><span class="p">(</span><span class="n">ciphertext_2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">plaintext_2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>consciousnessisthatannoyingtimebetweennaps
+</pre></div>
+</div>
+</div>
+</div>
+<p>which yields</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">consciousness</span> <span class="ow">is</span> <span class="n">that</span> <span class="n">annoying</span> <span class="n">time</span> <span class="n">between</span> <span class="n">naps</span>
+</pre></div>
+</div>
+</section>
+<section id="consider-extending-hill-s-digraph-system-to-a-trigraph-system-that-is-rather-than-enciphering-and-deciphering-characters-in-pairs-you-wish-to-encipher-them-three-at-a-time-describe-how-you-would-proceed-be-sure-to-consider-whatever-restrictions-are-necessary-to-impose-on-the-key-to-assure-that-a-message-is-decipherable-hint-see-exercises-3-2-9">
+<h3>4. Consider extending Hill’s (digraph) System to a trigraph system. That is, rather than enciphering and deciphering characters in pairs, you wish to encipher them three at a time. Describe how you would proceed. Be sure to consider whatever restrictions are necessary to impose on the key to assure that a message is decipherable. (Hint: See Exercises 3.2, #9.)<a class="headerlink" href="#consider-extending-hill-s-digraph-system-to-a-trigraph-system-that-is-rather-than-enciphering-and-deciphering-characters-in-pairs-you-wish-to-encipher-them-three-at-a-time-describe-how-you-would-proceed-be-sure-to-consider-whatever-restrictions-are-necessary-to-impose-on-the-key-to-assure-that-a-message-is-decipherable-hint-see-exercises-3-2-9" title="Link to this heading">#</a></h3>
+<p>The determinant of the <span class="math notranslate nohighlight">\(3 \times 3\)</span> matrix must be coprime to 26.  Plaintext must be padded to a multiple of 3.  See general implementation above, which will work for trigraph systems.</p>
+</section>
+<section id="molly-has-intercepted-the-following-message-that-was-enciphered-using-hill-s-system-digraph-version">
+<h3>3. Molly has intercepted the following message that was enciphered using Hill’s System (digraph version):<a class="headerlink" href="#molly-has-intercepted-the-following-message-that-was-enciphered-using-hill-s-system-digraph-version" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="n">KFHYY</span> <span class="n">GIGMC</span> <span class="n">EJSST</span> <span class="n">EBOEU</span> <span class="n">GRWJT</span> <span class="n">SDVYK</span> <span class="n">ZOZLI</span> <span class="n">ZKFHX</span> <span class="n">KUUIC</span> <span class="n">WXFWJ</span>
+ <span class="n">GAXQP</span> <span class="n">BQAGV</span> <span class="n">GXDVD</span> <span class="n">GUEVG</span> <span class="n">MIGYK</span> <span class="n">QQPIP</span> <span class="n">SCLLF</span> <span class="n">YPMUL</span> <span class="n">KFHXP</span> <span class="n">MHGME</span>
+ <span class="n">VDKAV</span> <span class="n">YQCEG</span> <span class="n">UEALY</span> <span class="n">YYZSZ</span> <span class="n">MPXZO</span> <span class="n">CTXTR</span> <span class="n">IMDID</span> <span class="n">VDGSX</span> <span class="n">OZFFT</span> <span class="n">SMEDV</span>
+ <span class="n">MEIMD</span> <span class="n">VMPKO</span> <span class="n">UJKOD</span> <span class="n">UBOAX</span> <span class="n">BOORS</span> <span class="n">LPZCW</span> <span class="n">IMDVY</span> <span class="n">GJWMI</span> <span class="n">FQ</span>
+</pre></div>
+</div>
+<p>Help her cryptanalyze and decipher it.</p>
+<p>We base our attack on a message encrypted with Hill’s System using digraphs (a 2x2 key) on the assumption that English text will contain common quintgrams.  We know that finding two pairs of ciphertext-plaintext digraphs is enough to determine the decryption key.  So we “slide” common quintgrams across the ciphertext, identify the two pairs of plaintext-ciphertext digrams implied at each position as the quintgram moves along the ciphertext.</p>
+<p>With those pairs of digraphs, we can solve for a candidate decryption key.  With this candidate encryption key, we can “decrypt” the ciphertext to get a possible plaintext.   To automate the process of checking each possible plaintext for being an intelligible message, we compute an ngram score.  The higher the score, the more English-like is the candidate plaintext.  We reserve the best-scoring candidates for manual investigation.  Hopefully, one of those is actual plaintext.</p>
+<p>For more details on this approach, see <a class="reference external" href="http://practicalcryptography.com/cryptanalysis/stochastic-searching/cryptanalysis-hill-cipher/">here</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ciphertext_3</span> <span class="o">=</span> <span class="s2">&quot;KFHYY GIGMC EJSST EBOEU GRWJT SDVYK ZOZLI ZKFHX KUUIC WXFWJ &quot;</span> <span class="o">+</span> \
+               <span class="s2">&quot;GAXQP BQAGV GXDVD GUEVG MIGYK QQPIP SCLLF YPMUL KFHXP MHGME &quot;</span> <span class="o">+</span> \
+               <span class="s2">&quot;VDKAV YQCEG UEALY YYZSZ MPXZO CTXTR IMDID VDGSX OZFFT SMEDV &quot;</span> <span class="o">+</span> \
+               <span class="s2">&quot;MEIMD VMPKO UJKOD UBOAX BOORS LPZCW IMDVY GJWMI FQ&quot;</span>
+<span class="n">ciphertext_3</span> <span class="o">=</span> <span class="n">strip_text</span><span class="p">(</span><span class="n">ciphertext_3</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="c1"># remove the non-letter chars, keep as uppercase</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">attack_hill_cipher</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Attack a ciphertext assumed to be English encrypted with a 2x2 Hill&#39;s System cipher</span>
+<span class="sd">    see http://practicalcryptography.com/cryptanalysis/stochastic-searching/cryptanalysis-hill-cipher/</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">decrypt_keys_examined</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">top_results</span> <span class="o">=</span> <span class="n">TopResults</span><span class="p">(</span><span class="n">max_size</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># only keep the top results</span>
+    <span class="n">scorer</span> <span class="o">=</span> <span class="n">NgramScorer</span><span class="p">(</span><span class="s1">&#39;english_quadgrams.txt.zip&#39;</span><span class="p">)</span>
+    <span class="c1"># use the top 100 quints from English for searching</span>
+    <span class="k">for</span> <span class="n">quint</span> <span class="ow">in</span> <span class="n">islice</span><span class="p">(</span><span class="n">iter_over_ngram_data_file</span><span class="p">(</span><span class="s1">&#39;english_quintgrams.txt.zip&#39;</span><span class="p">),</span> <span class="mi">100</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">)</span> <span class="o">-</span> <span class="mi">5</span><span class="p">):</span>
+            <span class="c1"># Depending on whether the window is on an even boundary, we line up either the</span>
+            <span class="c1"># first four characters or the last four characters of the quint to form the pairs</span>
+            <span class="n">p_dg_1</span> <span class="o">=</span> <span class="n">quint</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>            <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">quint</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+            <span class="n">p_dg_2</span> <span class="o">=</span> <span class="n">quint</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>            <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">quint</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+            <span class="n">c_dg_1</span> <span class="o">=</span> <span class="n">ciphertext</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>     <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">ciphertext</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span>
+            <span class="n">c_dg_2</span> <span class="o">=</span> <span class="n">ciphertext</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">4</span><span class="p">]</span>   <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">ciphertext</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">5</span><span class="p">]</span>
+
+            <span class="c1"># Given the candidate digraph pairs, solve for the candidate decrypt key</span>
+            <span class="n">c_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">pos</span><span class="p">(</span><span class="n">c_dg_1</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">pos</span><span class="p">(</span><span class="n">c_dg_2</span><span class="p">[</span><span class="mi">0</span><span class="p">])],</span>
+                                 <span class="p">[</span><span class="n">pos</span><span class="p">(</span><span class="n">c_dg_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">pos</span><span class="p">(</span><span class="n">c_dg_2</span><span class="p">[</span><span class="mi">1</span><span class="p">])]])</span>
+
+            <span class="c1"># need to check if c_matrix is invertible</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">is_invertible_mod_26</span><span class="p">(</span><span class="n">c_matrix</span><span class="p">):</span>
+                <span class="k">continue</span>   <span class="c1"># no need to check more</span>
+            <span class="n">c_matrix_inv</span> <span class="o">=</span> <span class="n">matrix_inverse_mod26</span><span class="p">(</span><span class="n">c_matrix</span><span class="p">)</span>
+
+            <span class="c1"># set up for solving for the decryption key</span>
+            <span class="n">p_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">pos</span><span class="p">(</span><span class="n">p_dg_1</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">pos</span><span class="p">(</span><span class="n">p_dg_2</span><span class="p">[</span><span class="mi">0</span><span class="p">])],</span>
+                                 <span class="p">[</span><span class="n">pos</span><span class="p">(</span><span class="n">p_dg_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">pos</span><span class="p">(</span><span class="n">p_dg_2</span><span class="p">[</span><span class="mi">1</span><span class="p">])]])</span>
+
+            <span class="c1"># compute the decryption key implied by this pair choice</span>
+            <span class="n">inv_key</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">p_matrix</span><span class="p">,</span> <span class="n">c_matrix_inv</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span>
+            <span class="n">inv_key_tuple</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">inv_key</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span> <span class="c1"># a hashable version for comparison</span>
+            <span class="k">if</span> <span class="n">inv_key_tuple</span> <span class="ow">in</span> <span class="n">decrypt_keys_examined</span><span class="p">:</span>
+                <span class="k">continue</span>  <span class="c1"># no need to check a key more than once</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">decrypt_keys_examined</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">inv_key_tuple</span><span class="p">)</span> <span class="c1"># remember we checked this one</span>
+
+            <span class="c1"># Now with the candidate decryption key, decrypt the text and score the key</span>
+            <span class="n">plaintext</span> <span class="o">=</span> <span class="n">hills_transform</span><span class="p">(</span><span class="n">inv_key</span><span class="p">,</span> <span class="n">ciphertext</span><span class="p">)</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="n">scorer</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">plaintext</span><span class="p">)</span>
+            <span class="n">top_results</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">inv_key_tuple</span><span class="p">,</span> <span class="n">plaintext</span><span class="p">)</span>  <span class="c1"># only keeps the top results</span>
+
+    <span class="c1"># Print out the top results and see if any look viable</span>
+    <span class="k">for</span> <span class="n">rank</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">top_results</span><span class="o">.</span><span class="n">get_best</span><span class="p">(),</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rank: </span><span class="si">{</span><span class="n">rank</span><span class="si">}</span><span class="s2"> Score: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+              <span class="sa">f</span><span class="s2">&quot;Inv Key: </span><span class="se">\n</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Plaintext:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">plaintext</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">attack_hill_cipher</span><span class="p">(</span><span class="n">ciphertext_3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rank: 1 Score: -796.8620
+Inv Key: 
+[[ 6  1]
+ [11 22]]
+Plaintext:
+tsunamiscanoccuranywhereintheworldbutstrikemostfrequentlyalo
+ngthepacificoceansrimoffirethatstretchesfromalaskaacrosstoja
+pandownthroughthephilippinesthesouthpacificislandsandovertos
+outhamericax
+
+
+Rank: 2 Score: -1216.9624
+Inv Key: 
+[[ 6  1]
+ [17 18]]
+Plaintext:
+tiunaeisconecounaryuharyiftveyojlhbwtitviseyowtvryqgeltvyulu
+netvelaeifisoweynerymmfdifelhatitvelcbeyfdowaraekcaerysqtijk
+ponrownrhnowgvtvelhalupbifeytveyowtvpocofqcosdardgardgvsrlow
+owtvaeelisar
+
+
+Rank: 3 Score: -1248.1741
+Inv Key: 
+[[ 6  1]
+ [ 6 14]]
+Plaintext:
+ttuhanivcpnncpuhanylhhrrivtterobllbbttttiverobttrrqderttylll
+nntteranivivobernnrrmzffiverhhttttercperffobanankxanrrsfttjj
+ppnnobnnhhobgttterhhllppivertterobttppcpffcpsfanddanddvvrrob
+obttanerivan
+</pre></div>
+</div>
+</div>
+</div>
+<p>On my laptop, the above ran in less than 4 seconds.  Looking at the top result, we see that decrypting with key
+<span class="math notranslate nohighlight">\(\begin{pmatrix} 6 &amp; 1 \\ 11 &amp; 22 \end{pmatrix}\)</span> yields good results which can be read as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">Tsunamis</span> <span class="n">can</span> <span class="n">occur</span> <span class="n">anywhere</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">world</span> <span class="n">but</span> <span class="n">strike</span> <span class="n">most</span> <span class="n">frequently</span> <span class="n">along</span>
+  <span class="n">the</span> <span class="n">Pacific</span> <span class="n">Ocean</span><span class="s1">&#39;s &quot;Rim of Fire&quot; that stretches from Alaska across to Japan,</span>
+  <span class="n">down</span> <span class="n">through</span> <span class="n">the</span> <span class="n">Philippines</span><span class="p">,</span> <span class="n">the</span> <span class="n">South</span> <span class="n">Pacific</span> <span class="n">Islands</span><span class="p">,</span> <span class="ow">and</span> <span class="n">over</span> <span class="n">to</span> <span class="n">South</span>
+  <span class="n">America</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="3_2_elementary_matrix_theory.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">3.2 Elementary Matrix Theory</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="4_1_more_number_theory.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">4.1 More Number Theory</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-3-3">Exercises 3.3</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-computer-program-to-both-encipher-and-decipher-a-message-using-hill-s-digraph-system">5. Write a computer program to both encipher and decipher a message using Hill’s (digraph) System.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-hill-s-system-with-key-begin-pmatrix-6-3-7-8-end-pmatrix-encipher-the-message">1. Using Hill’s System with <span class="math notranslate nohighlight">\(key = \begin{pmatrix} 6 &amp; 3 \\ 7 &amp; 8 \end{pmatrix}\)</span> encipher the message:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decipher-the-following-message-that-was-enciphered-using-hill-s-system-with-key-begin-pmatrix-3-2-8-5-end-pmatrix">2. Decipher the following message that was enciphered using Hill’s System with <span class="math notranslate nohighlight">\(key = \begin{pmatrix} 3 &amp; 2 \\ 8 &amp; 5 \end{pmatrix}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-extending-hill-s-digraph-system-to-a-trigraph-system-that-is-rather-than-enciphering-and-deciphering-characters-in-pairs-you-wish-to-encipher-them-three-at-a-time-describe-how-you-would-proceed-be-sure-to-consider-whatever-restrictions-are-necessary-to-impose-on-the-key-to-assure-that-a-message-is-decipherable-hint-see-exercises-3-2-9">4. Consider extending Hill’s (digraph) System to a trigraph system. That is, rather than enciphering and deciphering characters in pairs, you wish to encipher them three at a time. Describe how you would proceed. Be sure to consider whatever restrictions are necessary to impose on the key to assure that a message is decipherable. (Hint: See Exercises 3.2, #9.)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#molly-has-intercepted-the-following-message-that-was-enciphered-using-hill-s-system-digraph-version">3. Molly has intercepted the following message that was enciphered using Hill’s System (digraph version):</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Dan Douglas
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

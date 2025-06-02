@@ -1,0 +1,904 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>4.2 The RSA Algorithm &#8212; Cryptological Mathematics Exercises</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/crypto-book.css?v=761dc443" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/4_2_rsa_algorithm';</script>
+    <script src="../_static/sidebar-togle.js?v=2b3ca58f"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4.3 Two Examples" href="4_3_two_examples.html" />
+    <link rel="prev" title="4.1 More Number Theory" href="4_1_more_number_theory.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../markdown/intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Cryptological Mathematics Exercises</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../markdown/intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Monoalphabetic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/1_1_induction.html">1.1 Induction Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_2_primes_gcd.html">1.2 Prime Numbers, Division Algorithm, Greatest Common Divisor Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_3_relative_primes.html">1.3 Relatively Prime Integers, Fundamental Theorem of Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_4_modular_arithmatic.html">1.4 Modular Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_5_simple_ciphers.html">1.5 Simple Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_6_cryptoanalysis_monoalphabetic_substitution_ciphers.html">1.6 Cryptoanalysis of Monoalphabetic Substitution Ciphers</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Polyalphabetic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_1_multiplication_principle.html">2.1 The Multiplication Principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_2_permutations_and_combinations.html">2.2 Permutations and Combinations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_3_probability.html">2.3 Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_4_independent_events_expected_number.html">2.4 Independent Events and Expected Number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_5_disguising_the_frequencies.html">2.5 Disguising the Frequencies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Polygraphic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3_1_elementary_polygraphic_substitution_ciphers.html">3.1 Elementary Polygraphic Substitution Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_2_elementary_matrix_theory.html">3.2 Elementary Matrix Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_3_hills_system.html">3.3 Hill’s System</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Public Key Cryptography</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="4_1_more_number_theory.html">4.1 More Number Theory</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4.2 The RSA Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_3_two_examples.html">4.3 Two Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_4_other_pk_cryptography.html">4.4 Other Illustrations of Public Key Cryptography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/4_2_rsa_algorithm.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>4.2 The RSA Algorithm</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-4-2">Exercises 4.2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstrate-the-importance-of-using-extremely-large-numbers-when-generating-keys-by-deducing-the-private-keys-of-the-following-individuals-from-their-relatively-small-public-keys">1. Demonstrate the importance of using extremely large numbers when generating keys by deducing the private keys of the following individuals from their relatively small public keys.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-a-set-of-public-and-private-keys-for-a-group-of-5-individuals-use-the-same-values-of-p-and-q-for-each-person-in-the-group">2. Generate a set of public and private keys for a group of 5 individuals. Use the same values of <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span> for each person in the group.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-with-p-19-and-q-41">3. Start with <span class="math notranslate nohighlight">\(p = 19\)</span> and <span class="math notranslate nohighlight">\(q = 41\)</span>.</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-compute-a-set-of-private-and-public-keys">(a) Compute a set of private and public keys.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-encipher-the-message-436">(b) Encipher the message 436.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-decipher-your-answer-to-part-b-of-this-problem">(c) Decipher your answer to part (b) of this problem.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#solve-the-following-equations-for-x">4. Solve the following equations for <span class="math notranslate nohighlight">\(x\)</span>;</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-11-x-pmod-29-16">(a) <span class="math notranslate nohighlight">\(11^x \pmod{29} = 16\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-13-x-pmod-19-2">(b) <span class="math notranslate nohighlight">\(13^x \pmod{19} = 2\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-5-x-pmod-37-29">(c) <span class="math notranslate nohighlight">\(5^x \pmod{37} = 29\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-m-any-real-number-one-usually-thinks-of-m-8-as-m-cdot-m-cdot-m-cdot-m-cdot-m-cdot-m-cdot-m-cdot-m-an-expression-involving-7-multiplications-a-more-efficient-way-to-compute-m-8-however-would-be-to-first-compute-m-2-m-cdot-m-and-then-perform-the-three-multiplications-m-2-cdot-m-2-cdot-m-2-cdot-m-2-this-observation-lies-at-the-heart-of-the-so-called-square-and-multiply-algorithm-which-can-be-used-in-connection-with-evaluating-m-e-pmod-n-using-this-technique-how-many-multiplications-would-be-required-to-compute">5. For <span class="math notranslate nohighlight">\(m\)</span> any real number, one usually thinks of <span class="math notranslate nohighlight">\(m^8\)</span> as <span class="math notranslate nohighlight">\(m \cdot m \cdot m \cdot m \cdot m \cdot m \cdot m \cdot m\)</span>, an expression involving 7 multiplications. A more efficient way to compute <span class="math notranslate nohighlight">\(m^8\)</span> however, would be to first compute <span class="math notranslate nohighlight">\(m^2 = m \cdot m\)</span>, and then perform the three multiplications: <span class="math notranslate nohighlight">\(m^2 \cdot m^2 \cdot m^2 \cdot  m^2\)</span>. This observation lies at the heart of the so-called square and multiply algorithm which can be used in connection with evaluating <span class="math notranslate nohighlight">\(m^e \pmod{n}\)</span>. Using this technique, how many multiplications would be required to compute:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-m-16">(a) <span class="math notranslate nohighlight">\(m^{16}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-m-35">(b) <span class="math notranslate nohighlight">\(m^{35}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-m-103">(c) <span class="math notranslate nohighlight">\(m^{103}\)</span></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="the-rsa-algorithm">
+<h1>4.2 The RSA Algorithm<a class="headerlink" href="#the-rsa-algorithm" title="Link to this heading">#</a></h1>
+<section id="exercises-4-2">
+<h2>Exercises 4.2<a class="headerlink" href="#exercises-4-2" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="o">%</span><span class="n">run</span> <span class="o">./</span><span class="mi">4_1</span><span class="n">_more_number_theory</span><span class="o">.</span><span class="n">ipynb</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="kn">import</span> <span class="n">divisors</span><span class="p">,</span> <span class="n">nextprime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sympy.core.numbers</span><span class="w"> </span><span class="kn">import</span> <span class="n">mod_inverse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__main__</span><span class="w"> </span><span class="kn">import</span> <span class="n">phi</span> <span class="k">as</span> <span class="n">euler_phi</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="demonstrate-the-importance-of-using-extremely-large-numbers-when-generating-keys-by-deducing-the-private-keys-of-the-following-individuals-from-their-relatively-small-public-keys">
+<h3>1. Demonstrate the importance of using extremely large numbers when generating keys by deducing the private keys of the following individuals from their relatively small public keys.<a class="headerlink" href="#demonstrate-the-importance-of-using-extremely-large-numbers-when-generating-keys-by-deducing-the-private-keys-of-the-following-individuals-from-their-relatively-small-public-keys" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Person</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(n\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(e\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>A</p></td>
+<td class="text-center"><p>98662273</p></td>
+<td class="text-center"><p>1313</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>B</p></td>
+<td class="text-center"><p>99633329</p></td>
+<td class="text-center"><p>2791</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>C</p></td>
+<td class="text-center"><p>222561187</p></td>
+<td class="text-center"><p>52107</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>We start by factoring <span class="math notranslate nohighlight">\(n\)</span>, then computing <span class="math notranslate nohighlight">\(\varphi(n)\)</span> and then we find <span class="math notranslate nohighlight">\(d\)</span>, the multiplicative inverse of <span class="math notranslate nohighlight">\(e \pmod{\varphi(n)}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">crack_trivial_rsa</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Cracks a trivial RSA encryption scheme by calculating</span>
+<span class="sd">    Euler&#39;s totient function (`phi`) and derives the modular</span>
+<span class="sd">    inverse of `e` modulo `phi`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_phi</span> <span class="o">=</span> <span class="n">euler_phi</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mod_inverse</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">_phi</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Private key d, for Person A: </span><span class="si">{</span><span class="n">crack_trivial_rsa</span><span class="p">(</span><span class="mi">98662273</span><span class="p">,</span><span class="w"> </span><span class="mi">1313</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Private key d, for Person B: </span><span class="si">{</span><span class="n">crack_trivial_rsa</span><span class="p">(</span><span class="mi">99633329</span><span class="p">,</span><span class="w"> </span><span class="mi">2791</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Private key d, for Person C: </span><span class="si">{</span><span class="n">crack_trivial_rsa</span><span class="p">(</span><span class="mi">222561187</span><span class="p">,</span><span class="w"> </span><span class="mi">52107</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Private key d, for Person A: 90148577
+Private key d, for Person B: 92149591
+Private key d, for Person C: 213737507
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note, finding <span class="math notranslate nohighlight">\(d\)</span> took less than 10ms for all three examples combined when run on my laptop.</p>
+</section>
+<section id="generate-a-set-of-public-and-private-keys-for-a-group-of-5-individuals-use-the-same-values-of-p-and-q-for-each-person-in-the-group">
+<h3>2. Generate a set of public and private keys for a group of 5 individuals. Use the same values of <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span> for each person in the group.<a class="headerlink" href="#generate-a-set-of-public-and-private-keys-for-a-group-of-5-individuals-use-the-same-values-of-p-and-q-for-each-person-in-the-group" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start by picking p and q</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">nextprime</span><span class="p">(</span><span class="mi">1234567</span><span class="p">)</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">nextprime</span><span class="p">(</span><span class="mi">7654321</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p = </span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">;  q = </span><span class="si">{</span><span class="n">q</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># then n is the product of p and q, and phi is (p-1)(q-1)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">p</span><span class="o">*</span><span class="n">q</span>
+<span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">q</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;n = </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">;  phi = </span><span class="si">{</span><span class="n">phi</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># now find the divisors of phi so we can pick numbers in range 1..phi that are coprime with phi</span>
+<span class="c1"># these will be the choices for e</span>
+<span class="n">phi_divisors</span> <span class="o">=</span> <span class="n">divisors</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span>
+<span class="c1"># there&#39;s probably alot of them.  Let&#39;s just pick some from the middle</span>
+<span class="n">i</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">phi_divisors</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
+<span class="n">slice_of_phi_divisors</span> <span class="o">=</span> <span class="n">phi_divisors</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">5</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;selected divisors of phi = </span><span class="si">{</span><span class="n">slice_of_phi_divisors</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># we can probably assume that these are not consecutive, so adding 1 to each</span>
+<span class="c1"># should give us an invertible encryption key (number e with gcd(e,phi) = 1)</span>
+<span class="c1"># if we&#39;re wrong we wont be able to invert and we can just pick another number</span>
+<span class="n">e_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">div</span><span class="o">+</span><span class="mi">1</span> <span class="k">for</span> <span class="n">div</span> <span class="ow">in</span> <span class="n">slice_of_phi_divisors</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;list of e&#39;s = </span><span class="si">{</span><span class="n">e_list</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># now we just find the multiplicative inverse of each</span>
+<span class="n">d_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">mod_inverse</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">e_list</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;list of d&#39;s = </span><span class="si">{</span><span class="n">d_list</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;----------------------------------------&quot;</span><span class="p">)</span>
+<span class="c1"># finally, output the public, private key pairs</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">e_list</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Public key #</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">:  (e=</span><span class="si">{</span><span class="n">e_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">, n=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Private key: (d=</span><span class="si">{</span><span class="n">d_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">----------------------------------------&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p = 1234577;  q = 7654337
+n = 9449868410449;  phi = 9449859521536
+selected divisors of phi = [3254048, 3348772, 3365488, 3718912, 3827168]
+list of e&#39;s = [3254049, 3348773, 3365489, 3718913, 3827169]
+list of d&#39;s = [5810841372897, 6232744492717, 4905693486737, 8893298308353, 825439767073]
+----------------------------------------
+	Public key #1:  (e=3254049, n=9449868410449)
+	Private key: (d=5810841372897)
+	----------------------------------------
+	Public key #2:  (e=3348773, n=9449868410449)
+	Private key: (d=6232744492717)
+	----------------------------------------
+	Public key #3:  (e=3365489, n=9449868410449)
+	Private key: (d=4905693486737)
+	----------------------------------------
+	Public key #4:  (e=3718913, n=9449868410449)
+	Private key: (d=8893298308353)
+	----------------------------------------
+	Public key #5:  (e=3827169, n=9449868410449)
+	Private key: (d=825439767073)
+	----------------------------------------
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="start-with-p-19-and-q-41">
+<h3>3. Start with <span class="math notranslate nohighlight">\(p = 19\)</span> and <span class="math notranslate nohighlight">\(q = 41\)</span>.<a class="headerlink" href="#start-with-p-19-and-q-41" title="Link to this heading">#</a></h3>
+<section id="a-compute-a-set-of-private-and-public-keys">
+<h4>(a) Compute a set of private and public keys.<a class="headerlink" href="#a-compute-a-set-of-private-and-public-keys" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="mi">19</span>
+<span class="n">q</span> <span class="o">=</span> <span class="mi">41</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">p</span><span class="o">*</span><span class="n">q</span>
+<span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">q</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">divs</span> <span class="o">=</span> <span class="n">divisors</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">divs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 18, 20, 24, 30, 36, 40, 45, 48, 60, 72, 80, 90, 120, 144, 180, 240, 360, 720]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e</span> <span class="o">=</span> <span class="mi">31</span>  <span class="c1"># just picking some number less than phi that is not a divisor</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">mod_inverse</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;e = </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">; d = </span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s2">; n = </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>e = 31; d = 511; n = 779 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="b-encipher-the-message-436">
+<h4>(b) Encipher the message 436.<a class="headerlink" href="#b-encipher-the-message-436" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="mi">436</span>
+<span class="n">c</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>398
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="c-decipher-your-answer-to-part-b-of-this-problem">
+<h4>(c) Decipher your answer to part (b) of this problem.<a class="headerlink" href="#c-decipher-your-answer-to-part-b-of-this-problem" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m_prime</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m_prime</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>436
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="solve-the-following-equations-for-x">
+<h4>4. Solve the following equations for <span class="math notranslate nohighlight">\(x\)</span>;<a class="headerlink" href="#solve-the-following-equations-for-x" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># for numbers this small, we can just iterate 1..n to find the answers</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">discrete_log_mod</span><span class="p">(</span><span class="n">base</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">modulus</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the discrete logarithm modulo a given modulus.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">modulus</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">pow</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">modulus</span><span class="p">)</span> <span class="o">==</span> <span class="n">y</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="a-11-x-pmod-29-16">
+<h4>(a) <span class="math notranslate nohighlight">\(11^x \pmod{29} = 16\)</span><a class="headerlink" href="#a-11-x-pmod-29-16" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">discrete_log_mod</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="b-13-x-pmod-19-2">
+<h4>(b) <span class="math notranslate nohighlight">\(13^x \pmod{19} = 2\)</span><a class="headerlink" href="#b-13-x-pmod-19-2" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">discrete_log_mod</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="c-5-x-pmod-37-29">
+<h4>(c) <span class="math notranslate nohighlight">\(5^x \pmod{37} = 29\)</span><a class="headerlink" href="#c-5-x-pmod-37-29" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">discrete_log_mod</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">29</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="for-m-any-real-number-one-usually-thinks-of-m-8-as-m-cdot-m-cdot-m-cdot-m-cdot-m-cdot-m-cdot-m-cdot-m-an-expression-involving-7-multiplications-a-more-efficient-way-to-compute-m-8-however-would-be-to-first-compute-m-2-m-cdot-m-and-then-perform-the-three-multiplications-m-2-cdot-m-2-cdot-m-2-cdot-m-2-this-observation-lies-at-the-heart-of-the-so-called-square-and-multiply-algorithm-which-can-be-used-in-connection-with-evaluating-m-e-pmod-n-using-this-technique-how-many-multiplications-would-be-required-to-compute">
+<h3>5. For <span class="math notranslate nohighlight">\(m\)</span> any real number, one usually thinks of <span class="math notranslate nohighlight">\(m^8\)</span> as <span class="math notranslate nohighlight">\(m \cdot m \cdot m \cdot m \cdot m \cdot m \cdot m \cdot m\)</span>, an expression involving 7 multiplications. A more efficient way to compute <span class="math notranslate nohighlight">\(m^8\)</span> however, would be to first compute <span class="math notranslate nohighlight">\(m^2 = m \cdot m\)</span>, and then perform the three multiplications: <span class="math notranslate nohighlight">\(m^2 \cdot m^2 \cdot m^2 \cdot  m^2\)</span>. This observation lies at the heart of the so-called square and multiply algorithm which can be used in connection with evaluating <span class="math notranslate nohighlight">\(m^e \pmod{n}\)</span>. Using this technique, how many multiplications would be required to compute:<a class="headerlink" href="#for-m-any-real-number-one-usually-thinks-of-m-8-as-m-cdot-m-cdot-m-cdot-m-cdot-m-cdot-m-cdot-m-cdot-m-an-expression-involving-7-multiplications-a-more-efficient-way-to-compute-m-8-however-would-be-to-first-compute-m-2-m-cdot-m-and-then-perform-the-three-multiplications-m-2-cdot-m-2-cdot-m-2-cdot-m-2-this-observation-lies-at-the-heart-of-the-so-called-square-and-multiply-algorithm-which-can-be-used-in-connection-with-evaluating-m-e-pmod-n-using-this-technique-how-many-multiplications-would-be-required-to-compute" title="Link to this heading">#</a></h3>
+<p>An algorithmic description of “square and multiply” is</p>
+<ol class="arabic simple">
+<li><p>Convert the exponent to binary. Ignore leading zero’s.  (left most digit will be 1)</p></li>
+<li><p>Initialize the result with the base</p></li>
+<li><p>Process each binary digit (from left to right) after the left most 1:</p></li>
+<li><p>For each binary digit:</p>
+<ul class="simple">
+<li><p>Square the current result.</p></li>
+<li><p>If the digit is 1, multiply the result by the base</p></li>
+</ul>
+</li>
+</ol>
+<p>Using this definition, the number of multiplications can be derived as</p>
+<div class="math notranslate nohighlight">
+\[
+  (k − 1) + (h − 1)
+\]</div>
+<p>or, equivilantly</p>
+<div class="math notranslate nohighlight">
+\[
+  k + h − 2
+\]</div>
+<p>where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(k\)</span> = number of bits in the binary representation of the exponent</p></li>
+<li><p><span class="math notranslate nohighlight">\(h\)</span> = number of 1’s in the binary representation of the exponent</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bits_required</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">n</span><span class="o">.</span><span class="n">bit_length</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">count_ones</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">bin</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">mults_required_for_exponent</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">bits_required</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">count_ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">k</span> <span class="o">+</span> <span class="n">h</span> <span class="o">-</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="a-m-16">
+<h3>(a) <span class="math notranslate nohighlight">\(m^{16}\)</span><a class="headerlink" href="#a-m-16" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mults_required_for_exponent</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="b-m-35">
+<h3>(b) <span class="math notranslate nohighlight">\(m^{35}\)</span><a class="headerlink" href="#b-m-35" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mults_required_for_exponent</span><span class="p">(</span><span class="mi">35</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="c-m-103">
+<h3>(c) <span class="math notranslate nohighlight">\(m^{103}\)</span><a class="headerlink" href="#c-m-103" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mults_required_for_exponent</span><span class="p">(</span><span class="mi">103</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the exercise question as asked does not show the the proper (i.e. optimal) application of the square and multiply algorithm for an exponent of <span class="math notranslate nohighlight">\(8\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(8\)</span> in binary is <span class="math notranslate nohighlight">\(1000\)</span></p>
+<ol class="arabic simple">
+<li><p>Start with <span class="math notranslate nohighlight">\(m\)</span>, then moving left to right</p></li>
+<li><p>Next bit is <span class="math notranslate nohighlight">\(0\)</span>, so square <span class="math notranslate nohighlight">\(m\)</span> to get <span class="math notranslate nohighlight">\(m^2\)</span> (1st multiplication)</p></li>
+<li><p>Next bit is <span class="math notranslate nohighlight">\(0\)</span>, so square <span class="math notranslate nohighlight">\(m^2\)</span> to get <span class="math notranslate nohighlight">\(m^4\)</span> (2nd multiplication)</p></li>
+<li><p>Next (and last) bit is <span class="math notranslate nohighlight">\(0\)</span>, so square <span class="math notranslate nohighlight">\(m^4\)</span> to get <span class="math notranslate nohighlight">\(m^8\)</span> (3nd multiplication)</p></li>
+</ol>
+<p>So, only <span class="math notranslate nohighlight">\(3\)</span> multiplications are required to compute <span class="math notranslate nohighlight">\(m^8\)</span>, which matches what <code class="docutils literal notranslate"><span class="pre">mults_required_for_exponent</span></code> computes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mults_required_for_exponent</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="4_1_more_number_theory.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">4.1 More Number Theory</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="4_3_two_examples.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">4.3 Two Examples</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-4-2">Exercises 4.2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstrate-the-importance-of-using-extremely-large-numbers-when-generating-keys-by-deducing-the-private-keys-of-the-following-individuals-from-their-relatively-small-public-keys">1. Demonstrate the importance of using extremely large numbers when generating keys by deducing the private keys of the following individuals from their relatively small public keys.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-a-set-of-public-and-private-keys-for-a-group-of-5-individuals-use-the-same-values-of-p-and-q-for-each-person-in-the-group">2. Generate a set of public and private keys for a group of 5 individuals. Use the same values of <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span> for each person in the group.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-with-p-19-and-q-41">3. Start with <span class="math notranslate nohighlight">\(p = 19\)</span> and <span class="math notranslate nohighlight">\(q = 41\)</span>.</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-compute-a-set-of-private-and-public-keys">(a) Compute a set of private and public keys.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-encipher-the-message-436">(b) Encipher the message 436.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-decipher-your-answer-to-part-b-of-this-problem">(c) Decipher your answer to part (b) of this problem.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#solve-the-following-equations-for-x">4. Solve the following equations for <span class="math notranslate nohighlight">\(x\)</span>;</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-11-x-pmod-29-16">(a) <span class="math notranslate nohighlight">\(11^x \pmod{29} = 16\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-13-x-pmod-19-2">(b) <span class="math notranslate nohighlight">\(13^x \pmod{19} = 2\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-5-x-pmod-37-29">(c) <span class="math notranslate nohighlight">\(5^x \pmod{37} = 29\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-m-any-real-number-one-usually-thinks-of-m-8-as-m-cdot-m-cdot-m-cdot-m-cdot-m-cdot-m-cdot-m-cdot-m-an-expression-involving-7-multiplications-a-more-efficient-way-to-compute-m-8-however-would-be-to-first-compute-m-2-m-cdot-m-and-then-perform-the-three-multiplications-m-2-cdot-m-2-cdot-m-2-cdot-m-2-this-observation-lies-at-the-heart-of-the-so-called-square-and-multiply-algorithm-which-can-be-used-in-connection-with-evaluating-m-e-pmod-n-using-this-technique-how-many-multiplications-would-be-required-to-compute">5. For <span class="math notranslate nohighlight">\(m\)</span> any real number, one usually thinks of <span class="math notranslate nohighlight">\(m^8\)</span> as <span class="math notranslate nohighlight">\(m \cdot m \cdot m \cdot m \cdot m \cdot m \cdot m \cdot m\)</span>, an expression involving 7 multiplications. A more efficient way to compute <span class="math notranslate nohighlight">\(m^8\)</span> however, would be to first compute <span class="math notranslate nohighlight">\(m^2 = m \cdot m\)</span>, and then perform the three multiplications: <span class="math notranslate nohighlight">\(m^2 \cdot m^2 \cdot m^2 \cdot  m^2\)</span>. This observation lies at the heart of the so-called square and multiply algorithm which can be used in connection with evaluating <span class="math notranslate nohighlight">\(m^e \pmod{n}\)</span>. Using this technique, how many multiplications would be required to compute:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-m-16">(a) <span class="math notranslate nohighlight">\(m^{16}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-m-35">(b) <span class="math notranslate nohighlight">\(m^{35}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-m-103">(c) <span class="math notranslate nohighlight">\(m^{103}\)</span></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Dan Douglas
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -36,7 +36,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/crypto-book.css?v=b9f428a8" />
+    <link rel="stylesheet" type="text/css" href="../_static/crypto-book.css?v=761dc443" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -179,9 +179,35 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Monoalphabetic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1_1_induction.html">1.1 Induction Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notebooks/1_2_primes_gcd.html">1.2 Prime Numbers, Division Algorithm, Greatest Common Divisor Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/1_3_relative_primes.html">1.3 Relatively Prime Integers, Fundamental Theorem of Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/1_4_modular_arithmatic.html">1.4 Modular Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/1_5_simple_ciphers.html">1.5 Simple Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/1_6_cryptoanalysis_monoalphabetic_substitution_ciphers.html">1.6 Cryptoanalysis of Monoalphabetic Substitution Ciphers</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Polyalphabetic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2_1_multiplication_principle.html">2.1 The Multiplication Principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/2_2_permutations_and_combinations.html">2.2 Permutations and Combinations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_3_probability.html">2.3 Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_4_independent_events_expected_number.html">2.4 Independent Events and Expected Number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/2_5_disguising_the_frequencies.html">2.5 Disguising the Frequencies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Polygraphic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/3_1_elementary_polygraphic_substitution_ciphers.html">3.1 Elementary Polygraphic Substitution Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/3_2_elementary_matrix_theory.html">3.2 Elementary Matrix Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/3_3_hills_system.html">3.3 Hill’s System</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Public Key Cryptography</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/4_1_more_number_theory.html">4.1 More Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/4_2_rsa_algorithm.html">4.2 The RSA Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/4_3_two_examples.html">4.3 Two Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/4_4_other_pk_cryptography.html">4.4 Other Illustrations of Public Key Cryptography</a></li>
 </ul>
 
     </div>
@@ -334,13 +360,45 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h1>
-<p>As I was reading <span id="id1">[<a class="reference internal" href="#id4" title="Robert Edward Lewand. Cryptological Mathematics. The Mathematical Association of America, 2000. ISBN 978-0883857199.">Lew00</a>]</span>, I found myself wanting to do the exercises and save the work in a readable format.   The exercises insist of mathematical proofs (where writing equations would be helpful), and programming exercises.  I decided that using Jupyter Notebooks and incorporating  <a class="reference external" href="https://www.mathjax.org/">MathJax</a> and organizing as a <a class="reference external" href="https://jupyterbook.org/en/stable/intro.html">Jupyter Book</a> would be a decent approach.</p>
+<p>As I was reading <span id="id1">[<a class="reference internal" href="#id4" title="Robert Edward Lewand. Cryptological Mathematics. The Mathematical Association of America, 2000. ISBN 978-0883857199.">Lew00</a>]</span>, I found myself wanting to do the exercises and save the work in a readable format.   The exercises consist of mathematical proofs (where writing equations would be helpful), and programming exercises.  I decided that using Jupyter Notebooks and incorporating  <a class="reference external" href="https://www.mathjax.org/">MathJax</a> and organizing as a <a class="reference external" href="https://jupyterbook.org/en/stable/intro.html">Jupyter Book</a> would be a decent approach.</p>
 <p>Besides, I wanted to get more experience using those tools.</p>
-<p>The book content is oganized around how the exercises are presented in <span id="id2">[<a class="reference internal" href="#id4" title="Robert Edward Lewand. Cryptological Mathematics. The Mathematical Association of America, 2000. ISBN 978-0883857199.">Lew00</a>]</span>.</p>
+<p>The book content is organized around how the exercises are presented in <span id="id2">[<a class="reference internal" href="#id4" title="Robert Edward Lewand. Cryptological Mathematics. The Mathematical Association of America, 2000. ISBN 978-0883857199.">Lew00</a>]</span>.  The exercises completed here are ones I thought were interstesting to do and represent my own personal choices.</p>
 <div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Monoalphabetic Substitution Ciphers</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="1_1_induction.html">1.1 Induction Exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notebooks/1_2_primes_gcd.html">1.2 Prime Numbers, Division Algorithm, Greatest Common Divisor Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/1_3_relative_primes.html">1.3 Relatively Prime Integers, Fundamental Theorem of Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/1_4_modular_arithmatic.html">1.4 Modular Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/1_5_simple_ciphers.html">1.5 Simple Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/1_6_cryptoanalysis_monoalphabetic_substitution_ciphers.html">1.6 Cryptoanalysis of Monoalphabetic Substitution Ciphers</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Polyalphabetic Substitution Ciphers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="2_1_multiplication_principle.html">2.1 The Multiplication Principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/2_2_permutations_and_combinations.html">2.2 Permutations and Combinations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_3_probability.html">2.3 Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_4_independent_events_expected_number.html">2.4 Independent Events and Expected Number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/2_5_disguising_the_frequencies.html">2.5 Disguising the Frequencies</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Polygraphic Substitution Ciphers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/3_1_elementary_polygraphic_substitution_ciphers.html">3.1 Elementary Polygraphic Substitution Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/3_2_elementary_matrix_theory.html">3.2 Elementary Matrix Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/3_3_hills_system.html">3.3 Hill’s System</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Public Key Cryptography</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/4_1_more_number_theory.html">4.1 More Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/4_2_rsa_algorithm.html">4.2 The RSA Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/4_3_two_examples.html">4.3 Two Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/4_4_other_pk_cryptography.html">4.4 Other Illustrations of Public Key Cryptography</a></li>
 </ul>
 </div>
 <div class="docutils container" id="id3">

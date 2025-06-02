@@ -1,0 +1,919 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.3 Probability &#8212; Cryptological Mathematics Exercises</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/crypto-book.css?v=761dc443" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdown/2_3_probability';</script>
+    <script src="../_static/sidebar-togle.js?v=2b3ca58f"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.4 Independent Events and Expected Number" href="2_4_independent_events_expected_number.html" />
+    <link rel="prev" title="2.2 Permutations and Combinations" href="../notebooks/2_2_permutations_and_combinations.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Cryptological Mathematics Exercises</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Monoalphabetic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_1_induction.html">1.1 Induction Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/1_2_primes_gcd.html">1.2 Prime Numbers, Division Algorithm, Greatest Common Divisor Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/1_3_relative_primes.html">1.3 Relatively Prime Integers, Fundamental Theorem of Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/1_4_modular_arithmatic.html">1.4 Modular Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/1_5_simple_ciphers.html">1.5 Simple Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/1_6_cryptoanalysis_monoalphabetic_substitution_ciphers.html">1.6 Cryptoanalysis of Monoalphabetic Substitution Ciphers</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Polyalphabetic Substitution Ciphers</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2_1_multiplication_principle.html">2.1 The Multiplication Principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/2_2_permutations_and_combinations.html">2.2 Permutations and Combinations</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2.3 Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_4_independent_events_expected_number.html">2.4 Independent Events and Expected Number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/2_5_disguising_the_frequencies.html">2.5 Disguising the Frequencies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Polygraphic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/3_1_elementary_polygraphic_substitution_ciphers.html">3.1 Elementary Polygraphic Substitution Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/3_2_elementary_matrix_theory.html">3.2 Elementary Matrix Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/3_3_hills_system.html">3.3 Hill’s System</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Public Key Cryptography</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/4_1_more_number_theory.html">4.1 More Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/4_2_rsa_algorithm.html">4.2 The RSA Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/4_3_two_examples.html">4.3 Two Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/4_4_other_pk_cryptography.html">4.4 Other Illustrations of Public Key Cryptography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/markdown/2_3_probability.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2.3 Probability</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-2-3">Exercises 2.3</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-ball-is-selected-at-random-from-a-box-containing-4-green-6-blue-3-yellow-and-7-red-balls-find-the-probability-that">1. A ball is selected at random from a box containing 4 green, 6 blue, 3 yellow, and 7 red balls. Find the probability that</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-a-blue-ball-is-selected">(a) a blue ball is selected.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-a-yellow-ball-is-selected">(b) a yellow ball is selected.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-a-red-ball-is-not-selected">(c) a red ball is not selected.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-either-a-yellow-or-blue-ball-is-selected">(d) either a yellow or blue ball is selected.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-neither-a-green-nor-a-red-ball-is-selected">(e) neither a green nor a red ball is selected.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#f-a-green-blue-or-yellow-ball-is-selected">(f) a green, blue, or yellow ball is selected.</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-a-group-of-85-spies-one-will-be-selected-at-random-to-be-stationed-in-honolulu-if-48-are-female-and-64-are-single-and-if-among-the-64-single-spies-half-are-male-what-is-the-probability-that-the-spy-selected-will-be-neither-single-nor-female">2. From a group of 85 spies, one will be selected at random to be stationed in Honolulu. If 48 are female and 64 are single, and if among the 64 single spies, half are male, what is the probability that the spy selected will be neither single nor female?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#four-cards-are-to-be-drawn-simultaneously-from-a-deck-of-52-find-the-probability-that">3. Four cards are to be drawn simultaneously from a deck of 52. Find the probability that</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-all-four-are-clubs">(a) all four are clubs.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-at-least-one-is-not-a-club">(b) at least one is not a club.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-three-are-black-and-one-is-red">(e) three are black and one is red</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-exactly-two-are-picture-cards">(d) exactly two are picture cards.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-either-two-or-three-of-the-four-cards-are-picture-cards">(e) either two or three of the four cards are picture cards.</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-for-various-numbers-of-spies-being-deployed-to-the-san-fernando-valley-is-summarized-in-the-following-table">4. The probability for various numbers of spies being deployed to the San Fernando Valley is summarized in the following table:</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-at-most-two-spies-will-be-deployed">(a) at most two spies will be deployed.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-at-least-one-spy-will-be-deployed">(b) at least one spy will be deployed.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-one-or-two-spies-will-be-deployed">(e) one or two spies will be deployed.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-fewer-than-four-spies-will-be-deployed">(d) fewer than four spies will be deployed.</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-couple-has-3-children-assuming-that-the-probability-of-any-child-s-being-a-girl-is-0-5-find-the-probability-that">5. A couple has 3 children. Assuming that the probability of any child’s being a girl is 0.5, find the probability that</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-the-oldest-child-is-a-boy">(a) the oldest child is a boy.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-there-are-at-least-two-girls">(b) there are at least two girls.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-no-more-than-one-child-is-a-boy">(e) no more than one child is a boy.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-the-oldest-and-youngest-are-girls-and-the-middle-child-is-not">(d) the oldest and youngest are girls and the middle child is not.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-exactly-one-of-the-three-children-is-a-boy">(e) exactly one of the three children is a boy.</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-men-and-two-women-are-seated-in-the-same-row-of-seats-in-a-theater-if-the-seats-were-selected-at-random-find-the-probability-that-the-seating-arrangement-alternates-by-sex">6. Three men and two women are seated in the same row of seats in a theater. If the seats were selected at random, find the probability that the seating arrangement alternates by sex.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#of-24-runners-competing-in-a-marathon-3-have-taken-banned-performance-enhancing-drugs-six-of-the-athletes-are-selected-at-random-for-drug-testing-what-is-the-probability-that">7. Of 24 runners competing in a marathon, 3 have taken banned performance-enhancing drugs. Six of the athletes are selected at random for drug testing. What is the probability that</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-none-of-the-drug-takers-get-caught">(a) none of the drug takers get caught?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-at-least-one-gets-caught">(b) at least one gets caught?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-all-three-get-caught">(c) all three get caught?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-lottery-consists-of-48-numbers-of-which-8-are-selected-by-the-lottery-authority-in-order-to-win-you-need-to-select-either-7-or-8-of-the-numbers-selected-by-the-authority-if-you-pick-exactly-7-you-win-20-000-if-you-pick-8-you-win-50-000-what-is-the-probability-you">8. A lottery consists of 48 numbers of which 8 are selected by the lottery authority. In order to win, you need to select either 7 or 8 of the numbers selected by the authority. If you pick exactly 7, you win $20,000; if you pick 8 you win $50,000. What is the probability you</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-win-50-000">(a) win $50,000?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-win-20-000">(b) win $20,000?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#you-have-a-flush-in-poker-when-all-five-of-the-cards-you-are-dealt-are-of-the-same-suit-what-is-the-probability-of-the-following">9. You have a “flush” in poker when all five of the cards you are dealt are of the same suit. What is the probability of the following.</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-being-dealt-a-flush-in-spades">(a) being dealt a flush in spades?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-being-dealt-a-flush-in-either-spades-or-diamond">(b) being dealt a flush in either spades or diamond?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-being-dealt-a-flush-in-any-suit">(e) being dealt a flush in any suit?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-not-being-dealt-a-flush">(d) not being dealt a flush?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-spies-a-b-and-c-are-in-the-running-for-an-assignment-in-afghanistan-a-is-twice-as-likely-to-be-selected-as-b-and-c-is-three-times-as-likely-as-a-to-be-selected-what-is-the-probability-that-a-is-selected">10. Three spies, A, B, and C are in the running for an assignment in Afghanistan. A is twice as likely to be selected as B, and C is three times as likely as A to be selected. What is the probability that A is selected?</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="probability">
+<h1>2.3 Probability<a class="headerlink" href="#probability" title="Link to this heading">#</a></h1>
+<section id="exercises-2-3">
+<h2>Exercises 2.3<a class="headerlink" href="#exercises-2-3" title="Link to this heading">#</a></h2>
+<section id="a-ball-is-selected-at-random-from-a-box-containing-4-green-6-blue-3-yellow-and-7-red-balls-find-the-probability-that">
+<h3>1. A ball is selected at random from a box containing 4 green, 6 blue, 3 yellow, and 7 red balls. Find the probability that<a class="headerlink" href="#a-ball-is-selected-at-random-from-a-box-containing-4-green-6-blue-3-yellow-and-7-red-balls-find-the-probability-that" title="Link to this heading">#</a></h3>
+<p>There are 20 balls in total.</p>
+<section id="a-a-blue-ball-is-selected">
+<h4>(a) a blue ball is selected.<a class="headerlink" href="#a-a-blue-ball-is-selected" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\(p(\text{blue ball selected}) = \frac{6}{20} = 0.3\)</span></p>
+</section>
+<section id="b-a-yellow-ball-is-selected">
+<h4>(b) a yellow ball is selected.<a class="headerlink" href="#b-a-yellow-ball-is-selected" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\(p(\text{yellow ball selected}) = \frac{3}{20} = 0.15\)</span></p>
+</section>
+<section id="c-a-red-ball-is-not-selected">
+<h4>(c) a red ball is not selected.<a class="headerlink" href="#c-a-red-ball-is-not-selected" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\(p(\text{red ball not selected}) = \frac{13}{20} = 0.65\)</span></p>
+</section>
+<section id="d-either-a-yellow-or-blue-ball-is-selected">
+<h4>(d) either a yellow or blue ball is selected.<a class="headerlink" href="#d-either-a-yellow-or-blue-ball-is-selected" title="Link to this heading">#</a></h4>
+<p>Since a ball cannot be both yellow <strong>and</strong> blue, this is just the sum
+<span class="math notranslate nohighlight">\(p(\text{blue ball selected}) + p(\text{yellow ball selected}) = \frac{6}{20} + \frac{3}{20} = 0.45\)</span></p>
+</section>
+<section id="e-neither-a-green-nor-a-red-ball-is-selected">
+<h4>(e) neither a green nor a red ball is selected.<a class="headerlink" href="#e-neither-a-green-nor-a-red-ball-is-selected" title="Link to this heading">#</a></h4>
+<p>Since this implies that a yellow or blue ball is selected this is also <span class="math notranslate nohighlight">\(0.45\)</span>.</p>
+</section>
+<section id="f-a-green-blue-or-yellow-ball-is-selected">
+<h4>(f) a green, blue, or yellow ball is selected.<a class="headerlink" href="#f-a-green-blue-or-yellow-ball-is-selected" title="Link to this heading">#</a></h4>
+<p>This is same as a red ball not being selected, as computed above, <span class="math notranslate nohighlight">\(0.65\)</span></p>
+</section>
+</section>
+<section id="from-a-group-of-85-spies-one-will-be-selected-at-random-to-be-stationed-in-honolulu-if-48-are-female-and-64-are-single-and-if-among-the-64-single-spies-half-are-male-what-is-the-probability-that-the-spy-selected-will-be-neither-single-nor-female">
+<h3>2. From a group of 85 spies, one will be selected at random to be stationed in Honolulu. If 48 are female and 64 are single, and if among the 64 single spies, half are male, what is the probability that the spy selected will be neither single nor female?<a class="headerlink" href="#from-a-group-of-85-spies-one-will-be-selected-at-random-to-be-stationed-in-honolulu-if-48-are-female-and-64-are-single-and-if-among-the-64-single-spies-half-are-male-what-is-the-probability-that-the-spy-selected-will-be-neither-single-nor-female" title="Link to this heading">#</a></h3>
+<p>From the text, assuming a spy is either male or female and assuming that a spy is either married or single.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(48\)</span> are female</p></li>
+<li><p><span class="math notranslate nohighlight">\(64\)</span> are single</p></li>
+<li><p><span class="math notranslate nohighlight">\(32\)</span> are single females</p></li>
+<li><p><span class="math notranslate nohighlight">\(32\)</span> are single males</p></li>
+<li><p><span class="math notranslate nohighlight">\(85 - 48 = 37\)</span> are male</p></li>
+<li><p><span class="math notranslate nohighlight">\(37 - 32 = 5\)</span> are married males</p></li>
+<li><p><span class="math notranslate nohighlight">\(48 - 32 = 16\)</span> are married females</p></li>
+</ul>
+<p>Let <span class="math notranslate nohighlight">\(E\)</span> be the event that <em>“spy selected will be neither single nor female”</em>, this is the same as <em>“selected spy is a married male”</em>.
+$<span class="math notranslate nohighlight">\(
+ p(E) = \frac{n(E)}{n(S)} = \frac{5}{85} \approx 0.0588
+\)</span>$</p>
+</section>
+<section id="four-cards-are-to-be-drawn-simultaneously-from-a-deck-of-52-find-the-probability-that">
+<h3>3. Four cards are to be drawn simultaneously from a deck of 52. Find the probability that<a class="headerlink" href="#four-cards-are-to-be-drawn-simultaneously-from-a-deck-of-52-find-the-probability-that" title="Link to this heading">#</a></h3>
+<p>The size of the sample set, <span class="math notranslate nohighlight">\(S\)</span> is <span class="math notranslate nohighlight">\(n(S) = C(52, 4) = 270725\)</span></p>
+<section id="a-all-four-are-clubs">
+<h4>(a) all four are clubs.<a class="headerlink" href="#a-all-four-are-clubs" title="Link to this heading">#</a></h4>
+<p>Let <span class="math notranslate nohighlight">\(E\)</span> be <em>“all four are clubs”</em>, then <span class="math notranslate nohighlight">\(p(E) = \frac{n(E)}{n(S)} = \frac{C(13, 4)}{C(52, 4)} = \frac{715}{270725} \approx 0.00264\)</span></p>
+</section>
+<section id="b-at-least-one-is-not-a-club">
+<h4>(b) at least one is not a club.<a class="headerlink" href="#b-at-least-one-is-not-a-club" title="Link to this heading">#</a></h4>
+<p>This is <span class="math notranslate nohighlight">\(1 - p(E) = 1 - \frac{715}{270725} = \frac{270010}{270725} \approx 0.997\)</span></p>
+</section>
+<section id="e-three-are-black-and-one-is-red">
+<h4>(e) three are black and one is red<a class="headerlink" href="#e-three-are-black-and-one-is-red" title="Link to this heading">#</a></h4>
+<p>There are <span class="math notranslate nohighlight">\(C(26, 3)\)</span> ways of picking three black cards and <span class="math notranslate nohighlight">\(C(26, 1)\)</span> ways of picking one red, so if <span class="math notranslate nohighlight">\(E\)</span> is <em>“three are black and one is red”</em>, then
+$<span class="math notranslate nohighlight">\(
+ n(E) = C(26, 3) \cdot C(26, 1) = 2600 \cdot 26 = 67600
+\)</span><span class="math notranslate nohighlight">\(
+and 
+\)</span><span class="math notranslate nohighlight">\(
+ p(E) = \frac{n(E)}{n(S)} = \frac{67600}{270725} \approx 0.2497
+\)</span>$</p>
+</section>
+<section id="d-exactly-two-are-picture-cards">
+<h4>(d) exactly two are picture cards.<a class="headerlink" href="#d-exactly-two-are-picture-cards" title="Link to this heading">#</a></h4>
+<p>“Picture cards” are jack, queen, or king.  Three per suit, four suits so <span class="math notranslate nohighlight">\(12\)</span> picture cards total.</p>
+<ul class="simple">
+<li><p>The number of ways of choosing 2 picture cards is <span class="math notranslate nohighlight">\(C(12, 2) = 66\)</span></p></li>
+<li><p>The number of ways of choosing 2 non-picture cards is <span class="math notranslate nohighlight">\(C(52-12, 2) = C(40, 2) = 780\)</span></p></li>
+<li><p>The number of ways of choosing 4 cards with exactly 2 being picture cards is <span class="math notranslate nohighlight">\(66 \times 780 = 51480\)</span></p></li>
+<li><p>The probability of drawing that hand is <span class="math notranslate nohighlight">\(\frac{51480}{270725} \approx 0.190\)</span></p></li>
+</ul>
+</section>
+<section id="e-either-two-or-three-of-the-four-cards-are-picture-cards">
+<h4>(e) either two or three of the four cards are picture cards.<a class="headerlink" href="#e-either-two-or-three-of-the-four-cards-are-picture-cards" title="Link to this heading">#</a></h4>
+<p>This is the sum of the probabilities of exactly two are picture cards and exactly three are picture cards.  We computed the first above, so let’s focus on computing the probability of “exactly three are picture cards”</p>
+<ul class="simple">
+<li><p>The number of ways of choosing 3 picture cards is <span class="math notranslate nohighlight">\(C(12, 3) = 220\)</span></p></li>
+<li><p>The number of ways of choosing 1 non-picture card is <span class="math notranslate nohighlight">\(C(52-12, 1) = C(40, 1) = 40\)</span></p></li>
+<li><p>The number of ways of choosing 4 cards with exactly 3 being picture cards is <span class="math notranslate nohighlight">\(220 \times 40 = 8800\)</span></p></li>
+<li><p>The probability of drawing that hand is <span class="math notranslate nohighlight">\(\frac{8800}{270725} \approx 0.0325\)</span></p></li>
+</ul>
+<p>So, the probability of getting two or three picture cards is</p>
+<div class="math notranslate nohighlight">
+\[
+  \frac{51480}{270725} + \frac{8800}{270725} = \frac{51480 + 8800}{270725} = \frac{60280}{270725} \approx  0.2227
+\]</div>
+</section>
+</section>
+<section id="the-probability-for-various-numbers-of-spies-being-deployed-to-the-san-fernando-valley-is-summarized-in-the-following-table">
+<h3>4. The probability for various numbers of spies being deployed to the San Fernando Valley is summarized in the following table:<a class="headerlink" href="#the-probability-for-various-numbers-of-spies-being-deployed-to-the-san-fernando-valley-is-summarized-in-the-following-table" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Number of spies to be deployed</p></th>
+<th class="head text-center"><p>0</p></th>
+<th class="head text-center"><p>1</p></th>
+<th class="head text-center"><p>2</p></th>
+<th class="head text-center"><p>3</p></th>
+<th class="head text-center"><p>4 or more</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Probability</p></td>
+<td class="text-center"><p>0.24</p></td>
+<td class="text-center"><p>0.20</p></td>
+<td class="text-center"><p>0.35</p></td>
+<td class="text-center"><p>0.11</p></td>
+<td class="text-center"><p>0.10</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Find the probability that</p>
+<section id="a-at-most-two-spies-will-be-deployed">
+<h4>(a) at most two spies will be deployed.<a class="headerlink" href="#a-at-most-two-spies-will-be-deployed" title="Link to this heading">#</a></h4>
+<p>So, this is deploying 0, 1, or 2 and the probability is
+$<span class="math notranslate nohighlight">\(
+  0.24 + 0.20 + 0.35 = 0.79
+\)</span>$</p>
+</section>
+<section id="b-at-least-one-spy-will-be-deployed">
+<h4>(b) at least one spy will be deployed.<a class="headerlink" href="#b-at-least-one-spy-will-be-deployed" title="Link to this heading">#</a></h4>
+<p>This is <span class="math notranslate nohighlight">\(1 - p(\text{0 spies deployed})\)</span>
+$<span class="math notranslate nohighlight">\(
+  1 - 0.24 = 0.76
+\)</span>$</p>
+</section>
+<section id="e-one-or-two-spies-will-be-deployed">
+<h4>(e) one or two spies will be deployed.<a class="headerlink" href="#e-one-or-two-spies-will-be-deployed" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+ 0.20 + 0.35 = 0.55
+\]</div>
+</section>
+<section id="d-fewer-than-four-spies-will-be-deployed">
+<h4>(d) fewer than four spies will be deployed.<a class="headerlink" href="#d-fewer-than-four-spies-will-be-deployed" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+ 1 - 0.10 = 0.9
+\]</div>
+</section>
+</section>
+<section id="a-couple-has-3-children-assuming-that-the-probability-of-any-child-s-being-a-girl-is-0-5-find-the-probability-that">
+<h3>5. A couple has 3 children. Assuming that the probability of any child’s being a girl is 0.5, find the probability that<a class="headerlink" href="#a-couple-has-3-children-assuming-that-the-probability-of-any-child-s-being-a-girl-is-0-5-find-the-probability-that" title="Link to this heading">#</a></h3>
+<section id="a-the-oldest-child-is-a-boy">
+<h4>(a) the oldest child is a boy.<a class="headerlink" href="#a-the-oldest-child-is-a-boy" title="Link to this heading">#</a></h4>
+<p>Since the probability of any single child being a boy (or a girl) is <span class="math notranslate nohighlight">\(0.5\)</span>, the answer is <span class="math notranslate nohighlight">\(0.5\)</span>.</p>
+</section>
+<section id="b-there-are-at-least-two-girls">
+<h4>(b) there are at least two girls.<a class="headerlink" href="#b-there-are-at-least-two-girls" title="Link to this heading">#</a></h4>
+<p>All the outcomes are equiprobable, so computing the weights is just counting the sample space and the events.
+There are <span class="math notranslate nohighlight">\(2^3 = 8\)</span> different permutations of the children. That is <span class="math notranslate nohighlight">\(n(S)\)</span>.  The event, <span class="math notranslate nohighlight">\(E\)</span>, is equivalent to there being <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(1\)</span> boys.  There is <span class="math notranslate nohighlight">\(1\)</span> way for there to be zero boys and there are <span class="math notranslate nohighlight">\(3\)</span> ways for there to be exactly one boy, so <span class="math notranslate nohighlight">\(n(E)\)</span> is <span class="math notranslate nohighlight">\(4\)</span>.  Therefore, the probability of there being at least two girls is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+ \frac{n(E)}{n(S)} &amp;= \frac{4}{8} \\
+                   &amp;= 0.5
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="e-no-more-than-one-child-is-a-boy">
+<h4>(e) no more than one child is a boy.<a class="headerlink" href="#e-no-more-than-one-child-is-a-boy" title="Link to this heading">#</a></h4>
+<p>As computed above, this is <span class="math notranslate nohighlight">\(0.5\)</span></p>
+</section>
+<section id="d-the-oldest-and-youngest-are-girls-and-the-middle-child-is-not">
+<h4>(d) the oldest and youngest are girls and the middle child is not.<a class="headerlink" href="#d-the-oldest-and-youngest-are-girls-and-the-middle-child-is-not" title="Link to this heading">#</a></h4>
+<p>This is a single outcome of the sample space, <em><strong>GBG</strong></em>, since we computed the <span class="math notranslate nohighlight">\(n(S) = 8\)</span>, the probably that the oldest and youngest are girls and the middle child is not (i.e. is a boy) is <span class="math notranslate nohighlight">\(\frac{1}{8} = 0.125\)</span>.</p>
+</section>
+<section id="e-exactly-one-of-the-three-children-is-a-boy">
+<h4>(e) exactly one of the three children is a boy.<a class="headerlink" href="#e-exactly-one-of-the-three-children-is-a-boy" title="Link to this heading">#</a></h4>
+<p>There are three ways for this to happen: <em><strong>BGG</strong></em>, <em><strong>GBG</strong></em>, or <em><strong>GGB</strong></em>.  So its probably is <span class="math notranslate nohighlight">\(\frac{3}{8} = 0.375\)</span>.</p>
+</section>
+</section>
+<section id="three-men-and-two-women-are-seated-in-the-same-row-of-seats-in-a-theater-if-the-seats-were-selected-at-random-find-the-probability-that-the-seating-arrangement-alternates-by-sex">
+<h3>6. Three men and two women are seated in the same row of seats in a theater. If the seats were selected at random, find the probability that the seating arrangement alternates by sex.<a class="headerlink" href="#three-men-and-two-women-are-seated-in-the-same-row-of-seats-in-a-theater-if-the-seats-were-selected-at-random-find-the-probability-that-the-seating-arrangement-alternates-by-sex" title="Link to this heading">#</a></h3>
+<p>Assuming that we just consider five seats in a single row, there are five seats in the row, there is only <span class="math notranslate nohighlight">\(1\)</span> way to arrange the men (<em><strong>M</strong></em>) and women (<em><strong>W</strong></em>) so that they alternate by sex, <em><strong>MWMWM</strong></em>.  One way to count the total number of arrangements is to consider the seats as being numbered from 1 to 5 and choosing the two that will be occupied by the women.  This is <span class="math notranslate nohighlight">\(C(5, 2) = 10\)</span>  So, the probability that the men and women will be seated alternating by sex is <span class="math notranslate nohighlight">\(\frac{1}{10} = 0.1\)</span>.</p>
+</section>
+<section id="of-24-runners-competing-in-a-marathon-3-have-taken-banned-performance-enhancing-drugs-six-of-the-athletes-are-selected-at-random-for-drug-testing-what-is-the-probability-that">
+<h3>7. Of 24 runners competing in a marathon, 3 have taken banned performance-enhancing drugs. Six of the athletes are selected at random for drug testing. What is the probability that<a class="headerlink" href="#of-24-runners-competing-in-a-marathon-3-have-taken-banned-performance-enhancing-drugs-six-of-the-athletes-are-selected-at-random-for-drug-testing-what-is-the-probability-that" title="Link to this heading">#</a></h3>
+<p>There are <span class="math notranslate nohighlight">\(C(24, 6) = 134596\)</span> ways of randomly choosing the six for testing.  This is <span class="math notranslate nohighlight">\(n(S)\)</span>.</p>
+<section id="a-none-of-the-drug-takers-get-caught">
+<h4>(a) none of the drug takers get caught?<a class="headerlink" href="#a-none-of-the-drug-takers-get-caught" title="Link to this heading">#</a></h4>
+<p>Let <span class="math notranslate nohighlight">\(E\)</span> be the event, <strong><em>none of the drug takers get caught</em></strong>.  The event <span class="math notranslate nohighlight">\(\sim\!E\)</span> is the event that <strong><em>at least one of the drug takers gets caught</em></strong>.  We can think of each runner as being a ball labeled 1 through 24 and arbitrarily let balls 1, 2, and 3 represent the drug-takers.  Then, <span class="math notranslate nohighlight">\(p(\sim\!E)\)</span> is the probability of choosing 6 balls randomly from the bag and having 1, 2, or 3 of them be less than 4.</p>
+<ul class="simple">
+<li><p>There are <span class="math notranslate nohighlight">\(C(3, 1) \cdot C(21, 5) = 3 \times 20349 = 61047\)</span> ways for exactly one ball to be less than 4.</p></li>
+<li><p>There are <span class="math notranslate nohighlight">\(C(3, 2) \cdot C(21, 4) = 3 \times 5985 = 17955\)</span> ways for exactly two balls to be less than 4.</p></li>
+<li><p>There are <span class="math notranslate nohighlight">\(C(3, 3) \cdot C(21, 3) = 1 \times 1330 = 1330\)</span> ways for exactly three balls to be less than 4.</p></li>
+</ul>
+<p>So, <span class="math notranslate nohighlight">\(n(\sim\!E) = C(3, 1) \cdot C(21, 5) + C(3, 2) \cdot C(21, 4) + C(3, 2) \cdot C(21, 4) = 61047 + 17955 + 1330 = 80332\)</span></p>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+ p(\sim\!E) = \frac{n(\sim\!E)}{n(S)} = \frac{80332}{134596} \approx 0.597
+\]</div>
+<p>We know that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+ p(E) &amp;= 1 - p(\sim\!E) \\
+      &amp;= \frac{134596}{134596} - \frac{80332}{134596} \\
+      &amp;= \frac{134596 - 80332}{134596} \\
+      &amp;= \frac{54264}{134596} \\
+      &amp;\approx 0.403
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="b-at-least-one-gets-caught">
+<h4>(b) at least one gets caught?<a class="headerlink" href="#b-at-least-one-gets-caught" title="Link to this heading">#</a></h4>
+<p>As computed above, this is</p>
+<div class="math notranslate nohighlight">
+\[
+ p(\sim\!E) = \frac{n(\sim\!E)}{n(S)} = \frac{80332}{134596} \approx 0.597
+\]</div>
+</section>
+<section id="c-all-three-get-caught">
+<h4>(c) all three get caught?<a class="headerlink" href="#c-all-three-get-caught" title="Link to this heading">#</a></h4>
+<p>Let <span class="math notranslate nohighlight">\(F\)</span> be the event <strong><em>all three get caught</em></strong>.  <span class="math notranslate nohighlight">\(n(F)\)</span> is equivalent to number of ways of getting exactly 3 of the six chosen balls to be less than 4.  This is</p>
+<div class="math notranslate nohighlight">
+\[
+ C(3, 3) \cdot C(21, 3) = 1 \times 1330 = 1330
+\]</div>
+<p>So, <span class="math notranslate nohighlight">\(p(F) = \frac{n(F)}{n(S)} = \frac{1330}{134596} \approx 0.00988\)</span></p>
+</section>
+</section>
+<section id="a-lottery-consists-of-48-numbers-of-which-8-are-selected-by-the-lottery-authority-in-order-to-win-you-need-to-select-either-7-or-8-of-the-numbers-selected-by-the-authority-if-you-pick-exactly-7-you-win-20-000-if-you-pick-8-you-win-50-000-what-is-the-probability-you">
+<h3>8. A lottery consists of 48 numbers of which 8 are selected by the lottery authority. In order to win, you need to select either 7 or 8 of the numbers selected by the authority. If you pick exactly 7, you win $20,000; if you pick 8 you win $50,000. What is the probability you<a class="headerlink" href="#a-lottery-consists-of-48-numbers-of-which-8-are-selected-by-the-lottery-authority-in-order-to-win-you-need-to-select-either-7-or-8-of-the-numbers-selected-by-the-authority-if-you-pick-exactly-7-you-win-20-000-if-you-pick-8-you-win-50-000-what-is-the-probability-you" title="Link to this heading">#</a></h3>
+<p>There are <span class="math notranslate nohighlight">\(C(48, 8) = 377348994\)</span> ways of choosing the numbers.
+We assume that a single pick is a selection of 8 numbers.</p>
+<section id="a-win-50-000">
+<h4>(a) win $50,000?<a class="headerlink" href="#a-win-50-000" title="Link to this heading">#</a></h4>
+<p>Your odds of picking all 8 correctly are <span class="math notranslate nohighlight">\( \frac{1}{377348994} \approx  2.65e-09 = 0.00000000265\)</span></p>
+</section>
+<section id="b-win-20-000">
+<h4>(b) win $20,000?<a class="headerlink" href="#b-win-20-000" title="Link to this heading">#</a></h4>
+<p>There are <span class="math notranslate nohighlight">\(C(8, 7) = 8\)</span> ways of picking 7 of the 8 winning numbers.  For each of those selections, there are 40 other numbers that can round out your 8-number pick.  (There aren’t 41 because one of those choices would give you 8 correct.) Therefore, the number of picks that have exactly 7 matching numbers is <span class="math notranslate nohighlight">\(8 \times 40 = 320\)</span> and your odds of achieving this event are</p>
+<div class="math notranslate nohighlight">
+\[
+ \frac{320}{377348994} \approx 8.48e-07 = 0.000000848
+\]</div>
+</section>
+</section>
+<section id="you-have-a-flush-in-poker-when-all-five-of-the-cards-you-are-dealt-are-of-the-same-suit-what-is-the-probability-of-the-following">
+<h3>9. You have a “flush” in poker when all five of the cards you are dealt are of the same suit. What is the probability of the following.<a class="headerlink" href="#you-have-a-flush-in-poker-when-all-five-of-the-cards-you-are-dealt-are-of-the-same-suit-what-is-the-probability-of-the-following" title="Link to this heading">#</a></h3>
+<p>Assume the deck has 52 cards.  The sample set, <span class="math notranslate nohighlight">\(S\)</span>, of all 5-card hands you could be dealt has size <span class="math notranslate nohighlight">\(n(S) = C(52, 5) = 2598960\)</span></p>
+<section id="a-being-dealt-a-flush-in-spades">
+<h4>(a) being dealt a flush in spades?<a class="headerlink" href="#a-being-dealt-a-flush-in-spades" title="Link to this heading">#</a></h4>
+<p>There are <span class="math notranslate nohighlight">\(C(13, 5) = 1287\)</span> ways to deal a flush in spades (or any other particular suit), so the odds are</p>
+<div class="math notranslate nohighlight">
+\[
+ \frac{1287}{2598960} \approx 0.000495
+\]</div>
+</section>
+<section id="b-being-dealt-a-flush-in-either-spades-or-diamond">
+<h4>(b) being dealt a flush in either spades or diamond?<a class="headerlink" href="#b-being-dealt-a-flush-in-either-spades-or-diamond" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+ \frac{C(13, 5)+C(13, 5)}{C(52, 5)} = \frac{1287 + 1287}{2598960} = \frac{2574}{2598960} \approx 0.000990
+\]</div>
+</section>
+<section id="e-being-dealt-a-flush-in-any-suit">
+<h4>(e) being dealt a flush in any suit?<a class="headerlink" href="#e-being-dealt-a-flush-in-any-suit" title="Link to this heading">#</a></h4>
+<p>This is twice the probability of the previous answer</p>
+<div class="math notranslate nohighlight">
+\[
+ \frac{1287 + 1287 + 1287 + 1287}{2598960} = \frac{5148}{2598960} \approx 0.00198
+\]</div>
+</section>
+<section id="d-not-being-dealt-a-flush">
+<h4>(d) not being dealt a flush?<a class="headerlink" href="#d-not-being-dealt-a-flush" title="Link to this heading">#</a></h4>
+<p>This is</p>
+<div class="math notranslate nohighlight">
+\[
+ 1 - \frac{1287 + 1287 + 1287 + 1287}{2598960} = \frac{2593812}{2598960} \approx 0.998
+\]</div>
+</section>
+</section>
+<section id="three-spies-a-b-and-c-are-in-the-running-for-an-assignment-in-afghanistan-a-is-twice-as-likely-to-be-selected-as-b-and-c-is-three-times-as-likely-as-a-to-be-selected-what-is-the-probability-that-a-is-selected">
+<h3>10. Three spies, A, B, and C are in the running for an assignment in Afghanistan. A is twice as likely to be selected as B, and C is three times as likely as A to be selected. What is the probability that A is selected?<a class="headerlink" href="#three-spies-a-b-and-c-are-in-the-running-for-an-assignment-in-afghanistan-a-is-twice-as-likely-to-be-selected-as-b-and-c-is-three-times-as-likely-as-a-to-be-selected-what-is-the-probability-that-a-is-selected" title="Link to this heading">#</a></h3>
+<p>The sum of the probabilities has to equal <span class="math notranslate nohighlight">\(1\)</span>, so we have</p>
+<div class="math notranslate nohighlight">
+\[
+  p(A) + p(B) + p(C) = 1 
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+  p(A) = 2 \cdot p(B)  
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+  p(C) = 3 \cdot p(A) 
+\]</div>
+<p>Therefore,</p>
+<div class="math notranslate nohighlight">
+\[
+  p(C) = 6 \cdot p(B) 
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+   1 &amp;= p(A) + p(B) + p(C) \\
+     &amp;= 2 \cdot p(B) + p(B) +  6 \cdot p(B) \\
+     &amp;= 9 \cdot p(B) \\
+  p(B) &amp;= \frac{1}{9}
+\end{aligned}
+\end{split}\]</div>
+<p>but since <span class="math notranslate nohighlight">\(p(A) = 2 \cdot p(B)\)</span>, we know that <span class="math notranslate nohighlight">\(p(A)\)</span> is then <span class="math notranslate nohighlight">\( \frac{2}{9} \approx 0.222\)</span></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./markdown"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../notebooks/2_2_permutations_and_combinations.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">2.2 Permutations and Combinations</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="2_4_independent_events_expected_number.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2.4 Independent Events and Expected Number</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-2-3">Exercises 2.3</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-ball-is-selected-at-random-from-a-box-containing-4-green-6-blue-3-yellow-and-7-red-balls-find-the-probability-that">1. A ball is selected at random from a box containing 4 green, 6 blue, 3 yellow, and 7 red balls. Find the probability that</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-a-blue-ball-is-selected">(a) a blue ball is selected.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-a-yellow-ball-is-selected">(b) a yellow ball is selected.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-a-red-ball-is-not-selected">(c) a red ball is not selected.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-either-a-yellow-or-blue-ball-is-selected">(d) either a yellow or blue ball is selected.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-neither-a-green-nor-a-red-ball-is-selected">(e) neither a green nor a red ball is selected.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#f-a-green-blue-or-yellow-ball-is-selected">(f) a green, blue, or yellow ball is selected.</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-a-group-of-85-spies-one-will-be-selected-at-random-to-be-stationed-in-honolulu-if-48-are-female-and-64-are-single-and-if-among-the-64-single-spies-half-are-male-what-is-the-probability-that-the-spy-selected-will-be-neither-single-nor-female">2. From a group of 85 spies, one will be selected at random to be stationed in Honolulu. If 48 are female and 64 are single, and if among the 64 single spies, half are male, what is the probability that the spy selected will be neither single nor female?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#four-cards-are-to-be-drawn-simultaneously-from-a-deck-of-52-find-the-probability-that">3. Four cards are to be drawn simultaneously from a deck of 52. Find the probability that</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-all-four-are-clubs">(a) all four are clubs.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-at-least-one-is-not-a-club">(b) at least one is not a club.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-three-are-black-and-one-is-red">(e) three are black and one is red</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-exactly-two-are-picture-cards">(d) exactly two are picture cards.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-either-two-or-three-of-the-four-cards-are-picture-cards">(e) either two or three of the four cards are picture cards.</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-for-various-numbers-of-spies-being-deployed-to-the-san-fernando-valley-is-summarized-in-the-following-table">4. The probability for various numbers of spies being deployed to the San Fernando Valley is summarized in the following table:</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-at-most-two-spies-will-be-deployed">(a) at most two spies will be deployed.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-at-least-one-spy-will-be-deployed">(b) at least one spy will be deployed.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-one-or-two-spies-will-be-deployed">(e) one or two spies will be deployed.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-fewer-than-four-spies-will-be-deployed">(d) fewer than four spies will be deployed.</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-couple-has-3-children-assuming-that-the-probability-of-any-child-s-being-a-girl-is-0-5-find-the-probability-that">5. A couple has 3 children. Assuming that the probability of any child’s being a girl is 0.5, find the probability that</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-the-oldest-child-is-a-boy">(a) the oldest child is a boy.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-there-are-at-least-two-girls">(b) there are at least two girls.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-no-more-than-one-child-is-a-boy">(e) no more than one child is a boy.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-the-oldest-and-youngest-are-girls-and-the-middle-child-is-not">(d) the oldest and youngest are girls and the middle child is not.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-exactly-one-of-the-three-children-is-a-boy">(e) exactly one of the three children is a boy.</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-men-and-two-women-are-seated-in-the-same-row-of-seats-in-a-theater-if-the-seats-were-selected-at-random-find-the-probability-that-the-seating-arrangement-alternates-by-sex">6. Three men and two women are seated in the same row of seats in a theater. If the seats were selected at random, find the probability that the seating arrangement alternates by sex.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#of-24-runners-competing-in-a-marathon-3-have-taken-banned-performance-enhancing-drugs-six-of-the-athletes-are-selected-at-random-for-drug-testing-what-is-the-probability-that">7. Of 24 runners competing in a marathon, 3 have taken banned performance-enhancing drugs. Six of the athletes are selected at random for drug testing. What is the probability that</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-none-of-the-drug-takers-get-caught">(a) none of the drug takers get caught?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-at-least-one-gets-caught">(b) at least one gets caught?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-all-three-get-caught">(c) all three get caught?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-lottery-consists-of-48-numbers-of-which-8-are-selected-by-the-lottery-authority-in-order-to-win-you-need-to-select-either-7-or-8-of-the-numbers-selected-by-the-authority-if-you-pick-exactly-7-you-win-20-000-if-you-pick-8-you-win-50-000-what-is-the-probability-you">8. A lottery consists of 48 numbers of which 8 are selected by the lottery authority. In order to win, you need to select either 7 or 8 of the numbers selected by the authority. If you pick exactly 7, you win $20,000; if you pick 8 you win $50,000. What is the probability you</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-win-50-000">(a) win $50,000?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-win-20-000">(b) win $20,000?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#you-have-a-flush-in-poker-when-all-five-of-the-cards-you-are-dealt-are-of-the-same-suit-what-is-the-probability-of-the-following">9. You have a “flush” in poker when all five of the cards you are dealt are of the same suit. What is the probability of the following.</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-being-dealt-a-flush-in-spades">(a) being dealt a flush in spades?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-being-dealt-a-flush-in-either-spades-or-diamond">(b) being dealt a flush in either spades or diamond?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-being-dealt-a-flush-in-any-suit">(e) being dealt a flush in any suit?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-not-being-dealt-a-flush">(d) not being dealt a flush?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-spies-a-b-and-c-are-in-the-running-for-an-assignment-in-afghanistan-a-is-twice-as-likely-to-be-selected-as-b-and-c-is-three-times-as-likely-as-a-to-be-selected-what-is-the-probability-that-a-is-selected">10. Three spies, A, B, and C are in the running for an assignment in Afghanistan. A is twice as likely to be selected as B, and C is three times as likely as A to be selected. What is the probability that A is selected?</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Dan Douglas
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

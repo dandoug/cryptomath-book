@@ -1,0 +1,675 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1.3 Relatively Prime Integers, Fundamental Theorem of Arithmatic &#8212; Cryptological Mathematics Exercises</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/crypto-book.css?v=761dc443" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/1_3_relative_primes';</script>
+    <script src="../_static/sidebar-togle.js?v=2b3ca58f"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.4 Modular Arithmatic" href="1_4_modular_arithmatic.html" />
+    <link rel="prev" title="1.2 Prime Numbers, Division Algorithm, Greatest Common Divisor Exercises" href="1_2_primes_gcd.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../markdown/intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Cryptological Mathematics Exercises</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../markdown/intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Monoalphabetic Substitution Ciphers</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/1_1_induction.html">1.1 Induction Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_2_primes_gcd.html">1.2 Prime Numbers, Division Algorithm, Greatest Common Divisor Exercises</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1.3 Relatively Prime Integers, Fundamental Theorem of Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_4_modular_arithmatic.html">1.4 Modular Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_5_simple_ciphers.html">1.5 Simple Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_6_cryptoanalysis_monoalphabetic_substitution_ciphers.html">1.6 Cryptoanalysis of Monoalphabetic Substitution Ciphers</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Polyalphabetic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_1_multiplication_principle.html">2.1 The Multiplication Principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_2_permutations_and_combinations.html">2.2 Permutations and Combinations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_3_probability.html">2.3 Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_4_independent_events_expected_number.html">2.4 Independent Events and Expected Number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_5_disguising_the_frequencies.html">2.5 Disguising the Frequencies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Polygraphic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3_1_elementary_polygraphic_substitution_ciphers.html">3.1 Elementary Polygraphic Substitution Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_2_elementary_matrix_theory.html">3.2 Elementary Matrix Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_3_hills_system.html">3.3 Hill’s System</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Public Key Cryptography</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="4_1_more_number_theory.html">4.1 More Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_2_rsa_algorithm.html">4.2 The RSA Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_3_two_examples.html">4.3 Two Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_4_other_pk_cryptography.html">4.4 Other Illustrations of Public Key Cryptography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/1_3_relative_primes.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1.3 Relatively Prime Integers, Fundamental Theorem of Arithmatic</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-1-3">Exercises 1.3</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#which-elements-of-the-set-1-2-3-4-5-6-7-are-relatively-prime-to-6-to-7">1. Which elements of the set <span class="math notranslate nohighlight">\(\{ 1, 2, 3, 4, 5, 6, 7 \}\)</span> are relatively prime to <span class="math notranslate nohighlight">\(6\)</span>? to <span class="math notranslate nohighlight">\(7\)</span>?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-a-b-and-n-be-integers-and-suppose-that-a-n-and-b-n-prove-that-if-gcd-a-b-1-then-ab-n">3. Let <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, and <span class="math notranslate nohighlight">\(n\)</span> be integers and suppose that <span class="math notranslate nohighlight">\(a|n\)</span> and <span class="math notranslate nohighlight">\(b|n\)</span>.  Prove that if <span class="math notranslate nohighlight">\(gcd(a, b) = 1\)</span>, then <span class="math notranslate nohighlight">\(ab|n\)</span>.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-d-gcd-a-b-and-a-xd-and-b-yd-prove-that-gcd-x-y-1">5. If <span class="math notranslate nohighlight">\(d = gcd(a,b)\)</span> and <span class="math notranslate nohighlight">\(a = xd\)</span> and <span class="math notranslate nohighlight">\(b = yd\)</span>, prove that <span class="math notranslate nohighlight">\(gcd(x,y) = 1\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-the-fundamental-theorem-of-arithmetic-to-find-the-greatest-common-divisors-of-each-of-the-following-sets-of-integers">6. Use the Fundamental Theorem of Arithmetic to find the greatest common divisors of each of the following sets of integers.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#express-the-following-integers-as-products-as-products-of-prime-numbers-in-standard-form">7. Express the following integers as products as products of prime numbers in standard form.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-fundamental-theorem-of-arithmetic-write-144-as-a-product-of-primes-in-standard-form-use-your-answer-to-determine-the-number-of-positive-integral-divisors-of-144">8. Using the Fundamental Theorem of Arithmetic, write <span class="math notranslate nohighlight">\(144\)</span> as a product of primes in standard form.  Use your answer to determine the number of positive integral divisors of <span class="math notranslate nohighlight">\(144\)</span>.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-computer-program-whose-input-is-an-integer-and-whose-output-is-that-integer-written-as-a-product-of-prime-numbers-in-standard-form">9. Write a computer program whose input is an integer and whose output is that integer written as a product of prime numbers in standard form</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="relatively-prime-integers-fundamental-theorem-of-arithmatic">
+<h1>1.3 Relatively Prime Integers, Fundamental Theorem of Arithmatic<a class="headerlink" href="#relatively-prime-integers-fundamental-theorem-of-arithmatic" title="Link to this heading">#</a></h1>
+<p>For these exercises, we want some of the code from the <a class="reference internal" href="1_2_primes_gcd.html"><span class="std std-doc">last set</span></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="o">%</span><span class="n">run</span> <span class="o">./</span><span class="mi">1_2</span><span class="n">_primes_gcd</span><span class="o">.</span><span class="n">ipynb</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="exercises-1-3">
+<h2>Exercises 1.3<a class="headerlink" href="#exercises-1-3" title="Link to this heading">#</a></h2>
+<section id="which-elements-of-the-set-1-2-3-4-5-6-7-are-relatively-prime-to-6-to-7">
+<h3>1. Which elements of the set <span class="math notranslate nohighlight">\(\{ 1, 2, 3, 4, 5, 6, 7 \}\)</span> are relatively prime to <span class="math notranslate nohighlight">\(6\)</span>? to <span class="math notranslate nohighlight">\(7\)</span>?<a class="headerlink" href="#which-elements-of-the-set-1-2-3-4-5-6-7-are-relatively-prime-to-6-to-7" title="Link to this heading">#</a></h3>
+<p>For <span class="math notranslate nohighlight">\(7\)</span>:  Since <span class="math notranslate nohighlight">\(7\)</span> is prime, all the members of the set, except <span class="math notranslate nohighlight">\(7\)</span> are relatively prime to <span class="math notranslate nohighlight">\(7\)</span>, <span class="math notranslate nohighlight">\(\{1, 2, 3, 4, 5, 6\}\)</span></p>
+<p>For <span class="math notranslate nohighlight">\(6\)</span>:  The factors of <span class="math notranslate nohighlight">\(6\)</span> are <span class="math notranslate nohighlight">\(2 \cdot 3\)</span>, so we have to exclude any multiples of those factors, <span class="math notranslate nohighlight">\(\{1, 5, 7\}\)</span></p>
+</section>
+<section id="let-a-b-and-n-be-integers-and-suppose-that-a-n-and-b-n-prove-that-if-gcd-a-b-1-then-ab-n">
+<h3>3. Let <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, and <span class="math notranslate nohighlight">\(n\)</span> be integers and suppose that <span class="math notranslate nohighlight">\(a|n\)</span> and <span class="math notranslate nohighlight">\(b|n\)</span>.  Prove that if <span class="math notranslate nohighlight">\(gcd(a, b) = 1\)</span>, then <span class="math notranslate nohighlight">\(ab|n\)</span>.<a class="headerlink" href="#let-a-b-and-n-be-integers-and-suppose-that-a-n-and-b-n-prove-that-if-gcd-a-b-1-then-ab-n" title="Link to this heading">#</a></h3>
+<p>Since <span class="math notranslate nohighlight">\(gcd(a, b) = 1\)</span>, there exist integers <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+ ax + by = 1
+\]</div>
+<p>and since <span class="math notranslate nohighlight">\(a|n\)</span> and <span class="math notranslate nohighlight">\(b|n\)</span>, there exist integers <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+ ap = bq = n
+\]</div>
+<p>Multiplying each of the terms of the first equation by one of these equivalent expressions of <span class="math notranslate nohighlight">\(n\)</span> gives us</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+   n &amp;= ax(bq) + by(ap) \\
+     &amp;= ab(xq) + ab(yp) \\
+     &amp;= ab(xq + yp) \\
+\end{aligned}
+\end{split}\]</div>
+<p>and so <span class="math notranslate nohighlight">\(ab|n\)</span>.</p>
+</section>
+<section id="if-d-gcd-a-b-and-a-xd-and-b-yd-prove-that-gcd-x-y-1">
+<h3>5. If <span class="math notranslate nohighlight">\(d = gcd(a,b)\)</span> and <span class="math notranslate nohighlight">\(a = xd\)</span> and <span class="math notranslate nohighlight">\(b = yd\)</span>, prove that <span class="math notranslate nohighlight">\(gcd(x,y) = 1\)</span><a class="headerlink" href="#if-d-gcd-a-b-and-a-xd-and-b-yd-prove-that-gcd-x-y-1" title="Link to this heading">#</a></h3>
+<p>Since <span class="math notranslate nohighlight">\(d = gcd(a,b)\)</span>, there exists integers <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+  ap + bq = d
+\]</div>
+<p>Substituting the given expressions for <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> gives us</p>
+<div class="math notranslate nohighlight">
+\[
+  (xd)p + (yd)q = d
+\]</div>
+<p>Dividing that equation by <span class="math notranslate nohighlight">\(d\)</span> leaves</p>
+<div class="math notranslate nohighlight">
+\[
+  px + qy = 1
+\]</div>
+<p>and so, <span class="math notranslate nohighlight">\(gcd(x,y) = 1\)</span>.</p>
+</section>
+<section id="use-the-fundamental-theorem-of-arithmetic-to-find-the-greatest-common-divisors-of-each-of-the-following-sets-of-integers">
+<h3>6. Use the Fundamental Theorem of Arithmetic to find the greatest common divisors of each of the following sets of integers.<a class="headerlink" href="#use-the-fundamental-theorem-of-arithmetic-to-find-the-greatest-common-divisors-of-each-of-the-following-sets-of-integers" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>3435, 16</p></li>
+<li><p>747, 12</p></li>
+<li><p>3674, 28</p></li>
+<li><p>105, 15</p></li>
+<li><p>412, 16</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">prod</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">gcd_fta</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    We find the prime factors of x and y, and then find the gcd by using the common ones</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x_factors</span> <span class="o">=</span> <span class="n">prime_factors</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y_factors</span> <span class="o">=</span> <span class="n">prime_factors</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">common_factors</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># in case they are relatively prime</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">x_factors</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">y_factors</span><span class="p">:</span>
+            <span class="n">common_factors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">y_factors</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">prod</span><span class="p">(</span><span class="n">common_factors</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gcds_by_fta</span> <span class="o">=</span> <span class="p">[</span><span class="n">gcd_fta</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">]</span> <span class="c1"># same pairs as from last exercise</span>
+<span class="n">display_gcd_table</span><span class="p">(</span><span class="n">pairs</span><span class="p">,</span> <span class="n">gcds_by_fta</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \begin{array}{c|c|c}
+x &amp; y &amp; \text{gcd(} x , y \text{)} \\
+\hline
+3435 &amp; 16 &amp; 1 \\
+747 &amp; 12 &amp; 3 \\
+3674 &amp; 28 &amp; 2 \\
+105 &amp; 15 &amp; 15 \\
+412 &amp; 16 &amp; 4 \\
+\end{array}\end{split}\]</div>
+</div>
+</div>
+</section>
+<section id="express-the-following-integers-as-products-as-products-of-prime-numbers-in-standard-form">
+<h3>7. Express the following integers as products as products of prime numbers in standard form.<a class="headerlink" href="#express-the-following-integers-as-products-as-products-of-prime-numbers-in-standard-form" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>1416</p></li>
+<li><p>525</p></li>
+<li><p>36414</p></li>
+<li><p>46000</p></li>
+<li><p>829</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inputs_7</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1416</span><span class="p">,</span> <span class="mi">525</span><span class="p">,</span> <span class="mi">36414</span><span class="p">,</span> <span class="mi">46000</span><span class="p">,</span> <span class="mi">829</span><span class="p">]</span>
+<span class="n">outputs_7</span> <span class="o">=</span> <span class="p">[</span><span class="n">format_factors</span><span class="p">(</span><span class="n">prime_factors</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">inputs_7</span><span class="p">]</span>
+<span class="n">display_prime_factors_table</span><span class="p">(</span><span class="n">inputs_7</span><span class="p">,</span> <span class="n">outputs_7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \begin{array}{c|l}
+n &amp; \text{Prime Factorization of } n \\
+\hline
+1416 &amp; 2^3 \cdot 3 \cdot 59 \\
+525 &amp; 3 \cdot 5^2 \cdot 7 \\
+36414 &amp; 2 \cdot 3^2 \cdot 7 \cdot 17^2 \\
+46000 &amp; 2^4 \cdot 5^3 \cdot 23 \\
+829 &amp; 829 \\
+\end{array}\end{split}\]</div>
+</div>
+</div>
+</section>
+<section id="using-the-fundamental-theorem-of-arithmetic-write-144-as-a-product-of-primes-in-standard-form-use-your-answer-to-determine-the-number-of-positive-integral-divisors-of-144">
+<h3>8. Using the Fundamental Theorem of Arithmetic, write <span class="math notranslate nohighlight">\(144\)</span> as a product of primes in standard form.  Use your answer to determine the number of positive integral divisors of <span class="math notranslate nohighlight">\(144\)</span>.<a class="headerlink" href="#using-the-fundamental-theorem-of-arithmetic-write-144-as-a-product-of-primes-in-standard-form-use-your-answer-to-determine-the-number-of-positive-integral-divisors-of-144" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inputs_8</span> <span class="o">=</span> <span class="p">[</span><span class="mi">144</span><span class="p">]</span>
+<span class="n">outputs_8</span> <span class="o">=</span> <span class="p">[</span><span class="n">format_factors</span><span class="p">(</span><span class="n">prime_factors</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">inputs_8</span><span class="p">]</span>
+<span class="n">display_prime_factors_table</span><span class="p">(</span><span class="n">inputs_8</span><span class="p">,</span> <span class="n">outputs_8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \begin{array}{c|l}
+n &amp; \text{Prime Factorization of } n \\
+\hline
+144 &amp; 2^4 \cdot 3^2 \\
+\end{array}\end{split}\]</div>
+</div>
+</div>
+<p>Any divisor of <span class="math notranslate nohighlight">\(144\)</span> will have a factorization made up of <span class="math notranslate nohighlight">\(2\)</span> and <span class="math notranslate nohighlight">\(3\)</span> and using exponents.  For the factorization of any divisor of <span class="math notranslate nohighlight">\(144\)</span>, the exponent for <span class="math notranslate nohighlight">\(2\)</span> will be from the set <span class="math notranslate nohighlight">\(\{0,1,2,3,4\}\)</span> and the exponent of 3 will be from the set <span class="math notranslate nohighlight">\(\{0,1,2\}\)</span>.  So there are <span class="math notranslate nohighlight">\(5 \times 3 = 15\)</span> choices and thus, <span class="math notranslate nohighlight">\(15\)</span> positive integral divisors of <span class="math notranslate nohighlight">\(144\)</span>.</p>
+</section>
+<section id="write-a-computer-program-whose-input-is-an-integer-and-whose-output-is-that-integer-written-as-a-product-of-prime-numbers-in-standard-form">
+<h3>9. Write a computer program whose input is an integer and whose output is that integer written as a product of prime numbers in standard form<a class="headerlink" href="#write-a-computer-program-whose-input-is-an-integer-and-whose-output-is-that-integer-written-as-a-product-of-prime-numbers-in-standard-form" title="Link to this heading">#</a></h3>
+<p>See solution of previous problem, which relied on <code class="docutils literal notranslate"><span class="pre">prime_factors</span></code> from the <a class="reference internal" href="1_2_primes_gcd.html"><span class="std std-doc">previous exercises</span></a> and <a class="reference external" href="https://github.com/dandoug/cryptomath-book/blob/main/src/utilities.py#L7-L39">format_factors</a> from the <code class="docutils literal notranslate"><span class="pre">utilities</span></code> project.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1_2_primes_gcd.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">1.2 Prime Numbers, Division Algorithm, Greatest Common Divisor Exercises</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="1_4_modular_arithmatic.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">1.4 Modular Arithmatic</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-1-3">Exercises 1.3</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#which-elements-of-the-set-1-2-3-4-5-6-7-are-relatively-prime-to-6-to-7">1. Which elements of the set <span class="math notranslate nohighlight">\(\{ 1, 2, 3, 4, 5, 6, 7 \}\)</span> are relatively prime to <span class="math notranslate nohighlight">\(6\)</span>? to <span class="math notranslate nohighlight">\(7\)</span>?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-a-b-and-n-be-integers-and-suppose-that-a-n-and-b-n-prove-that-if-gcd-a-b-1-then-ab-n">3. Let <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, and <span class="math notranslate nohighlight">\(n\)</span> be integers and suppose that <span class="math notranslate nohighlight">\(a|n\)</span> and <span class="math notranslate nohighlight">\(b|n\)</span>.  Prove that if <span class="math notranslate nohighlight">\(gcd(a, b) = 1\)</span>, then <span class="math notranslate nohighlight">\(ab|n\)</span>.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-d-gcd-a-b-and-a-xd-and-b-yd-prove-that-gcd-x-y-1">5. If <span class="math notranslate nohighlight">\(d = gcd(a,b)\)</span> and <span class="math notranslate nohighlight">\(a = xd\)</span> and <span class="math notranslate nohighlight">\(b = yd\)</span>, prove that <span class="math notranslate nohighlight">\(gcd(x,y) = 1\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-the-fundamental-theorem-of-arithmetic-to-find-the-greatest-common-divisors-of-each-of-the-following-sets-of-integers">6. Use the Fundamental Theorem of Arithmetic to find the greatest common divisors of each of the following sets of integers.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#express-the-following-integers-as-products-as-products-of-prime-numbers-in-standard-form">7. Express the following integers as products as products of prime numbers in standard form.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-fundamental-theorem-of-arithmetic-write-144-as-a-product-of-primes-in-standard-form-use-your-answer-to-determine-the-number-of-positive-integral-divisors-of-144">8. Using the Fundamental Theorem of Arithmetic, write <span class="math notranslate nohighlight">\(144\)</span> as a product of primes in standard form.  Use your answer to determine the number of positive integral divisors of <span class="math notranslate nohighlight">\(144\)</span>.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-computer-program-whose-input-is-an-integer-and-whose-output-is-that-integer-written-as-a-product-of-prime-numbers-in-standard-form">9. Write a computer program whose input is an integer and whose output is that integer written as a product of prime numbers in standard form</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Dan Douglas
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

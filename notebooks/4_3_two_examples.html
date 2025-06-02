@@ -1,0 +1,913 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>4.3 Two Examples &#8212; Cryptological Mathematics Exercises</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/crypto-book.css?v=761dc443" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/4_3_two_examples';</script>
+    <script src="../_static/sidebar-togle.js?v=2b3ca58f"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4.4 Other Illustrations of Public Key Cryptography" href="4_4_other_pk_cryptography.html" />
+    <link rel="prev" title="4.2 The RSA Algorithm" href="4_2_rsa_algorithm.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../markdown/intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Cryptological Mathematics Exercises</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../markdown/intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Monoalphabetic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/1_1_induction.html">1.1 Induction Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_2_primes_gcd.html">1.2 Prime Numbers, Division Algorithm, Greatest Common Divisor Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_3_relative_primes.html">1.3 Relatively Prime Integers, Fundamental Theorem of Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_4_modular_arithmatic.html">1.4 Modular Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_5_simple_ciphers.html">1.5 Simple Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_6_cryptoanalysis_monoalphabetic_substitution_ciphers.html">1.6 Cryptoanalysis of Monoalphabetic Substitution Ciphers</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Polyalphabetic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_1_multiplication_principle.html">2.1 The Multiplication Principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_2_permutations_and_combinations.html">2.2 Permutations and Combinations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_3_probability.html">2.3 Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_4_independent_events_expected_number.html">2.4 Independent Events and Expected Number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_5_disguising_the_frequencies.html">2.5 Disguising the Frequencies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Polygraphic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3_1_elementary_polygraphic_substitution_ciphers.html">3.1 Elementary Polygraphic Substitution Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_2_elementary_matrix_theory.html">3.2 Elementary Matrix Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_3_hills_system.html">3.3 Hill’s System</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Public Key Cryptography</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="4_1_more_number_theory.html">4.1 More Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_2_rsa_algorithm.html">4.2 The RSA Algorithm</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4.3 Two Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_4_other_pk_cryptography.html">4.4 Other Illustrations of Public Key Cryptography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/4_3_two_examples.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>4.3 Two Examples</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-4-3">Exercises 4.3</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-message-why-isn-t-phonetic-spelled-the-way-it-sounds">1. The message: <code class="docutils literal notranslate"><span class="pre">Why</span> <span class="pre">isn't</span> <span class="pre">phonetic</span> <span class="pre">spelled</span> <span class="pre">the</span> <span class="pre">way</span> <span class="pre">it</span> <span class="pre">sounds?</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-enciphered-message-239-1093-3145-2258-336-3746-1098-3712-637-1528-259-1633-2258-1902-427-1048-1637-1198-1694">2. The enciphered message: <code class="docutils literal notranslate"><span class="pre">[239,</span> <span class="pre">1093,</span> <span class="pre">3145,</span> <span class="pre">2258,</span> <span class="pre">336,</span> <span class="pre">3746,</span> <span class="pre">1098,</span> <span class="pre">3712,</span> <span class="pre">637,</span> <span class="pre">1528,</span> <span class="pre">259,</span> <span class="pre">1633,</span> <span class="pre">2258,</span> <span class="pre">1902,</span> <span class="pre">427,</span> <span class="pre">1048,</span> <span class="pre">1637,</span> <span class="pre">1198,</span> <span class="pre">1694]</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encipher-the-following-message-using-the-rsa-algorithm-with-n-34618195959169-and-e-20000000089">3.Encipher the following message using the RSA algorithm with <span class="math notranslate nohighlight">\(n = 34618195959169\)</span> and <span class="math notranslate nohighlight">\(e = 20000000089\)</span>:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decipher-the-following-message-using-the-rsa-algorithm-with-n-41378299599863-and-d-17927688850145">4. Decipher the following message using the RSA algorithm with <span class="math notranslate nohighlight">\(n = 41378299599863\)</span> and <span class="math notranslate nohighlight">\(d = 17927688850145\)</span>.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#as-a-trusted-person-you-have-been-contracted-by-a-small-clandestine-organization-to-generate-a-set-of-six-public-and-private-keys-money-is-no-object-they-have-agreed-to-pay-you-an-amount-proportional-to-the-size-of-n-go-for-it">5. As a trusted person, you have been contracted by a small clandestine organization to generate a set of six public and private keys. Money is no object. They have agreed to pay you an amount proportional to the size of n. Go for it.</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="two-examples">
+<h1>4.3 Two Examples<a class="headerlink" href="#two-examples" title="Link to this heading">#</a></h1>
+<section id="exercises-4-3">
+<h2>Exercises 4.3<a class="headerlink" href="#exercises-4-3" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="o">%</span><span class="n">run</span> <span class="o">./</span><span class="mi">4_2</span><span class="n">_rsa_algorithm</span><span class="o">.</span><span class="n">ipynb</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Annotated</span><span class="p">,</span> <span class="n">Generic</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing_extensions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cryptography.hazmat.primitives.asymmetric</span><span class="w"> </span><span class="kn">import</span> <span class="n">rsa</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cryptography.hazmat.primitives.asymmetric.rsa</span><span class="w"> </span><span class="kn">import</span> <span class="n">RSAPrivateKey</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">format_pk_plaintext</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__main__</span><span class="w"> </span><span class="kn">import</span> <span class="n">crack_trivial_rsa</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">)</span>  <span class="c1"># For specifying character block size</span>
+<span class="n">CharStr</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Literal</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>  <span class="c1"># For single-character strings</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>The purpose of the first two problems is to give you an opportunity to practice enciphering and deciphering using the RSA algorithm without the use of a computer. You should be able to do these problems with no more than a calculator.</p>
+</div></blockquote>
+<p>Um. yeah.. no.   Working through the problem here in a notebook is as close as I’m getting to doing it by hand with calculator.  I don’t need to experience that.</p>
+<p>I’m going to define an abstract class to represent the correspondence and encoding scheme and then I can implement the encryption and decryption independent of it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">EncodingScheme</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">N</span><span class="p">],</span> <span class="n">ABC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Abstract base class for an encoding scheme.</span>
+<span class="sd">    Concreate subclasses define the length of the character blocksize</span>
+<span class="sd">    and the correspondence between characters and numbers.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chars</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">CharStr</span><span class="p">,</span> <span class="n">N</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Turn a block of characters into a single number. &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encoded_chars</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">CharStr</span><span class="p">,</span> <span class="n">N</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Turn a number into a block of characters. &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">block_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Return the character blocksize used.&quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With the encoder interface defined, we can define the <code class="docutils literal notranslate"><span class="pre">pk_encrypt</span></code> and <code class="docutils literal notranslate"><span class="pre">pk_decrypt</span></code> methods</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">pk_encrypt</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">encoder</span><span class="p">:</span> <span class="n">EncodingScheme</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Encrypt a message using the public key (e, n) with the given encoder. &quot;&quot;&quot;</span>
+    <span class="n">blocksize</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">block_size</span><span class="p">()</span>
+    <span class="c1"># pad message so that is an even multiple of blocksize</span>
+    <span class="n">message</span> <span class="o">+=</span> <span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="o">%</span> <span class="n">blocksize</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">message</span><span class="p">),</span> <span class="n">blocksize</span><span class="p">):</span>
+        <span class="n">block</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">message</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">blocksize</span><span class="p">])</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">encoder</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">block</span><span class="p">),</span> <span class="n">e</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">pk_decrypt</span><span class="p">(</span><span class="n">d</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">encoder</span><span class="p">:</span> <span class="n">EncodingScheme</span><span class="p">,</span> <span class="n">ciphertext</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Decrypt a message using the private key (d, n) with the given encoder. &quot;&quot;&quot;</span>
+    <span class="n">msg_chars</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">encrypted_block</span> <span class="ow">in</span> <span class="n">ciphertext</span><span class="p">:</span>
+        <span class="n">block</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">encrypted_block</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+        <span class="n">msg_chars</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">msg_chars</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that questions 1, and 2, below use the same encoding scheme, so let’s define that.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Tuple2Chars</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">CharStr</span><span class="p">,</span> <span class="n">Literal</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SimpleEncoder</span><span class="p">(</span><span class="n">EncodingScheme</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="mi">2</span><span class="p">]]):</span>
+    <span class="n">_CHARS</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">abcdefghijklmnopqrstuvwxyz&#39; ?&quot;</span> <span class="c1"># using \0 makes _CHARS.index(&#39;a&#39;) = 1</span>
+    <span class="n">_default_char</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">char</span><span class="p">:</span> <span class="n">CharStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CHARS</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="k">if</span> <span class="n">char</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CHARS</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CHARS</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_default_char</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_char</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CharStr</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CHARS</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="k">if</span>  <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CHARS</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_default_char</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chars</span><span class="p">:</span> <span class="n">Tuple2Chars</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span><span class="p">(</span><span class="n">chars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span><span class="p">(</span><span class="n">chars</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encoded_chars</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple2Chars</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_char</span><span class="p">(</span><span class="n">encoded_chars</span> <span class="o">//</span> <span class="mi">100</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_char</span><span class="p">(</span><span class="n">encoded_chars</span> <span class="o">%</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">block_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">2</span>
+<span class="n">encoder_1_2</span> <span class="o">=</span> <span class="n">SimpleEncoder</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="the-message-why-isn-t-phonetic-spelled-the-way-it-sounds">
+<h3>1. The message: <code class="docutils literal notranslate"><span class="pre">Why</span> <span class="pre">isn't</span> <span class="pre">phonetic</span> <span class="pre">spelled</span> <span class="pre">the</span> <span class="pre">way</span> <span class="pre">it</span> <span class="pre">sounds?</span></code><a class="headerlink" href="#the-message-why-isn-t-phonetic-spelled-the-way-it-sounds" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>The keys:</strong> <span class="math notranslate nohighlight">\(n = 3363\)</span>, <span class="math notranslate nohighlight">\(e = 5\)</span>.</p></li>
+<li><p><strong>The correspondence:</strong> Associate each letter with its position in the alphabet. Associate the apostrophe with the number <span class="math notranslate nohighlight">\(27\)</span>, the space with the number <span class="math notranslate nohighlight">\(28\)</span>, and the question mark with the number <span class="math notranslate nohighlight">\(29\)</span>.</p></li>
+<li><p><strong>The task:</strong> Combine pairs of numbers as in the examples and encipher the message using the RSA algorithm.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Why isn&#39;t phonetic spelled the way it sounds?&quot;</span>
+<span class="n">ciphertext</span> <span class="o">=</span> <span class="n">pk_encrypt</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3363</span><span class="p">,</span> <span class="n">encoder_1_2</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[700, 305, 3241, 3167, 1929, 2877, 2579, 904, 801, 2177, 2448, 306, 3138, 2862, 1531, 2724, 995, 2740, 1929, 3175, 1244, 932, 2673]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">pk_decrypt</span><span class="p">(</span><span class="n">crack_trivial_rsa</span><span class="p">(</span><span class="mi">3363</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="mi">3363</span><span class="p">,</span> <span class="n">encoder_1_2</span><span class="p">,</span> <span class="n">ciphertext</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>why isn&#39;t phonetic spelled the way it sounds? 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-enciphered-message-239-1093-3145-2258-336-3746-1098-3712-637-1528-259-1633-2258-1902-427-1048-1637-1198-1694">
+<h3>2. The enciphered message: <code class="docutils literal notranslate"><span class="pre">[239,</span> <span class="pre">1093,</span> <span class="pre">3145,</span> <span class="pre">2258,</span> <span class="pre">336,</span> <span class="pre">3746,</span> <span class="pre">1098,</span> <span class="pre">3712,</span> <span class="pre">637,</span> <span class="pre">1528,</span> <span class="pre">259,</span> <span class="pre">1633,</span> <span class="pre">2258,</span> <span class="pre">1902,</span> <span class="pre">427,</span> <span class="pre">1048,</span> <span class="pre">1637,</span> <span class="pre">1198,</span> <span class="pre">1694]</span></code><a class="headerlink" href="#the-enciphered-message-239-1093-3145-2258-336-3746-1098-3712-637-1528-259-1633-2258-1902-427-1048-1637-1198-1694" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>The keys:</strong> <span class="math notranslate nohighlight">\(n = 3953\)</span>, <span class="math notranslate nohighlight">\(d = 5\)</span>.</p></li>
+<li><p><strong>The task:</strong> Decipher this message using the RSA algorithm. Then decompose each of the integers in the deciphered message into two integers as in the examples. (Be careful when it comes to 3-digit numbers!!)</p></li>
+<li><p><strong>The correspondence:</strong> Associate each number between <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(26\)</span> with the letter occupying that alphabetic position. Associate the number <span class="math notranslate nohighlight">\(27\)</span> with the apostrophe, the number <span class="math notranslate nohighlight">\(28\)</span> with the space, and the number <span class="math notranslate nohighlight">\(29\)</span> with the question mark.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ciphertext</span> <span class="o">=</span> <span class="p">[</span><span class="mi">239</span><span class="p">,</span> <span class="mi">1093</span><span class="p">,</span> <span class="mi">3145</span><span class="p">,</span> <span class="mi">2258</span><span class="p">,</span> <span class="mi">336</span><span class="p">,</span> <span class="mi">3746</span><span class="p">,</span> <span class="mi">1098</span><span class="p">,</span> <span class="mi">3712</span><span class="p">,</span> <span class="mi">637</span><span class="p">,</span> <span class="mi">1528</span><span class="p">,</span> <span class="mi">259</span><span class="p">,</span> <span class="mi">1633</span><span class="p">,</span> <span class="mi">2258</span><span class="p">,</span> <span class="mi">1902</span><span class="p">,</span> <span class="mi">427</span><span class="p">,</span> <span class="mi">1048</span><span class="p">,</span> <span class="mi">1637</span><span class="p">,</span> <span class="mi">1198</span><span class="p">,</span> <span class="mi">1694</span><span class="p">]</span>
+<span class="n">plaintext</span> <span class="o">=</span> <span class="n">pk_decrypt</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3953</span><span class="p">,</span> <span class="n">encoder_1_2</span><span class="p">,</span> <span class="n">ciphertext</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">plaintext</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>why is abbreviation such a long word? 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">pk_encrypt</span><span class="p">(</span><span class="n">crack_trivial_rsa</span><span class="p">(</span><span class="mi">3953</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="mi">3953</span><span class="p">,</span> <span class="n">encoder_1_2</span><span class="p">,</span> <span class="n">plaintext</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[239, 1093, 3145, 2258, 336, 3746, 1098, 3712, 637, 1528, 259, 1633, 2258, 1902, 427, 1048, 1637, 1198, 1694]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="encipher-the-following-message-using-the-rsa-algorithm-with-n-34618195959169-and-e-20000000089">
+<h3>3.Encipher the following message using the RSA algorithm with <span class="math notranslate nohighlight">\(n = 34618195959169\)</span> and <span class="math notranslate nohighlight">\(e = 20000000089\)</span>:<a class="headerlink" href="#encipher-the-following-message-using-the-rsa-algorithm-with-n-34618195959169-and-e-20000000089" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="n">Why</span> <span class="ow">is</span> <span class="n">it</span> <span class="n">that</span> <span class="n">when</span> <span class="n">you</span> <span class="n">transport</span> <span class="n">something</span> <span class="n">by</span> <span class="n">car</span><span class="p">,</span> <span class="n">it</span><span class="s1">&#39;s</span>
+ <span class="n">called</span> <span class="n">a</span> <span class="n">shipment</span><span class="p">,</span> <span class="n">but</span> <span class="n">when</span> <span class="n">you</span> <span class="n">transport</span> <span class="n">something</span> <span class="n">by</span> <span class="n">ship</span><span class="p">,</span>
+ <span class="n">it</span><span class="s1">&#39;s called cargo?</span>
+</pre></div>
+</div>
+<p>Use a text-numeric correspondence of your choice. Check your answer by deciphering it using <span class="math notranslate nohighlight">\(d = 4771730348713\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># I checked and n=34618195959169 requires 46 bits, so we can use block size of</span>
+<span class="c1"># 5 characters and represent each as an 8 bit ascii code.</span>
+<span class="n">AsciiEncoderTupleChars</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">CharStr</span><span class="p">,</span> <span class="n">Literal</span><span class="p">[</span><span class="mi">5</span><span class="p">]]</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AsciiEncoder</span><span class="p">(</span><span class="n">EncodingScheme</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="mi">5</span><span class="p">]]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_BLOCKSIZE</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># make blocksize easier to change for larger n</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chars</span><span class="p">:</span> <span class="n">AsciiEncoderTupleChars</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_BLOCKSIZE</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;chars must be of length </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_BLOCKSIZE</span><span class="si">}</span><span class="s2">, not </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># Take each of the chars, get its ascii code and build the block</span>
+        <span class="c1"># block is reversed so we can shift out more naturally during decode</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>  <span class="c1"># reverse order</span>
+            <span class="k">if</span> <span class="nb">ord</span><span class="p">(</span><span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">255</span><span class="p">:</span>
+                <span class="c1"># raise an error if input contains wide characters</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;character </span><span class="si">{</span><span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> is not in range(256)&quot;</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="n">result</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&amp;</span> <span class="mh">0xFF</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encoded_chars</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsciiEncoderTupleChars</span><span class="p">:</span>
+        <span class="n">chars</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_BLOCKSIZE</span><span class="p">):</span>
+            <span class="n">chars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="n">encoded_chars</span> <span class="o">&amp;</span> <span class="mh">0xFF</span><span class="p">))</span>
+            <span class="n">encoded_chars</span> <span class="o">&gt;&gt;=</span> <span class="mi">8</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">block_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_BLOCKSIZE</span>
+<span class="n">encoder_3</span> <span class="o">=</span> <span class="n">AsciiEncoder</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">msg_3</span> <span class="o">=</span> <span class="s2">&quot;Why is it that when you transport something by car, it&#39;s &quot;</span> <span class="o">+</span> \
+        <span class="s2">&quot;called a shipment, but when you transport something by ship, &quot;</span> <span class="o">+</span> \
+        <span class="s2">&quot;it&#39;s called cargo?&quot;</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">34618195959169</span>
+<span class="n">e</span> <span class="o">=</span> <span class="mi">20000000089</span>
+<span class="n">ciphertext_3</span> <span class="o">=</span> <span class="n">pk_encrypt</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">encoder_3</span><span class="p">,</span> <span class="n">msg_3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ciphertext_3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[21026755237750, 3673500579484, 26134721829671, 23033184621597, 14904862462988, 26826051023443, 17187528846116, 14225599331655, 11720127759526, 17009559551858, 3599980615836, 29499074929590, 21980861814084, 4899869418213, 362102174095, 9825773672909, 23033184621597, 14904862462988, 26826051023443, 17187528846116, 14225599331655, 11720127759526, 14827570556748, 991926326256, 6134789661838, 22947818031193, 2192425791530, 7418393140983]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="mi">4771730348713</span>
+<span class="n">plaintext_3_prime</span> <span class="o">=</span> <span class="n">pk_decrypt</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">encoder_3</span><span class="p">,</span> <span class="n">ciphertext_3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">format_pk_plaintext</span><span class="p">(</span><span class="n">plaintext_3_prime</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Why is it that when you transport something by car, it&#39;s cal
+led a shipment, but when you transport something by ship, it
+&#39;s called cargo?    
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="decipher-the-following-message-using-the-rsa-algorithm-with-n-41378299599863-and-d-17927688850145">
+<h3>4. Decipher the following message using the RSA algorithm with <span class="math notranslate nohighlight">\(n = 41378299599863\)</span> and <span class="math notranslate nohighlight">\(d = 17927688850145\)</span>.<a class="headerlink" href="#decipher-the-following-message-using-the-rsa-algorithm-with-n-41378299599863-and-d-17927688850145" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="mi">31041840486988</span><span class="p">,</span> <span class="mi">29077957566727</span><span class="p">,</span> <span class="mi">11122505017205</span><span class="p">,</span>
+ <span class="mi">40696280438081</span><span class="p">,</span><span class="mi">33635577577494</span><span class="p">,</span> <span class="mi">23781081595165</span><span class="p">,</span> <span class="mi">13392200113552</span><span class="p">,</span>
+ <span class="mi">13042556080033</span><span class="p">,</span> <span class="mi">12862388751593</span><span class="p">,</span> <span class="mi">34364195535462</span><span class="p">,</span>
+ <span class="mi">2445939988968</span><span class="p">,</span> <span class="mi">33291530313321</span><span class="p">,</span><span class="mi">41132626495683</span><span class="p">,</span> <span class="mi">34138477928943</span><span class="p">,</span>
+ <span class="mi">5921732609276</span><span class="p">,</span> <span class="mi">12675552190449</span><span class="p">,</span> <span class="mi">3052697916053</span><span class="p">,</span> <span class="mi">20979766863114</span><span class="p">,</span>
+ <span class="mi">33068565954829</span><span class="p">,</span> <span class="mi">29024930510830</span><span class="p">,</span> <span class="mf">29540937197477.</span>
+ <span class="mi">25212533372768</span><span class="p">,</span> <span class="mi">5204853349407</span><span class="p">,</span> <span class="mi">1812489541036</span><span class="p">,</span> <span class="mi">11924887995293</span><span class="p">,</span>
+ <span class="mi">22111140271445</span><span class="p">,</span> <span class="mi">6327640502644</span><span class="p">,</span> <span class="mi">22111140271445</span><span class="p">,</span> <span class="mi">26465841739700</span><span class="p">,</span>
+ <span class="mi">39782824809293</span><span class="p">,</span> <span class="mi">24869716524496</span><span class="p">,</span> <span class="mi">35280750488903</span><span class="p">,</span>
+ <span class="mi">39782824809293</span><span class="p">,</span> <span class="mi">29077957566727</span><span class="p">,</span> <span class="mi">11122505017205</span><span class="p">,</span> <span class="mi">5921732609276</span><span class="p">,</span>
+ <span class="mi">14670735876808</span><span class="p">,</span> <span class="mi">6793151864986</span><span class="p">,</span> <span class="mi">32428301166222</span><span class="p">,</span> <span class="mi">5921732609276</span><span class="p">,</span>
+ <span class="mi">12675552190449</span><span class="p">,</span> <span class="mi">34601196283821</span><span class="p">,</span> <span class="mi">26850267312878</span><span class="p">,</span> <span class="mi">35401622221039</span><span class="p">,</span>
+ <span class="mi">9312542831382</span><span class="p">,</span> <span class="mi">35258512628692</span><span class="p">,</span> <span class="mi">2274436743060</span><span class="p">]</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Each integer in this message represents two integers in deciphered form. Convert your deciphered message into text using the correspondence between the integers and the position of the characters in the text string:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890-=!@#$%^&amp;*()_+[]\{}|&#39;;,:./&lt;?&gt;~
+</pre></div>
+</div>
+<p>(Note that the space character appears between the ‘Z’ and the ‘1’, i.e., in position 53.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CommonEncoder</span><span class="p">(</span><span class="n">EncodingScheme</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="mi">2</span><span class="p">]]):</span>
+    <span class="n">_CHARS</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890-=!@#$%^&amp;*()_+[]</span><span class="se">\\</span><span class="si">{}</span><span class="s2">|&#39;;,:./&lt;?&gt;~&quot;</span>
+    <span class="n">_default_char</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">char</span><span class="p">:</span> <span class="n">CharStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CHARS</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="k">if</span> <span class="n">char</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CHARS</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CHARS</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_default_char</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_char</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CharStr</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_CHARS</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="k">if</span>  <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CHARS</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_default_char</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chars</span><span class="p">:</span> <span class="n">Tuple2Chars</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span><span class="p">(</span><span class="n">chars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span><span class="p">(</span><span class="n">chars</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encoded_chars</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple2Chars</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_char</span><span class="p">(</span><span class="n">encoded_chars</span> <span class="o">//</span> <span class="mi">100</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_char</span><span class="p">(</span><span class="n">encoded_chars</span> <span class="o">%</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">block_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">2</span>
+<span class="n">encoder_4</span> <span class="o">=</span> <span class="n">CommonEncoder</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">msg_4</span> <span class="o">=</span> <span class="p">[</span><span class="mi">31041840486988</span><span class="p">,</span> <span class="mi">29077957566727</span><span class="p">,</span> <span class="mi">11122505017205</span><span class="p">,</span> <span class="mi">40696280438081</span><span class="p">,</span>
+         <span class="mi">33635577577494</span><span class="p">,</span> <span class="mi">23781081595165</span><span class="p">,</span> <span class="mi">13392200113552</span><span class="p">,</span> <span class="mi">13042556080033</span><span class="p">,</span>
+         <span class="mi">12862388751593</span><span class="p">,</span> <span class="mi">34364195535462</span><span class="p">,</span>  <span class="mi">2445939988968</span><span class="p">,</span> <span class="mi">33291530313321</span><span class="p">,</span>
+         <span class="mi">41132626495683</span><span class="p">,</span> <span class="mi">34138477928943</span><span class="p">,</span>  <span class="mi">5921732609276</span><span class="p">,</span> <span class="mi">12675552190449</span><span class="p">,</span>
+          <span class="mi">3052697916053</span><span class="p">,</span> <span class="mi">20979766863114</span><span class="p">,</span> <span class="mi">33068565954829</span><span class="p">,</span> <span class="mi">29024930510830</span><span class="p">,</span>
+         <span class="mi">29540937197477</span><span class="p">,</span> <span class="mi">25212533372768</span><span class="p">,</span>  <span class="mi">5204853349407</span><span class="p">,</span>  <span class="mi">1812489541036</span><span class="p">,</span>
+         <span class="mi">11924887995293</span><span class="p">,</span> <span class="mi">22111140271445</span><span class="p">,</span>  <span class="mi">6327640502644</span><span class="p">,</span> <span class="mi">22111140271445</span><span class="p">,</span>
+         <span class="mi">26465841739700</span><span class="p">,</span> <span class="mi">39782824809293</span><span class="p">,</span> <span class="mi">24869716524496</span><span class="p">,</span> <span class="mi">35280750488903</span><span class="p">,</span>
+         <span class="mi">39782824809293</span><span class="p">,</span> <span class="mi">29077957566727</span><span class="p">,</span> <span class="mi">11122505017205</span><span class="p">,</span>  <span class="mi">5921732609276</span><span class="p">,</span>
+         <span class="mi">14670735876808</span><span class="p">,</span>  <span class="mi">6793151864986</span><span class="p">,</span> <span class="mi">32428301166222</span><span class="p">,</span>  <span class="mi">5921732609276</span><span class="p">,</span>
+         <span class="mi">12675552190449</span><span class="p">,</span> <span class="mi">34601196283821</span><span class="p">,</span> <span class="mi">26850267312878</span><span class="p">,</span> <span class="mi">35401622221039</span><span class="p">,</span>
+          <span class="mi">9312542831382</span><span class="p">,</span> <span class="mi">35258512628692</span><span class="p">,</span> <span class="mi">2274436743060</span><span class="p">]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">41378299599863</span>
+<span class="n">d</span> <span class="o">=</span> <span class="mi">17927688850145</span>
+<span class="n">plaintext_4</span> <span class="o">=</span> <span class="n">pk_decrypt</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">encoder_4</span><span class="p">,</span> <span class="n">msg_4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">format_pk_plaintext</span><span class="p">(</span><span class="n">plaintext_4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>If you&#39;re in a vehicle going the speed of light, what happen
+s when you turn on the headlights?
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="as-a-trusted-person-you-have-been-contracted-by-a-small-clandestine-organization-to-generate-a-set-of-six-public-and-private-keys-money-is-no-object-they-have-agreed-to-pay-you-an-amount-proportional-to-the-size-of-n-go-for-it">
+<h3>5. As a trusted person, you have been contracted by a small clandestine organization to generate a set of six public and private keys. Money is no object. They have agreed to pay you an amount proportional to the size of n. Go for it.<a class="headerlink" href="#as-a-trusted-person-you-have-been-contracted-by-a-small-clandestine-organization-to-generate-a-set-of-six-public-and-private-keys-money-is-no-object-they-have-agreed-to-pay-you-an-amount-proportional-to-the-size-of-n-go-for-it" title="Link to this heading">#</a></h3>
+<p>There is no sense making keys that people can’t readily use, so let’s go with 8192 bit keys.  Since the time the textbook was written, the generation of RSA keys has become a commonplace task and good library supposrt is available to create and use keys of this magnitude.  We’ll make use of that support for this exercise.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">generate_key</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">RSAPrivateKey</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates an RSA private key.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">rsa</span><span class="o">.</span><span class="n">generate_private_key</span><span class="p">(</span>
+        <span class="c1"># this is a Fermat prime and is efficient to use as a encrypting exponent</span>
+        <span class="c1"># n and d will be randomized based on this value</span>
+        <span class="n">public_exponent</span><span class="o">=</span><span class="mi">65537</span><span class="p">,</span>
+        <span class="n">key_size</span><span class="o">=</span><span class="mi">8192</span>
+    <span class="p">)</span>
+<span class="n">key</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="n">generate_key</span><span class="p">()</span>
+    <span class="n">public_numbers</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">public_key</span><span class="p">()</span><span class="o">.</span><span class="n">public_numbers</span><span class="p">()</span>
+    <span class="n">private_numbers</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">private_numbers</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">n = </span><span class="si">{</span><span class="n">public_numbers</span><span class="o">.</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">e = </span><span class="si">{</span><span class="n">public_numbers</span><span class="o">.</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">d = </span><span class="si">{</span><span class="n">private_numbers</span><span class="o">.</span><span class="n">d</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>------------------------------------------------------------
+	n = 884134166147111528419449709586824701147421828806631726993102282171545379872631462877424350054898786133860375261527940990281278717373850321185955351502505674553589348852344209167986084631715607130070308825039008440060829450758426170713505917219577319185326596692142460495513813537475803289609919351972148214825722111851615194711789566288893942561676841060845042250357293288573991185989220510431227709736647658228152087569459652342167640187680362976135991762803927536343568698452830624502346739599068360028172929161394478840527328439682070615365761386631078329566998965116352895900413049426806933762375726513489571150476397494191561525244845813367758181265142348473787131342608892415648629498097977385130781484220623191224984352024899383261938989652206442964503304006747942670644674698794978447552686394434655530179417205108425492167522628462999673946095600528754123807260069852417951380741628580340388282101636945545449604892401426976116677230507066779438979333464692470314784400198202239599230852418536738841728721286117323940554024912631858015831266856850566833408509790572977909613630658196671778203025854814247345644556997768435339362206289065998764033433329658992670654078607052424994127817815124987023386782927434457277214944542498720923008969576458974250725034101950207805946554645716578483713582632521379900652928191965333473062050897448749524827420192418086044595292563612826556390872596354315438033482894081758229644149441840085497463114147015968422606012654734070770125141254679691475576419225092546631433503006395877014957552495585659969358782727824144830494466817598632738266093386852342065566305413626174502031880277173852828798812850691306949054960238298743157504051010772266974640862782381734278489547566214603202499250701221136898942110756068236304674636769738227638824452561583153759348197074916148714016921642052839457468015414860424481704223205611026318871409674769400664386719776982383419991573613192078112642948639280218675339614516029850471981837678224924102423776374778786446687053602831030958945220559869094360890407240599456311030898573107064761709961455425608440778759763843783945891394155660521840658125004877942210073504744369727216915724837047417566453565304560194023509902327869881447308561945964578569894004615613167231895328780571153888346099790317517261179357242597187202573292247596147501394673766512074230773868744823871761183295663415900721703281480786172587382478822727760200196037234448883937975250519298878220259015096217558743
+	e = 65537
+	d = 643665662190651083286481967736224641068642543100123249439312580438761264448561898784218879440037868392531057334383743020573561425863589122548533398871465706665180774481782882459177161664697491459275468839958514662259152230093082744278348925572103146479502777515813784602908326785912585247699919693608258931338392453354070231007010461414978405704369720481883941120092493799643943496336340976794495466119000896500392543410876494292487542071077467461557047363268208847083349593273465147968205303179990915547755941226175547809639005044237985474729931092938309116110325775065622257607523275689516824966725056720441207985877553255646296319080459168402921715931905515169075363072230630353355225729419220229002453597530782386902304024542788496040831405996149778194973115884399622390003167451212011889500173498124522364312129206422472402782311901773272181954180646987070162047962256797169891284626030911867939207215830137480197585774164141733443984822560735593831415591997376589264462701435862243095151421349765455325167634505325340875869939869700650451873510113468735671037410126066725073963151729386573540822262422385981569382900056450370362994484171621959121851889715570378222593134651581985449465857662599240525394856627020107070202273052880585266105589951245558905755265359026472907396789638846637237387166527890281738698974129764645856410580508824169697776395363814985824640375590673900101134202646067088140235429034823586932509153303829892506181403848145973053383862444872815005464617251769955455627086523926545110539740815064194228896792682245593501629960656109466970820039771406204053819618038803598954190396621705631594722939016916304525197222648686900439087190856905946466473875653365420350442151112942151353566959800686502989428864670966959341317620016631143477976182387447175041385169499380501683171030682140328279787790590203192736728493820260522569951301374133609861535063319400444735613287939125256914180557306722277290529171823652601095787761407673691385572389871520497984792275759284177620202666537487230651347577729627217565180012299377086181181899350077547845990488265724312542979314718458669418101726550701376536508594580515397843662936274132495238985830166438119312163437906676991682119437948269102639841616110290744367803451650689510647114412828699619853047610335407008780414329132099452240562527447034274845262087435825489866572775796477841622783845393441488807494985501699123556034348226188233235493704049927007178797938155965243364647554031321409
+------------------------------------------------------------
+	n = 613473636180495062102495887807308532085704411362151094979740750136561614153911030969253962830684705846852787630688771720746757643992219295090179875831431094958021007959670077059117447091221354185919594755637693002752955762312949615966836977319307299066685118574669842318829990347981198964919191910758483556277745402263668616138569869785092177308790108774820651305905860481945259979360760823748720334691845242734815849859401583159347787705997979262344676867903452722364603778835402296061818341950902995544429065695406127585798906305866489834280179540368599331160058467163258704159458882063892368853646817365354371582552605178711137606796440504994562209263267797516904200293077270179202071191753770952935599719047959344883731777201372001371276367296372352113037217309216380292586708579336862606811483455910593341839653294188019404270562668699387859423489722016075911462645042840129999480770782259908662778140539126014415874918052121211675334821388188879961557940150123749160861699276355335053697293569054889363309244707779072703347967712828589815115712689925195296280323621852719519804309377412104765659505469807627673455034432987758038759083920200991923359688334834968771527082930148180646328317412919972400069859876225633030054938932644691238584246347118146642554107574840010797155874671521845479631463164320182797541539353106079838097683852237426691440786262924694116187684499454022798032391754844912390159411275549036971677371967237974113034076802945667090684864154350071563725111321225644248504547985765857636395833783302729461820449171342918518466089483553943198620142396929187557246260598350812017635813346722998783437477600513793065928395267923460420904604862253700464411267841974937501488912310510420554812072056208437110932717692010493808959494308816873740533654004138342988238450292378904641708494324032317177373779134640297339145014755551118223469205648827538464343258575244887372363358989947719366063497246363677583362735159100637118516399931334058255155273842195700426958185500440600632943037194559349758531122152060743664119457436828527607676900404132015377477312193907604636920388338744697598220501609324760446932411600506761626937181199423826314229857263887677020017094019856495433675575822282492901701628861981192161744319454415006703590606400988260310177924099359102730365389293754807713558738446725337599167396381795335946941691138589806168243793017964169466548272960120949079842227962196164333688787601832464339838940968651069791276999739765214399
+	e = 65537
+	d = 5348612529407808408247902547075331706179096346643646601552162743653318991623879092487854195775407784605880749959424122715989443086822859563641318833403920102506341682192422891354860565052490813333759752389009832048490123488672799589221795246899610203990668922000362245117826953331694421433010605376565064498185597840644582209697652649766690778254952053165074180896323005882009822176552876044791990819694412080646200717664106012035518525206447601874780659598892407893013742758816574026034319584496829873179741503677525691356656673461672073235620630392578106108831823020053231823482269220293823008936222215951523322471405926985302662182262937639865073946585482074978307164921511447980270095270345618379221443281749462866717512693013201223145854366950636571268975947450626254642631302197808220217465034462331246743417911621360435557965336839048683385102725509538581894700113647092259202740205698513952760080544361633766055199973692610164301436710032774217790987800312989236037541623694600523391601236585380554412550316631578567792861579401662882755343550645590051440189959234864122778131540577318916977185079299540251750482788470023796081803814062003314439641724457412228389354315489786124163523187573331702477411834220008575066260320214483709160658173743629193267913448403203633296587526897799706358189166434653540770232828615873497200342929020206563070560562624728569532308904180410564731311503476705298554622607265002536011234038746808671324164940360733622538587528418360121049366522136126908208564458217331359421986547660831390105687821841838122823900285977754140332908561656055590105299885707036575040955422037050946196346474886227704548210897438866599685134680043313979072353902631098220922416326657179082327128798693812283666970376668570323228371510448916149244429642055062598834373106722538701440617764019301433309469402167859393761332445663053070474337055854770333957852872530903950310388640191297780528358930312070836574595194464705994909416141892379571196339688248186256615709225005200818267895775318303191027641351027501051005799569621510402745618020314623987061386652327891114763545904578485805296608883014243721225369292453008594518517642749785652575816985257997274839969150194170489230888721794795902206993571929504711585354916711757436635028068613137579698740448823570082784249941909052451662903283989016815247872109054670737934072844776281667374575009641938504671085392768901057952311463962963793666580587680153444058676537657600450257766800801464373
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>------------------------------------------------------------
+	n = 647532616756256636991775198976440539844328971737698942430252139179495456388917718138200104842506086157371473986610666406905336563302866179550769771758290167364549077368969062036102171486379465615681268731818672790850194331313385159462284788369331673138656738264764790089721548147894381102172842654046911635996779419857499872945284487289154520486428369755900653575264620996353641188408928438803191055674459630240133986755952697429125404768250623207445317879211896370805941147118229366011784873642067631359767714224880481649916154670878513760005123720269441258697527205192597795872241254021162132981046040895637744684782926731447188824990576719038519763116289967154270904145120751946661489975031591373266143619093599999335957155894556114468335468662909497080904224850533796858306002777692075728502502857405443024784582810044384801447819345610413606084593281602059605626077017053849168795782843732087132800666506699407077197155345341489503370026671536946611186039639755441629022678415017362700481980812896818197839344564479147578027930788706917980916719524119579020747827753474529042755698978087542183060402181031444822291023911816499287697209786605085723571547876921726895636446190769793927481484056155041364643997233515534287859410776111791938853974684223023027052114979618331060676879932820860513760172332740861410081627131158355171498978576700570102639351480992524520308401426219909497266483663842215359065292207115975396806702270103686756371294489235344284538135864134498790556487105428414983194682567149827135650847117360995019198252036269014426447998044496601893554243609015919755737492412417920661720371747411501637116101243833815320732750897023871308806301172550545574946597004661922636336534187376943750558533468803427602088340725066430990097190413897596892292921331815829343065268849770503650001733998480479185082840356216529889606803992062663574640103475313294175225348909590271218678103450262872249678230495311347793630556694999864682020850311997463075260215897064758695293502706593607716875776598922667441361123713013424217503006653363794877229286850399890313273248026478547017959289148083095168792395805694010406196560630653876379634170705118368132607844289556312003890860794016709642985873086749797533219551348098111684378656580687758185499276671161579116279888690831178164631850911383364414826641091236977271063282498665220674357657780659621045594880349555720989442794493228735114726115229432686690521581269050778253068878280694166980028377167097491137
+	e = 65537
+	d = 159830498420092245423157170853752695313972070911315546061354253771718391904959449890330561301017741164910198039953117248749625050220010295764270979947937514569977694280469475746936948243731288059143202216156747492274412447937668416803357643454178461182652253330789746660457155860268450736214641945667178327962859183138148628937842661529105819623246540478757448808463435029792554994648779023914732442927169327381166782683944471214157607309361218949833516710759895046192872834679006322219351480972136457858786371502491403503515093398133364020915252206554139135470353370383112718692148109398863683784242355929448769044866121645349275218997819007515245051620468813855853384819316505849598998925509232004053279403302983358854663944524898713485466663241002112997684471265005416251558463981160807834080301775681205259478276451877305808026315663583423954389542139857419735575480032140189375147244780377986595415566500535925638712174549398303324095781565407592914778689446152614576680125080191775145709244588855537781365460081286859801272087864923897320876746164486021179320494310909573509012276492958681754188879501372585976895352980903910779062726614172409008763830267345534814337900297617949730196747285264690581429781974273525495636934226371104053674850994802077848827364556185688582185915767175504753524169942652352790903529940376033516077190129068047872308271960066672305944207654696582568956401453911615512684912949617397610826240583257325642108348583190148387646880512429191027339851828063360528722242109424034189307611540740472344010550897316721567327976701987167512805898126409555320061322447140128335604558740606778907058044640083809120971885125777269845774629492894065281084633605624731104861695303568905771226505267101491038045121806439767380348095349915682169221188274510798267619255665810708296906753887734673963889936814413066820807051417091759794986780618050066146236512759095904756556993927441860896894165822895381453841053700337069671399916397429941516841572904514469462158822129404375858721711770276385148357281570636801578040689526925298142909203261990309908351131896302342359334923632625255633339770851111004395105303385526824779216182056090823324567227797675307095750165725871288336973348823678204873979268910394760414772068037467297453072398972163881050790341875025984773472478849549876837124393132021317949021456770516128126810637528311048644159989003728171186711881255378872845799759221414968252625116496682214157606287806473477148782070453860909443
+------------------------------------------------------------
+	n = 694961587217585099734236307492430922200178687261214802981479344788383512879486838669490141807004958556667499239476461106596712624384633308119850414931122918694311724119727639746586656510924872560266436870544119134247443616598291706508848531932789741315519019100159503318344207288355354175747674272717404976431023299127484752480805202607623830521633906744608624426128323403912744900346807136391194817567763071084010924087181429521347408437113959261583184088417066992649199153088284510626089800579395901805585431633629539198985038037781017089596825651985779204575438569730379290233429704710954743443646195862966744560184911341157325519245738481004146236756379539320732005466790266914802790955712712208195337186484017093707891031906184637752592210526183486753795587538910425111772153246435991572220337650216468542009878437277293345181457807629468228021343926704958648715178498613623568253859295338715692993928546226961283831477021619499387913453752434508743405942577144042397301573735054262419069783303981256688887367314139340234900622508676944197843467725664978279307874542213189857083377160456061180453552200259176910030298918616098911074675761846784057282239666527245291026283843713431236194983876253934233455982982545507510624552289309755814461652915837247068302269057809217266751455257558942609723479557787829390527904376948673306030214710985278225272488872224945370247295818547932535244819432871265006540904260319172015908211428002185202788917011638687034809063919812666747059442136195161983853998441772854690493514243988791471790396714776426158292140473423465946880348400348485150307258098546023110472935642224682219574844087701310835583180665577969760961287298182613046399349102006368430481106750356449229496685691814883269291665235627738685051908812888107995698013499148231224755070176196926669057572023143548723621962187489815369787076206681029929731487880191955133901903654386911222172936783611819141320298592935090372401704824410630125425655968210171016178667263452650872159317260807711792850596027674258044130709442223504354633201140816394914024751790243779434997872183371603791815839671469749046355901275767149541111710368519286304924604760270119237455694898878436341628417974726874745677148798713981561770566889047467208206666869977316884884687249525031988042329493723338622655553369753466029510121382530304316469543325194449244389237347671408417287057790958712753667187371009326313048208216798460507045127070025627102615100900174584247409462748412776853
+	e = 65537
+	d = 52682988117066171877407291784391192150655676662469424554259216902403538294969821561099917189590131807517640123974634758804292248705010234121551238279348162318890444034883504008437985778858150170003159072162924880278270408998424496796522742594220387971360469252373098744262840011643765487752115655775702084172381945882201893553006500868544127144512222424355805335201131148173894168521695057572275015937250330311994958664863083023335024230846519298585870410332138969803011981919650154307879800381136387172952419070059312383291232430708898124783943359883333313774888608280037424819995590449488711077487143273975453277269715382579201358019633231050787074913079425076958309430702125177287528153559160571417913560766951151121601852821285324490407508235996469059828526046221678497532732441529239139153750413291480921130487272677517629548992873714153374961442241561123518927096540542425156644539958941137006811561957455278415016790765871328809818148890210416180000579169736400200958142249081263277359993007787909325111625321744916594346584515518335773668604323853567037266196785095526131421432142087763979960785351627136336499720718741645412617363753261238653899136574808913679499627424450447003778365082236633569752174081629967380726936130588561590465341256119075034089363769425239768770863975742519462420559819676994850647927402756218684947929254383276645919617697010883567651240156882590854313642089178350720758306021484819294738640877271516487465602147802251932930074040492778924866507896796912990488795807220373893125695157250503650628056419044150169805025941446401259769768259285889004350802462406359341605273912253819758258420997113779153477229871425266374002276365104371318563326518933139740412344336641101695427270277056511389899582958993946206762067080994012847863318503353700796814064503612843834876552995824235842441469476843181816295423299519431601504443427248064147788905465058399017476956618063390253889603182528922546736261632972462781647523374219152165853474158613636586434948275859839271513072073775217443939602136780580307649495255237337212501122797360022738854629262195257529262003214717639683832870307543720980837672739800632863056876534803041219547583003451185253220508420463424252234486059998793490799768527816083890936405991838995872302022186903497577781451820681405874738691852385588600813853882818775274642699600367009681240796157685435968723101221089730755747008296059637160798988551496724740903201023357234304188360907928592348008439011598280099
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>------------------------------------------------------------
+	n = 720172522070018494160039315711150818547498257433830521174521115948658481860748871342583469354772036256775749842916368007401743673840642697294147830827167355228904368265820175729351257126405083125245320247483081859484375985190844328096227016636583929503556040430168838049424117332539381322447444458717095382483244546834056573114309452289081202243599997994922119278995082849101409618599079975999960809291206491760096297632151447074882565046074652967756397344403935509912360975845589595060927434272978011797604249359874867266982873182205914882733568205786020097723964175266001306127263103403839279387798938836241291095164591359625294152974213986575720378976588973306539964763143781300901880514866665201793035887152535655202574215895692934237753383687441421584139612691532792730055110358231208672123511342467580560959163395434329840769662767001413240163418740283930544006402161065719271326266098309179484862529863076869255517900129282140157491092946862054696820662805738238182666174665100374489445268363721944186507355577341640305755529999656510996772017738593113756123437738175304635560234643059131620661756808981653184415398422490468139104983728859414997314777748698048560619066750208051430840227664142967809623348833954071380426110687820237695463310699862551749865652348360642801978353728135873001485252010752018269311178478557051672816198309933952924934902455193144280523235734530816409804686859250455365880388538367407907077360624628886377890293380356822783966522488237560996935543147114443848398849704472320277688510970456163418988716020557242684186646782302049592473369517108895317370161693607243522168074091107774082394544622500132729114210396390078364069291114402079714250917084227817957274900390422205489165875910509347066566410528472226035549547569276134827486464638814864879273164878632803890630037265463334142391760194834392085710394411365668009126748269823991146827189072034678246761409590657193120313225097540232299706138076522807656201682593008549251574690032787033888414516033316648580547550259175223076505133276177634992967297714797265490773452392070191248149188827018549230318171944668623273906027981955761341007279719326679618818763939232323126027431744588968659963056906372848870481442417500304968243021277524345151756324106598227817632289886119250421806770236459946766097990343931482024975103150528320427008208853373685556691625179806246317299862239541812064882090786198394751496340354015866495624743780433524765334836663609878268716777792751852819
+	e = 65537
+	d = 135348962484343466935764594833670211209691258934838191087577652091789775563099376662444124571505060814115795822439246604928014355718070648680470861227981450392212263361614158482359879671421203424838589033496332137010681889766019646751624703051906621598414632192172201630449316465277439610427471098738399130659720815468438817935653898162024706166507792167835814015889992453917360609614185392440781807040904990448282742541392028527722180656308672972578170286876470904612517358736135725504149460731194137224943032780956997423248364267287642913325745145347916589768620271705316662153737577927355362683972710524527884743261703644910581016558331838086167323921672435177329641973047926427563185106147866324221200589316840588753377582391431555777750101879521735655459474945780389826450536251008343336047504298414226921728703107276265936017210679481154262158671111342862390871215579258227631184302295388470081252602046531238821127210215486948141047313606458945751266309165483282415977223146467511674115345078901432573129851818760654037352806246940953140168774012943091416057683180815497004687358440248398983348198095979782752833429396673865084904040230531782268366359728561177107910722876578307970667853031711078238416936808029239928478697610829054060458150655271614329627512753766203856062645702308205999693671892203325032199890484150149648707444259749337908633767608107412496508446790851860190831055296150735188985962410853720264213256091360963962247362522982763067982196744854681080738099226969911063732610091416284036256984723847400047450524558086577481719309740124758008779709534287728456241774603926772805811330896520109973690261157169373570893532209597214782519875968923674183443778054039819959702273923380280382469386027554674685939126936474514672135749189078019985934655977202514203985906387815438712464564437333874260359669272919913669380244335702976458460690924052285128121300022534947625363437768270546817324165187055479235931654414005384738498665128147353629336941838271275319099879727198279439587582065440021610608249533568649014222297437991249489088486363320073440314653079140034718050113630309655929647627200225981011616929804910833011825965489798301703267756971563121169024762971265172288546161019929127204291770388382699810007006527505268829843014075209089051882825937134952912925574425548947597604757407979967732649723674663103766160952649742392877182165560063059039002442101250385075320595898013952544535357720746617748992313363375219273700171087449889409
+------------------------------------------------------------
+	n = 770103584497667411348337152947078864320525842264414126761158916862887770013651267186541302207825566921404791669348553248928501767161860837094986311196705686882984748983171177784650033636780097801480349784996957138207048094954781657464259497012650452956145316401584315691777710003746022171318608679656938731518937380581247845738866884922102910802761991439205052064014898084769330731988398031225699756376006249691028574522968108632917587743461137695986471051471493349497628436979566057170829296405989460709271422907389689194802452126171075942354389742297915234488740429068693847268893747096799809091856417787726817008223840736500113627647367302452916665552914861131408104727290709946103507130010961324244695134711151110120024663589268792674554418068492623650021858801985491105403224859254847857555257147675792814464827326324397657484724089598081066621812213025853917533746119280422221864136979855064727171433007124281374517585486886825415702091223841857145408191713406908134416690354120895269593977012406615573397078976059910338291150183198011841133319721941965047378367993678465161311447610468391803474340441910026427842900661739320569111769800163392388924443580840603450275394792452882595463382409142959293900068997429708898321750034948873095653815967971413295532174256941160213645606223563013466396410536031982792788833027267153315038959746464639953491584486539261905504745103749855000810024471178450995335581842505828281460487009089554585947727329121628622293810427035358471116348737466621721129821555847844748346953121730164715122878737949190496462419096971285719302846699368266983773349752604957051817621818937222460246474944455583018988922688278213739503008507999032475833471903103638519053596058610020839936561144087833124287027416205809406742549174348027079903410856744725701927388655501021764702001281213017827995461239012616888719202586422472797170486809097724123423850026794206794285103921624915107774374052986163767437186589514188486649851592227548536411478147232847574199480959399541938142603379218010871447265751395709696565844897714087128929802084454230914919596715879050535458089208761044737589590103715862523103848539141348537528321616592819578893341893189837130151053716633075188008687139838425234271303431138569345982559599114041471129787237782048634591775405903801157886081304953162178279261816353480581619706759643644253873763541217549643938869006026514307630058742807883240835074180579612368105632347026595642921414749592757249215618901769489951
+	e = 65537
+	d = 157276827238186512461538041466960298144530236901110073388082022716195757476657695434003113651840049139563032090245139554149313088828874168394919576456235519875571194481975901079674815374696480141353948787666383459974247146297851215257493953610415795468079512143934041432726532486154975567267557530446439361765341980413960233017865691460394684066093471999298717050685985068214826848685455749407821206176887188137839265692702849535335542566067345125531088114933857252183514775085112255553396779189556524358198320947006382578205188221657029860238374193292131871401110003095502278083685679204374888151577768647936731651533820534014156443676796125237363063766925385031559756743861063327183459590485248208559334757931266338608747274208623650083961328846876413647919763936939054361662411509966835698146823005219443198883142062486670132087283360196919542185325015872629839010489112005566492645994497869449529896486642413521278929926956516726654812772021690210674317041396281409919970401331228636079403704553497357922122361468408286462957686492012356218436134058903096436770614559888145886317241719064256680861228155770705841333343056701556924443848251984175739346616645677419730537116767621124053572480306623341603509551451792085978143452756752142845813406801626019636154167436730784227665737273245440565830446313646808531481369320174908007291116576292528421084773014716818514731188106965167069930660734562831007433495794555191217685069030004985893217787027242341317650868091076943426238210119973398049527772011724170038845233395612437651906839739135250426910990626167695846413189217369634643158883143278713628646714094845148031590828714645298043785143862166783334204495553398740292539665236981366423377431194874634493848726309570104229390743791671510989462021859269909610611674343985266153635257675415437891231917158525077551290226426191300074602058371941382085352868869612314271174102860450252302526392397747459032887189798153163790763086779376153194035226186157868430342014226172286556879002485135234680716825287697518249586193658196730393555436774564727809185198831829566797387401909152153263549411174922217299042496692233530270372650519965595779468167856756906266524237703560043090302951209837453427736918903606031706152403067876368648731403408418206939082448248172205885097854321356866752268990711284467616208867748921318242740984827060957785563402416148121327962048668924895391249854663915818592621754370154955133762757975742618951626739586048672605097917380156557445
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">number_of_n_digits</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">public_key</span><span class="p">()</span><span class="o">.</span><span class="n">public_numbers</span><span class="p">()</span><span class="o">.</span><span class="n">n</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">number_of_n_digits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2466
+</pre></div>
+</div>
+</div>
+</div>
+<p>Just for reference, generating all six of these keys took less than a minute, and the values of <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(d\)</span> have over <span class="math notranslate nohighlight">\(2465\)</span> decimal digits.  So picking a remuneration rate of $1 per decimal digit of <span class="math notranslate nohighlight">\(n\)</span> per key, that will be:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">invoice_amount</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">1</span>  <span class="o">*</span>    <span class="c1"># dollar per decimal digit of n</span>
+                   <span class="n">number_of_n_digits</span> <span class="o">*</span>  <span class="c1"># digits of n per key</span>
+                   <span class="mi">6</span><span class="p">)</span>      <span class="c1"># keys</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;That will be $</span><span class="si">{</span><span class="n">invoice_amount</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> please.  Thank you. :-)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>That will be $14,796 please.  Thank you. :-)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Not bad for 1 minute of work.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="4_2_rsa_algorithm.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">4.2 The RSA Algorithm</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="4_4_other_pk_cryptography.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">4.4 Other Illustrations of Public Key Cryptography</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-4-3">Exercises 4.3</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-message-why-isn-t-phonetic-spelled-the-way-it-sounds">1. The message: <code class="docutils literal notranslate"><span class="pre">Why</span> <span class="pre">isn't</span> <span class="pre">phonetic</span> <span class="pre">spelled</span> <span class="pre">the</span> <span class="pre">way</span> <span class="pre">it</span> <span class="pre">sounds?</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-enciphered-message-239-1093-3145-2258-336-3746-1098-3712-637-1528-259-1633-2258-1902-427-1048-1637-1198-1694">2. The enciphered message: <code class="docutils literal notranslate"><span class="pre">[239,</span> <span class="pre">1093,</span> <span class="pre">3145,</span> <span class="pre">2258,</span> <span class="pre">336,</span> <span class="pre">3746,</span> <span class="pre">1098,</span> <span class="pre">3712,</span> <span class="pre">637,</span> <span class="pre">1528,</span> <span class="pre">259,</span> <span class="pre">1633,</span> <span class="pre">2258,</span> <span class="pre">1902,</span> <span class="pre">427,</span> <span class="pre">1048,</span> <span class="pre">1637,</span> <span class="pre">1198,</span> <span class="pre">1694]</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encipher-the-following-message-using-the-rsa-algorithm-with-n-34618195959169-and-e-20000000089">3.Encipher the following message using the RSA algorithm with <span class="math notranslate nohighlight">\(n = 34618195959169\)</span> and <span class="math notranslate nohighlight">\(e = 20000000089\)</span>:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decipher-the-following-message-using-the-rsa-algorithm-with-n-41378299599863-and-d-17927688850145">4. Decipher the following message using the RSA algorithm with <span class="math notranslate nohighlight">\(n = 41378299599863\)</span> and <span class="math notranslate nohighlight">\(d = 17927688850145\)</span>.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#as-a-trusted-person-you-have-been-contracted-by-a-small-clandestine-organization-to-generate-a-set-of-six-public-and-private-keys-money-is-no-object-they-have-agreed-to-pay-you-an-amount-proportional-to-the-size-of-n-go-for-it">5. As a trusted person, you have been contracted by a small clandestine organization to generate a set of six public and private keys. Money is no object. They have agreed to pay you an amount proportional to the size of n. Go for it.</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Dan Douglas
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

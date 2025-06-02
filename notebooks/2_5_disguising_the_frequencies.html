@@ -1,0 +1,2040 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.5 Disguising the Frequencies &#8212; Cryptological Mathematics Exercises</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/crypto-book.css?v=761dc443" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/2_5_disguising_the_frequencies';</script>
+    <script src="../_static/sidebar-togle.js?v=2b3ca58f"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3.1 Elementary Polygraphic Substitution Ciphers" href="3_1_elementary_polygraphic_substitution_ciphers.html" />
+    <link rel="prev" title="2.4 Independent Events and Expected Number" href="../markdown/2_4_independent_events_expected_number.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../markdown/intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Cryptological Mathematics Exercises</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../markdown/intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Monoalphabetic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/1_1_induction.html">1.1 Induction Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_2_primes_gcd.html">1.2 Prime Numbers, Division Algorithm, Greatest Common Divisor Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_3_relative_primes.html">1.3 Relatively Prime Integers, Fundamental Theorem of Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_4_modular_arithmatic.html">1.4 Modular Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_5_simple_ciphers.html">1.5 Simple Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_6_cryptoanalysis_monoalphabetic_substitution_ciphers.html">1.6 Cryptoanalysis of Monoalphabetic Substitution Ciphers</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Polyalphabetic Substitution Ciphers</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_1_multiplication_principle.html">2.1 The Multiplication Principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_2_permutations_and_combinations.html">2.2 Permutations and Combinations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_3_probability.html">2.3 Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_4_independent_events_expected_number.html">2.4 Independent Events and Expected Number</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2.5 Disguising the Frequencies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Polygraphic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3_1_elementary_polygraphic_substitution_ciphers.html">3.1 Elementary Polygraphic Substitution Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_2_elementary_matrix_theory.html">3.2 Elementary Matrix Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_3_hills_system.html">3.3 Hill’s System</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Public Key Cryptography</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="4_1_more_number_theory.html">4.1 More Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_2_rsa_algorithm.html">4.2 The RSA Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_3_two_examples.html">4.3 Two Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_4_other_pk_cryptography.html">4.4 Other Illustrations of Public Key Cryptography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/2_5_disguising_the_frequencies.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2.5 Disguising the Frequencies</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-2-5">Exercises 2.5</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-program-to-encipher-and-decipher-messages-by-means-of-the-letter-number-scheme-appearing-in-table-2-1">3. Write a program to encipher and decipher messages by means of the Letter-Number scheme appearing in Table 2.1.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-letter-number-scheme-appearing-in-table-2-1-encipher-each-of-the-following-messages">1. Using the Letter-Number scheme appearing in Table 2.1, encipher each of the following messages:</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-why-is-it-that-when-we-talk-to-god-we-are-praying-but-when-god-talks-to-us-we-are-schizophrenic">(a) Why is it that when we talk to god we are praying, but when god talks to us we are schizophrenic?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-my-grandmother-started-walking-five-miles-a-day-when-she-was-sixty-she-s-ninety-seven-today-and-we-don-t-know-where-she-is">(b) My grandmother started walking five miles a day when she was sixty. She’s ninety-seven today and we don’t know where she is.</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-letter-number-scheme-appearing-in-table-2-1-decipher-each-of-the-following-messages">2. Using the Letter-Number scheme appearing in Table 2.1, decipher each of the following messages:</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-50378706411991441253083896254555492420391532006473011044857">(a) 50378706411991441253083896254555492420391532006473011044857</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-80167661508877723414773327201893011035745690579530127187818">(b) 80167661508877723414773327201893011035745690579530127187818</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-program-that-accepts-a-text-message-and-outputs-a-count-of-each-digraph-trigraph-quadgraph-and-quintgraph-and-don-t-pretend-you-don-t-know-what-these-terms-mean">4. Write a program that accepts a text message and outputs a count of each digraph, trigraph, quadgraph, and quintgraph. (And don’t pretend you don’t know what these terms mean.)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-program-that-enciphers-and-deciphers-messages-using-the-vigenere-square-the-input-to-your-program-should-be-both-a-message-and-the-keyword">7. Write a program that enciphers and deciphers messages using the Vigenère Square. The input to your program should be both a message and the keyword.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encipher-the-following-messages-using-the-vigenere-square">5. Encipher the following messages using the Vigenère Square:</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-though-the-cold-war-has-passed-decoded-soviet-cables-have-intensified-the-long-running-debate-on-whether-the-soviet-union-employed-american-citizens-as-spies-use-keyword-venom">(a) Though the Cold War has passed, decoded Soviet cables have intensified the long-running debate on whether the Soviet Union employed American citizens as spies. (Use keyword venom.)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-i-really-do-hope-that-molly-intercepts-this-message-stef-because-there-s-no-way-she-could-decrypt-it-use-keyword-pride">(b) I really do hope that Molly intercepts this message, Stef, because there’s no way she could decrypt it. (Use keyword pride.)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decipher-the-following-messages-using-the-vigenere-square">6. Decipher the following messages using the Vigenère Square:</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-use-keyword-gift">(a) (Use keyword gift.)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-use-keyword-dispute">(b) (Use keyword dispute.)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-program-that-computes-the-index-of-coincidence-of-a-message-and-then-approximates-the-length-of-the-keyword">8. Write a program that computes the Index of Coincidence of a message and then approximates the length of the keyword.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-each-of-the-following-messages-enciphered-by-means-of-the-vigenere-square">9. For each of the following messages enciphered by means of the Vigenère Square,</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-perform-the-kasiski-test-to-get-an-idea-of-the-length-of-the-key-word">(a) Perform the Kasiski Test to get an idea of the length of the key word.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-compute-the-index-of-coincidence-to-verify-that-the-encipherment-scheme-is-polyalphabetic">(b) Compute the Index of Coincidence to verify that the encipherment scheme is polyalphabetic.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-compute-the-approximation-to-the-keyword-s-length-using-the-index-of-coincidence">(c) Compute the approximation to the keyword’s length using the Index of Coincidence.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-figure-out-the-keyword">(d) Figure out the keyword.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-decrypt-the-message-good-luck-you-ll-need-it">(e) Decrypt the message. Good luck. You’ll need it.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#message-1">Message 1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#message-2">Message 2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="disguising-the-frequencies">
+<h1>2.5 Disguising the Frequencies<a class="headerlink" href="#disguising-the-frequencies" title="Link to this heading">#</a></h1>
+<section id="exercises-2-5">
+<h2>Exercises 2.5<a class="headerlink" href="#exercises-2-5" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="o">%</span><span class="n">run</span> <span class="o">./</span><span class="mi">1_2</span><span class="n">_primes_gcd</span><span class="o">.</span><span class="n">ipynb</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.polyalpabetic_ciphers</span><span class="w"> </span><span class="kn">import</span> <span class="n">TABLE_2_1</span><span class="p">,</span> <span class="n">display_frequency_tables</span><span class="p">,</span> <span class="n">LETTER_PROBABILITIES</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">strip_text</span><span class="p">,</span> <span class="n">strip_number_text</span><span class="p">,</span> <span class="n">format_plaintext</span><span class="p">,</span> <span class="n">format_ciphertext</span><span class="p">,</span> \
+                        <span class="n">format_number_ciphertext</span><span class="p">,</span> <span class="n">CHARACTERS</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">char_at</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="write-a-program-to-encipher-and-decipher-messages-by-means-of-the-letter-number-scheme-appearing-in-table-2-1">
+<h3>3. Write a program to encipher and decipher messages by means of the Letter-Number scheme appearing in Table 2.1.<a class="headerlink" href="#write-a-program-to-encipher-and-decipher-messages-by-means-of-the-letter-number-scheme-appearing-in-table-2-1" title="Link to this heading">#</a></h3>
+<p>For reference, here is the letter-number table being referenced.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Letter</p></th>
+<th class="head text-left"><p>Subset of S</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>a</p></td>
+<td class="text-left"><p>15, 33, 37, 55, 57, 72, 91, 96</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>b</p></td>
+<td class="text-left"><p>24</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>c</p></td>
+<td class="text-left"><p>03, 39, 67</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>d</p></td>
+<td class="text-left"><p>04, 43, 61, 88</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>e</p></td>
+<td class="text-left"><p>08, 12, 20, 46, 47, 59, 64, 79, 81, 85, 90, 94, 97</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>f</p></td>
+<td class="text-left"><p>40, 48</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>g</p></td>
+<td class="text-left"><p>29, 53</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>h</p></td>
+<td class="text-left"><p>05, 16, 30, 42, 69, 99</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>i</p></td>
+<td class="text-left"><p>14, 45, 50, 60, 73, 82, 93</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>j</p></td>
+<td class="text-left"><p>11</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>k</p></td>
+<td class="text-left"><p>77</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>l</p></td>
+<td class="text-left"><p>01, 26, 71, 98</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>m</p></td>
+<td class="text-left"><p>34, 87</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>n</p></td>
+<td class="text-left"><p>06, 17, 22, 31, 49, 58</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>o</p></td>
+<td class="text-left"><p>02, 10, 41, 51, 66, 75, 83</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>p</p></td>
+<td class="text-left"><p>13, 18</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>q</p></td>
+<td class="text-left"><p>36</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>r</p></td>
+<td class="text-left"><p>21, 25, 65, 68, 92, 95</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>s</p></td>
+<td class="text-left"><p>00, 28, 52, 63, 74, 78</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>t</p></td>
+<td class="text-left"><p>07, 19, 23, 35, 38, 54, 70, 84, 89</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>u</p></td>
+<td class="text-left"><p>09, 32</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>v</p></td>
+<td class="text-left"><p>44</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>w</p></td>
+<td class="text-left"><p>56, 80</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>x</p></td>
+<td class="text-left"><p>86</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>У</p></td>
+<td class="text-left"><p>62, 76</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>z</p></td>
+<td class="text-left"><p>27</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For brevity, it is defined in a <a class="reference external" href="https://github.com/dandoug/cryptomath-book/blob/main/src/polyalpabetic_ciphers.py">separate Python module</a> and referenced here.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">LetterNumber</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Construct a LetterNumber object for enciphering and deciphering messages.</span>
+<span class="sd">        :param table: a dictionary mapping letters to lists of numbers as shown in Table 2.1 (above)</span>
+<span class="sd">        :raise ValueError if the input table is not valid (see below)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_letter_to_numbers</span> <span class="o">=</span> <span class="n">table</span>
+        <span class="c1"># validate that all the letters a-z are in the table</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">table</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">26</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;wrong number of letters in table: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">table</span><span class="p">)</span><span class="si">}</span><span class="s2"> != 26&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">CHARACTERS</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">l</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;letter </span><span class="si">{</span><span class="n">l</span><span class="si">}</span><span class="s2"> not in table&quot;</span><span class="p">)</span>
+        <span class="c1"># Build and validate the numbers_to_letters table</span>
+        <span class="n">number_to_letters</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">nums</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+                <span class="c1"># convert n to a two-character string, padded with leading zero if needed</span>
+                <span class="n">n_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">02</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="k">if</span> <span class="n">n_str</span> <span class="ow">in</span> <span class="n">number_to_letters</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;duplicate number </span><span class="si">{</span><span class="n">n_str</span><span class="si">}</span><span class="s2"> in table&quot;</span><span class="p">)</span>
+                <span class="n">number_to_letters</span><span class="p">[</span><span class="n">n_str</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
+        <span class="c1"># validate that number_to_letters has the right number of entries</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">number_to_letters</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">100</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;wrong number of numbers in table: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">number_to_letters</span><span class="p">)</span><span class="si">}</span><span class="s2"> != 100&quot;</span><span class="p">)</span>
+        <span class="c1"># need to validate that all numbers 00-99 are covered</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+            <span class="n">n_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">02</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">if</span> <span class="n">n_str</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">number_to_letters</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;number </span><span class="si">{</span><span class="n">n_str</span><span class="si">}</span><span class="s2"> not in table&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_numbers_to_letters</span> <span class="o">=</span> <span class="n">number_to_letters</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">encipher</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plaintext</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Encipher a plaintext</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">plaintext</span> <span class="o">=</span> <span class="n">strip_text</span><span class="p">(</span><span class="n">plaintext</span><span class="p">)</span>
+        <span class="n">ciphertext</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">plaintext</span><span class="p">:</span>
+            <span class="c1"># randomly select a number from the list for this letter</span>
+            <span class="n">nums</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_letter_to_numbers</span><span class="p">[</span><span class="n">char</span><span class="p">]</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">ciphertext</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">nums</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="si">:</span><span class="s2">02</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">ciphertext</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">decipher</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ciphertext</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Decipher a ciphertext</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ciphertext</span> <span class="o">=</span> <span class="n">strip_number_text</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ciphertext does not contain an even number of digits&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_numbers_to_letters</span><span class="p">[</span><span class="n">ciphertext</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="n">encoder</span> <span class="o">=</span> <span class="n">LetterNumber</span><span class="p">(</span><span class="n">TABLE_2_1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-the-letter-number-scheme-appearing-in-table-2-1-encipher-each-of-the-following-messages">
+<h3>1. Using the Letter-Number scheme appearing in Table 2.1, encipher each of the following messages:<a class="headerlink" href="#using-the-letter-number-scheme-appearing-in-table-2-1-encipher-each-of-the-following-messages" title="Link to this heading">#</a></h3>
+<section id="a-why-is-it-that-when-we-talk-to-god-we-are-praying-but-when-god-talks-to-us-we-are-schizophrenic">
+<h4>(a) Why is it that when we talk to god we are praying, but when god talks to us we are schizophrenic?<a class="headerlink" href="#a-why-is-it-that-when-we-talk-to-god-we-are-praying-but-when-god-talks-to-us-we-are-schizophrenic" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plaintext_1a</span> <span class="o">=</span> <span class="s2">&quot;Why is it that when we talk to god we are praying, but when god talks to us we are schizophrenic?&quot;</span>
+<span class="n">ciphertext_1a</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">encipher</span><span class="p">(</span><span class="n">plaintext_1a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">format_number_ciphertext</span><span class="p">(</span><span class="n">ciphertext_1a</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>563062827493238999370780167949564607557177704153104380979168
+791895917673585324328956301231291004709601775207410974809091
+958100036973278313422508177339
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># validation</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">encoder</span><span class="o">.</span><span class="n">decipher</span><span class="p">(</span><span class="n">ciphertext_1a</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>whyisitthatwhenwetalktogodweareprayingbutwhengodtalkstouswea
+reschizophrenic
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="b-my-grandmother-started-walking-five-miles-a-day-when-she-was-sixty-she-s-ninety-seven-today-and-we-don-t-know-where-she-is">
+<h4>(b) My grandmother started walking five miles a day when she was sixty. She’s ninety-seven today and we don’t know where she is.<a class="headerlink" href="#b-my-grandmother-started-walking-five-miles-a-day-when-she-was-sixty-she-s-ninety-seven-today-and-we-don-t-know-where-she-is" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plaintext_1b</span> <span class="o">=</span> <span class="s2">&quot;My grandmother started walking five miles a day when she was sixty. She&#39;s ninety-seven today and we don&#39;t know where she is.&quot;</span>
+<span class="n">ciphertext_1b</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">encipher</span><span class="p">(</span><span class="n">plaintext_1b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">format_number_ciphertext</span><span class="p">(</span><span class="n">ciphertext_1b</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>347653659606438702386981250089912189120480577177601753405044
+798773268500334337625605643174699456377400608607622899462831
+500646236263084446222366439676152243802088513138774983565616
+4795647416128200
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># validation</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">encoder</span><span class="o">.</span><span class="n">decipher</span><span class="p">(</span><span class="n">ciphertext_1b</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mygrandmotherstartedwalkingfivemilesadaywhenshewassixtyshesn
+inetyseventodayandwedontknowwheresheis
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="using-the-letter-number-scheme-appearing-in-table-2-1-decipher-each-of-the-following-messages">
+<h3>2. Using the Letter-Number scheme appearing in Table 2.1, decipher each of the following messages:<a class="headerlink" href="#using-the-letter-number-scheme-appearing-in-table-2-1-decipher-each-of-the-following-messages" title="Link to this heading">#</a></h3>
+<section id="a-50378706411991441253083896254555492420391532006473011044857">
+<h4>(a) 50378706411991441253083896254555492420391532006473011044857<a class="headerlink" href="#a-50378706411991441253083896254555492420391532006473011044857" title="Link to this heading">#</a></h4>
+<p>24993871598744596345544812994847295143758249467720963469305
+915408137172498978</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ciphertext_2a</span> <span class="o">=</span> <span class="s2">&quot;50378706411991441253083896254555492420391532006473011044857&quot;</span> <span class="o">+</span> \
+                <span class="s2">&quot;24993871598744596345544812994847295143758249467720963469305&quot;</span> <span class="o">+</span> \
+                <span class="s2">&quot;915408137172498978&quot;</span>
+<span class="n">plaintext_2a</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">decipher</span><span class="p">(</span><span class="n">ciphertext_2a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">plaintext_2a</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iamnotavegetarianbecauseiloveanimalsiamavegetarianbecauseiha
+teplants
+</pre></div>
+</div>
+</div>
+</div>
+<p>yields</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">i</span> <span class="n">am</span> <span class="ow">not</span> <span class="n">a</span> <span class="n">vegetarian</span> <span class="n">because</span> <span class="n">i</span> <span class="n">love</span> <span class="n">animals</span> <span class="n">i</span> <span class="n">am</span> <span class="n">a</span> <span class="n">vegetarian</span> <span class="n">because</span> <span class="n">i</span>
+  <span class="n">hate</span> <span class="n">plants</span>
+</pre></div>
+</div>
+</section>
+<section id="b-80167661508877723414773327201893011035745690579530127187818">
+<h4>(b) 80167661508877723414773327201893011035745690579530127187818<a class="headerlink" href="#b-80167661508877723414773327201893011035745690579530127187818" title="Link to this heading">#</a></h4>
+<p>900</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ciphertext_2b</span> <span class="o">=</span> <span class="s2">&quot;80167661508877723414773327201893011035745690579530127187818&quot;</span> <span class="o">+</span> \
+                <span class="s2">&quot;900&quot;</span>
+<span class="n">plaintext_2b</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">decipher</span><span class="p">(</span><span class="n">ciphertext_2b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">plaintext_2b</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>whydidkamikazepilotswearhelmets
+</pre></div>
+</div>
+</div>
+</div>
+<p>yields</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">why</span> <span class="n">did</span> <span class="n">kamikaze</span> <span class="n">pilots</span> <span class="n">wear</span> <span class="n">helmets</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="write-a-program-that-accepts-a-text-message-and-outputs-a-count-of-each-digraph-trigraph-quadgraph-and-quintgraph-and-don-t-pretend-you-don-t-know-what-these-terms-mean">
+<h3>4. Write a program that accepts a text message and outputs a count of each digraph, trigraph, quadgraph, and quintgraph. (And don’t pretend you don’t know what these terms mean.)<a class="headerlink" href="#write-a-program-that-accepts-a-text-message-and-outputs-a-count-of-each-digraph-trigraph-quadgraph-and-quintgraph-and-don-t-pretend-you-don-t-know-what-these-terms-mean" title="Link to this heading">#</a></h3>
+<p>We did this in <a class="reference external" href="https://dandoug.github.io/cryptomath-book/notebooks/1_6_cryptoanalysis_monoalphabetic_substitution_ciphers.html#write-a-program-that-accepts-a-text-message-and-outputs-the-frequency-of-each-letter-appearing-in-the-message">Exercises 1.6</a> but that was just for letters, digraphs and trigraphs.  We generalize the code here to take an additional parameter, <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(1 \le n \le 7\)</span>, and return as list of of maps that count the frequency of i-graphs for <span class="math notranslate nohighlight">\(i\)</span> from 1 to <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">frequency_tabulator2</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given a message, and a value of n (1 &lt;= n &lt;= 7), return a list of</span>
+<span class="sd">    dictionaries that count the frequency of i-gram for i from 1 to n.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">7</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;n must be between 1 and 7, got </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># initialize the dictionaries</span>
+    <span class="n">result</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="n">current_i_gram</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="n">strip_text</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">message</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">current_i_gram</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">current_i_gram</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">c</span><span class="p">)[</span><span class="o">-</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">):]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_i_gram</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">current_i_gram</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">current_i_gram</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The function above computes the complete frequency tables.  We choose to limit our display function to the entries that have 2 or more occurances because singleton occurrences aren’t much help for cryptoanalysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">frequencies</span> <span class="o">=</span> <span class="n">frequency_tabulator2</span><span class="p">(</span><span class="n">plaintext_2a</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">display_frequency_tables</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \begin{array}[t]{ccccc}
+\begin{array}{c|c}
+\text{Letter} &amp; \text{Frequency} \\
+\hline
+A &amp; 14 \\
+E &amp; 10 \\
+I &amp; 7 \\
+N &amp; 5 \\
+T &amp; 5 \\
+S &amp; 4 \\
+M &amp; 3 \\
+V &amp; 3 \\
+L &amp; 3 \\
+O &amp; 2 \\
+G &amp; 2 \\
+R &amp; 2 \\
+B &amp; 2 \\
+C &amp; 2 \\
+U &amp; 2 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Digraph} &amp; \text{Frequency} \\
+\hline
+IA &amp; 4 \\
+AN &amp; 4 \\
+TA &amp; 3 \\
+VE &amp; 3 \\
+AM &amp; 2 \\
+AV &amp; 2 \\
+EG &amp; 2 \\
+GE &amp; 2 \\
+ET &amp; 2 \\
+AR &amp; 2 \\
+RI &amp; 2 \\
+NB &amp; 2 \\
+BE &amp; 2 \\
+EC &amp; 2 \\
+CA &amp; 2 \\
+AU &amp; 2 \\
+US &amp; 2 \\
+SE &amp; 2 \\
+EI &amp; 2 \\
+MA &amp; 2 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Trigraph} &amp; \text{Frequency} \\
+\hline
+IAM &amp; 2 \\
+AVE &amp; 2 \\
+VEG &amp; 2 \\
+EGE &amp; 2 \\
+GET &amp; 2 \\
+ETA &amp; 2 \\
+TAR &amp; 2 \\
+ARI &amp; 2 \\
+RIA &amp; 2 \\
+IAN &amp; 2 \\
+ANB &amp; 2 \\
+NBE &amp; 2 \\
+BEC &amp; 2 \\
+ECA &amp; 2 \\
+CAU &amp; 2 \\
+AUS &amp; 2 \\
+USE &amp; 2 \\
+SEI &amp; 2 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Quadgraph} &amp; \text{Frequency} \\
+\hline
+AVEG &amp; 2 \\
+VEGE &amp; 2 \\
+EGET &amp; 2 \\
+GETA &amp; 2 \\
+ETAR &amp; 2 \\
+TARI &amp; 2 \\
+ARIA &amp; 2 \\
+RIAN &amp; 2 \\
+IANB &amp; 2 \\
+ANBE &amp; 2 \\
+NBEC &amp; 2 \\
+BECA &amp; 2 \\
+ECAU &amp; 2 \\
+CAUS &amp; 2 \\
+AUSE &amp; 2 \\
+USEI &amp; 2 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Pentagraph} &amp; \text{Frequency} \\
+\hline
+AVEGE &amp; 2 \\
+VEGET &amp; 2 \\
+EGETA &amp; 2 \\
+GETAR &amp; 2 \\
+ETARI &amp; 2 \\
+TARIA &amp; 2 \\
+ARIAN &amp; 2 \\
+RIANB &amp; 2 \\
+IANBE &amp; 2 \\
+ANBEC &amp; 2 \\
+NBECA &amp; 2 \\
+BECAU &amp; 2 \\
+ECAUS &amp; 2 \\
+CAUSE &amp; 2 \\
+AUSEI &amp; 2 \\
+\end{array}
+\end{array}\end{split}\]</div>
+</div>
+</div>
+</section>
+<section id="write-a-program-that-enciphers-and-deciphers-messages-using-the-vigenere-square-the-input-to-your-program-should-be-both-a-message-and-the-keyword">
+<h3>7. Write a program that enciphers and deciphers messages using the Vigenère Square. The input to your program should be both a message and the keyword.<a class="headerlink" href="#write-a-program-that-enciphers-and-deciphers-messages-using-the-vigenere-square-the-input-to-your-program-should-be-both-a-message-and-the-keyword" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">VigenereSq</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents a Vigenere square, used in cryptography for encoding and decoding</span>
+<span class="sd">    text with a cipher key. It houses the key and provides the functionality needed</span>
+<span class="sd">    to work with the Vigenere cipher.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Construct a VigenereSq object using the given key.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_key</span> <span class="o">=</span> <span class="n">strip_text</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="c1"># clean up the key</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_key</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;key cannot be empty&quot;</span><span class="p">)</span>
+        <span class="c1"># precompute the key shift values</span>
+        <span class="n">shifts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_key</span><span class="p">:</span>
+            <span class="n">shifts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pos</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_shifts</span> <span class="o">=</span> <span class="n">shifts</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">encipher</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plaintext</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Encode a text message using the Vigenere cipher.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">plaintext</span> <span class="o">=</span> <span class="n">strip_text</span><span class="p">(</span><span class="n">plaintext</span><span class="p">)</span>
+        <span class="n">ciphertext</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">char</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">plaintext</span><span class="p">):</span>
+            <span class="n">ciphertext</span> <span class="o">+=</span> <span class="n">char_at</span><span class="p">(</span><span class="n">pos</span><span class="p">(</span><span class="n">char</span><span class="p">)</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_shifts</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_key</span><span class="p">)])</span>
+        <span class="k">return</span> <span class="n">ciphertext</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">decipher</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ciphertext</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;&quot;</span>
+<span class="sd">        Decode a text message using the Vigenere cipher.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ciphertext</span> <span class="o">=</span> <span class="n">strip_text</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">)</span>
+        <span class="n">plaintext</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">char</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">):</span>
+            <span class="n">plaintext</span> <span class="o">+=</span> <span class="n">char_at</span><span class="p">(</span><span class="n">pos</span><span class="p">(</span><span class="n">char</span><span class="p">)</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_shifts</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_key</span><span class="p">)])</span>
+        <span class="k">return</span> <span class="n">plaintext</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="encipher-the-following-messages-using-the-vigenere-square">
+<h3>5. Encipher the following messages using the Vigenère Square:<a class="headerlink" href="#encipher-the-following-messages-using-the-vigenere-square" title="Link to this heading">#</a></h3>
+<section id="a-though-the-cold-war-has-passed-decoded-soviet-cables-have-intensified-the-long-running-debate-on-whether-the-soviet-union-employed-american-citizens-as-spies-use-keyword-venom">
+<h4>(a) Though the Cold War has passed, decoded Soviet cables have intensified the long-running debate on whether the Soviet Union employed American citizens as spies. (Use keyword venom.)<a class="headerlink" href="#a-though-the-cold-war-has-passed-decoded-soviet-cables-have-intensified-the-long-running-debate-on-whether-the-soviet-union-employed-american-citizens-as-spies-use-keyword-venom" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plaintext_5a</span> <span class="o">=</span> <span class="s2">&quot;Though the Cold War has passed, decoded Soviet cables have intensified &quot;</span> <span class="o">+</span> \
+               <span class="s2">&quot;the long-running debate on whether the Soviet Union employed American &quot;</span> <span class="o">+</span> \
+               <span class="s2">&quot;citizens as spies.&quot;</span>
+<span class="n">coder5a</span> <span class="o">=</span> <span class="n">VigenereSq</span><span class="p">(</span><span class="s2">&quot;venom&quot;</span><span class="p">)</span>
+<span class="n">ciphertext_5a</span> <span class="o">=</span> <span class="n">coder5a</span><span class="o">.</span><span class="n">encipher</span><span class="p">(</span><span class="n">plaintext_5a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">format_ciphertext</span><span class="p">(</span><span class="n">ciphertext_5a</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OLBIS CXUSO JPQKM MLNGB VWFSP YIPCP ZHFCH DIGQM WPRGT VZRWZ
+OIAGU AMRRF CIYCZ BVHBZ DRTRQ WEGSA IAUSF CIEHT ZWBJU ZXHBU
+JRRAB GSLSP VQRFU XEAQU OMMSZ NEFGB DIF
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="b-i-really-do-hope-that-molly-intercepts-this-message-stef-because-there-s-no-way-she-could-decrypt-it-use-keyword-pride">
+<h4>(b) I really do hope that Molly intercepts this message, Stef, because there’s no way she could decrypt it. (Use keyword pride.)<a class="headerlink" href="#b-i-really-do-hope-that-molly-intercepts-this-message-stef-because-there-s-no-way-she-could-decrypt-it-use-keyword-pride" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plaintext_5b</span> <span class="o">=</span> <span class="s2">&quot;I really do hope that Molly intercepts this message, Stef, because there&#39;s no &quot;</span> <span class="o">+</span> \
+               <span class="s2">&quot;way she could decrypt it.&quot;</span>
+<span class="n">coder5b</span> <span class="o">=</span> <span class="n">VigenereSq</span><span class="p">(</span><span class="s2">&quot;pride&quot;</span><span class="p">)</span>
+<span class="n">ciphertext_5b</span> <span class="o">=</span> <span class="n">coder5b</span><span class="o">.</span><span class="n">encipher</span><span class="p">(</span><span class="n">plaintext_5b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">format_ciphertext</span><span class="p">(</span><span class="n">ciphertext_5b</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XIMDP APLRL DGMWL PKURP APQQX TIKHT IJBKM HDMVW PXMVX TWJHG
+PLAHX WVZHW CFEDC HYMFS JCLGI RIGSX XK
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="decipher-the-following-messages-using-the-vigenere-square">
+<h3>6. Decipher the following messages using the Vigenère Square:<a class="headerlink" href="#decipher-the-following-messages-using-the-vigenere-square" title="Link to this heading">#</a></h3>
+<section id="a-use-keyword-gift">
+<h4>(a) (Use keyword gift.)<a class="headerlink" href="#a-use-keyword-gift" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ciphertext_6a</span> <span class="o">=</span> <span class="s2">&quot;CPJGO EFLGJ TRCMB XXMXH VWTKZ PFMLW &quot;</span> <span class="o">+</span> \
+                <span class="s2">&quot;WVNZN LZUFL SGKTS QQRPC XMKFH AGVLX &quot;</span> <span class="o">+</span> \
+                <span class="s2">&quot;JOQTT KJL&quot;</span>
+<span class="n">coder6a</span> <span class="o">=</span> <span class="n">VigenereSq</span><span class="p">(</span><span class="s2">&quot;gift&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">coder6a</span><span class="o">.</span><span class="n">decipher</span><span class="p">(</span><span class="n">ciphertext_6a</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>wheniwasaboyweweresopoorthatforchristmasmyfamilyjustexchange
+dglances
+</pre></div>
+</div>
+</div>
+</div>
+<p>yields</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">when</span> <span class="n">i</span> <span class="n">was</span> <span class="n">a</span> <span class="n">boy</span> <span class="n">we</span> <span class="n">were</span> <span class="n">so</span> <span class="n">poor</span> <span class="n">that</span> <span class="k">for</span> <span class="n">christmas</span> <span class="n">my</span> <span class="n">family</span> <span class="n">just</span>
+  <span class="n">exchanged</span> <span class="n">glances</span>
+</pre></div>
+</div>
+</section>
+<section id="b-use-keyword-dispute">
+<h4>(b) (Use keyword dispute.)<a class="headerlink" href="#b-use-keyword-dispute" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ciphertext_6b</span> <span class="o">=</span> <span class="s2">&quot;VWETW EELUL WUMXK METNA SGKGB GHROG &quot;</span> <span class="o">+</span> \
+                <span class="s2">&quot;SINKM ECLTX MSWPW ELNWV QSCZK MHLJX &quot;</span> <span class="o">+</span> \
+                <span class="s2">&quot;WAALT ZTFFO DAAHE BADAS RNNEO TQXHO &quot;</span> <span class="o">+</span> \
+                <span class="s2">&quot;IQBWS VRXKM WCAEM VPEPN AIPIL XWBEQ &quot;</span> <span class="o">+</span> \
+                <span class="s2">&quot;KZPLE IVJSQ VTKHV ACYRI DZKEL BSUBG &quot;</span> <span class="o">+</span> \
+                <span class="s2">&quot;IBXTX JDXWT XLWFD ZDEVQ KZCLA RZC&quot;</span>
+<span class="n">encoder6b</span> <span class="o">=</span> <span class="n">VigenereSq</span><span class="p">(</span><span class="s2">&quot;dispute&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">encoder6b</span><span class="o">.</span><span class="n">decipher</span><span class="p">(</span><span class="n">ciphertext_6b</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>someclaimthatthemethodcommonlyattributedtotheprussianfriedri
+chwilhelmkasiskiwasactuallyinventedbytheenglishmathematician
+charlesbabbagenineyearspriortothepublicationofkasiskiswork
+</pre></div>
+</div>
+</div>
+</div>
+<p>yields</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="n">some</span> <span class="n">claim</span> <span class="n">that</span> <span class="n">the</span> <span class="n">method</span> <span class="n">commonly</span> <span class="n">attributed</span> <span class="n">to</span> <span class="n">the</span> <span class="n">prussian</span> <span class="n">friedrich</span>
+ <span class="n">wilhelm</span> <span class="n">kasiski</span> <span class="n">was</span> <span class="n">actually</span> <span class="n">invented</span> <span class="n">by</span> <span class="n">the</span> <span class="n">english</span> <span class="n">mathematician</span>
+ <span class="n">charles</span> <span class="n">babbage</span> <span class="n">nine</span> <span class="n">years</span> <span class="n">prior</span> <span class="n">to</span> <span class="n">the</span> <span class="n">publication</span> <span class="n">of</span> <span class="n">kasiski</span> <span class="n">s</span> <span class="n">work</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="write-a-program-that-computes-the-index-of-coincidence-of-a-message-and-then-approximates-the-length-of-the-keyword">
+<h3>8. Write a program that computes the Index of Coincidence of a message and then approximates the length of the keyword.<a class="headerlink" href="#write-a-program-that-computes-the-index-of-coincidence-of-a-message-and-then-approximates-the-length-of-the-keyword" title="Link to this heading">#</a></h3>
+<p>Recall the formula</p>
+<div class="math notranslate nohighlight">
+\[
+  IC = \sum_{i=1}^{26} \frac{n_i(n_i-1)}{n(n-1)}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(n\)</span> is the number of characters in the message and <span class="math notranslate nohighlight">\(n_i\)</span> is the number of times each letter appears in message.</p>
+<p>Recall also that <span class="math notranslate nohighlight">\(r\)</span>, an approximation of the length of the keyword can be found using this formula</p>
+<div class="math notranslate nohighlight">
+\[
+  r \approx \frac{0.027n}{(n-1)IC - 0.038n +0.065}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ic</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Use the formula above to compute the Index of Coincidence of a message and</span>
+<span class="sd">    an approximation of the length of the keyword.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># First, get the letter frequencies</span>
+    <span class="n">letter_frequencies</span> <span class="o">=</span> <span class="n">frequency_tabulator2</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">chars_in_message</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">letter_frequencies</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">numerator</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">n_sub_i</span> <span class="ow">in</span> <span class="n">letter_frequencies</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="n">numerator</span> <span class="o">+=</span> <span class="n">n_sub_i</span> <span class="o">*</span> <span class="p">(</span><span class="n">n_sub_i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">i_of_c</span> <span class="o">=</span> <span class="n">numerator</span> <span class="o">/</span> <span class="p">(</span><span class="n">chars_in_message</span> <span class="o">*</span> <span class="p">(</span><span class="n">chars_in_message</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="c1"># now compute the r approximation of the length of the keyword</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.027</span> <span class="o">*</span> <span class="n">chars_in_message</span><span class="p">)</span> <span class="o">/</span> <span class="p">((</span><span class="n">chars_in_message</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">i_of_c</span> <span class="o">-</span> <span class="mf">0.038</span> <span class="o">*</span> <span class="n">chars_in_message</span> <span class="o">+</span> <span class="mf">0.065</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">i_of_c</span><span class="p">,</span> <span class="n">r</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ic</span><span class="p">(</span><span class="n">ciphertext_5a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.03827751196172249, 56.434243176179145)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <span class="math notranslate nohighlight">\(IC\)</span> correctly indicates that the encoding was polyalphabetic (since it is close to <span class="math notranslate nohighlight">\(0.038\)</span>).  However the estimated keyword length is way off (<span class="math notranslate nohighlight">\(56.4\)</span> instead of <span class="math notranslate nohighlight">\(5\)</span>).  I’m going to assume that this is because the cipher text is relatively short (only <span class="math notranslate nohighlight">\(133\)</span> characters).  Hopefully, the values yielded during the decoding examples in the next problem will be more helpful.</p>
+<p>Before moving onto the next problem, I’m going to implement another keyword length estimate using a slightly <a class="reference external" href="https://pages.mtu.edu/~shene/NSF-4/Tutorial/VIG/Vig-IOC-Len.html">different technique</a>.  Rather than solving for <span class="math notranslate nohighlight">\(r\)</span>, this technique breaks the ciphertext into groups assuming several different keyword lengths, computes the average <span class="math notranslate nohighlight">\(IC\)</span> of the groups based on that keyword length.  The length that gives an average <span class="math notranslate nohighlight">\(IC\)</span> closest to <span class="math notranslate nohighlight">\(0.065\)</span>, the <span class="math notranslate nohighlight">\(IC\)</span> of natural English, is assumed to be keyword length.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">cosets_of_size_l</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">l</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    partition a message into l cosets</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="n">strip_text</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="n">cosets</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">l</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+        <span class="n">cosets</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="n">l</span><span class="p">]</span> <span class="o">+=</span> <span class="n">c</span>
+    <span class="k">return</span> <span class="n">cosets</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ic_avg_diffent_keywod_len</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">upper_limit_len</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;&quot;</span>
+<span class="sd">    Given a message and a upper bound on the length of the keyword, return a dictionary</span>
+<span class="sd">    that contains the average IC of the cosets of the message using keyword lengths from</span>
+<span class="sd">    2 to upper_limit_len.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">upper_limit_len</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">upper_limit_len</span> <span class="o">&gt;</span> <span class="mi">24</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;upper_limit_len must be between 2 and 24, got </span><span class="si">{</span><span class="n">upper_limit_len</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="n">strip_text</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="n">answer</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">upper_limit_len</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">cosets</span> <span class="o">=</span><span class="n">cosets_of_size_l</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
+        <span class="n">ic_sum</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">coset</span> <span class="ow">in</span> <span class="n">cosets</span><span class="p">:</span>
+            <span class="n">ic_sum</span> <span class="o">+=</span> <span class="n">ic</span><span class="p">(</span><span class="n">coset</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">answer</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">l</span><span class="p">)]</span> <span class="o">=</span> <span class="n">ic_sum</span> <span class="o">/</span> <span class="n">l</span>
+    <span class="k">return</span> <span class="n">answer</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ic_avg_diffent_keywod_len</span><span class="p">(</span><span class="n">ciphertext_5a</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;2&#39;: 0.036273179556761646,
+ &#39;3&#39;: 0.03894761569180174,
+ &#39;4&#39;: 0.03459224598930481,
+ &#39;5&#39;: 0.06732763532763533,
+ &#39;6&#39;: 0.039964866051822576,
+ &#39;7&#39;: 0.034252297410192145,
+ &#39;8&#39;: 0.031127450980392157,
+ &#39;9&#39;: 0.03817663817663817,
+ &#39;10&#39;: 0.06043956043956045,
+ &#39;11&#39;: 0.03676626403899131,
+ &#39;12&#39;: 0.04040404040404041}
+</pre></div>
+</div>
+</div>
+</div>
+<p>This gives a strong indication that the keywork is length <span class="math notranslate nohighlight">\(5\)</span> since <span class="math notranslate nohighlight">\(0.0673\)</span> is much closer to <span class="math notranslate nohighlight">\(0.065\)</span> than the other values (except <span class="math notranslate nohighlight">\(10\)</span> which is a multiple of <span class="math notranslate nohighlight">\(5\)</span>).</p>
+</section>
+<section id="for-each-of-the-following-messages-enciphered-by-means-of-the-vigenere-square">
+<h3>9. For each of the following messages enciphered by means of the Vigenère Square,<a class="headerlink" href="#for-each-of-the-following-messages-enciphered-by-means-of-the-vigenere-square" title="Link to this heading">#</a></h3>
+<section id="a-perform-the-kasiski-test-to-get-an-idea-of-the-length-of-the-key-word">
+<h4>(a) Perform the Kasiski Test to get an idea of the length of the key word.<a class="headerlink" href="#a-perform-the-kasiski-test-to-get-an-idea-of-the-length-of-the-key-word" title="Link to this heading">#</a></h4>
+</section>
+<section id="b-compute-the-index-of-coincidence-to-verify-that-the-encipherment-scheme-is-polyalphabetic">
+<h4>(b) Compute the Index of Coincidence to verify that the encipherment scheme is polyalphabetic.<a class="headerlink" href="#b-compute-the-index-of-coincidence-to-verify-that-the-encipherment-scheme-is-polyalphabetic" title="Link to this heading">#</a></h4>
+</section>
+<section id="c-compute-the-approximation-to-the-keyword-s-length-using-the-index-of-coincidence">
+<h4>(c) Compute the approximation to the keyword’s length using the Index of Coincidence.<a class="headerlink" href="#c-compute-the-approximation-to-the-keyword-s-length-using-the-index-of-coincidence" title="Link to this heading">#</a></h4>
+</section>
+<section id="d-figure-out-the-keyword">
+<h4>(d) Figure out the keyword.<a class="headerlink" href="#d-figure-out-the-keyword" title="Link to this heading">#</a></h4>
+</section>
+<section id="e-decrypt-the-message-good-luck-you-ll-need-it">
+<h4>(e) Decrypt the message. Good luck. You’ll need it.<a class="headerlink" href="#e-decrypt-the-message-good-luck-you-ll-need-it" title="Link to this heading">#</a></h4>
+<p>Before diving into this, I’m going to define something to compute the distance between pairs of repeated i-grams in a cipher text (Kasiski Test) to help with keyword length estimation.  The plan is to feed a repeated i-gram detected by the tabulator above and find candidates for keyword length.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">distance_between_repeated_i_grams</span><span class="p">(</span><span class="n">i_gram</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given an i-gram and a message, return the character distances between the occurances</span>
+<span class="sd">    of that i-gram in the message.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="n">strip_text</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="n">i_gram</span> <span class="o">=</span> <span class="n">strip_text</span><span class="p">(</span><span class="n">i_gram</span><span class="p">)</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">last_start</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="n">i_gram</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">i_gram</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">i_gram</span><span class="p">)]</span> <span class="o">==</span> <span class="n">i_gram</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">last_start</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">distances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">last_start</span><span class="p">)</span>
+                <span class="n">last_start</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="n">distances</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">frequencies</span> <span class="o">=</span> <span class="n">frequency_tabulator2</span><span class="p">(</span><span class="n">ciphertext_5a</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="n">display_frequency_tables</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \begin{array}[t]{ccccccc}
+\begin{array}{c|c}
+\text{Letter} &amp; \text{Frequency} \\
+\hline
+R &amp; 9 \\
+B &amp; 8 \\
+I &amp; 8 \\
+S &amp; 8 \\
+Z &amp; 8 \\
+U &amp; 7 \\
+G &amp; 7 \\
+F &amp; 7 \\
+C &amp; 6 \\
+P &amp; 6 \\
+M &amp; 6 \\
+A &amp; 6 \\
+Q &amp; 5 \\
+W &amp; 5 \\
+H &amp; 5 \\
+O &amp; 4 \\
+V &amp; 4 \\
+E &amp; 4 \\
+L &amp; 3 \\
+X &amp; 3 \\
+J &amp; 3 \\
+D &amp; 3 \\
+T &amp; 3 \\
+N &amp; 2 \\
+Y &amp; 2 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Digraph} &amp; \text{Frequency} \\
+\hline
+FC &amp; 3 \\
+US &amp; 2 \\
+MM &amp; 2 \\
+GB &amp; 2 \\
+BV &amp; 2 \\
+SP &amp; 2 \\
+DI &amp; 2 \\
+IA &amp; 2 \\
+RR &amp; 2 \\
+RF &amp; 2 \\
+CI &amp; 2 \\
+HB &amp; 2 \\
+GS &amp; 2 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Trigraph} &amp; \text{Frequency} \\
+\hline
+FCI &amp; 2 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Quadgraph} &amp; \text{Frequency} \\
+\hline
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Pentagraph} &amp; \text{Frequency} \\
+\hline
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Hexagraph} &amp; \text{Frequency} \\
+\hline
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Septagraph} &amp; \text{Frequency} \\
+\hline
+\end{array}
+\end{array}\end{split}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">distances</span> <span class="o">=</span> <span class="n">distance_between_repeated_i_grams</span><span class="p">(</span><span class="s2">&quot;FCI&quot;</span><span class="p">,</span> <span class="n">ciphertext_5a</span><span class="p">)</span>
+<span class="n">factors</span> <span class="o">=</span> <span class="p">[</span><span class="n">format_factors</span><span class="p">(</span><span class="n">prime_factors</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">distances</span><span class="p">]</span>
+<span class="n">display_prime_factors_table</span><span class="p">(</span><span class="n">distances</span><span class="p">,</span> <span class="n">factors</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \begin{array}{c|l}
+n &amp; \text{Prime Factorization of } n \\
+\hline
+25 &amp; 5^2 \\
+\end{array}\end{split}\]</div>
+</div>
+</div>
+<p>The trigram, “FCI”, occurs twice and is <span class="math notranslate nohighlight">\(25\)</span> characters apart.  <span class="math notranslate nohighlight">\(25\)</span> is a multiple of <span class="math notranslate nohighlight">\(5\)</span> which is also the keyword length we found most likely above.</p>
+<p>Once a keyword length is obtained and the cosets creating by partitioning the ciphertext based on that key length are created.  We can perform a chi-squared analysis to determine the most likely shift (and thus keyword letter) for that coset.  Refer to <a class="reference external" href="http://practicalcryptography.com/cryptanalysis/text-characterisation/chi-squared-statistic/">this page</a> for more details.  The chi-squared calculation yields us measure of “distance” of an observed set of characters from what we would expect to find in English text.   The formula is given by</p>
+<div class="math notranslate nohighlight">
+\[
+  \chi^2(C, E) = \sum_{i=A}^{Z} \frac{(C_i - E_i)^2}{E_i}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(C_i\)</span> is the count of each letter in the coset, and <span class="math notranslate nohighlight">\(E_i\)</span> is the expected count which is given by <span class="math notranslate nohighlight">\(p_in\)</span> where <span class="math notranslate nohighlight">\(p_i\)</span> is the probability of occurance of each letter in English text and <span class="math notranslate nohighlight">\(n\)</span> is the length of the coset.  We compute this metric for each possible shift of the coset (<span class="math notranslate nohighlight">\(0\)</span>…<span class="math notranslate nohighlight">\(25\)</span>) and the one that has the lowest chi-squared distance probably corresponds to the keyword letter for the respective position.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">keyword_letter_using_chi_squared</span><span class="p">(</span><span class="n">coset</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="nb">float</span><span class="p">]]:</span>
+    <span class="n">coset</span> <span class="o">=</span> <span class="n">strip_text</span><span class="p">(</span><span class="n">coset</span><span class="p">)</span>
+    <span class="n">coset_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">coset</span><span class="p">)</span>
+    <span class="n">chi_squared_distances</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">shift</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">26</span><span class="p">):</span>
+        <span class="n">shifted_coset</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">char_at</span><span class="p">(</span><span class="n">pos</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="n">shift</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coset</span><span class="p">])</span>
+        <span class="n">shifted_coset_frequencies</span> <span class="o">=</span> <span class="n">frequency_tabulator2</span><span class="p">(</span><span class="n">shifted_coset</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">shifted_chi_squared_distance</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([((</span><span class="n">cnt</span> <span class="o">-</span> <span class="n">coset_len</span><span class="o">*</span><span class="n">LETTER_PROBABILITIES</span><span class="p">[</span><span class="n">char</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">coset_len</span><span class="o">*</span><span class="n">LETTER_PROBABILITIES</span><span class="p">[</span><span class="n">char</span><span class="p">])</span>
+                                            <span class="k">for</span> <span class="n">char</span><span class="p">,</span> <span class="n">cnt</span> <span class="ow">in</span> <span class="n">shifted_coset_frequencies</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
+        <span class="n">chi_squared_distances</span><span class="p">[</span><span class="n">char_at</span><span class="p">(</span><span class="n">shift</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">shifted_chi_squared_distance</span>
+    <span class="c1"># It&#39;s not an exact science, return the lowest 5 chi-squared distances, sorted, so we can try alternatives if the first guess is wrong</span>
+    <span class="n">sorted_pairs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">chi_squared_distances</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])[:</span><span class="mi">5</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sorted_pairs</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="message-1">
+<h4>Message 1<a class="headerlink" href="#message-1" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ciphertext_9_1</span> <span class="o">=</span> <span class="s2">&quot;PVVWA MKAZS TDUDK UJURB &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;KZPMH DYMXS KUYQZ BDSIU &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;OHFPA HVDIW EQPVV WAMNA &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;NRKTE BXEYC LXZUV FWPZF &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;YCDBH WTMPS UTKKV HAFZR &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;PVVWA MNANR ZEHCE SAFKT &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;WBKTA AVEOO XQEHJ QHTWA &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;NHYQJ HYQPS TTJWH GARVE &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;YEZNA RZZPV ZEYVR BPSIN &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;NSRWO RFIJP LFDCN OKICP &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;PKFOK FIQOD FZZSE FOFVY &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;AASQN GLODO CAJUB QUKFD &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;ZKVXH CEQSO PFKRF UPAZS &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;DHSQP CRSNS VFDOK FDSBQ &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;UKFDZ WJFDS VZPWI QPSOF &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;KTKTA RVOHO IMPWF ZKTZZ &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot; &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;ZSGQJ RVZYS FDPVV OKBJF &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;EHLFE CEANH YQIWC IWIBQ &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;AKYUP SGMCS JSAHK TAWUQ &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;W&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">frequencies</span> <span class="o">=</span> <span class="n">frequency_tabulator2</span><span class="p">(</span><span class="n">ciphertext_9_1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="n">display_frequency_tables</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \begin{array}[t]{ccccccc}
+\begin{array}{c|c}
+\text{Letter} &amp; \text{Frequency} \\
+\hline
+F &amp; 24 \\
+A &amp; 23 \\
+K &amp; 23 \\
+S &amp; 23 \\
+Z &amp; 22 \\
+P &amp; 21 \\
+V &amp; 21 \\
+W &amp; 17 \\
+H &amp; 17 \\
+Q &amp; 17 \\
+D &amp; 16 \\
+O &amp; 16 \\
+E &amp; 15 \\
+T &amp; 13 \\
+U &amp; 13 \\
+R &amp; 13 \\
+Y &amp; 12 \\
+N &amp; 12 \\
+I &amp; 11 \\
+C &amp; 11 \\
+J &amp; 10 \\
+B &amp; 10 \\
+M &amp; 8 \\
+X &amp; 5 \\
+L &amp; 4 \\
+G &amp; 4 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Digraph} &amp; \text{Frequency} \\
+\hline
+KT &amp; 7 \\
+FD &amp; 7 \\
+PV &amp; 5 \\
+PS &amp; 5 \\
+KF &amp; 5 \\
+VV &amp; 4 \\
+WA &amp; 4 \\
+ZS &amp; 4 \\
+YQ &amp; 4 \\
+QP &amp; 4 \\
+AN &amp; 4 \\
+ZZ &amp; 4 \\
+OK &amp; 4 \\
+VW &amp; 3 \\
+AM &amp; 3 \\
+ZP &amp; 3 \\
+DS &amp; 3 \\
+IW &amp; 3 \\
+NA &amp; 3 \\
+EY &amp; 3 \\
+FZ &amp; 3 \\
+EH &amp; 3 \\
+CE &amp; 3 \\
+FK &amp; 3 \\
+TA &amp; 3 \\
+HY &amp; 3 \\
+AR &amp; 3 \\
+RV &amp; 3 \\
+VZ &amp; 3 \\
+BQ &amp; 3 \\
+AZ &amp; 2 \\
+ST &amp; 2 \\
+KU &amp; 2 \\
+JU &amp; 2 \\
+RB &amp; 2 \\
+BK &amp; 2 \\
+SI &amp; 2 \\
+OH &amp; 2 \\
+PA &amp; 2 \\
+AH &amp; 2 \\
+EQ &amp; 2 \\
+MN &amp; 2 \\
+NR &amp; 2 \\
+YC &amp; 2 \\
+VF &amp; 2 \\
+MP &amp; 2 \\
+TK &amp; 2 \\
+KV &amp; 2 \\
+AF &amp; 2 \\
+RZ &amp; 2 \\
+ZE &amp; 2 \\
+HC &amp; 2 \\
+SA &amp; 2 \\
+TW &amp; 2 \\
+AA &amp; 2 \\
+VE &amp; 2 \\
+NH &amp; 2 \\
+QJ &amp; 2 \\
+NS &amp; 2 \\
+RF &amp; 2 \\
+FI &amp; 2 \\
+LF &amp; 2 \\
+FO &amp; 2 \\
+IQ &amp; 2 \\
+OD &amp; 2 \\
+OF &amp; 2 \\
+SQ &amp; 2 \\
+DO &amp; 2 \\
+QU &amp; 2 \\
+UK &amp; 2 \\
+DZ &amp; 2 \\
+ZK &amp; 2 \\
+SO &amp; 2 \\
+UP &amp; 2 \\
+SV &amp; 2 \\
+JF &amp; 2 \\
+PW &amp; 2 \\
+WI &amp; 2 \\
+VO &amp; 2 \\
+SG &amp; 2 \\
+FE &amp; 2 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Trigraph} &amp; \text{Frequency} \\
+\hline
+PVV &amp; 4 \\
+VVW &amp; 3 \\
+VWA &amp; 3 \\
+WAM &amp; 3 \\
+KTA &amp; 3 \\
+HYQ &amp; 3 \\
+KFD &amp; 3 \\
+AZS &amp; 2 \\
+AMN &amp; 2 \\
+MNA &amp; 2 \\
+NAN &amp; 2 \\
+ANR &amp; 2 \\
+HCE &amp; 2 \\
+FKT &amp; 2 \\
+ANH &amp; 2 \\
+NHY &amp; 2 \\
+QPS &amp; 2 \\
+ARV &amp; 2 \\
+OKF &amp; 2 \\
+ZZS &amp; 2 \\
+BQU &amp; 2 \\
+QUK &amp; 2 \\
+UKF &amp; 2 \\
+FDZ &amp; 2 \\
+FDS &amp; 2 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Quadgraph} &amp; \text{Frequency} \\
+\hline
+PVVW &amp; 3 \\
+VVWA &amp; 3 \\
+VWAM &amp; 3 \\
+WAMN &amp; 2 \\
+AMNA &amp; 2 \\
+MNAN &amp; 2 \\
+NANR &amp; 2 \\
+ANHY &amp; 2 \\
+NHYQ &amp; 2 \\
+BQUK &amp; 2 \\
+QUKF &amp; 2 \\
+UKFD &amp; 2 \\
+KFDZ &amp; 2 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Pentagraph} &amp; \text{Frequency} \\
+\hline
+PVVWA &amp; 3 \\
+VVWAM &amp; 3 \\
+VWAMN &amp; 2 \\
+WAMNA &amp; 2 \\
+AMNAN &amp; 2 \\
+MNANR &amp; 2 \\
+ANHYQ &amp; 2 \\
+BQUKF &amp; 2 \\
+QUKFD &amp; 2 \\
+UKFDZ &amp; 2 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Hexagraph} &amp; \text{Frequency} \\
+\hline
+PVVWAM &amp; 3 \\
+VVWAMN &amp; 2 \\
+VWAMNA &amp; 2 \\
+WAMNAN &amp; 2 \\
+AMNANR &amp; 2 \\
+BQUKFD &amp; 2 \\
+QUKFDZ &amp; 2 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Septagraph} &amp; \text{Frequency} \\
+\hline
+PVVWAMN &amp; 2 \\
+VVWAMNA &amp; 2 \\
+VWAMNAN &amp; 2 \\
+WAMNANR &amp; 2 \\
+BQUKFDZ &amp; 2 \\
+\end{array}
+\end{array}\end{split}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d1</span> <span class="o">=</span> <span class="n">distance_between_repeated_i_grams</span><span class="p">(</span><span class="s1">&#39;vvwamna&#39;</span><span class="p">,</span> <span class="n">ciphertext_9_1</span><span class="p">)</span>
+<span class="n">d2</span> <span class="o">=</span> <span class="n">distance_between_repeated_i_grams</span><span class="p">(</span><span class="s1">&#39;vwamnan&#39;</span><span class="p">,</span> <span class="n">ciphertext_9_1</span><span class="p">)</span>
+<span class="n">d3</span> <span class="o">=</span> <span class="n">distance_between_repeated_i_grams</span><span class="p">(</span><span class="s1">&#39;wamnanr&#39;</span><span class="p">,</span> <span class="n">ciphertext_9_1</span><span class="p">)</span>
+<span class="n">d4</span> <span class="o">=</span> <span class="n">distance_between_repeated_i_grams</span><span class="p">(</span><span class="s1">&#39;bqukfdz&#39;</span><span class="p">,</span> <span class="n">ciphertext_9_1</span><span class="p">)</span>
+<span class="n">distances</span> <span class="o">=</span> <span class="n">d1</span> <span class="o">+</span> <span class="n">d2</span> <span class="o">+</span> <span class="n">d3</span> <span class="o">+</span> <span class="n">d4</span>
+<span class="n">factors</span> <span class="o">=</span> <span class="p">[</span><span class="n">format_factors</span><span class="p">(</span><span class="n">prime_factors</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">distances</span><span class="p">]</span>
+<span class="n">display_prime_factors_table</span><span class="p">(</span><span class="n">distances</span><span class="p">,</span> <span class="n">factors</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \begin{array}{c|l}
+n &amp; \text{Prime Factorization of } n \\
+\hline
+48 &amp; 2^4 \cdot 3 \\
+48 &amp; 2^4 \cdot 3 \\
+48 &amp; 2^4 \cdot 3 \\
+44 &amp; 2^2 \cdot 11 \\
+\end{array}\end{split}\]</div>
+</div>
+</div>
+<p>Since the 4 repeated septgrams are separated by distances that are all multiples of <span class="math notranslate nohighlight">\(4\)</span>, this suggests a keyword length of 4.  Checking the <span class="math notranslate nohighlight">\(IC\)</span> next.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ic</span><span class="p">(</span><span class="n">ciphertext_9_1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.04220196159690565, 6.335352794081267)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <span class="math notranslate nohighlight">\(IC\)</span> is low and relatively closer to <span class="math notranslate nohighlight">\(0.038\)</span> than <span class="math notranslate nohighlight">\(0.065\)</span> which suggests a polyalphabetic encipherment.  Using the average of cosets <span class="math notranslate nohighlight">\(IC\)</span> method next to confirm <span class="math notranslate nohighlight">\(4\)</span> as a good keyword length choice.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ic_avg_diffent_keywod_len</span><span class="p">(</span><span class="n">ciphertext_9_1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;2&#39;: 0.05088564925985703,
+ &#39;3&#39;: 0.04049493813273341,
+ &#39;4&#39;: 0.06829040686823443,
+ &#39;5&#39;: 0.0427760309865573,
+ &#39;6&#39;: 0.04896046680320874,
+ &#39;7&#39;: 0.04356775300171527,
+ &#39;8&#39;: 0.07026672833795869,
+ &#39;9&#39;: 0.04065340764149613,
+ &#39;10&#39;: 0.053131268920742616}
+</pre></div>
+</div>
+</div>
+</div>
+<p>This shows that <span class="math notranslate nohighlight">\(4\)</span> (and multiples of <span class="math notranslate nohighlight">\(4\)</span>) are good keyword choices since cosets derived from that length have high <span class="math notranslate nohighlight">\(IC\)</span>’s.  Let’s divide the message into cosets based on a keyword of size 4 and compute the letter frequencies for each coset and try to determine the keyword.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cosets</span> <span class="o">=</span> <span class="n">cosets_of_size_l</span><span class="p">(</span><span class="n">ciphertext_9_1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">lets</span> <span class="o">=</span>  <span class="p">[</span><span class="n">keyword_letter_using_chi_squared</span><span class="p">(</span><span class="n">coset</span><span class="p">)</span> <span class="k">for</span> <span class="n">coset</span> <span class="ow">in</span> <span class="n">cosets</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">lets</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;w&#39;, 16.82023726145013), (&#39;h&#39;, 164.22913991201565), (&#39;m&#39;, 379.29943024997533), (&#39;c&#39;, 385.31965359602304), (&#39;v&#39;, 395.3786354653953)]
+[(&#39;o&#39;, 34.542042235258606), (&#39;a&#39;, 153.27339567391564), (&#39;h&#39;, 211.52722218442582), (&#39;q&#39;, 245.66722336520712), (&#39;e&#39;, 363.52715359660147)]
+[(&#39;r&#39;, 30.227174345159902), (&#39;x&#39;, 295.9677084580993), (&#39;d&#39;, 338.4366969446811), (&#39;e&#39;, 346.40611723303437), (&#39;h&#39;, 355.61740948834864)]
+[(&#39;m&#39;, 30.011454061271554), (&#39;z&#39;, 316.61068415902463), (&#39;s&#39;, 336.65038716442376), (&#39;y&#39;, 443.1694021480859), (&#39;q&#39;, 447.3536441390748)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">keyword_guesses</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;worm&#39;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s try some and see what we get</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">keyword_guesses</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Keyword: </span><span class="si">{</span><span class="n">keyword</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">coder</span> <span class="o">=</span> <span class="n">VigenereSq</span><span class="p">(</span><span class="n">keyword</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">coder</span><span class="o">.</span><span class="n">decipher</span><span class="p">(</span><span class="n">ciphertext_9_1</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Keyword: worm
+thekeytodecryptingapolyalphabeticcipheristodeterminethekeywo
+rdthingscouldgetabitcomplicatedhoweverifthekeywordislongerth
+anthemessageitselfforthenthetechniquedescqibedinthischapterb
+reaksdownbuthowcouldtwocorrespondentsremembersuchalongkeywor
+dwellonewaytodoitmightbetoagreethatthekeywordistheentiretext
+ofthedeclarationofindependenceortheconstitutionorthemilwauke
+ewhitepagesgettheidea
+</pre></div>
+</div>
+</div>
+</div>
+<p>yields</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">the</span> <span class="n">key</span> <span class="n">to</span> <span class="n">decrypting</span> <span class="n">a</span> <span class="n">polyalphabetic</span> <span class="n">cipher</span> <span class="ow">is</span> <span class="n">to</span> <span class="n">determine</span> <span class="n">the</span> <span class="n">keyword</span>
+    <span class="n">things</span> <span class="n">could</span> <span class="n">get</span> <span class="n">a</span> <span class="n">bit</span> <span class="n">complicated</span> <span class="n">however</span> <span class="k">if</span> <span class="n">the</span> <span class="n">keyword</span> <span class="ow">is</span> <span class="n">longer</span> <span class="n">than</span>
+    <span class="n">the</span> <span class="n">message</span> <span class="n">itself</span> <span class="k">for</span> <span class="n">then</span> <span class="n">the</span> <span class="n">technique</span> <span class="n">descqibed</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">chapter</span> <span class="n">breaks</span>
+    <span class="n">down</span> <span class="n">but</span> <span class="n">how</span> <span class="n">could</span> <span class="n">two</span> <span class="n">correspondents</span> <span class="n">remember</span> <span class="n">such</span> <span class="n">a</span> <span class="n">long</span> <span class="n">keyword</span>
+    <span class="n">well</span> <span class="n">one</span> <span class="n">way</span> <span class="n">to</span> <span class="n">do</span> <span class="n">it</span> <span class="n">might</span> <span class="n">be</span> <span class="n">to</span> <span class="n">agree</span> <span class="n">that</span> <span class="n">the</span> <span class="n">keyword</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">entire</span> <span class="n">text</span>
+    <span class="n">of</span> <span class="n">the</span> <span class="n">declaration</span> <span class="n">of</span> <span class="n">independence</span> <span class="ow">or</span> <span class="n">the</span> <span class="n">constitution</span> <span class="ow">or</span> <span class="n">the</span> <span class="n">milwaukee</span>
+    <span class="n">whitepages</span> <span class="n">get</span> <span class="n">the</span> <span class="n">idea</span>
+</pre></div>
+</div>
+</section>
+<section id="message-2">
+<h4>Message 2<a class="headerlink" href="#message-2" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ciphertext_9_2</span> <span class="o">=</span> <span class="s2">&quot;XPERG POEVO WIMPF EVOBE &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;VODLS EWMQS MJQAF LBASI &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;PAPQG OOPOR YPVVN PXOVL &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;MWQEV OFUSK GHCZY TVOFA &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;VIOLO FQBGY TDLEY HTDSO &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;DUPIM OWZTZ QEJVX THOPA &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;LYSWJ VXDLE OHOLK EFAPQ &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;MGWYF ZYTVO BEXHG TFDWA &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;ILXLW PQSZL PPJHC PXIEH &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;OOXHC AUSIK GFXZV DYHTU &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;SKGDF YIEFH OZXHG YTNLE &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;OLCPX HOHZM IARVM JKRCW &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;ITGSE OFXIL GATCI AFJIL &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;TTGYU SVEGV GELIU IPZOT &quot;</span> <span class="o">+</span> \
+                 <span class="s2">&quot;QMJYH OWAIZ ATQWS ZGEGK&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">frequencies</span> <span class="o">=</span> <span class="n">frequency_tabulator2</span><span class="p">(</span><span class="n">ciphertext_9_2</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="n">display_frequency_tables</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \begin{array}[t]{ccccccc}
+\begin{array}{c|c}
+\text{Letter} &amp; \text{Frequency} \\
+\hline
+O &amp; 26 \\
+E &amp; 18 \\
+P &amp; 17 \\
+G &amp; 16 \\
+V &amp; 16 \\
+I &amp; 16 \\
+L &amp; 16 \\
+T &amp; 15 \\
+H &amp; 14 \\
+F &amp; 13 \\
+A &amp; 13 \\
+X &amp; 12 \\
+S &amp; 12 \\
+Y &amp; 12 \\
+W &amp; 11 \\
+Z &amp; 11 \\
+Q &amp; 10 \\
+M &amp; 9 \\
+D &amp; 8 \\
+J &amp; 7 \\
+U &amp; 6 \\
+K &amp; 6 \\
+C &amp; 6 \\
+R &amp; 4 \\
+B &amp; 4 \\
+N &amp; 2 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Digraph} &amp; \text{Frequency} \\
+\hline
+VO &amp; 6 \\
+HO &amp; 6 \\
+EV &amp; 4 \\
+OF &amp; 4 \\
+US &amp; 4 \\
+YT &amp; 4 \\
+XH &amp; 4 \\
+OW &amp; 3 \\
+DL &amp; 3 \\
+MJ &amp; 3 \\
+PQ &amp; 3 \\
+PX &amp; 3 \\
+KG &amp; 3 \\
+HC &amp; 3 \\
+OL &amp; 3 \\
+GY &amp; 3 \\
+LE &amp; 3 \\
+YH &amp; 3 \\
+EO &amp; 3 \\
+IL &amp; 3 \\
+PO &amp; 2 \\
+WI &amp; 2 \\
+IM &amp; 2 \\
+OB &amp; 2 \\
+BE &amp; 2 \\
+OD &amp; 2 \\
+SE &amp; 2 \\
+QS &amp; 2 \\
+AF &amp; 2 \\
+SI &amp; 2 \\
+IP &amp; 2 \\
+PA &amp; 2 \\
+AP &amp; 2 \\
+OO &amp; 2 \\
+OP &amp; 2 \\
+QE &amp; 2 \\
+SK &amp; 2 \\
+ZY &amp; 2 \\
+TV &amp; 2 \\
+FA &amp; 2 \\
+TD &amp; 2 \\
+HT &amp; 2 \\
+JV &amp; 2 \\
+VX &amp; 2 \\
+OH &amp; 2 \\
+EF &amp; 2 \\
+QM &amp; 2 \\
+HG &amp; 2 \\
+WA &amp; 2 \\
+AI &amp; 2 \\
+SZ &amp; 2 \\
+CP &amp; 2 \\
+XI &amp; 2 \\
+IE &amp; 2 \\
+FX &amp; 2 \\
+IA &amp; 2 \\
+TG &amp; 2 \\
+AT &amp; 2 \\
+EG &amp; 2 \\
+GE &amp; 2 \\
+TQ &amp; 2 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Trigraph} &amp; \text{Frequency} \\
+\hline
+EVO &amp; 4 \\
+VOB &amp; 2 \\
+OBE &amp; 2 \\
+APQ &amp; 2 \\
+VOF &amp; 2 \\
+USK &amp; 2 \\
+SKG &amp; 2 \\
+ZYT &amp; 2 \\
+YTV &amp; 2 \\
+TVO &amp; 2 \\
+GYT &amp; 2 \\
+DLE &amp; 2 \\
+YHT &amp; 2 \\
+JVX &amp; 2 \\
+LEO &amp; 2 \\
+XHG &amp; 2 \\
+WAI &amp; 2 \\
+CPX &amp; 2 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Quadgraph} &amp; \text{Frequency} \\
+\hline
+VOBE &amp; 2 \\
+USKG &amp; 2 \\
+ZYTV &amp; 2 \\
+YTVO &amp; 2 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Pentagraph} &amp; \text{Frequency} \\
+\hline
+ZYTVO &amp; 2 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Hexagraph} &amp; \text{Frequency} \\
+\hline
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Septagraph} &amp; \text{Frequency} \\
+\hline
+\end{array}
+\end{array}\end{split}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d1</span> <span class="o">=</span> <span class="n">distance_between_repeated_i_grams</span><span class="p">(</span><span class="s1">&#39;zytvo&#39;</span><span class="p">,</span> <span class="n">ciphertext_9_2</span><span class="p">)</span>
+<span class="n">d2</span> <span class="o">=</span> <span class="n">distance_between_repeated_i_grams</span><span class="p">(</span><span class="s1">&#39;vobe&#39;</span><span class="p">,</span> <span class="n">ciphertext_9_2</span><span class="p">)</span>
+<span class="n">distances</span> <span class="o">=</span> <span class="n">d1</span> <span class="o">+</span> <span class="n">d2</span>
+<span class="n">factors</span> <span class="o">=</span> <span class="p">[</span><span class="n">format_factors</span><span class="p">(</span><span class="n">prime_factors</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">distances</span><span class="p">]</span>
+<span class="n">display_prime_factors_table</span><span class="p">(</span><span class="n">distances</span><span class="p">,</span> <span class="n">factors</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \begin{array}{c|l}
+n &amp; \text{Prime Factorization of } n \\
+\hline
+72 &amp; 2^3 \cdot 3^2 \\
+132 &amp; 2^2 \cdot 3 \cdot 11 \\
+\end{array}\end{split}\]</div>
+</div>
+</div>
+<p>This suggests a keyword of length <span class="math notranslate nohighlight">\(3\)</span>, <span class="math notranslate nohighlight">\(4\)</span>, or <span class="math notranslate nohighlight">\(6\)</span>.  Let’s do some <span class="math notranslate nohighlight">\(IC\)</span> analysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ic</span><span class="p">(</span><span class="n">ciphertext_9_2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.043299888517279825, 5.025853154084798)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Polyalphabetic and a keyword that is more likely <span class="math notranslate nohighlight">\(4\)</span> or <span class="math notranslate nohighlight">\(6\)</span>.  Let’s look at the <span class="math notranslate nohighlight">\(IC\)</span> averages for different keyword lengths.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ic_avg_diffent_keywod_len</span><span class="p">(</span><span class="n">ciphertext_9_2</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;2&#39;: 0.05114093959731544,
+ &#39;3&#39;: 0.05528619528619529,
+ &#39;4&#39;: 0.054324324324324325,
+ &#39;5&#39;: 0.043954802259887,
+ &#39;6&#39;: 0.07061224489795918,
+ &#39;7&#39;: 0.03901435787020424,
+ &#39;8&#39;: 0.054883831199620675,
+ &#39;9&#39;: 0.05158199643493762,
+ &#39;10&#39;: 0.0496551724137931,
+ &#39;11&#39;: 0.04155104155104155,
+ &#39;12&#39;: 0.07722222222222222,
+ &#39;13&#39;: 0.042515455558933817,
+ &#39;14&#39;: 0.04703153988868274}
+</pre></div>
+</div>
+</div>
+</div>
+<p>A keyword length of <span class="math notranslate nohighlight">\(6\)</span> looks like a good choice since <span class="math notranslate nohighlight">\(0.0706\)</span> is close to the value we’d look for.  Let’s see what keywords might make sense.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cosets</span> <span class="o">=</span> <span class="n">cosets_of_size_l</span><span class="p">(</span><span class="n">ciphertext_9_2</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">lets</span> <span class="o">=</span>  <span class="p">[</span><span class="n">keyword_letter_using_chi_squared</span><span class="p">(</span><span class="n">coset</span><span class="p">)</span> <span class="k">for</span> <span class="n">coset</span> <span class="ow">in</span> <span class="n">cosets</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">lets</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;b&#39;, 31.62295516391733), (&#39;x&#39;, 126.59950853488178), (&#39;m&#39;, 254.15534768162752), (&#39;v&#39;, 305.89975130391167), (&#39;t&#39;, 334.8963646566901)]
+[(&#39;l&#39;, 71.79356500060987), (&#39;w&#39;, 119.52250775722173), (&#39;x&#39;, 156.24472429446652), (&#39;y&#39;, 157.5910950844078), (&#39;r&#39;, 207.9286251761042)]
+[(&#39;e&#39;, 18.64741663821346), (&#39;k&#39;, 138.32421613117788), (&#39;d&#39;, 143.90553697642588), (&#39;u&#39;, 169.86943266389792), (&#39;p&#39;, 260.2466807606641)]
+[(&#39;a&#39;, 32.38807889439707), (&#39;m&#39;, 114.36244405037672), (&#39;x&#39;, 117.66176425779129), (&#39;c&#39;, 180.80137321696182), (&#39;t&#39;, 195.2973238427556)]
+[(&#39;c&#39;, 28.563422593564866), (&#39;o&#39;, 132.42897802089934), (&#39;s&#39;, 145.53314675283596), (&#39;d&#39;, 168.88941423259183), (&#39;v&#39;, 190.88077485266774)]
+[(&#39;h&#39;, 14.040243397097244), (&#39;a&#39;, 111.50256560556956), (&#39;u&#39;, 135.17313055007352), (&#39;e&#39;, 151.04841745256454), (&#39;n&#39;, 198.66834084170435)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Well, <code class="docutils literal notranslate"><span class="pre">bleach</span></code> jumps right out.  Let’s try that.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coder</span> <span class="o">=</span> <span class="n">VigenereSq</span><span class="p">(</span><span class="s1">&#39;bleach&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">coder</span><span class="o">.</span><span class="n">decipher</span><span class="p">(</span><span class="n">ciphertext_9_2</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>weareintroublebethatrobertsmollymadeapointofcominguptometote
+llmethejokeabouttheprimenumbersshewassoobnoxioussomehowidont
+knowhowshemanagedtofigureoutthatthemessagewaspolyalphabetica
+ndthatthekeywordwasjokeweneedanotherschemebethmaybeapolygrap
+hicschemeletsreadchapterthreeofthisbooktofindouthowtoproceed
+</pre></div>
+</div>
+</div>
+</div>
+<p>yields</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">we</span> <span class="n">are</span> <span class="ow">in</span> <span class="n">trouble</span> <span class="n">beth</span> <span class="n">at</span> <span class="n">roberts</span> <span class="n">molly</span> <span class="n">made</span> <span class="n">a</span> <span class="n">point</span> <span class="n">of</span> <span class="n">coming</span> <span class="n">up</span> <span class="n">to</span> <span class="n">me</span> <span class="n">to</span> <span class="n">tell</span>
+    <span class="n">me</span> <span class="n">the</span> <span class="n">joke</span> <span class="n">about</span> <span class="n">the</span> <span class="n">prime</span> <span class="n">numbers</span> <span class="n">she</span> <span class="n">was</span> <span class="n">so</span> <span class="n">obnoxious</span> <span class="n">somehow</span> <span class="n">i</span> <span class="n">dont</span>
+    <span class="n">know</span> <span class="n">how</span> <span class="n">she</span> <span class="n">managed</span> <span class="n">to</span> <span class="n">figure</span> <span class="n">out</span> <span class="n">that</span> <span class="n">the</span> <span class="n">message</span> <span class="n">was</span> <span class="n">polyalphabetic</span> <span class="ow">and</span>
+    <span class="n">that</span> <span class="n">the</span> <span class="n">keyword</span> <span class="n">was</span> <span class="n">joke</span> <span class="n">we</span> <span class="n">need</span> <span class="n">another</span> <span class="n">scheme</span> <span class="n">beth</span> <span class="n">maybe</span> <span class="n">a</span> <span class="n">polygraphic</span>
+    <span class="n">scheme</span> <span class="n">lets</span> <span class="n">read</span> <span class="n">chapter</span> <span class="n">three</span> <span class="n">of</span> <span class="n">this</span> <span class="n">book</span> <span class="n">to</span> <span class="n">find</span> <span class="n">out</span> <span class="n">how</span> <span class="n">to</span> <span class="n">proceed</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../markdown/2_4_independent_events_expected_number.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">2.4 Independent Events and Expected Number</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="3_1_elementary_polygraphic_substitution_ciphers.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">3.1 Elementary Polygraphic Substitution Ciphers</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-2-5">Exercises 2.5</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-program-to-encipher-and-decipher-messages-by-means-of-the-letter-number-scheme-appearing-in-table-2-1">3. Write a program to encipher and decipher messages by means of the Letter-Number scheme appearing in Table 2.1.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-letter-number-scheme-appearing-in-table-2-1-encipher-each-of-the-following-messages">1. Using the Letter-Number scheme appearing in Table 2.1, encipher each of the following messages:</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-why-is-it-that-when-we-talk-to-god-we-are-praying-but-when-god-talks-to-us-we-are-schizophrenic">(a) Why is it that when we talk to god we are praying, but when god talks to us we are schizophrenic?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-my-grandmother-started-walking-five-miles-a-day-when-she-was-sixty-she-s-ninety-seven-today-and-we-don-t-know-where-she-is">(b) My grandmother started walking five miles a day when she was sixty. She’s ninety-seven today and we don’t know where she is.</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-letter-number-scheme-appearing-in-table-2-1-decipher-each-of-the-following-messages">2. Using the Letter-Number scheme appearing in Table 2.1, decipher each of the following messages:</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-50378706411991441253083896254555492420391532006473011044857">(a) 50378706411991441253083896254555492420391532006473011044857</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-80167661508877723414773327201893011035745690579530127187818">(b) 80167661508877723414773327201893011035745690579530127187818</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-program-that-accepts-a-text-message-and-outputs-a-count-of-each-digraph-trigraph-quadgraph-and-quintgraph-and-don-t-pretend-you-don-t-know-what-these-terms-mean">4. Write a program that accepts a text message and outputs a count of each digraph, trigraph, quadgraph, and quintgraph. (And don’t pretend you don’t know what these terms mean.)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-program-that-enciphers-and-deciphers-messages-using-the-vigenere-square-the-input-to-your-program-should-be-both-a-message-and-the-keyword">7. Write a program that enciphers and deciphers messages using the Vigenère Square. The input to your program should be both a message and the keyword.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encipher-the-following-messages-using-the-vigenere-square">5. Encipher the following messages using the Vigenère Square:</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-though-the-cold-war-has-passed-decoded-soviet-cables-have-intensified-the-long-running-debate-on-whether-the-soviet-union-employed-american-citizens-as-spies-use-keyword-venom">(a) Though the Cold War has passed, decoded Soviet cables have intensified the long-running debate on whether the Soviet Union employed American citizens as spies. (Use keyword venom.)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-i-really-do-hope-that-molly-intercepts-this-message-stef-because-there-s-no-way-she-could-decrypt-it-use-keyword-pride">(b) I really do hope that Molly intercepts this message, Stef, because there’s no way she could decrypt it. (Use keyword pride.)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decipher-the-following-messages-using-the-vigenere-square">6. Decipher the following messages using the Vigenère Square:</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-use-keyword-gift">(a) (Use keyword gift.)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-use-keyword-dispute">(b) (Use keyword dispute.)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-program-that-computes-the-index-of-coincidence-of-a-message-and-then-approximates-the-length-of-the-keyword">8. Write a program that computes the Index of Coincidence of a message and then approximates the length of the keyword.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-each-of-the-following-messages-enciphered-by-means-of-the-vigenere-square">9. For each of the following messages enciphered by means of the Vigenère Square,</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-perform-the-kasiski-test-to-get-an-idea-of-the-length-of-the-key-word">(a) Perform the Kasiski Test to get an idea of the length of the key word.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-compute-the-index-of-coincidence-to-verify-that-the-encipherment-scheme-is-polyalphabetic">(b) Compute the Index of Coincidence to verify that the encipherment scheme is polyalphabetic.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-compute-the-approximation-to-the-keyword-s-length-using-the-index-of-coincidence">(c) Compute the approximation to the keyword’s length using the Index of Coincidence.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-figure-out-the-keyword">(d) Figure out the keyword.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-decrypt-the-message-good-luck-you-ll-need-it">(e) Decrypt the message. Good luck. You’ll need it.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#message-1">Message 1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#message-2">Message 2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Dan Douglas
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

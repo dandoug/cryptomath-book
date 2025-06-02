@@ -1,0 +1,1800 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1.6 Cryptoanalysis of Monoalphabetic Substitution Ciphers &#8212; Cryptological Mathematics Exercises</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/crypto-book.css?v=761dc443" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/1_6_cryptoanalysis_monoalphabetic_substitution_ciphers';</script>
+    <script src="../_static/sidebar-togle.js?v=2b3ca58f"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.1 The Multiplication Principle" href="../markdown/2_1_multiplication_principle.html" />
+    <link rel="prev" title="1.5 Simple Ciphers" href="1_5_simple_ciphers.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../markdown/intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Cryptological Mathematics Exercises</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../markdown/intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Monoalphabetic Substitution Ciphers</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/1_1_induction.html">1.1 Induction Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_2_primes_gcd.html">1.2 Prime Numbers, Division Algorithm, Greatest Common Divisor Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_3_relative_primes.html">1.3 Relatively Prime Integers, Fundamental Theorem of Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_4_modular_arithmatic.html">1.4 Modular Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_5_simple_ciphers.html">1.5 Simple Ciphers</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1.6 Cryptoanalysis of Monoalphabetic Substitution Ciphers</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Polyalphabetic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_1_multiplication_principle.html">2.1 The Multiplication Principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_2_permutations_and_combinations.html">2.2 Permutations and Combinations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_3_probability.html">2.3 Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_4_independent_events_expected_number.html">2.4 Independent Events and Expected Number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_5_disguising_the_frequencies.html">2.5 Disguising the Frequencies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Polygraphic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3_1_elementary_polygraphic_substitution_ciphers.html">3.1 Elementary Polygraphic Substitution Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_2_elementary_matrix_theory.html">3.2 Elementary Matrix Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_3_hills_system.html">3.3 Hill’s System</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Public Key Cryptography</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="4_1_more_number_theory.html">4.1 More Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_2_rsa_algorithm.html">4.2 The RSA Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_3_two_examples.html">4.3 Two Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_4_other_pk_cryptography.html">4.4 Other Illustrations of Public Key Cryptography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/1_6_cryptoanalysis_monoalphabetic_substitution_ciphers.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1.6 Cryptoanalysis of Monoalphabetic Substitution Ciphers</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-1-6">Exercises 1.6</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-program-that-accepts-a-text-message-and-outputs-the-frequency-of-each-letter-appearing-in-the-message">7. Write a program that accepts a text message and outputs the frequency of each letter appearing in the message.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decipher-the-following-message">1. Decipher the following message.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2. Decipher the following message.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3. Decipher the following message.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">4. Decipher the following message.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">5. Decipher the following message.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">6. Decipher the following message.</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="cryptoanalysis-of-monoalphabetic-substitution-ciphers">
+<h1>1.6 Cryptoanalysis of Monoalphabetic Substitution Ciphers<a class="headerlink" href="#cryptoanalysis-of-monoalphabetic-substitution-ciphers" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="o">%</span><span class="n">run</span> <span class="o">./</span><span class="mi">1_5</span><span class="n">_simple_ciphers</span><span class="o">.</span><span class="n">ipynb</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">display_fequency_tables</span><span class="p">,</span> <span class="n">reverse_mult_key</span><span class="p">,</span> <span class="n">reverse_add_key</span><span class="p">,</span> <span class="n">mod_26</span><span class="p">,</span> <span class="n">build_guesses</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="exercises-1-6">
+<h2>Exercises 1.6<a class="headerlink" href="#exercises-1-6" title="Link to this heading">#</a></h2>
+<p>Some lists and utility classes to simplify the ciphertext cracking below.  Helper functions are in <a class="reference external" href="https://github.com/dandoug/cryptomath-book/blob/main/src/helpers.py">helpers.py</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># top occurring letters and digraphs in English plaintext, used to construct guesses below.  These lists were long enough</span>
+<span class="c1"># to solve the exercises here.  You may find you need longer lists for your own problems.</span>
+<span class="n">top_digraphs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;th&#39;</span><span class="p">,</span> <span class="s1">&#39;er&#39;</span><span class="p">,</span> <span class="s1">&#39;on&#39;</span><span class="p">,</span> <span class="s1">&#39;an&#39;</span><span class="p">,</span> <span class="s1">&#39;re&#39;</span><span class="p">,</span> <span class="s1">&#39;he&#39;</span><span class="p">,</span> <span class="s1">&#39;in&#39;</span><span class="p">]</span>
+<span class="n">top_letters</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CrackAdditiveCipher</span><span class="p">(</span><span class="n">AdditiveCipher</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A CrackAdditiveCipher is a subclass of AdditiveCipher that takes a tuple of two</span>
+<span class="sd">    characters as the &quot;key&quot;.  These are assumed to be a plaintext letter and the</span>
+<span class="sd">    corresponding ciphertext character, example (&#39;e&#39;, &#39;Z&#39;)</span>
+<span class="sd">    In an AdditiveCipher, the key can be computed from that information.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tuple_guess</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]):</span>
+        <span class="n">add_key</span> <span class="o">=</span> <span class="n">reverse_add_key</span><span class="p">(</span><span class="n">plain_char</span><span class="o">=</span><span class="n">tuple_guess</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cipher_char</span><span class="o">=</span><span class="n">tuple_guess</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">add_key</span><span class="o">=</span><span class="n">add_key</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">key</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_key</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CrackMultiplicativeCipher</span><span class="p">(</span><span class="n">MultiplicativeCipher</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A CrackMultiplicativeCipher is a subclass of MultiplicativeCipher that takes a tuple of two</span>
+<span class="sd">    characters as the &quot;key&quot;.  These are assumed to be a plaintext letter and the</span>
+<span class="sd">    corresponding ciphertext character, example (&#39;e&#39;, &#39;Z&#39;)</span>
+<span class="sd">    In an MultiplicativeCipher, the key can be computed from that information.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tuple_guess</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :raise ValueError if no key can be found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mult_key</span> <span class="o">=</span> <span class="n">reverse_mult_key</span><span class="p">(</span><span class="n">plain_char</span><span class="o">=</span><span class="n">tuple_guess</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cipher_char</span><span class="o">=</span><span class="n">tuple_guess</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">mult_key</span><span class="o">=</span><span class="n">mult_key</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">key</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mult_key</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CrackAffineCipher</span><span class="p">(</span><span class="n">AffineCipher</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A CrackAffineCipher is a subclass of AffineCipher that takes two tuples of (plaintext letter, ciphertext letter) pairs</span>
+<span class="sd">    and solves for the multiplicative and additive keys necessary to produce the given characters if a solution exists.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tuple_guesses</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param tuple_guesses: example ((&#39;e&#39;, &#39;Z&#39;), (&#39;t&#39;, &#39;J&#39;))</span>
+<span class="sd">        :raise ValueError if no keys can be found for the given guesses.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">p1</span> <span class="o">=</span> <span class="n">pos</span><span class="p">(</span><span class="n">tuple_guesses</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">c1</span> <span class="o">=</span> <span class="n">pos</span><span class="p">(</span><span class="n">tuple_guesses</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">p2</span> <span class="o">=</span> <span class="n">pos</span><span class="p">(</span><span class="n">tuple_guesses</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">c2</span> <span class="o">=</span> <span class="n">pos</span><span class="p">(</span><span class="n">tuple_guesses</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">mult_key</span> <span class="o">=</span> <span class="n">mod_26</span><span class="p">((</span><span class="n">c1</span> <span class="o">-</span> <span class="n">c2</span><span class="p">)</span> <span class="o">*</span> <span class="n">inv_26</span><span class="p">(</span><span class="n">mod_26</span><span class="p">(</span><span class="n">p1</span> <span class="o">-</span> <span class="n">p2</span><span class="p">)))</span>
+        <span class="n">add_key</span> <span class="o">=</span> <span class="n">mod_26</span><span class="p">((</span><span class="n">c1</span> <span class="o">-</span> <span class="n">mult_key</span> <span class="o">*</span> <span class="n">p1</span><span class="p">)</span> <span class="o">*</span> <span class="n">inv_26</span><span class="p">(</span><span class="n">mult_key</span><span class="p">))</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">mult_key</span><span class="o">=</span><span class="n">mult_key</span><span class="p">,</span> <span class="n">add_key</span><span class="o">=</span><span class="n">add_key</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">mult_key</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mult_key</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_key</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_key</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Question 7. done first so that the frequency analsysis program will be available to use with the other problems.</p>
+<section id="write-a-program-that-accepts-a-text-message-and-outputs-the-frequency-of-each-letter-appearing-in-the-message">
+<h3>7. Write a program that accepts a text message and outputs the frequency of each letter appearing in the message.<a class="headerlink" href="#write-a-program-that-accepts-a-text-message-and-outputs-the-frequency-of-each-letter-appearing-in-the-message" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">frequency_tabulator</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given a message, return the feequency of each letter appearing in the message, each</span>
+<span class="sd">    diagraph and each trigraph.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">letter_counts</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">diagram_counts</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">trigraph_counts</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">current_digraph</span> <span class="o">=</span> <span class="n">current_trigraph</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="n">strip_text</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">message</span><span class="p">:</span>
+        <span class="n">current_letter</span> <span class="o">=</span> <span class="n">c</span>
+        <span class="n">current_digraph</span> <span class="o">=</span> <span class="p">(</span><span class="n">current_digraph</span> <span class="o">+</span> <span class="n">c</span><span class="p">)[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span>
+        <span class="n">current_trigraph</span> <span class="o">=</span> <span class="p">(</span><span class="n">current_trigraph</span> <span class="o">+</span> <span class="n">c</span><span class="p">)[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span>
+        <span class="n">letter_counts</span><span class="p">[</span><span class="n">current_letter</span><span class="p">]</span> <span class="o">=</span> <span class="n">letter_counts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">current_letter</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_digraph</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">diagram_counts</span><span class="p">[</span><span class="n">current_digraph</span><span class="p">]</span> <span class="o">=</span> <span class="n">diagram_counts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">current_digraph</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_trigraph</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">trigraph_counts</span><span class="p">[</span><span class="n">current_trigraph</span><span class="p">]</span> <span class="o">=</span> <span class="n">trigraph_counts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">current_trigraph</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">letter_counts</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)),</span>
+        <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">diagram_counts</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)),</span>
+        <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">trigraph_counts</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="decipher-the-following-message">
+<h3>1. Decipher the following message.<a class="headerlink" href="#decipher-the-following-message" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">msg1</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;KFM YGV VEM VHK AWK YZK FWG RKF MSJ JZG XOJ MEM DJZ MAM SCJ &quot;</span> <span class="o">+</span>
+    <span class="s2">&quot;GKF EJK TSF GJI STM ZSW MKF MEJ KBS XGJ SFH PMJ JIK FME JKR MSZ&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">letters</span><span class="p">,</span> <span class="n">digraphs</span><span class="p">,</span> <span class="n">trigraphs</span> <span class="o">=</span> <span class="n">frequency_tabulator</span><span class="p">(</span><span class="n">msg1</span><span class="p">)</span>
+<span class="n">display_fequency_tables</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="n">digraphs</span><span class="p">,</span> <span class="n">trigraphs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \begin{array}[t]{ccc}
+\begin{array}{c|c}
+\text{Letter} &amp; \text{Frequency} \\
+\hline
+M &amp; 13 \\
+J &amp; 12 \\
+K &amp; 11 \\
+F &amp; 8 \\
+S &amp; 8 \\
+G &amp; 6 \\
+E &amp; 5 \\
+Z &amp; 5 \\
+V &amp; 3 \\
+W &amp; 3 \\
+Y &amp; 2 \\
+H &amp; 2 \\
+A &amp; 2 \\
+R &amp; 2 \\
+X &amp; 2 \\
+T &amp; 2 \\
+I &amp; 2 \\
+O &amp; 1 \\
+D &amp; 1 \\
+C &amp; 1 \\
+B &amp; 1 \\
+P &amp; 1 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Digraph} &amp; \text{Frequency} \\
+\hline
+KF &amp; 6 \\
+FM &amp; 4 \\
+MS &amp; 3 \\
+ME &amp; 3 \\
+EJ &amp; 3 \\
+JK &amp; 3 \\
+EM &amp; 2 \\
+JJ &amp; 2 \\
+JZ &amp; 2 \\
+SF &amp; 2 \\
+GJ &amp; 2 \\
+JI &amp; 2 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Trigraph} &amp; \text{Frequency} \\
+\hline
+KFM &amp; 4 \\
+EJK &amp; 3 \\
+FME &amp; 2 \\
+MEJ &amp; 2 \\
+\end{array}
+\end{array}\end{split}\]</div>
+</div>
+</div>
+<p>First, try the top additive ciphers that might make sense by taking to top occurring ciphertext letters and pairing them with the top occurring plaintext letters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build a set of single letter guesses and the top occurring ciphertext letters</span>
+<span class="n">guesses</span> <span class="o">=</span> <span class="n">build_guesses</span><span class="p">(</span><span class="n">top_letters</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">letters</span><span class="o">.</span><span class="n">keys</span><span class="p">())[:</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">guesses</span><span class="p">:</span>
+    <span class="n">crack</span> <span class="o">=</span> <span class="n">CrackAdditiveCipher</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Trying an additive cipher derived from guess=</span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2"> with key=</span><span class="si">{</span><span class="n">crack</span><span class="o">.</span><span class="n">key</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plaintext</span> <span class="o">=</span> <span class="n">crack</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">msg1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">plaintext</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying an additive cipher derived from guess=(&#39;e&#39;, &#39;M&#39;) with key=8
+cxeqynnwenzcsocqrcxoyjcxekbbrypgbewevbresekubycxwbclkxybakle
+rkoecxewbctkpybkxzhebbacxewbcjekr
+
+Trying an additive cipher derived from guess=(&#39;e&#39;, &#39;J&#39;) with key=5
+fahtbqqzhqcfvrftufarbmfahneeubsjehzhyeuhvhnxebfazefonabednoh
+unrhfahzefwnsbenackheedfahzefmhnu
+
+Trying an additive cipher derived from guess=(&#39;e&#39;, &#39;K&#39;) with key=6
+ezgsappygpbeuqestezqalezgmddtaridgygxdtgugmwdaezydenmzadcmng
+tmqgezgydevmradmzbjgddcezgydelgmt
+
+Trying an additive cipher derived from guess=(&#39;t&#39;, &#39;M&#39;) with key=19
+rmtfnccltcorhdrfgrmdnyrmtzqqgnevqtltkqgthtzjqnrmlqrazmnqpzat
+gzdtrmtlqrizenqzmowtqqprmtlqrytzg
+
+Trying an additive cipher derived from guess=(&#39;t&#39;, &#39;J&#39;) with key=16
+upwiqffowfrukguijupgqbupwcttjqhytwowntjwkwcmtqupotudcpqtscdw
+jcgwupwotulchqtcprzwttsupwotubwcj
+
+Trying an additive cipher derived from guess=(&#39;t&#39;, &#39;K&#39;) with key=17
+tovhpeenveqtjfthitofpatovbssipgxsvnvmsivjvblsptonstcbopsrbcv
+ibfvtovnstkbgpsboqyvssrtovnstavbi
+
+Trying an additive cipher derived from guess=(&#39;a&#39;, &#39;M&#39;) with key=12
+ytamujjsajvyokymnytkufytagxxnulcxasarxnaoagqxuytsxyhgtuxwgha
+ngkaytasxypgluxgtvdaxxwytasxyfagn
+
+Trying an additive cipher derived from guess=(&#39;a&#39;, &#39;J&#39;) with key=9
+bwdpxmmvdmybrnbpqbwnxibwdjaaqxofadvduaqdrdjtaxbwvabkjwxazjkd
+qjndbwdvabsjoxajwygdaazbwdvabidjq
+
+Trying an additive cipher derived from guess=(&#39;a&#39;, &#39;K&#39;) with key=10
+avcowlluclxaqmaopavmwhavcizzpwnezcuctzpcqciszwavuzajivwzyijc
+pimcavcuzarinwzivxfczzyavcuzahcip
+</pre></div>
+</div>
+</div>
+</div>
+<p>Those didn’t work.  Let’s see if any of those guesses make a good multiplicative cipher.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">guesses</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">crack</span> <span class="o">=</span> <span class="n">CrackMultiplicativeCipher</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Trying an multiplicative cipher derived from guess=</span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2"> with key=</span><span class="si">{</span><span class="n">crack</span><span class="o">.</span><span class="n">key</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">plaintext</span> <span class="o">=</span> <span class="n">crack</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">msg1</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">plaintext</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Guess: </span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2"> is not valid for multiplicative key&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Guess: (&#39;e&#39;, &#39;M&#39;) is not valid for multiplicative key
+
+Guess: (&#39;e&#39;, &#39;J&#39;) is not valid for multiplicative key
+
+Trying an multiplicative cipher derived from guess=(&#39;e&#39;, &#39;K&#39;) with key=23
+exmiojjgmjfeqaeizexaotexmknnzorunmgmpnzmqmkynoexgnebkxonwkbm
+zkamexmgnehkronkxflmnnwexmgnetmkz
+
+Guess: (&#39;t&#39;, &#39;M&#39;) is not valid for multiplicative key
+
+Trying an multiplicative cipher derived from guess=(&#39;t&#39;, &#39;J&#39;) with key=7
+ilmkarrwmrpiogikzilgajilmyttzavqtmwmhtzmomystailwtinylateynm
+zygmilmwtidyvatylpfmtteilmwtijmyz
+
+Guess: (&#39;t&#39;, &#39;K&#39;) is not valid for multiplicative key
+
+Guess: (&#39;a&#39;, &#39;M&#39;) is not valid for multiplicative key
+
+Guess: (&#39;a&#39;, &#39;J&#39;) is not valid for multiplicative key
+
+Trying an multiplicative cipher derived from guess=(&#39;a&#39;, &#39;K&#39;) with key=11
+ajmgcbbqmbvasuagzajucdajmwhhzcnyhmqmxhzmsmwehcajqhapwjchowpm
+zwumajmqhalwnchwjvrmhhoajmqhadmwz
+</pre></div>
+</div>
+</div>
+</div>
+<p>So, none of those choices for additive or multiplicative ciphers yielded results.  Let’s try affine ciphers with the top digraphs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">guesses</span> <span class="o">=</span> <span class="n">build_guesses</span><span class="p">(</span><span class="n">top_digraphs</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">digraphs</span><span class="o">.</span><span class="n">keys</span><span class="p">())[:</span><span class="mi">3</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">guesses</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">crack</span> <span class="o">=</span> <span class="n">CrackAffineCipher</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Trying possible solution </span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2">: mult_key:</span><span class="si">{</span><span class="n">crack</span><span class="o">.</span><span class="n">mult_key</span><span class="p">()</span><span class="si">}</span><span class="s2">  add_key:</span><span class="si">{</span><span class="n">crack</span><span class="o">.</span><span class="n">add_key</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">plaintext</span> <span class="o">=</span> <span class="n">crack</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">msg1</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">plaintext</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2"> not a possible solution&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;t&#39;, &#39;K&#39;), (&#39;h&#39;, &#39;F&#39;)) not a possible solution
+
+((&#39;t&#39;, &#39;F&#39;), (&#39;h&#39;, &#39;M&#39;)) not a possible solution
+
+((&#39;t&#39;, &#39;M&#39;), (&#39;h&#39;, &#39;S&#39;)) not a possible solution
+
+((&#39;e&#39;, &#39;K&#39;), (&#39;r&#39;, &#39;F&#39;)) not a possible solution
+
+((&#39;e&#39;, &#39;F&#39;), (&#39;r&#39;, &#39;M&#39;)) not a possible solution
+
+((&#39;e&#39;, &#39;M&#39;), (&#39;r&#39;, &#39;S&#39;)) not a possible solution
+
+Trying possible solution ((&#39;o&#39;, &#39;K&#39;), (&#39;n&#39;, &#39;F&#39;)): mult_key:5  add_key:8
+onewillseldomgowrongifoneattributesextremeactionstovanityave
+rageonestohabitandpettyonestofear
+
+Trying possible solution ((&#39;o&#39;, &#39;F&#39;), (&#39;n&#39;, &#39;M&#39;)): mult_key:19  add_key:25
+ronpziidnikrltrparotzqronbggazejgndnsganlnbhgzrodgrmbozgvbmn
+abtnrondgrwbezgbokunggvrondgrqnba
+
+((&#39;o&#39;, &#39;M&#39;), (&#39;n&#39;, &#39;S&#39;)) not a possible solution
+
+((&#39;a&#39;, &#39;K&#39;), (&#39;n&#39;, &#39;F&#39;)) not a possible solution
+
+((&#39;a&#39;, &#39;F&#39;), (&#39;n&#39;, &#39;M&#39;)) not a possible solution
+
+((&#39;a&#39;, &#39;M&#39;), (&#39;n&#39;, &#39;S&#39;)) not a possible solution
+
+((&#39;r&#39;, &#39;K&#39;), (&#39;e&#39;, &#39;F&#39;)) not a possible solution
+
+((&#39;r&#39;, &#39;F&#39;), (&#39;e&#39;, &#39;M&#39;)) not a possible solution
+
+((&#39;r&#39;, &#39;M&#39;), (&#39;e&#39;, &#39;S&#39;)) not a possible solution
+
+Trying possible solution ((&#39;h&#39;, &#39;K&#39;), (&#39;e&#39;, &#39;F&#39;)): mult_key:19  add_key:9
+hedfpyytdyahbjhfqhejpghedrwwqpuzwdtdiwqdbdrxwphetwhcrepwlrcd
+qrjdhedtwhmrupwreakdwwlhedtwhgdrq
+
+Trying possible solution ((&#39;h&#39;, &#39;F&#39;), (&#39;e&#39;, &#39;M&#39;)): mult_key:15  add_key:8
+qhekoppaepvqywqkrqhwonqheujjrodsjeaetjreyeumjoqhajqbuhojcube
+ruweqheajqfudojuhvzejjcqheajqneur
+
+((&#39;h&#39;, &#39;M&#39;), (&#39;e&#39;, &#39;S&#39;)) not a possible solution
+
+Trying possible solution ((&#39;i&#39;, &#39;K&#39;), (&#39;n&#39;, &#39;F&#39;)): mult_key:25  add_key:6
+ingumxxogxliswiutinwmbingajjtmvejgogpjtgsgaqjminojizanmjkazg
+tawgingojiravmjanldgjjkingojibgat
+
+Trying possible solution ((&#39;i&#39;, &#39;F&#39;), (&#39;n&#39;, &#39;M&#39;)): mult_key:17  add_key:25
+tindfmmlnmctxjtdatijfytinvwwafghwnlnowanxnvrwftilwtsvifwzvsn
+avjntinlwtuvgfwvicenwwztinlwtynva
+
+((&#39;i&#39;, &#39;M&#39;), (&#39;n&#39;, &#39;S&#39;)) not a possible solution
+</pre></div>
+</div>
+</div>
+</div>
+<p>An <strong>AffineCipher</strong> using guess <code class="docutils literal notranslate"><span class="pre">(('o',</span> <span class="pre">'K'),</span> <span class="pre">('n',</span> <span class="pre">'F')):</span> <span class="pre">mult_key:5</span>&#160; <span class="pre">add_key:8</span></code> yielded a good result:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">one</span> <span class="n">will</span> <span class="n">seldom</span> <span class="n">go</span> <span class="n">wrong</span> <span class="k">if</span> <span class="n">one</span> <span class="n">attributes</span> <span class="n">extreme</span> <span class="n">actions</span> <span class="n">to</span> <span class="n">vanity</span> <span class="n">average</span>
+<span class="n">ones</span> <span class="n">to</span> <span class="n">habit</span> <span class="ow">and</span> <span class="n">petty</span> <span class="n">ones</span> <span class="n">to</span> <span class="n">fear</span>
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h3>2. Decipher the following message.<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">msg2</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;XTS OCZ SIV JPI FCS XQE BEA SIV YIP SOF ICO SJR QYC VJJ SNS VJE VXT &quot;</span> <span class="o">+</span>
+    <span class="s2">&quot;FSS BIA XEF OXT SPS DEA CXQ EBX TSY CVJ XTS JCO XIV ASC XRD EYO IAF &quot;</span> <span class="o">+</span>
+    <span class="s2">&quot;EOO XTS YIX SFX TSD SVK XTE BXC MSC XRD EYO&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">letters</span><span class="p">,</span> <span class="n">digraphs</span><span class="p">,</span> <span class="n">trigraphs</span> <span class="o">=</span> <span class="n">frequency_tabulator</span><span class="p">(</span><span class="n">msg2</span><span class="p">)</span>
+<span class="n">display_fequency_tables</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="n">digraphs</span><span class="p">,</span> <span class="n">trigraphs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \begin{array}[t]{ccc}
+\begin{array}{c|c}
+\text{Letter} &amp; \text{Frequency} \\
+\hline
+S &amp; 20 \\
+X &amp; 16 \\
+C &amp; 10 \\
+E &amp; 10 \\
+O &amp; 9 \\
+I &amp; 9 \\
+T &amp; 8 \\
+V &amp; 8 \\
+J &amp; 7 \\
+F &amp; 6 \\
+Y &amp; 6 \\
+A &amp; 5 \\
+B &amp; 4 \\
+D &amp; 4 \\
+P &amp; 3 \\
+Q &amp; 3 \\
+R &amp; 3 \\
+Z &amp; 1 \\
+N &amp; 1 \\
+K &amp; 1 \\
+M &amp; 1 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Digraph} &amp; \text{Frequency} \\
+\hline
+XT &amp; 8 \\
+TS &amp; 6 \\
+VJ &amp; 4 \\
+IV &amp; 3 \\
+EB &amp; 3 \\
+OX &amp; 3 \\
+DE &amp; 3 \\
+CX &amp; 3 \\
+SO &amp; 2 \\
+SI &amp; 2 \\
+XQ &amp; 2 \\
+QE &amp; 2 \\
+EA &amp; 2 \\
+AS &amp; 2 \\
+YI &amp; 2 \\
+PS &amp; 2 \\
+CO &amp; 2 \\
+SJ &amp; 2 \\
+YC &amp; 2 \\
+CV &amp; 2 \\
+SV &amp; 2 \\
+IA &amp; 2 \\
+SD &amp; 2 \\
+BX &amp; 2 \\
+SY &amp; 2 \\
+SC &amp; 2 \\
+XR &amp; 2 \\
+RD &amp; 2 \\
+EY &amp; 2 \\
+YO &amp; 2 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Trigraph} &amp; \text{Frequency} \\
+\hline
+XTS &amp; 6 \\
+SIV &amp; 2 \\
+XQE &amp; 2 \\
+QEB &amp; 2 \\
+YCV &amp; 2 \\
+CVJ &amp; 2 \\
+OXT &amp; 2 \\
+EBX &amp; 2 \\
+TSY &amp; 2 \\
+SCX &amp; 2 \\
+CXR &amp; 2 \\
+XRD &amp; 2 \\
+RDE &amp; 2 \\
+DEY &amp; 2 \\
+EYO &amp; 2 \\
+\end{array}
+\end{array}\end{split}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build a set of single letter guesses and the top 4 occurring ciphertext letters</span>
+<span class="n">guesses</span> <span class="o">=</span> <span class="n">build_guesses</span><span class="p">(</span><span class="n">top_letters</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">letters</span><span class="o">.</span><span class="n">keys</span><span class="p">())[:</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">guesses</span><span class="p">:</span>
+    <span class="n">crack</span> <span class="o">=</span> <span class="n">CrackAdditiveCipher</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Trying an additive cipher derived from guess=</span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2"> with key=</span><span class="si">{</span><span class="n">crack</span><span class="o">.</span><span class="n">key</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plaintext</span> <span class="o">=</span> <span class="n">crack</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">msg2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">plaintext</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying an additive cipher derived from guess=(&#39;e&#39;, &#39;S&#39;) with key=14
+jfeaoleuhvburoejcqnqmeuhkubearuoaevdckohvvezehvqhjfreenumjqr
+ajfebepqmojcqnjfekohvjfevoajuhmeojdpqkaumrqaajfekujerjfepehw
+jfqnjoyeojdpqka
+
+Trying an additive cipher derived from guess=(&#39;e&#39;, &#39;X&#39;) with key=19
+eazvjgzpcqwpmjzexlilhzpcfpwzvmpjvzqyxfjcqqzuzcqlceamzziphelm
+veazwzklhjexlieazfjcqeazqjvepchzjeyklfvphmlvveazfpezmeazkzcr
+ealiejtzjeyklfv
+
+Trying an additive cipher derived from guess=(&#39;e&#39;, &#39;C&#39;) with key=24
+zvuqebukxlrkheuzsgdgcukxakruqhkequltsaexllupuxlgxzvhuudkczgh
+qzvurufgcezsgdzvuaexlzvuleqzkxcueztfgaqkchgqqzvuakzuhzvufuxm
+zvgdzeoueztfgaq
+
+Trying an additive cipher derived from guess=(&#39;t&#39;, &#39;S&#39;) with key=25
+yutpdatjwkqjgdtyrfcfbtjwzjqtpgjdptksrzdwkktotwkfwyugttcjbyfg
+pyutqtefbdyrfcyutzdwkyutkdpyjwbtdysefzpjbgfppyutzjytgyutetwl
+yufcydntdysefzp
+
+Trying an additive cipher derived from guess=(&#39;t&#39;, &#39;X&#39;) with key=4
+tpokyvoerflebyotmaxawoeruelokbeykofnmuyrffojorfartpbooxewtab
+ktpolozawytmaxtpouyrftpofykterwoytnzaukewbakktpouetobtpozorg
+tpaxtyioytnzauk
+
+Trying an additive cipher derived from guess=(&#39;t&#39;, &#39;C&#39;) with key=9
+okjftqjzmagzwtjohvsvrjzmpzgjfwztfjaihptmaajejmavmokwjjszrovw
+fokjgjuvrtohvsokjptmaokjatfozmrjtoiuvpfzrwvffokjpzojwokjujmb
+okvsotdjtoiuvpf
+
+Trying an additive cipher derived from guess=(&#39;a&#39;, &#39;S&#39;) with key=18
+fbawkhaqdrxqnkafymjmiaqdgqxawnqkwarzygkdrravadrmdfbnaajqifmn
+wfbaxalmikfymjfbagkdrfbarkwfqdiakfzlmgwqinmwwfbagqfanfbalads
+fbmjfkuakfzlmgw
+
+Trying an additive cipher derived from guess=(&#39;a&#39;, &#39;X&#39;) with key=23
+awvrfcvlymslifvathehdvlyblsvrilfrvmutbfymmvqvymhyawivveldahi
+rawvsvghdfatheawvbfymawvmfralydvfaughbrldihrrawvblaviawvgvyn
+awheafpvfaughbr
+
+Trying an additive cipher derived from guess=(&#39;a&#39;, &#39;C&#39;) with key=2
+vrqmaxqgthngdaqvoczcyqgtwgnqmdgamqhpowathhqlqthctvrdqqzgyvcd
+mvrqnqbcyavoczvrqwathvrqhamvgtyqavpbcwmgydcmmvrqwgvqdvrqbqti
+vrczvakqavpbcwm
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">guesses</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">crack</span> <span class="o">=</span> <span class="n">CrackMultiplicativeCipher</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Trying an multiplicative cipher derived from guess=</span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2"> with key=</span><span class="si">{</span><span class="n">crack</span><span class="o">.</span><span class="n">key</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">plaintext</span> <span class="o">=</span> <span class="n">crack</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">msg2</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">plaintext</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Guess: </span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2"> is not valid for multiplicative key&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying an multiplicative cipher derived from guess=(&#39;e&#39;, &#39;S&#39;) with key=9
+thesizeandvarietyofoceanwavesraisedbywinddependonthreefactor
+sthevelocityofthewindthedistanceitblowsacrossthewatertheleng
+thoftimeitblows
+
+Guess: (&#39;e&#39;, &#39;X&#39;) is not valid for multiplicative key
+
+Trying an multiplicative cipher derived from guess=(&#39;e&#39;, &#39;C&#39;) with key=11
+npwyezwobhrojewnkqlqswobgorwyjoeywhdkgebhhwfwbhqbnpjwwlosnqj
+ynpwrwxqsenkqlnpwgebhnpwheynobswendxqgyosjqyynpwgonwjnpwxwba
+npqlnemwendxqgy
+
+Guess: (&#39;t&#39;, &#39;S&#39;) is not valid for multiplicative key
+
+Trying an multiplicative cipher derived from guess=(&#39;t&#39;, &#39;X&#39;) with key=9
+thesizeandvarietyofoceanwavesraisedbywinddependonthreefactor
+sthevelocityofthewindthedistanceitblowsacrossthewatertheleng
+thoftimeitblows
+
+Guess: (&#39;t&#39;, &#39;C&#39;) is not valid for multiplicative key
+
+Trying an multiplicative cipher derived from guess=(&#39;a&#39;, &#39;S&#39;) with key=19
+dlaigzauhftungadecvckauhoutainugiafpeoghffaxahfchdlnaavukdcn
+idlatarckgdecvdlaoghfdlafgiduhkagdprcoiuknciidlaoudandlarahq
+dlcvdgmagdprcoi
+
+Guess: (&#39;a&#39;, &#39;X&#39;) is not valid for multiplicative key
+
+Trying an multiplicative cipher derived from guess=(&#39;a&#39;, &#39;C&#39;) with key=3
+hxoeazocplncbaohwsrsiocpqcnoebcaeolfwqapllovoplsphxboorcihsb
+ehxonojsiahwsrhxoqaplhxolaehcpioahfjsqecibseehxoqchobhxojopu
+hxsrhamoahfjsqe
+</pre></div>
+</div>
+</div>
+</div>
+<p>A <strong>MultiplicativeCipher</strong> derived from <code class="docutils literal notranslate"><span class="pre">guess=('e',</span> <span class="pre">'S')</span> <span class="pre">with</span> <span class="pre">key=9</span></code> yielded</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">the</span> <span class="n">size</span> <span class="ow">and</span> <span class="n">variety</span> <span class="n">of</span> <span class="n">ocean</span> <span class="n">waves</span> <span class="n">raised</span> <span class="n">by</span> <span class="n">wind</span> <span class="n">depend</span> <span class="n">on</span> <span class="n">three</span> <span class="n">factors</span>
+<span class="n">the</span> <span class="n">velocity</span> <span class="n">of</span> <span class="n">the</span> <span class="n">wind</span> <span class="n">the</span> <span class="n">distance</span> <span class="n">it</span> <span class="n">blows</span> <span class="n">across</span> <span class="n">the</span> <span class="n">water</span> <span class="n">the</span> <span class="n">length</span>
+<span class="n">of</span> <span class="n">time</span> <span class="n">it</span> <span class="n">blows</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3>3. Decipher the following message.<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">msg3</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;VYU XOX SJY YTS FXV OWM YFQ GCQ PPY CQP VQD OFP VQJ ODW PRT SEQ&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">letters</span><span class="p">,</span> <span class="n">digraphs</span><span class="p">,</span> <span class="n">trigraphs</span> <span class="o">=</span> <span class="n">frequency_tabulator</span><span class="p">(</span><span class="n">msg3</span><span class="p">)</span>
+<span class="n">display_fequency_tables</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="n">digraphs</span><span class="p">,</span> <span class="n">trigraphs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \begin{array}[t]{ccc}
+\begin{array}{c|c}
+\text{Letter} &amp; \text{Frequency} \\
+\hline
+Q &amp; 6 \\
+Y &amp; 5 \\
+P &amp; 5 \\
+V &amp; 4 \\
+O &amp; 4 \\
+X &amp; 3 \\
+S &amp; 3 \\
+F &amp; 3 \\
+J &amp; 2 \\
+T &amp; 2 \\
+W &amp; 2 \\
+C &amp; 2 \\
+D &amp; 2 \\
+U &amp; 1 \\
+M &amp; 1 \\
+G &amp; 1 \\
+R &amp; 1 \\
+E &amp; 1 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Digraph} &amp; \text{Frequency} \\
+\hline
+TS &amp; 2 \\
+CQ &amp; 2 \\
+QP &amp; 2 \\
+PV &amp; 2 \\
+VQ &amp; 2 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Trigraph} &amp; \text{Frequency} \\
+\hline
+CQP &amp; 2 \\
+PVQ &amp; 2 \\
+\end{array}
+\end{array}\end{split}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build a set of single letter guesses and the top 4 occurring ciphertext letters</span>
+<span class="n">guesses</span> <span class="o">=</span> <span class="n">build_guesses</span><span class="p">(</span><span class="n">top_letters</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">letters</span><span class="o">.</span><span class="n">keys</span><span class="p">())[:</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">guesses</span><span class="p">:</span>
+    <span class="n">crack</span> <span class="o">=</span> <span class="n">CrackAdditiveCipher</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Trying an additive cipher derived from guess=</span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2"> with key=</span><span class="si">{</span><span class="n">crack</span><span class="o">.</span><span class="n">key</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plaintext</span> <span class="o">=</span> <span class="n">crack</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">msg3</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">plaintext</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying an additive cipher derived from guess=(&#39;e&#39;, &#39;Q&#39;) with key=12
+jmilclgxmmhgtljckamteuqeddmqedjerctdjexcrkdfhgse
+
+Trying an additive cipher derived from guess=(&#39;e&#39;, &#39;Y&#39;) with key=20
+beadudypeezyldbucselwmiwvveiwvbwjulvbwpujcvxzykw
+
+Trying an additive cipher derived from guess=(&#39;e&#39;, &#39;P&#39;) with key=11
+knjmdmhynnihumkdlbnufvrfeenrfekfsduekfydslegihtf
+
+Trying an additive cipher derived from guess=(&#39;t&#39;, &#39;Q&#39;) with key=23
+ybxaravmbbwviayrzpbitjftssbftsytgrisytmrgzsuwvht
+
+Trying an additive cipher derived from guess=(&#39;t&#39;, &#39;Y&#39;) with key=5
+qtpsjsnettonasqjrhtalbxlkktxlkqlyjakqlejyrkmonzl
+
+Trying an additive cipher derived from guess=(&#39;t&#39;, &#39;P&#39;) with key=22
+zcybsbwnccxwjbzsaqcjukguttcgutzuhsjtzunshatvxwiu
+
+Trying an additive cipher derived from guess=(&#39;a&#39;, &#39;Q&#39;) with key=16
+fiehyhctiidcphfygwipaqmazzimazfanypzfatyngzbdcoa
+
+Trying an additive cipher derived from guess=(&#39;a&#39;, &#39;Y&#39;) with key=24
+xawzqzulaavuhzxqyoahsiesrraesrxsfqhrxslqfyrtvugs
+
+Trying an additive cipher derived from guess=(&#39;a&#39;, &#39;P&#39;) with key=15
+gjfizidujjedqigzhxjqbrnbaajnbagbozqagbuzohacedpb
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">guesses</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">crack</span> <span class="o">=</span> <span class="n">CrackMultiplicativeCipher</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Trying an multiplicative cipher derived from guess=</span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2"> with key=</span><span class="si">{</span><span class="n">crack</span><span class="o">.</span><span class="n">key</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">plaintext</span> <span class="o">=</span> <span class="n">crack</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">msg3</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">plaintext</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Guess: </span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2"> is not valid for multiplicative key&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying an multiplicative cipher derived from guess=(&#39;e&#39;, &#39;Q&#39;) with key=19
+howdidafoolandhismoneygettogetherinthefirstplace
+
+Trying an multiplicative cipher derived from guess=(&#39;e&#39;, &#39;Y&#39;) with key=5
+teyjcjibeedivjtcomevsqksxxeksxtsfcvxtsbcfoxndias
+
+Guess: (&#39;e&#39;, &#39;P&#39;) is not valid for multiplicative key
+
+Guess: (&#39;t&#39;, &#39;Q&#39;) is not valid for multiplicative key
+
+Guess: (&#39;t&#39;, &#39;Y&#39;) is not valid for multiplicative key
+
+Trying an multiplicative cipher derived from guess=(&#39;t&#39;, &#39;P&#39;) with key=19
+howdidafoolandhismoneygettogetherinthefirstplace
+
+Trying an multiplicative cipher derived from guess=(&#39;a&#39;, &#39;Q&#39;) with key=17
+lcofgfuvccruhflgimchaeqaddcqadlanghdlavgnidxruka
+
+Trying an multiplicative cipher derived from guess=(&#39;a&#39;, &#39;Y&#39;) with key=25
+daebkbgpaafgtbdkcmatiswijjawijdivktjdipkvcjhfgui
+
+Guess: (&#39;a&#39;, &#39;P&#39;) is not valid for multiplicative key
+</pre></div>
+</div>
+</div>
+</div>
+<p>A <strong>MultiplicativeCipher</strong> derived from <code class="docutils literal notranslate"><span class="pre">guess=('e',</span> <span class="pre">'Q')</span> <span class="pre">with</span> <span class="pre">key=19</span></code> yielded</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">how</span> <span class="n">did</span> <span class="n">a</span> <span class="n">fool</span> <span class="ow">and</span> <span class="n">his</span> <span class="n">money</span> <span class="n">get</span> <span class="n">together</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">first</span> <span class="n">place</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h3>4. Decipher the following message.<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">msg4</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;STB RDX TZQ MFY MJQ GTB WTT RXM FPJ XUJ FWJ MFI PNS LOT MSX FDF &quot;</span> <span class="o">+</span>
+    <span class="s2">&quot;UUF WJS YQD MJB FXS YTS YMJ BFX MNS LYT SGJ QYB FDF YYM JYN RJ&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">letters</span><span class="p">,</span> <span class="n">digraphs</span><span class="p">,</span> <span class="n">trigraphs</span> <span class="o">=</span> <span class="n">frequency_tabulator</span><span class="p">(</span><span class="n">msg4</span><span class="p">)</span>
+<span class="n">display_fequency_tables</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="n">digraphs</span><span class="p">,</span> <span class="n">trigraphs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \begin{array}[t]{ccc}
+\begin{array}{c|c}
+\text{Letter} &amp; \text{Frequency} \\
+\hline
+F &amp; 11 \\
+J &amp; 10 \\
+M &amp; 9 \\
+Y &amp; 9 \\
+S &amp; 8 \\
+T &amp; 8 \\
+X &amp; 6 \\
+B &amp; 5 \\
+D &amp; 4 \\
+Q &amp; 4 \\
+R &amp; 3 \\
+W &amp; 3 \\
+U &amp; 3 \\
+N &amp; 3 \\
+G &amp; 2 \\
+P &amp; 2 \\
+L &amp; 2 \\
+Z &amp; 1 \\
+I &amp; 1 \\
+O &amp; 1 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Digraph} &amp; \text{Frequency} \\
+\hline
+MJ &amp; 4 \\
+MF &amp; 3 \\
+YM &amp; 3 \\
+SY &amp; 3 \\
+BF &amp; 3 \\
+TB &amp; 2 \\
+FY &amp; 2 \\
+JQ &amp; 2 \\
+XM &amp; 2 \\
+FW &amp; 2 \\
+WJ &amp; 2 \\
+NS &amp; 2 \\
+SL &amp; 2 \\
+FD &amp; 2 \\
+DF &amp; 2 \\
+JB &amp; 2 \\
+FX &amp; 2 \\
+YT &amp; 2 \\
+TS &amp; 2 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Trigraph} &amp; \text{Frequency} \\
+\hline
+YMJ &amp; 3 \\
+FWJ &amp; 2 \\
+NSL &amp; 2 \\
+FDF &amp; 2 \\
+MJB &amp; 2 \\
+JBF &amp; 2 \\
+BFX &amp; 2 \\
+YTS &amp; 2 \\
+\end{array}
+\end{array}\end{split}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build a set of single letter guesses and the top 4 occurring ciphertext letters</span>
+<span class="n">guesses</span> <span class="o">=</span> <span class="n">build_guesses</span><span class="p">(</span><span class="n">top_letters</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">letters</span><span class="o">.</span><span class="n">keys</span><span class="p">())[:</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">guesses</span><span class="p">:</span>
+    <span class="n">crack</span> <span class="o">=</span> <span class="n">CrackAdditiveCipher</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Trying an additive cipher derived from guess=</span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2"> with key=</span><span class="si">{</span><span class="n">crack</span><span class="o">.</span><span class="n">key</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plaintext</span> <span class="o">=</span> <span class="n">crack</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">msg4</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">plaintext</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying an additive cipher derived from guess=(&#39;e&#39;, &#39;F&#39;) with key=1
+rsaqcwsyplexlipfsavssqwleoiwtievilehomrknslrwecettevirxpclia
+ewrxsrxliaewlmrkxsrfipxaecexxlixmqi
+
+Trying an additive cipher derived from guess=(&#39;e&#39;, &#39;J&#39;) with key=5
+nowmysoulhathelbowroomshakespearehadkingjohnsayapparentlyhew
+asntonthewashingtonbeltwayatthetime
+
+Trying an additive cipher derived from guess=(&#39;e&#39;, &#39;M&#39;) with key=8
+kltjvplriexqebiyltolljpexhbpmbxobexahfkdglekpxvxmmxobkqivebt
+xpkqlkqebtxpefkdqlkybiqtxvxqqebqfjb
+
+Trying an additive cipher derived from guess=(&#39;t&#39;, &#39;F&#39;) with key=12
+ghpfrlhneatmaxeuhpkhhflatdxlixtkxatwdbgzchagltrtiitkxgmeraxp
+tlgmhgmaxptlabgzmhguxemptrtmmaxmbfx
+
+Trying an additive cipher derived from guess=(&#39;t&#39;, &#39;J&#39;) with key=16
+cdlbnhdjawpiwtaqdlgddbhwpzthetpgtwpszxcvydwchpnpeepgtcianwtl
+phcidciwtlphwxcvidcqtailpnpiiwtixbt
+
+Trying an additive cipher derived from guess=(&#39;t&#39;, &#39;M&#39;) with key=19
+zaiykeagxtmftqxnaidaayetmwqebqmdqtmpwuzsvatzemkmbbmdqzfxktqi
+mezfazftqimetuzsfaznqxfimkmfftqfuyq
+
+Trying an additive cipher derived from guess=(&#39;a&#39;, &#39;F&#39;) with key=5
+nowmysoulhathelbowroomshakespearehadkingjohnsayapparentlyhew
+asntonthewashingtonbeltwayatthetime
+
+Trying an additive cipher derived from guess=(&#39;a&#39;, &#39;J&#39;) with key=9
+jksiuokqhdwpdahxksnkkiodwgaolawnadwzgejcfkdjowuwllwnajphudas
+wojpkjpdaswodejcpkjxahpswuwppdapeia
+
+Trying an additive cipher derived from guess=(&#39;a&#39;, &#39;M&#39;) with key=12
+ghpfrlhneatmaxeuhpkhhflatdxlixtkxatwdbgzchagltrtiitkxgmeraxp
+tlgmhgmaxptlabgzmhguxemptrtmmaxmbfx
+</pre></div>
+</div>
+</div>
+</div>
+<p>An <em>AdditiveCipher</em> derived from <code class="docutils literal notranslate"><span class="pre">guess=('e',</span> <span class="pre">'J')</span></code> with <code class="docutils literal notranslate"><span class="pre">key=5</span></code> yielded</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">now</span> <span class="n">my</span> <span class="n">soul</span> <span class="n">hath</span> <span class="n">elbow</span> <span class="n">room</span> <span class="n">shakespeare</span> <span class="n">had</span> <span class="n">king</span> <span class="n">john</span> <span class="n">say</span> <span class="n">apparently</span> <span class="n">he</span> <span class="n">wasnt</span>
+<span class="n">on</span> <span class="n">the</span> <span class="n">washington</span> <span class="n">beltway</span> <span class="n">at</span> <span class="n">the</span> <span class="n">time</span>
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h3>5. Decipher the following message.<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">msg5</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;CWF FSK AAC KHW JAO ZHA NGA THO ZUW ENC AKK MUA KJA HR&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">letters</span><span class="p">,</span> <span class="n">digraphs</span><span class="p">,</span> <span class="n">trigraphs</span> <span class="o">=</span> <span class="n">frequency_tabulator</span><span class="p">(</span><span class="n">msg5</span><span class="p">)</span>
+<span class="n">display_fequency_tables</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="n">digraphs</span><span class="p">,</span> <span class="n">trigraphs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \begin{array}[t]{ccc}
+\begin{array}{c|c}
+\text{Letter} &amp; \text{Frequency} \\
+\hline
+A &amp; 8 \\
+K &amp; 5 \\
+H &amp; 4 \\
+C &amp; 3 \\
+W &amp; 3 \\
+F &amp; 2 \\
+J &amp; 2 \\
+O &amp; 2 \\
+Z &amp; 2 \\
+N &amp; 2 \\
+U &amp; 2 \\
+S &amp; 1 \\
+G &amp; 1 \\
+T &amp; 1 \\
+E &amp; 1 \\
+M &amp; 1 \\
+R &amp; 1 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Digraph} &amp; \text{Frequency} \\
+\hline
+JA &amp; 2 \\
+OZ &amp; 2 \\
+AK &amp; 2 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Trigraph} &amp; \text{Frequency} \\
+\hline
+\end{array}
+\end{array}\end{split}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build a set of single letter guesses and the top 4 occurring ciphertext letters</span>
+<span class="n">guesses</span> <span class="o">=</span> <span class="n">build_guesses</span><span class="p">(</span><span class="n">top_letters</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">letters</span><span class="o">.</span><span class="n">keys</span><span class="p">())[:</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">guesses</span><span class="p">:</span>
+    <span class="n">crack</span> <span class="o">=</span> <span class="n">CrackAdditiveCipher</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Trying an additive cipher derived from guess=</span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2"> with key=</span><span class="si">{</span><span class="n">crack</span><span class="o">.</span><span class="n">key</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plaintext</span> <span class="o">=</span> <span class="n">crack</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">msg5</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">plaintext</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying an additive cipher derived from guess=(&#39;e&#39;, &#39;A&#39;) with key=22
+gajjwoeegolanesdlerkexlsdyairgeooqyeonelv
+
+Trying an additive cipher derived from guess=(&#39;e&#39;, &#39;K&#39;) with key=6
+wqzzmeuuwebqduitbuhaunbitoqyhwueegouedubl
+
+Trying an additive cipher derived from guess=(&#39;e&#39;, &#39;H&#39;) with key=3
+ztccphxxzhetgxlwexkdxqelwrtbkzxhhjrxhgxeo
+
+Trying an additive cipher derived from guess=(&#39;t&#39;, &#39;A&#39;) with key=7
+vpyyldttvdapcthsatgztmahsnpxgvtddfntdctak
+
+Trying an additive cipher derived from guess=(&#39;t&#39;, &#39;K&#39;) with key=17
+lfoobtjjltqfsjxiqjwpjcqxidfnwljttvdjtsjqa
+
+Trying an additive cipher derived from guess=(&#39;t&#39;, &#39;H&#39;) with key=14
+oirrewmmowtivmaltmzsmftalgiqzomwwygmwvmtd
+
+Trying an additive cipher derived from guess=(&#39;a&#39;, &#39;A&#39;) with key=0
+cwffskaackhwjaozhangathozuwencakkmuakjahr
+
+Trying an additive cipher derived from guess=(&#39;a&#39;, &#39;K&#39;) with key=10
+smvviaqqsaxmzqepxqdwqjxepkmudsqaackqazqxh
+
+Trying an additive cipher derived from guess=(&#39;a&#39;, &#39;H&#39;) with key=7
+vpyyldttvdapcthsatgztmahsnpxgvtddfntdctak
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">guesses</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">crack</span> <span class="o">=</span> <span class="n">CrackMultiplicativeCipher</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Trying an multiplicative cipher derived from guess=</span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2"> with key=</span><span class="si">{</span><span class="n">crack</span><span class="o">.</span><span class="n">key</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">plaintext</span> <span class="o">=</span> <span class="n">crack</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">msg5</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">plaintext</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Guess: </span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2"> is not valid for multiplicative key&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying an multiplicative cipher derived from guess=(&#39;e&#39;, &#39;A&#39;) with key=21
+okddqceeocnkxewznerievnwzakyroeccmaecxenl
+
+Trying an multiplicative cipher derived from guess=(&#39;e&#39;, &#39;K&#39;) with key=23
+yaxxkeqqyefanquzfqdoqbfuzsagdyqeemsqenqft
+
+Guess: (&#39;e&#39;, &#39;H&#39;) is not valid for multiplicative key
+
+Guess: (&#39;t&#39;, &#39;A&#39;) is not valid for multiplicative key
+
+Guess: (&#39;t&#39;, &#39;K&#39;) is not valid for multiplicative key
+
+Trying an multiplicative cipher derived from guess=(&#39;t&#39;, &#39;H&#39;) with key=3
+aybbouiiautylieztivkixtezgysvaiuumgiulitf
+
+Trying an multiplicative cipher derived from guess=(&#39;a&#39;, &#39;A&#39;) with key=1
+cwffskaackhwjaozhangathozuwencakkmuakjahr
+
+Trying an multiplicative cipher derived from guess=(&#39;a&#39;, &#39;K&#39;) with key=11
+eujjwasseavuhsyzvsfcspvyziuqfesaamisahsvd
+
+Guess: (&#39;a&#39;, &#39;H&#39;) is not valid for multiplicative key
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">guesses</span> <span class="o">=</span> <span class="n">build_guesses</span><span class="p">(</span><span class="n">top_digraphs</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">digraphs</span><span class="o">.</span><span class="n">keys</span><span class="p">())[:</span><span class="mi">3</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">guesses</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">crack</span> <span class="o">=</span> <span class="n">CrackAffineCipher</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Trying possible solution </span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2">: mult_key:</span><span class="si">{</span><span class="n">crack</span><span class="o">.</span><span class="n">mult_key</span><span class="p">()</span><span class="si">}</span><span class="s2">  add_key:</span><span class="si">{</span><span class="n">crack</span><span class="o">.</span><span class="n">add_key</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">plaintext</span> <span class="o">=</span> <span class="n">crack</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">msg5</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">plaintext</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2"> not a possible solution&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;t&#39;, &#39;J&#39;), (&#39;h&#39;, &#39;A&#39;)) not a possible solution
+
+((&#39;t&#39;, &#39;O&#39;), (&#39;h&#39;, &#39;Z&#39;)) not a possible solution
+
+((&#39;t&#39;, &#39;A&#39;), (&#39;h&#39;, &#39;K&#39;)) not a possible solution
+
+((&#39;e&#39;, &#39;J&#39;), (&#39;r&#39;, &#39;A&#39;)) not a possible solution
+
+((&#39;e&#39;, &#39;O&#39;), (&#39;r&#39;, &#39;Z&#39;)) not a possible solution
+
+((&#39;e&#39;, &#39;A&#39;), (&#39;r&#39;, &#39;K&#39;)) not a possible solution
+
+Trying possible solution ((&#39;o&#39;, &#39;J&#39;), (&#39;n&#39;, &#39;A&#39;)): mult_key:9  add_key:15
+tbccprnntribondkinafnsidkvbzatnrrxvnronim
+
+Trying possible solution ((&#39;o&#39;, &#39;O&#39;), (&#39;n&#39;, &#39;Z&#39;)): mult_key:15  add_key:12
+isddqmuuimrsfuonruhkuxroneswhiummaeumfurj
+
+((&#39;o&#39;, &#39;A&#39;), (&#39;n&#39;, &#39;K&#39;)) not a possible solution
+
+((&#39;a&#39;, &#39;J&#39;), (&#39;n&#39;, &#39;A&#39;)) not a possible solution
+
+((&#39;a&#39;, &#39;O&#39;), (&#39;n&#39;, &#39;Z&#39;)) not a possible solution
+
+((&#39;a&#39;, &#39;A&#39;), (&#39;n&#39;, &#39;K&#39;)) not a possible solution
+
+((&#39;r&#39;, &#39;J&#39;), (&#39;e&#39;, &#39;A&#39;)) not a possible solution
+
+((&#39;r&#39;, &#39;O&#39;), (&#39;e&#39;, &#39;Z&#39;)) not a possible solution
+
+((&#39;r&#39;, &#39;A&#39;), (&#39;e&#39;, &#39;K&#39;)) not a possible solution
+
+Trying possible solution ((&#39;h&#39;, &#39;J&#39;), (&#39;e&#39;, &#39;A&#39;)): mult_key:3  add_key:4
+wuxxkqeewqpuheavpergetpavcuorweqqiceqhepb
+
+Trying possible solution ((&#39;h&#39;, &#39;O&#39;), (&#39;e&#39;, &#39;Z&#39;)): mult_key:5  add_key:21
+ptaanbzzpbqtgzheqzmvziqhedtfmpzbbrdzbgzqs
+
+((&#39;h&#39;, &#39;A&#39;), (&#39;e&#39;, &#39;K&#39;)) not a possible solution
+
+Trying possible solution ((&#39;i&#39;, &#39;J&#39;), (&#39;n&#39;, &#39;A&#39;)): mult_key:19  add_key:23
+jvqqdtnnjtmvinlcmnabnomlczvfajnttpzntinms
+
+Trying possible solution ((&#39;i&#39;, &#39;O&#39;), (&#39;n&#39;, &#39;Z&#39;)): mult_key:23  add_key:12
+mollyseemstobeinterceptingourmessagesbeth
+
+((&#39;i&#39;, &#39;A&#39;), (&#39;n&#39;, &#39;K&#39;)) not a possible solution
+</pre></div>
+</div>
+</div>
+</div>
+<p>A <strong>AffineCipher</strong> derived from guess  <code class="docutils literal notranslate"><span class="pre">(('i',</span> <span class="pre">'O'),</span> <span class="pre">('n',</span> <span class="pre">'Z'))</span></code> with  <code class="docutils literal notranslate"><span class="pre">mult_key:23</span>&#160; <span class="pre">add_key:12</span></code> yields</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">molly</span> <span class="n">seems</span> <span class="n">to</span> <span class="n">be</span> <span class="n">intercepting</span> <span class="n">our</span> <span class="n">messages</span> <span class="n">beth</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h3>6. Decipher the following message.<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">msg6</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;ARO EXJ FPE LJB QLK RJB OLR PFK PQF QRQ FLK PLC EFD EBO IBX OKF KDF &quot;</span> <span class="o">+</span>
+    <span class="s2">&quot;KZI RAF KDA RHB XKA QEB RKF SBO PFQ VLC KLO QEZ XOL IFK XTE BOB QEB &quot;</span> <span class="o">+</span>
+    <span class="s2">&quot;VEX SBZ IXP PBP FKX AAF QFL KQL YXP HBQ YXI IQB XJP&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">letters</span><span class="p">,</span> <span class="n">digraphs</span><span class="p">,</span> <span class="n">trigraphs</span> <span class="o">=</span> <span class="n">frequency_tabulator</span><span class="p">(</span><span class="n">msg6</span><span class="p">)</span>
+<span class="n">display_fequency_tables</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="n">digraphs</span><span class="p">,</span> <span class="n">trigraphs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \begin{array}[t]{ccc}
+\begin{array}{c|c}
+\text{Letter} &amp; \text{Frequency} \\
+\hline
+F &amp; 14 \\
+B &amp; 14 \\
+K &amp; 13 \\
+Q &amp; 12 \\
+X &amp; 11 \\
+P &amp; 10 \\
+L &amp; 10 \\
+E &amp; 9 \\
+O &amp; 8 \\
+R &amp; 7 \\
+A &amp; 6 \\
+I &amp; 6 \\
+J &amp; 4 \\
+D &amp; 3 \\
+Z &amp; 3 \\
+C &amp; 2 \\
+H &amp; 2 \\
+S &amp; 2 \\
+V &amp; 2 \\
+Y &amp; 2 \\
+T &amp; 1 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Digraph} &amp; \text{Frequency} \\
+\hline
+FK &amp; 6 \\
+BO &amp; 4 \\
+EB &amp; 4 \\
+BQ &amp; 3 \\
+LK &amp; 3 \\
+PF &amp; 3 \\
+QF &amp; 3 \\
+FQ &amp; 3 \\
+BX &amp; 3 \\
+QE &amp; 3 \\
+AR &amp; 2 \\
+EX &amp; 2 \\
+XJ &amp; 2 \\
+JB &amp; 2 \\
+QL &amp; 2 \\
+OL &amp; 2 \\
+KP &amp; 2 \\
+FL &amp; 2 \\
+LC &amp; 2 \\
+XO &amp; 2 \\
+KF &amp; 2 \\
+KD &amp; 2 \\
+ZI &amp; 2 \\
+AF &amp; 2 \\
+HB &amp; 2 \\
+SB &amp; 2 \\
+KX &amp; 2 \\
+XP &amp; 2 \\
+YX &amp; 2 \\
+\end{array} \quad \quad &amp; \begin{array}{c|c}
+\text{Trigraph} &amp; \text{Frequency} \\
+\hline
+PFK &amp; 2 \\
+QFL &amp; 2 \\
+FLK &amp; 2 \\
+EBO &amp; 2 \\
+FKD &amp; 2 \\
+QEB &amp; 2 \\
+FKX &amp; 2 \\
+\end{array}
+\end{array}\end{split}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">guesses</span> <span class="o">=</span> <span class="n">build_guesses</span><span class="p">(</span><span class="n">top_letters</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">letters</span><span class="o">.</span><span class="n">keys</span><span class="p">())[:</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">guesses</span><span class="p">:</span>
+    <span class="n">crack</span> <span class="o">=</span> <span class="n">CrackAdditiveCipher</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Trying an additive cipher derived from guess=</span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s2"> with key=</span><span class="si">{</span><span class="n">crack</span><span class="o">.</span><span class="n">key</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plaintext</span> <span class="o">=</span> <span class="n">crack</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">msg6</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">plaintext</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying an additive cipher derived from guess=(&#39;e&#39;, &#39;F&#39;) with key=1
+zqndwieodkiapkjqiankqoejopepqpekjokbdecdanhawnjejcejyhqzejcz
+qgawjzpdaqjeranoepukbjknpdywnkhejwsdanapdaudwrayhwooaoejwzze
+pekjpkxwogapxwhhpawio
+
+Trying an additive cipher derived from guess=(&#39;e&#39;, &#39;B&#39;) with key=23
+durhamishometonumerousinstitutionsofhigherlearningincludingd
+ukeandtheuniversityofnorthcarolinawheretheyhaveclassesinaddi
+tiontobasketballteams
+
+Trying an additive cipher derived from guess=(&#39;e&#39;, &#39;K&#39;) with key=6
+uliyrdzjyfdvkfeldvifljzejkzklkzfejfwyzxyvicvriezexzetcluzexu
+lbvreukyvlezmvijzkpfwefikytrifczernyvivkyvpyrmvtcrjjvjzeruuz
+kzfekfsrjbvksrcckvrdj
+
+Trying an additive cipher derived from guess=(&#39;t&#39;, &#39;F&#39;) with key=12
+ofcslxtdszxpezyfxpczfdtydetefetzydzqstrspcwplcytyrtynwfotyro
+fvplyoespfytgpcdtejzqyzcesnlczwtylhspcpespjslgpnwlddpdtyloot
+etzyezmldvpemlwweplxd
+
+Trying an additive cipher derived from guess=(&#39;t&#39;, &#39;B&#39;) with key=8
+sjgwpbxhwdbtidcjbtgdjhxchixijixdchduwxvwtgatpgcxcvxcrajsxcvs
+jztpcsiwtjcxktghxinducdgiwrpgdaxcplwtgtiwtnwpktraphhthxcpssx
+ixdcidqphztiqpaaitpbh
+
+Trying an additive cipher derived from guess=(&#39;t&#39;, &#39;K&#39;) with key=17
+jaxngsoynuskzutaskxuayotyzozazoutyulnomnkxrkgxtotmotirajotmj
+aqkgtjznkatobkxyozeultuxznigxurotgcnkxkznkengbkirgyykyotgjjo
+zoutzuhgyqkzhgrrzkgsy
+
+Trying an additive cipher derived from guess=(&#39;a&#39;, &#39;F&#39;) with key=5
+vmjzseakzgewlgfmewjgmkafklalmlagfkgxzayzwjdwsjfafyafudmvafyv
+mcwsfvlzwmfanwjkalqgxfgjlzusjgdafsozwjwlzwqzsnwudskkwkafsvva
+lagflgtskcwltsddlwsek
+
+Trying an additive cipher derived from guess=(&#39;a&#39;, &#39;B&#39;) with key=1
+zqndwieodkiapkjqiankqoejopepqpekjokbdecdanhawnjejcejyhqzejcz
+qgawjzpdaqjeranoepukbjknpdywnkhejwsdanapdaudwrayhwooaoejwzze
+pekjpkxwogapxwhhpawio
+
+Trying an additive cipher derived from guess=(&#39;a&#39;, &#39;K&#39;) with key=10
+qheunzvfubzrgbahzrebhfvafgvghgvbafbsuvtureyrneavatvapyhqvatq
+hxrnaqgurhavirefvglbsabegupnebyvanjurergurlunirpynffrfvanqqv
+gvbagbonfxrgonyygrnzf
+</pre></div>
+</div>
+</div>
+</div>
+<p>An <strong>AddativeCipher</strong> derived from guess <code class="docutils literal notranslate"><span class="pre">guess=('e',</span> <span class="pre">'B')</span></code> with <code class="docutils literal notranslate"><span class="pre">key=23</span></code> yielded</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">durham</span> <span class="ow">is</span> <span class="n">home</span> <span class="n">to</span> <span class="n">numerous</span> <span class="n">institutions</span> <span class="n">of</span> <span class="n">higher</span> <span class="n">learning</span> <span class="n">including</span> <span class="n">duke</span>
+<span class="ow">and</span> <span class="n">the</span> <span class="n">university</span> <span class="n">of</span> <span class="n">north</span> <span class="n">carolina</span> <span class="n">where</span> <span class="n">they</span> <span class="n">have</span> <span class="n">classes</span> <span class="ow">in</span> <span class="n">addition</span>
+<span class="n">to</span> <span class="n">basketball</span> <span class="n">teams</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1_5_simple_ciphers.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">1.5 Simple Ciphers</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../markdown/2_1_multiplication_principle.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2.1 The Multiplication Principle</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-1-6">Exercises 1.6</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-program-that-accepts-a-text-message-and-outputs-the-frequency-of-each-letter-appearing-in-the-message">7. Write a program that accepts a text message and outputs the frequency of each letter appearing in the message.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decipher-the-following-message">1. Decipher the following message.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2. Decipher the following message.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3. Decipher the following message.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">4. Decipher the following message.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">5. Decipher the following message.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">6. Decipher the following message.</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Dan Douglas
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

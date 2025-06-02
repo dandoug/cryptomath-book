@@ -1,0 +1,828 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.4 Independent Events and Expected Number &#8212; Cryptological Mathematics Exercises</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/crypto-book.css?v=761dc443" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdown/2_4_independent_events_expected_number';</script>
+    <script src="../_static/sidebar-togle.js?v=2b3ca58f"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.5 Disguising the Frequencies" href="../notebooks/2_5_disguising_the_frequencies.html" />
+    <link rel="prev" title="2.3 Probability" href="2_3_probability.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Cryptological Mathematics Exercises</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Monoalphabetic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_1_induction.html">1.1 Induction Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/1_2_primes_gcd.html">1.2 Prime Numbers, Division Algorithm, Greatest Common Divisor Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/1_3_relative_primes.html">1.3 Relatively Prime Integers, Fundamental Theorem of Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/1_4_modular_arithmatic.html">1.4 Modular Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/1_5_simple_ciphers.html">1.5 Simple Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/1_6_cryptoanalysis_monoalphabetic_substitution_ciphers.html">1.6 Cryptoanalysis of Monoalphabetic Substitution Ciphers</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Polyalphabetic Substitution Ciphers</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2_1_multiplication_principle.html">2.1 The Multiplication Principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/2_2_permutations_and_combinations.html">2.2 Permutations and Combinations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_3_probability.html">2.3 Probability</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2.4 Independent Events and Expected Number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/2_5_disguising_the_frequencies.html">2.5 Disguising the Frequencies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Polygraphic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/3_1_elementary_polygraphic_substitution_ciphers.html">3.1 Elementary Polygraphic Substitution Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/3_2_elementary_matrix_theory.html">3.2 Elementary Matrix Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/3_3_hills_system.html">3.3 Hill’s System</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Public Key Cryptography</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/4_1_more_number_theory.html">4.1 More Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/4_2_rsa_algorithm.html">4.2 The RSA Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/4_3_two_examples.html">4.3 Two Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/4_4_other_pk_cryptography.html">4.4 Other Illustrations of Public Key Cryptography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/markdown/2_4_independent_events_expected_number.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2.4 Independent Events and Expected Number</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-2-4">Exercises 2.4</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-experiment-consists-in-selecting-a-card-from-a-deck-of-52-if-this-experiment-is-repeated-1000-times-what-is-the-expected-number-of">1. An experiment consists in selecting a card from a deck of 52. If this experiment is repeated 1000 times, what is the expected number of</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-aces">(a) aces?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-picture-cards">(b) picture cards?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-5s-or-6s">(c) 5s or 6s?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-card-is-selected-from-a-deck-of-52-and-then-re-inserted-into-the-deck-a-second-card-is-then-selected-from-the-deck-of-52-let-e-be-the-event-the-first-card-is-a-jack-and-let-f-be-the-event-the-second-card-is-a-queen-are-e-and-f-independent-events-compute-p-e-cap-f">2. A card is selected from a deck of 52 and then re-inserted into the deck. A second card is then selected from the deck of 52. Let <span class="math notranslate nohighlight">\(E\)</span> be the event “the first card is a Jack” and let <span class="math notranslate nohighlight">\(F\)</span> be the event “the second card is a Queen.” Are <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(F\)</span> independent events? Compute <span class="math notranslate nohighlight">\(p(E \cap F)\)</span>.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-a-survey-of-1000-people-categorized-as-smokers-or-nonsmokers-with-or-without-respiratory-problems-the-following-data-were-obtained">3. In a survey of 1000 people categorized as smokers or nonsmokers, with or without respiratory problems, the following data were obtained:</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-s-and-r">(a) S and R</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-s-and-r">(b) S and ~R</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-s-and-r">(c) ~S and R</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-s-and-r">(d) ~S and ~R</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-s-and-s">(e) S and ~S</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#f-r-and-r">(f) R and ~R</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suppose-that-in-a-certain-language-the-probability-of-two-characters-selected-at-random-from-a-text-being-the-same-is-0-03-if-a-document-in-this-language-contains-5713-characters">4. Suppose that in a certain language, the probability of two characters selected at random from a text being the same is 0.03. If a document in this language contains 5713 characters,</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-how-many-pairs-of-letters-without-regard-to-order-can-be-selected">(a) How many pairs of letters (without regard to order) can be selected?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-of-these-how-many-would-you-expect-to-have-both-letters-being-the-same">(b) Of these, how many would you expect to have both letters being the same?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#find-the-probability-that">5. Find the probability that</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-the-sum-of-the-dice-is-2">(a) the sum of the dice is 2</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-the-sum-of-the-dice-is-3">(b) the sum of the dice is 3.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-the-sum-of-the-dice-is-4">(c) the sum of the dice is 4.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-the-sum-of-the-dice-is-5">(d) the sum of the dice is 5.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-the-sum-of-the-dice-is-6">(e) the sum of the dice is 6.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#f-the-sum-of-the-dice-is-7">(f) the sum of the dice is 7.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#g-the-sum-of-the-dice-is-8">(g) the sum of the dice is 8.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#h-the-sum-of-the-dice-is-9">(h) the sum of the dice is 9.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#i-the-sum-of-the-dice-is-10">(i) the sum of the dice is 10.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#j-the-sum-of-the-dice-is-11">(j) the sum of the dice is 11.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#k-the-sum-of-the-dice-is-12">(k) the sum of the dice is 12.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#l-the-sum-of-the-dice-is-13">(l) the sum of the dice is 13.</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-e-be-the-event-the-italicized-die-turns-up-5-and-f-the-event-the-bold-die-turns-up-3-are-e-and-f-independent">6. Let <span class="math notranslate nohighlight">\(E\)</span> be the event “the italicized die turns up 5” and <span class="math notranslate nohighlight">\(F\)</span> the event “the bold die turns up 3.” Are <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(F\)</span> independent?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-e-be-the-event-the-sum-of-the-dice-is-even-and-let-f-be-the-event-the-sum-of-the-dice-is-greater-than-8-are-e-and-f-independent">7. Let <span class="math notranslate nohighlight">\(E\)</span> be the event “the sum of the dice is even” and let <span class="math notranslate nohighlight">\(F\)</span> be the event “the sum of the dice is greater than 8.” Are <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(F\)</span> independent?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-e-be-the-event-the-face-of-the-italicized-die-is-greater-than-or-equal-to-the-face-of-the-bold-die-and-let-f-be-the-event-the-sum-of-the-faces-is-11-or-12-are-e-and-f-independent">8. Let <span class="math notranslate nohighlight">\(E\)</span> be the event “the face of the italicized die is greater than or equal to the face of the bold die” and let <span class="math notranslate nohighlight">\(F\)</span> be the event “the sum of the faces is 11 or 12.” Are <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(F\)</span> independent?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-the-pair-of-dice-is-thrown-500-times-what-is-the-expected-number-of-7s">9. If the pair of dice is thrown 500 times, what is the expected number of 7s</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-the-pair-of-dice-is-thrown-36-times-what-is-the-expected-number-of-11s">10. If the pair of dice is thrown 36 times, what is the expected number of 11s?</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="independent-events-and-expected-number">
+<h1>2.4 Independent Events and Expected Number<a class="headerlink" href="#independent-events-and-expected-number" title="Link to this heading">#</a></h1>
+<section id="exercises-2-4">
+<h2>Exercises 2.4<a class="headerlink" href="#exercises-2-4" title="Link to this heading">#</a></h2>
+<section id="an-experiment-consists-in-selecting-a-card-from-a-deck-of-52-if-this-experiment-is-repeated-1000-times-what-is-the-expected-number-of">
+<h3>1. An experiment consists in selecting a card from a deck of 52. If this experiment is repeated 1000 times, what is the expected number of<a class="headerlink" href="#an-experiment-consists-in-selecting-a-card-from-a-deck-of-52-if-this-experiment-is-repeated-1000-times-what-is-the-expected-number-of" title="Link to this heading">#</a></h3>
+<section id="a-aces">
+<h4>(a) aces?<a class="headerlink" href="#a-aces" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+ p(\text{selecting ace}) = \frac{4}{52} = \frac{1}{13}
+\]</div>
+<p>So <span class="math notranslate nohighlight">\(EN = \frac{1}{13}(1000) \approx 76.923\)</span></p>
+</section>
+<section id="b-picture-cards">
+<h4>(b) picture cards?<a class="headerlink" href="#b-picture-cards" title="Link to this heading">#</a></h4>
+<p>Assuming that’s jack, queen, king</p>
+<div class="math notranslate nohighlight">
+\[
+  p(\text{selecting picture card}) = \frac{12}{52} = \frac{3}{13}  
+\]</div>
+<p>So <span class="math notranslate nohighlight">\(EN = \frac{3}{13}(1000) \approx 230.769\)</span></p>
+</section>
+<section id="c-5s-or-6s">
+<h4>(c) 5s or 6s?<a class="headerlink" href="#c-5s-or-6s" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[
+  p(\text{selecting 5 pr 6}) = \frac{8}{52} = \frac{2}{13}
+\]</div>
+<p>So <span class="math notranslate nohighlight">\(EN =  \frac{2}{13}(1000) \approx 153.846\)</span></p>
+</section>
+</section>
+<section id="a-card-is-selected-from-a-deck-of-52-and-then-re-inserted-into-the-deck-a-second-card-is-then-selected-from-the-deck-of-52-let-e-be-the-event-the-first-card-is-a-jack-and-let-f-be-the-event-the-second-card-is-a-queen-are-e-and-f-independent-events-compute-p-e-cap-f">
+<h3>2. A card is selected from a deck of 52 and then re-inserted into the deck. A second card is then selected from the deck of 52. Let <span class="math notranslate nohighlight">\(E\)</span> be the event “the first card is a Jack” and let <span class="math notranslate nohighlight">\(F\)</span> be the event “the second card is a Queen.” Are <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(F\)</span> independent events? Compute <span class="math notranslate nohighlight">\(p(E \cap F)\)</span>.<a class="headerlink" href="#a-card-is-selected-from-a-deck-of-52-and-then-re-inserted-into-the-deck-a-second-card-is-then-selected-from-the-deck-of-52-let-e-be-the-event-the-first-card-is-a-jack-and-let-f-be-the-event-the-second-card-is-a-queen-are-e-and-f-independent-events-compute-p-e-cap-f" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+ p(E) = \frac{4}{36} = \frac{1}{13}
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+ p(F) = \frac{4}{36} = \frac{1}{13} 
+\]</div>
+<p>Note the the sample set here is <span class="math notranslate nohighlight">\(52^2 = 2704\)</span> and there are <span class="math notranslate nohighlight">\(16\)</span> outcomes that match the criteria.  So</p>
+<div class="math notranslate nohighlight">
+\[                                        
+ p(E \cap F) = \frac{16}{2704} = \frac{1}{169}      
+\]</div>
+<p>This is exactly the same as <span class="math notranslate nohighlight">\(p(E)p(F)\)</span> so <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(F\)</span> are independent.</p>
+</section>
+<section id="in-a-survey-of-1000-people-categorized-as-smokers-or-nonsmokers-with-or-without-respiratory-problems-the-following-data-were-obtained">
+<h3>3. In a survey of 1000 people categorized as smokers or nonsmokers, with or without respiratory problems, the following data were obtained:<a class="headerlink" href="#in-a-survey-of-1000-people-categorized-as-smokers-or-nonsmokers-with-or-without-respiratory-problems-the-following-data-were-obtained" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head text-center"><p>Respiratory Problem (<span class="math notranslate nohighlight">\(R\)</span>)</p></th>
+<th class="head text-center"><p>No Respiratory Problem (<span class="math notranslate nohighlight">\(\sim\!R\)</span>)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Smokers (<span class="math notranslate nohighlight">\(S\)</span>)</p></td>
+<td class="text-center"><p>520</p></td>
+<td class="text-center"><p>180</p></td>
+</tr>
+<tr class="row-odd"><td><p>Nonsmokers (<span class="math notranslate nohighlight">\(\sim\!S\)</span>)</p></td>
+<td class="text-center"><p>77</p></td>
+<td class="text-center"><p>223</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Based on this data determine whether the following pairs of events are independent:</p>
+<div class="math notranslate nohighlight">
+\[
+ n(\text{sample set}) = 1000
+\]</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p></p></th>
+<th class="head text-center"><p>Probability</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(S\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(.700\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(\sim\!S\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(.300\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(R\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(.597\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(\sim\!R\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(.403\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="a-s-and-r">
+<h4>(a) S and R<a class="headerlink" href="#a-s-and-r" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\(p(S \cap R) = .520 \ne (.700)(.597)\)</span> so <em>not</em> independent</p>
+</section>
+<section id="b-s-and-r">
+<h4>(b) S and ~R<a class="headerlink" href="#b-s-and-r" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\(p(S \, \cap \sim\!R) = .180 \ne (.700)(.403)\)</span> so <em>not</em> independent</p>
+</section>
+<section id="c-s-and-r">
+<h4>(c) ~S and R<a class="headerlink" href="#c-s-and-r" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\(p(\sim\!S \cap R) = .077 \ne (.300)(.597)\)</span> so <em>not</em> independent</p>
+</section>
+<section id="d-s-and-r">
+<h4>(d) ~S and ~R<a class="headerlink" href="#d-s-and-r" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\(p(\sim\!S \, \cap \sim\!R) = .223 \ne (.300)(.403)\)</span> so <em>not</em> independent</p>
+</section>
+<section id="e-s-and-s">
+<h4>(e) S and ~S<a class="headerlink" href="#e-s-and-s" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\(p(S \, \cap \sim\!S) = .000 \ne (.700)(.300)\)</span> so <em>not</em> independent</p>
+</section>
+<section id="f-r-and-r">
+<h4>(f) R and ~R<a class="headerlink" href="#f-r-and-r" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\(p(R \, \cap \sim\!R) = .000 \ne (.597)(.403)\)</span> so <em>not</em> independent</p>
+</section>
+</section>
+<section id="suppose-that-in-a-certain-language-the-probability-of-two-characters-selected-at-random-from-a-text-being-the-same-is-0-03-if-a-document-in-this-language-contains-5713-characters">
+<h3>4. Suppose that in a certain language, the probability of two characters selected at random from a text being the same is 0.03. If a document in this language contains 5713 characters,<a class="headerlink" href="#suppose-that-in-a-certain-language-the-probability-of-two-characters-selected-at-random-from-a-text-being-the-same-is-0-03-if-a-document-in-this-language-contains-5713-characters" title="Link to this heading">#</a></h3>
+<section id="a-how-many-pairs-of-letters-without-regard-to-order-can-be-selected">
+<h4>(a) How many pairs of letters (without regard to order) can be selected?<a class="headerlink" href="#a-how-many-pairs-of-letters-without-regard-to-order-can-be-selected" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\(C(5713, 2) = 16316328\)</span></p>
+</section>
+<section id="b-of-these-how-many-would-you-expect-to-have-both-letters-being-the-same">
+<h4>(b) Of these, how many would you expect to have both letters being the same?<a class="headerlink" href="#b-of-these-how-many-would-you-expect-to-have-both-letters-being-the-same" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\( EN = (.03)(16316328) = 489489.84 \)</span></p>
+<p>The following problems refer to an experiment that consists of tossing two
+dice, one with bold font and one with italicized font. The sample space for this
+experiment is</p>
+<p>S = ( <br/>
+(<strong>1</strong>, <em>1</em>), (<strong>1</strong>, <em>2</em>), (<strong>1</strong>, <em>3</em>), (<strong>1</strong>, <em>4</em>), (<strong>1</strong>, <em>5</em>), (<strong>1</strong>, <em>6</em>),  <br/>
+(<strong>2</strong>, <em>1</em>), (<strong>2</strong>, <em>2</em>), (<strong>2</strong>, <em>3</em>), (<strong>2</strong>, <em>4</em>), (<strong>2</strong>, <em>5</em>), (<strong>2</strong>, <em>6</em>),  <br/>
+(<strong>3</strong>, <em>1</em>), (<strong>3</strong>, <em>2</em>), (<strong>3</strong>, <em>3</em>), (<strong>3</strong>, <em>4</em>), (<strong>3</strong>, <em>5</em>), (<strong>3</strong>, <em>6</em>),  <br/>
+(<strong>4</strong>, <em>1</em>), (<strong>4</strong>, <em>2</em>), (<strong>4</strong>, <em>3</em>), (<strong>4</strong>, <em>4</em>), (<strong>4</strong>, <em>5</em>), (<strong>4</strong>, <em>6</em>),  <br/>
+(<strong>5</strong>, <em>1</em>), (<strong>5</strong>, <em>2</em>), (<strong>5</strong>, <em>3</em>), (<strong>5</strong>, <em>4</em>), (<strong>5</strong>, <em>5</em>), (<strong>5</strong>, <em>6</em>),  <br/>
+(<strong>6</strong>, <em>1</em>), (<strong>6</strong>, <em>2</em>), (<strong>6</strong>, <em>3</em>), (<strong>6</strong>, <em>4</em>), (<strong>6</strong>, <em>5</em>), (<strong>6</strong>, <em>6</em>)   <br/>
+). <br/></p>
+</section>
+</section>
+<section id="find-the-probability-that">
+<h3>5. Find the probability that<a class="headerlink" href="#find-the-probability-that" title="Link to this heading">#</a></h3>
+<p>Notice that the total number of outcomes in <span class="math notranslate nohighlight">\(S\)</span> is <span class="math notranslate nohighlight">\(36\)</span> and that outcomes on the left-to-right-sloping-up diagonals add up to the same numbrer.  For the probability calcultions below, it is sufficient to count the number of outcomes that produce the given sum and divide by <span class="math notranslate nohighlight">\(36\)</span>.</p>
+<section id="a-the-sum-of-the-dice-is-2">
+<h4>(a) the sum of the dice is 2<a class="headerlink" href="#a-the-sum-of-the-dice-is-2" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\( \frac{1}{36} \)</span></p>
+</section>
+<section id="b-the-sum-of-the-dice-is-3">
+<h4>(b) the sum of the dice is 3.<a class="headerlink" href="#b-the-sum-of-the-dice-is-3" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\( \frac{2}{36} = \frac{1}{18}  \)</span></p>
+</section>
+<section id="c-the-sum-of-the-dice-is-4">
+<h4>(c) the sum of the dice is 4.<a class="headerlink" href="#c-the-sum-of-the-dice-is-4" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\( \frac{3}{36} = \frac{1}{12}  \)</span></p>
+</section>
+<section id="d-the-sum-of-the-dice-is-5">
+<h4>(d) the sum of the dice is 5.<a class="headerlink" href="#d-the-sum-of-the-dice-is-5" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\( \frac{4}{36} = \frac{1}{9}  \)</span></p>
+</section>
+<section id="e-the-sum-of-the-dice-is-6">
+<h4>(e) the sum of the dice is 6.<a class="headerlink" href="#e-the-sum-of-the-dice-is-6" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\( \frac{5}{36} \)</span></p>
+</section>
+<section id="f-the-sum-of-the-dice-is-7">
+<h4>(f) the sum of the dice is 7.<a class="headerlink" href="#f-the-sum-of-the-dice-is-7" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\( \frac{6}{36} = \frac{1}{6}  \)</span></p>
+</section>
+<section id="g-the-sum-of-the-dice-is-8">
+<h4>(g) the sum of the dice is 8.<a class="headerlink" href="#g-the-sum-of-the-dice-is-8" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\( \frac{5}{36} \)</span></p>
+</section>
+<section id="h-the-sum-of-the-dice-is-9">
+<h4>(h) the sum of the dice is 9.<a class="headerlink" href="#h-the-sum-of-the-dice-is-9" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\( \frac{4}{36} = \frac{1}{9}  \)</span></p>
+</section>
+<section id="i-the-sum-of-the-dice-is-10">
+<h4>(i) the sum of the dice is 10.<a class="headerlink" href="#i-the-sum-of-the-dice-is-10" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\( \frac{3}{36} = \frac{1}{12}  \)</span></p>
+</section>
+<section id="j-the-sum-of-the-dice-is-11">
+<h4>(j) the sum of the dice is 11.<a class="headerlink" href="#j-the-sum-of-the-dice-is-11" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\( \frac{2}{36} = \frac{1}{18}  \)</span></p>
+</section>
+<section id="k-the-sum-of-the-dice-is-12">
+<h4>(k) the sum of the dice is 12.<a class="headerlink" href="#k-the-sum-of-the-dice-is-12" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\( \frac{1}{36} \)</span></p>
+</section>
+<section id="l-the-sum-of-the-dice-is-13">
+<h4>(l) the sum of the dice is 13.<a class="headerlink" href="#l-the-sum-of-the-dice-is-13" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\( \frac{0}{36} = 0 \)</span></p>
+</section>
+</section>
+<section id="let-e-be-the-event-the-italicized-die-turns-up-5-and-f-the-event-the-bold-die-turns-up-3-are-e-and-f-independent">
+<h3>6. Let <span class="math notranslate nohighlight">\(E\)</span> be the event “the italicized die turns up 5” and <span class="math notranslate nohighlight">\(F\)</span> the event “the bold die turns up 3.” Are <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(F\)</span> independent?<a class="headerlink" href="#let-e-be-the-event-the-italicized-die-turns-up-5-and-f-the-event-the-bold-die-turns-up-3-are-e-and-f-independent" title="Link to this heading">#</a></h3>
+<p>yes, because <span class="math notranslate nohighlight">\(p(E) = \frac{1}{6}\)</span> and <span class="math notranslate nohighlight">\(p(F) = \frac{1}{6}\)</span> and <span class="math notranslate nohighlight">\(p(E \cap F) = \frac{1}{36} = p(E)p(F)\)</span></p>
+</section>
+<section id="let-e-be-the-event-the-sum-of-the-dice-is-even-and-let-f-be-the-event-the-sum-of-the-dice-is-greater-than-8-are-e-and-f-independent">
+<h3>7. Let <span class="math notranslate nohighlight">\(E\)</span> be the event “the sum of the dice is even” and let <span class="math notranslate nohighlight">\(F\)</span> be the event “the sum of the dice is greater than 8.” Are <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(F\)</span> independent?<a class="headerlink" href="#let-e-be-the-event-the-sum-of-the-dice-is-even-and-let-f-be-the-event-the-sum-of-the-dice-is-greater-than-8-are-e-and-f-independent" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+ p(E) = \frac{18}{36} = \frac{1}{2}
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+ p(F) = \frac{10}{36} = \frac{5}{18} 
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[                                        
+ p(E \cap F) = \frac{4}{36} = \frac{1}{9}      
+\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(p(E)p(F) \ne p(E \cap F)\)</span> so <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(F\)</span> are <em>not</em> independent.</p>
+</section>
+<section id="let-e-be-the-event-the-face-of-the-italicized-die-is-greater-than-or-equal-to-the-face-of-the-bold-die-and-let-f-be-the-event-the-sum-of-the-faces-is-11-or-12-are-e-and-f-independent">
+<h3>8. Let <span class="math notranslate nohighlight">\(E\)</span> be the event “the face of the italicized die is greater than or equal to the face of the bold die” and let <span class="math notranslate nohighlight">\(F\)</span> be the event “the sum of the faces is 11 or 12.” Are <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(F\)</span> independent?<a class="headerlink" href="#let-e-be-the-event-the-face-of-the-italicized-die-is-greater-than-or-equal-to-the-face-of-the-bold-die-and-let-f-be-the-event-the-sum-of-the-faces-is-11-or-12-are-e-and-f-independent" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+ p(E) = \frac{21}{36} = \frac{7}{12}   
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+ p(F) = \frac{3}{36} = \frac{1}{12}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+ p(E \cap F) = \frac{2}{36} = \frac{1}{18}      
+\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(p(E)p(F) \ne p(E \cap F)\)</span> so <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(F\)</span> are <em>not</em> independent.</p>
+</section>
+<section id="if-the-pair-of-dice-is-thrown-500-times-what-is-the-expected-number-of-7s">
+<h3>9. If the pair of dice is thrown 500 times, what is the expected number of 7s<a class="headerlink" href="#if-the-pair-of-dice-is-thrown-500-times-what-is-the-expected-number-of-7s" title="Link to this heading">#</a></h3>
+<p>Using the probability computed above</p>
+<div class="math notranslate nohighlight">
+\[
+  EN = \frac{1}{6}(500) \approx 83.33
+\]</div>
+</section>
+<section id="if-the-pair-of-dice-is-thrown-36-times-what-is-the-expected-number-of-11s">
+<h3>10. If the pair of dice is thrown 36 times, what is the expected number of 11s?<a class="headerlink" href="#if-the-pair-of-dice-is-thrown-36-times-what-is-the-expected-number-of-11s" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+  EN =  \frac{1}{18}(36) = 2
+\]</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./markdown"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2_3_probability.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">2.3 Probability</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../notebooks/2_5_disguising_the_frequencies.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2.5 Disguising the Frequencies</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-2-4">Exercises 2.4</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-experiment-consists-in-selecting-a-card-from-a-deck-of-52-if-this-experiment-is-repeated-1000-times-what-is-the-expected-number-of">1. An experiment consists in selecting a card from a deck of 52. If this experiment is repeated 1000 times, what is the expected number of</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-aces">(a) aces?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-picture-cards">(b) picture cards?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-5s-or-6s">(c) 5s or 6s?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-card-is-selected-from-a-deck-of-52-and-then-re-inserted-into-the-deck-a-second-card-is-then-selected-from-the-deck-of-52-let-e-be-the-event-the-first-card-is-a-jack-and-let-f-be-the-event-the-second-card-is-a-queen-are-e-and-f-independent-events-compute-p-e-cap-f">2. A card is selected from a deck of 52 and then re-inserted into the deck. A second card is then selected from the deck of 52. Let <span class="math notranslate nohighlight">\(E\)</span> be the event “the first card is a Jack” and let <span class="math notranslate nohighlight">\(F\)</span> be the event “the second card is a Queen.” Are <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(F\)</span> independent events? Compute <span class="math notranslate nohighlight">\(p(E \cap F)\)</span>.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-a-survey-of-1000-people-categorized-as-smokers-or-nonsmokers-with-or-without-respiratory-problems-the-following-data-were-obtained">3. In a survey of 1000 people categorized as smokers or nonsmokers, with or without respiratory problems, the following data were obtained:</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-s-and-r">(a) S and R</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-s-and-r">(b) S and ~R</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-s-and-r">(c) ~S and R</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-s-and-r">(d) ~S and ~R</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-s-and-s">(e) S and ~S</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#f-r-and-r">(f) R and ~R</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suppose-that-in-a-certain-language-the-probability-of-two-characters-selected-at-random-from-a-text-being-the-same-is-0-03-if-a-document-in-this-language-contains-5713-characters">4. Suppose that in a certain language, the probability of two characters selected at random from a text being the same is 0.03. If a document in this language contains 5713 characters,</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-how-many-pairs-of-letters-without-regard-to-order-can-be-selected">(a) How many pairs of letters (without regard to order) can be selected?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-of-these-how-many-would-you-expect-to-have-both-letters-being-the-same">(b) Of these, how many would you expect to have both letters being the same?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#find-the-probability-that">5. Find the probability that</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-the-sum-of-the-dice-is-2">(a) the sum of the dice is 2</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-the-sum-of-the-dice-is-3">(b) the sum of the dice is 3.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-the-sum-of-the-dice-is-4">(c) the sum of the dice is 4.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-the-sum-of-the-dice-is-5">(d) the sum of the dice is 5.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-the-sum-of-the-dice-is-6">(e) the sum of the dice is 6.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#f-the-sum-of-the-dice-is-7">(f) the sum of the dice is 7.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#g-the-sum-of-the-dice-is-8">(g) the sum of the dice is 8.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#h-the-sum-of-the-dice-is-9">(h) the sum of the dice is 9.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#i-the-sum-of-the-dice-is-10">(i) the sum of the dice is 10.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#j-the-sum-of-the-dice-is-11">(j) the sum of the dice is 11.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#k-the-sum-of-the-dice-is-12">(k) the sum of the dice is 12.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#l-the-sum-of-the-dice-is-13">(l) the sum of the dice is 13.</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-e-be-the-event-the-italicized-die-turns-up-5-and-f-the-event-the-bold-die-turns-up-3-are-e-and-f-independent">6. Let <span class="math notranslate nohighlight">\(E\)</span> be the event “the italicized die turns up 5” and <span class="math notranslate nohighlight">\(F\)</span> the event “the bold die turns up 3.” Are <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(F\)</span> independent?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-e-be-the-event-the-sum-of-the-dice-is-even-and-let-f-be-the-event-the-sum-of-the-dice-is-greater-than-8-are-e-and-f-independent">7. Let <span class="math notranslate nohighlight">\(E\)</span> be the event “the sum of the dice is even” and let <span class="math notranslate nohighlight">\(F\)</span> be the event “the sum of the dice is greater than 8.” Are <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(F\)</span> independent?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-e-be-the-event-the-face-of-the-italicized-die-is-greater-than-or-equal-to-the-face-of-the-bold-die-and-let-f-be-the-event-the-sum-of-the-faces-is-11-or-12-are-e-and-f-independent">8. Let <span class="math notranslate nohighlight">\(E\)</span> be the event “the face of the italicized die is greater than or equal to the face of the bold die” and let <span class="math notranslate nohighlight">\(F\)</span> be the event “the sum of the faces is 11 or 12.” Are <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(F\)</span> independent?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-the-pair-of-dice-is-thrown-500-times-what-is-the-expected-number-of-7s">9. If the pair of dice is thrown 500 times, what is the expected number of 7s</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-the-pair-of-dice-is-thrown-36-times-what-is-the-expected-number-of-11s">10. If the pair of dice is thrown 36 times, what is the expected number of 11s?</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Dan Douglas
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

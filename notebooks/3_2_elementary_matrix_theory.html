@@ -1,0 +1,1153 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3.2 Elementary Matrix Theory &#8212; Cryptological Mathematics Exercises</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/crypto-book.css?v=761dc443" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/3_2_elementary_matrix_theory';</script>
+    <script src="../_static/sidebar-togle.js?v=2b3ca58f"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3.3 Hill’s System" href="3_3_hills_system.html" />
+    <link rel="prev" title="3.1 Elementary Polygraphic Substitution Ciphers" href="3_1_elementary_polygraphic_substitution_ciphers.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../markdown/intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Cryptological Mathematics Exercises</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../markdown/intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Monoalphabetic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/1_1_induction.html">1.1 Induction Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_2_primes_gcd.html">1.2 Prime Numbers, Division Algorithm, Greatest Common Divisor Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_3_relative_primes.html">1.3 Relatively Prime Integers, Fundamental Theorem of Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_4_modular_arithmatic.html">1.4 Modular Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_5_simple_ciphers.html">1.5 Simple Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_6_cryptoanalysis_monoalphabetic_substitution_ciphers.html">1.6 Cryptoanalysis of Monoalphabetic Substitution Ciphers</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Polyalphabetic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_1_multiplication_principle.html">2.1 The Multiplication Principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_2_permutations_and_combinations.html">2.2 Permutations and Combinations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_3_probability.html">2.3 Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_4_independent_events_expected_number.html">2.4 Independent Events and Expected Number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_5_disguising_the_frequencies.html">2.5 Disguising the Frequencies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Polygraphic Substitution Ciphers</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3_1_elementary_polygraphic_substitution_ciphers.html">3.1 Elementary Polygraphic Substitution Ciphers</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3.2 Elementary Matrix Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_3_hills_system.html">3.3 Hill’s System</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Public Key Cryptography</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="4_1_more_number_theory.html">4.1 More Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_2_rsa_algorithm.html">4.2 The RSA Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_3_two_examples.html">4.3 Two Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_4_other_pk_cryptography.html">4.4 Other Illustrations of Public Key Cryptography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/3_2_elementary_matrix_theory.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>3.2 Elementary Matrix Theory</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-3-2">Exercises 3.2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-the-following-matrix-operations">1. Perform the following matrix operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a">(a)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b">(b)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c">(c)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d">(d)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e">(e)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f">(f)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#g">(g)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determine-the-additive-inverse-of-the-matrix">2. Determine the additive inverse of the matrix:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-the-multiplicative-inverses-if-they-exist-of-the-following-matrices">3. Fine the multiplicative inverses (if they exist) of the following matrices</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">(a)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">(b)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">(c)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">(d)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#show-that-if-the-product-of-two-matrices-is-the-zero-matrix-then-it-is-not-necessarily-true-that-one-of-them-must-be-the-zero-matrix">4. Show that if the product of two matrices is the zero matrix, then it is not necessarily true that one of them must be the zero matrix.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suppose-a-b-and-c-are-square-matrices-of-the-same-dimension-and-that-a-times-b-a-times-c-does-b-c-always-sometimes-or-never-justify-your-answer">5. Suppose <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span>, and <span class="math notranslate nohighlight">\(C\)</span> are square matrices of the same dimension and that <span class="math notranslate nohighlight">\(A \times B = A \times C\)</span>.  Does <span class="math notranslate nohighlight">\(B = C\)</span> always, sometimes, or never? Justify your answer.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#find-two-2-times-2-matrices-whoe-elements-are-integers-and-whose-multiplicative-inverses-are-also-matrices-of-integers">6. Find two <span class="math notranslate nohighlight">\(2 \times 2\)</span> matrices whoe elements are integers and whose multiplicative inverses are also matrices of integers.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-the-solution-to-the-system-of-equations-in-this-section-to-deduce-that-e-frac-d-ad-bc-and-g-frac-c-ad-bc">7. Complete the solution to the system of equations in this section to deduce that <span class="math notranslate nohighlight">\(e = \frac{d}{ad - bc}\)</span> and <span class="math notranslate nohighlight">\(g = \frac{-c}{ad-bc}\)</span>.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solve-the-following-systems-of-equations">10. Solve the following systems of equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">(a)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">(b)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">(c)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-triangle-with-vertices-0-7-7-0-3-3-is-rotated-135-degress-counter-clockwise-about-the-origin-what-are-its-new-coordinates">11. A triangle with vertices <span class="math notranslate nohighlight">\(\{(0,7), (7,0), (-3,-3)\}\)</span> is rotated 135 degress counter-clockwise about the origin.  What are its new coordinates?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-pentegon-with-vertices-2-2-2-2-2-2-0-6-2-2-is-rotated-45-degrees-clockwise-about-the-origin-what-are-its-new-coordinates">12. A pentegon with vertices <span class="math notranslate nohighlight">\(\{(2,2), (-2,2), (-2,-2), (0,-6), (2,-2)\}\)</span> is rotated 45 degrees clockwise about the origin.  What are its new coordinates.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiply-the-matrices-s-and-sr-of-example-3-10-on-the-right-by-the-matrix-begin-pmatrix-1-0-0-1-end-pmatrix-and-apply-the-drawing-algorithm-to-each-of-the-two-resulting-polygons-what-in-general-do-you-think-happens-when-you-multiply-the-vertices-of-a-polygon-by-begin-pmatrix-1-0-0-1-end-pmatrix">13. Multiply the matrices <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(SR\)</span> of Example 3.10 on the right by the matrix <span class="math notranslate nohighlight">\(\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\)</span> and apply the drawing algorithm to each of the two resulting polygons.   What, in general, do  you think happens when you multiply the vertices of a polygon by <span class="math notranslate nohighlight">\(\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\)</span>?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repeat-problem-13-for-the-two-matrices-p-and-pq-of-example-3-11">14. Repeat Problem #13 for the two matrices <span class="math notranslate nohighlight">\(P\)</span> and <span class="math notranslate nohighlight">\(PQ\)</span> of Example 3.11</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#argue-geometrically-that-every-matrix-of-the-form-begin-pmatrix-cos-theta-sin-theta-sin-theta-cos-theta-end-pmatrix-has-a-multiplicative-inverse-can-you-determine-the-inverse-of-begin-pmatrix-cos-theta-sin-theta-sin-theta-cos-theta-end-pmatrix-by-a-geometrical-argument">15. Argue geometrically that every matrix of the form <span class="math notranslate nohighlight">\(\begin{pmatrix} cos(\theta) &amp; sin(\theta) \\ -sin(\theta) &amp; cos(\theta) \end{pmatrix}\)</span> has a multiplicative inverse.  Can you determine the inverse of <span class="math notranslate nohighlight">\(\begin{pmatrix} cos(\theta) &amp; sin(\theta) \\ -sin(\theta) &amp; cos(\theta) \end{pmatrix}\)</span> by a geometrical argument?</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="elementary-matrix-theory">
+<h1>3.2 Elementary Matrix Theory<a class="headerlink" href="#elementary-matrix-theory" title="Link to this heading">#</a></h1>
+<section id="exercises-3-2">
+<h2>Exercises 3.2<a class="headerlink" href="#exercises-3-2" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Set the precision of the printed numbers for matrices.  5 decimal places, no scientific notation, make very small values zero</span>
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">formatter</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;float&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="mi">0</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">1e-10</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">x</span><span class="si">:</span><span class="s1">g</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="perform-the-following-matrix-operations">
+<h3>1. Perform the following matrix operations<a class="headerlink" href="#perform-the-following-matrix-operations" title="Link to this heading">#</a></h3>
+<section id="a">
+<h4>(a)<a class="headerlink" href="#a" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{pmatrix}
+    -3 &amp;  0 &amp;  7 &amp;  2 &amp; 8 \\
+     6 &amp; -1 &amp; 13 &amp;  4 &amp; 7 \\
+    -4 &amp;  9 &amp; -7 &amp; 14 &amp; 6 \\
+     5 &amp; -5 &amp; 10 &amp; -1 &amp; 0
+\end{pmatrix}
++
+\begin{pmatrix}
+     7 &amp; -9 &amp;  6 &amp;  2 &amp;  7 \\
+     7 &amp; 21 &amp; 14 &amp; -8 &amp; 23 \\
+    -4 &amp;  6 &amp;  7 &amp;  7 &amp; 11 \\
+    17 &amp;  6 &amp;  8 &amp; 18 &amp; 13
+\end{pmatrix}
+=
+\begin{pmatrix}
+     4 &amp; -9 &amp; 13 &amp;  4 &amp; 15 \\
+    13 &amp; 20 &amp; 27 &amp; -4 &amp; 30 \\
+    -8 &amp; 15 &amp;  0 &amp; 21 &amp; 17 \\
+    22 &amp;  1 &amp; 18 &amp; 17 &amp; 13
+\end{pmatrix}
+\end{split}\]</div>
+</section>
+<section id="b">
+<h4>(b)<a class="headerlink" href="#b" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{pmatrix}
+    -3 &amp;  0 &amp;  7 &amp;  2 &amp; 8 \\
+     6 &amp; -1 &amp; 13 &amp;  4 &amp; 7 \\
+    -4 &amp;  9 &amp; -7 &amp; 14 &amp; 6 \\
+     5 &amp; -5 &amp; 10 &amp; -1 &amp; 0
+\end{pmatrix}
+-
+\begin{pmatrix}
+     7 &amp; -9 &amp;  6 &amp;  2 &amp;  7 \\
+     7 &amp; 21 &amp; 14 &amp; -8 &amp; 23 \\
+    -4 &amp;  6 &amp;  7 &amp;  7 &amp; 11 \\
+    17 &amp;  6 &amp;  8 &amp; 18 &amp; 13
+\end{pmatrix}
+=
+\begin{pmatrix}
+   -10 &amp;   9 &amp;   1 &amp;   0 &amp;   1 \\
+    -1 &amp; -22 &amp;  -1 &amp;  12 &amp; -16 \\
+     0 &amp;   3 &amp; -14 &amp;   7 &amp;  -5 \\
+   -12 &amp; -11 &amp;   2 &amp; -19 &amp; -13
+\end{pmatrix}
+\end{split}\]</div>
+</section>
+</section>
+<section id="c">
+<h3>(c)<a class="headerlink" href="#c" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">3</span><span class="p">,</span>  <span class="mi">7</span><span class="p">,</span>  <span class="mi">7</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">0</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">8</span><span class="p">]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span>  <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">4</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[14 14 11]
+ [69 67 -4]
+ [60 32  1]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="d">
+<h3>(d)<a class="headerlink" href="#d" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">A</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[26 45 54]
+ [40 37 40]
+ [17 -2 19]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">4</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">6</span><span class="p">]])</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="e">
+<h3>(e)<a class="headerlink" href="#e" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 4 28 20]
+ [ 2 14 10]
+ [ 6 42 30]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="f">
+<h3>(f)<a class="headerlink" href="#f" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">C</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[48]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="g">
+<h3>(g)<a class="headerlink" href="#g" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">66</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="n">E</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ -24   12]
+ [ -42 -396]
+ [ -78   48]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="determine-the-additive-inverse-of-the-matrix">
+<h3>2. Determine the additive inverse of the matrix:<a class="headerlink" href="#determine-the-additive-inverse-of-the-matrix" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">F</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>  <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">],</span>
+              <span class="p">[</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span>  <span class="mi">4</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mi">11</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span>  <span class="mi">3</span><span class="p">,</span>  <span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span> <span class="o">-</span><span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span> <span class="mi">17</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">F</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[  6  -2  -7   8]
+ [  0   0 -13  -4]
+ [ 11  -3  -3  -2]
+ [  9  -7  -6 -17]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="fine-the-multiplicative-inverses-if-they-exist-of-the-following-matrices">
+<h3>3. Fine the multiplicative inverses (if they exist) of the following matrices<a class="headerlink" href="#fine-the-multiplicative-inverses-if-they-exist-of-the-following-matrices" title="Link to this heading">#</a></h3>
+<section id="id1">
+<h4>(a)<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">M_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">M_inv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.1 -0.2]
+ [0.3 0.4]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h4>(b)<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\(\begin{pmatrix} 4 &amp; 1 \\ 8 &amp; 2 \end{pmatrix}\)</span> is a singular matrix with no multiplicative inverse.</p>
+</section>
+<section id="id3">
+<h4>(c)<a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\(\begin{pmatrix} 17 &amp; 17 \\ 17 &amp; 17 \end{pmatrix}\)</span> is a singular matrix with no multiplicative inverse.</p>
+</section>
+<section id="id4">
+<h4>(d)<a class="headerlink" href="#id4" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span>
+<span class="n">M_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">M_inv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[5 -4]
+ [-11 9]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="show-that-if-the-product-of-two-matrices-is-the-zero-matrix-then-it-is-not-necessarily-true-that-one-of-them-must-be-the-zero-matrix">
+<h3>4. Show that if the product of two matrices is the zero matrix, then it is not necessarily true that one of them must be the zero matrix.<a class="headerlink" href="#show-that-if-the-product-of-two-matrices-is-the-zero-matrix-then-it-is-not-necessarily-true-that-one-of-them-must-be-the-zero-matrix" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">11</span><span class="p">]])</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">4</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">18</span><span class="p">,</span>  <span class="mi">0</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0 0]
+ [0 0]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">B</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0 0]
+ [0 0]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>both products are the zero matrix, but neither <span class="math notranslate nohighlight">\(B\)</span> or <span class="math notranslate nohighlight">\(C\)</span> are the zero matrix.</p>
+</section>
+<section id="suppose-a-b-and-c-are-square-matrices-of-the-same-dimension-and-that-a-times-b-a-times-c-does-b-c-always-sometimes-or-never-justify-your-answer">
+<h3>5. Suppose <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span>, and <span class="math notranslate nohighlight">\(C\)</span> are square matrices of the same dimension and that <span class="math notranslate nohighlight">\(A \times B = A \times C\)</span>.  Does <span class="math notranslate nohighlight">\(B = C\)</span> always, sometimes, or never? Justify your answer.<a class="headerlink" href="#suppose-a-b-and-c-are-square-matrices-of-the-same-dimension-and-that-a-times-b-a-times-c-does-b-c-always-sometimes-or-never-justify-your-answer" title="Link to this heading">#</a></h3>
+<p>If <span class="math notranslate nohighlight">\(B = C\)</span>, then the equation <span class="math notranslate nohighlight">\(A \times B = A \times C\)</span> holds so the answer is not <em>never</em>.</p>
+<p>Consider the following example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">4</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">18</span><span class="p">,</span>  <span class="mi">0</span><span class="p">]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">11</span><span class="p">]])</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0 0]
+ [0 0]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">C</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0 0]
+ [0 0]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that <span class="math notranslate nohighlight">\(A \times B = A \times C\)</span>, but clearly <span class="math notranslate nohighlight">\(B \ne C\)</span>, the the correct answer is:  <em><strong>sometimes</strong></em>.</p>
+</section>
+<section id="find-two-2-times-2-matrices-whoe-elements-are-integers-and-whose-multiplicative-inverses-are-also-matrices-of-integers">
+<h3>6. Find two <span class="math notranslate nohighlight">\(2 \times 2\)</span> matrices whoe elements are integers and whose multiplicative inverses are also matrices of integers.<a class="headerlink" href="#find-two-2-times-2-matrices-whoe-elements-are-integers-and-whose-multiplicative-inverses-are-also-matrices-of-integers" title="Link to this heading">#</a></h3>
+<p>Consider <span class="math notranslate nohighlight">\(\begin{pmatrix} 9 &amp; 4 \\ 11 &amp; 5 \end{pmatrix}\)</span> and <span class="math notranslate nohighlight">\(\begin{pmatrix} 5 &amp; -4 \\ -11 &amp; 9 \end{pmatrix}\)</span> from exercise <strong>3(c)</strong>, above.  These are two matrixes of integers, they are multiplicative inverses of each other.</p>
+<p>Another example is  <span class="math notranslate nohighlight">\(\begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 5 \end{pmatrix}\)</span> and <span class="math notranslate nohighlight">\(\begin{pmatrix} -5 &amp; 2 \\ 3 &amp; -1 \end{pmatrix}\)</span>.</p>
+</section>
+<section id="complete-the-solution-to-the-system-of-equations-in-this-section-to-deduce-that-e-frac-d-ad-bc-and-g-frac-c-ad-bc">
+<h3>7. Complete the solution to the system of equations in this section to deduce that <span class="math notranslate nohighlight">\(e = \frac{d}{ad - bc}\)</span> and <span class="math notranslate nohighlight">\(g = \frac{-c}{ad-bc}\)</span>.<a class="headerlink" href="#complete-the-solution-to-the-system-of-equations-in-this-section-to-deduce-that-e-frac-d-ad-bc-and-g-frac-c-ad-bc" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+  ce + dg &amp;= 0 \\
+        e &amp;= \frac{-dg}{c}
+\end{aligned}
+\end{split}\]</div>
+<p>which means</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+                          ae + bg &amp;= 1 \\
+            a  \frac{-dg}{c} + bg &amp;= 1 \\
+   \frac{-adg}{c} + \frac{bgc}{c} &amp;= 1 \\
+            \frac{g(-ad + bc)}{c} &amp;= 1 \\
+                                g &amp;= \frac{c}{-ad + bc} \\
+                                  &amp;= \frac{-c}{ad-bc}
+\end{aligned}
+\end{split}\]</div>
+<p>which also means</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+  ce + dg &amp;= 0 \\
+  ce - \frac{dc}{ad-bc} &amp;= 0 \\
+  ce &amp;= \frac{dc}{ad-bc} \\
+   e &amp;= \frac{d}{ad-bc}
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="solve-the-following-systems-of-equations">
+<h3>10. Solve the following systems of equations<a class="headerlink" href="#solve-the-following-systems-of-equations" title="Link to this heading">#</a></h3>
+<section id="id5">
+<h4>(a)<a class="headerlink" href="#id5" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+  7x - 12y &amp;= 13 \\
+  5x + 11y &amp;= 4
+\end{aligned}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">12</span><span class="p">],</span>
+              <span class="p">[</span> <span class="mi">5</span><span class="p">,</span>  <span class="mi">11</span><span class="p">]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">13</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">4</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">B</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1.39416]
+ [-0.270073]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h4>(b)<a class="headerlink" href="#id6" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+  -3x + 5y &amp;= 71 \\
+   7x - 19y &amp;= 32
+\end{aligned}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span>   <span class="mi">5</span><span class="p">],</span>
+              <span class="p">[</span>  <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">19</span><span class="p">]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">71</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">32</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">B</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-68.5909]
+ [-26.9545]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id7">
+<h4>(c)<a class="headerlink" href="#id7" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+  4x + 5y -  z &amp;= 8 \\
+  3x + 2y + 7z &amp;= 15 \\
+  6x - 7y - 2z &amp;= 4
+\end{aligned}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">3</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">7</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">8</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">15</span><span class="p">],</span>
+              <span class="p">[</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">B</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1.68433]
+ [0.507726]
+ [1.27594]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Used in problems 11 and 12, below</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">rotational_array</span><span class="p">(</span><span class="n">degrees</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts degrees to radians and returns a 2D array</span>
+<span class="sd">    that can be used to rotate a matrix of 2d coordinates</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">radians</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">degrees</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">radians</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">radians</span><span class="p">)],</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">radians</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">radians</span><span class="p">)]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="a-triangle-with-vertices-0-7-7-0-3-3-is-rotated-135-degress-counter-clockwise-about-the-origin-what-are-its-new-coordinates">
+<h3>11. A triangle with vertices <span class="math notranslate nohighlight">\(\{(0,7), (7,0), (-3,-3)\}\)</span> is rotated 135 degress counter-clockwise about the origin.  What are its new coordinates?<a class="headerlink" href="#a-triangle-with-vertices-0-7-7-0-3-3-is-rotated-135-degress-counter-clockwise-about-the-origin-what-are-its-new-coordinates" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">]])</span>
+<span class="n">rot</span> <span class="o">=</span> <span class="n">rotational_array</span><span class="p">(</span><span class="mi">135</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">rot</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-4.94975 -4.94975]
+ [-4.94975 4.94975]
+ [4.24264 0]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="a-pentegon-with-vertices-2-2-2-2-2-2-0-6-2-2-is-rotated-45-degrees-clockwise-about-the-origin-what-are-its-new-coordinates">
+<h3>12. A pentegon with vertices <span class="math notranslate nohighlight">\(\{(2,2), (-2,2), (-2,-2), (0,-6), (2,-2)\}\)</span> is rotated 45 degrees clockwise about the origin.  What are its new coordinates.<a class="headerlink" href="#a-pentegon-with-vertices-2-2-2-2-2-2-0-6-2-2-is-rotated-45-degrees-clockwise-about-the-origin-what-are-its-new-coordinates" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]])</span>
+<span class="n">rot</span> <span class="o">=</span> <span class="n">rotational_array</span><span class="p">(</span><span class="o">-</span><span class="mi">45</span><span class="p">)</span> <span class="c1"># negative sign because clockwise rotation</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">rot</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[2.82843 0]
+ [0 2.82843]
+ [-2.82843 0]
+ [-4.24264 -4.24264]
+ [0 -2.82843]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">draw_polygon</span><span class="p">(</span><span class="n">points</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">color_code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Draw a polygon</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Plot the points and connect them with lines</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+    <span class="c1"># Extract x and y coordinates</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Plot the points</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color_code</span><span class="o">+</span><span class="s1">&#39;o-&#39;</span><span class="p">)</span>  <span class="c1"># &#39;bo-&#39; means blue color, circles for points, solid line</span>
+
+    <span class="c1"># Connect the last point back to the first point</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">color_code</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>  <span class="c1"># &#39;b-&#39; means blue color, solid line</span>
+
+    <span class="c1"># Set equal aspect ratio to preserve shape</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Add grid for better visualization</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="multiply-the-matrices-s-and-sr-of-example-3-10-on-the-right-by-the-matrix-begin-pmatrix-1-0-0-1-end-pmatrix-and-apply-the-drawing-algorithm-to-each-of-the-two-resulting-polygons-what-in-general-do-you-think-happens-when-you-multiply-the-vertices-of-a-polygon-by-begin-pmatrix-1-0-0-1-end-pmatrix">
+<h3>13. Multiply the matrices <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(SR\)</span> of Example 3.10 on the right by the matrix <span class="math notranslate nohighlight">\(\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\)</span> and apply the drawing algorithm to each of the two resulting polygons.   What, in general, do  you think happens when you multiply the vertices of a polygon by <span class="math notranslate nohighlight">\(\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\)</span>?<a class="headerlink" href="#multiply-the-matrices-s-and-sr-of-example-3-10-on-the-right-by-the-matrix-begin-pmatrix-1-0-0-1-end-pmatrix-and-apply-the-drawing-algorithm-to-each-of-the-two-resulting-polygons-what-in-general-do-you-think-happens-when-you-multiply-the-vertices-of-a-polygon-by-begin-pmatrix-1-0-0-1-end-pmatrix" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">]])</span>
+<span class="n">SR</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">R</span><span class="p">)</span>
+<span class="n">REFLECTOR</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
+                      <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">draw_polygon</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+<span class="n">draw_polygon</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">REFLECTOR</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">draw_polygon</span><span class="p">(</span><span class="n">SR</span><span class="p">)</span>
+<span class="n">draw_polygon</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">SR</span><span class="p">,</span> <span class="n">REFLECTOR</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d67f39732d42d03f2e23af1eba230256461c1666bff473600bd16790e03103b4.png" src="../_images/d67f39732d42d03f2e23af1eba230256461c1666bff473600bd16790e03103b4.png" />
+<img alt="../_images/4b07ed9c54d52daea464d975d96582833a55f7ac0994f02f88cdf5dbf7793be8.png" src="../_images/4b07ed9c54d52daea464d975d96582833a55f7ac0994f02f88cdf5dbf7793be8.png" />
+<img alt="../_images/2b7a659bb76a89a22ec0fb2a3d4ec8f18a2cb76024d84e58f3bddd418d7f3c87.png" src="../_images/2b7a659bb76a89a22ec0fb2a3d4ec8f18a2cb76024d84e58f3bddd418d7f3c87.png" />
+<img alt="../_images/cd7be8dc02d3257c85e0bdd06f8385ba622a1006dcadc4fb6958d3920d7e497b.png" src="../_images/cd7be8dc02d3257c85e0bdd06f8385ba622a1006dcadc4fb6958d3920d7e497b.png" />
+</div>
+</div>
+<p>Multiplying by <span class="math notranslate nohighlight">\(\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\)</span> “flips” or reflects the polygon across the horizontal axis.</p>
+</section>
+<section id="repeat-problem-13-for-the-two-matrices-p-and-pq-of-example-3-11">
+<h3>14. Repeat Problem #13 for the two matrices <span class="math notranslate nohighlight">\(P\)</span> and <span class="math notranslate nohighlight">\(PQ\)</span> of Example 3.11<a class="headerlink" href="#repeat-problem-13-for-the-two-matrices-p-and-pq-of-example-3-11" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span>    <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span>    <span class="mi">0</span><span class="p">]])</span>
+<span class="n">radians</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">6</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">radians</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">radians</span><span class="p">)],</span>
+              <span class="p">[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">radians</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">radians</span><span class="p">)]])</span>
+<span class="n">PQ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">)</span>
+<span class="n">draw_polygon</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+<span class="n">draw_polygon</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">REFLECTOR</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">draw_polygon</span><span class="p">(</span><span class="n">PQ</span><span class="p">)</span>
+<span class="n">draw_polygon</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">PQ</span><span class="p">,</span> <span class="n">REFLECTOR</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/bc1c87d1d7d596261cab0b8171c0dc3e7c89c27cedb7bd77ecd95ffc951e28a9.png" src="../_images/bc1c87d1d7d596261cab0b8171c0dc3e7c89c27cedb7bd77ecd95ffc951e28a9.png" />
+<img alt="../_images/af723609c3f4c6a70ca69bda6c0d23ed1dde702395fc1bab6dbad1b5983329e9.png" src="../_images/af723609c3f4c6a70ca69bda6c0d23ed1dde702395fc1bab6dbad1b5983329e9.png" />
+<img alt="../_images/1f4cc53747367f93ac7ed49cac452a36cbd7768c832880439171cc5794c0d152.png" src="../_images/1f4cc53747367f93ac7ed49cac452a36cbd7768c832880439171cc5794c0d152.png" />
+<img alt="../_images/5bcd497018467b1bfda94abb6874b5e55e86416689367aa3c47ec1fbc1abcce2.png" src="../_images/5bcd497018467b1bfda94abb6874b5e55e86416689367aa3c47ec1fbc1abcce2.png" />
+</div>
+</div>
+</section>
+<section id="argue-geometrically-that-every-matrix-of-the-form-begin-pmatrix-cos-theta-sin-theta-sin-theta-cos-theta-end-pmatrix-has-a-multiplicative-inverse-can-you-determine-the-inverse-of-begin-pmatrix-cos-theta-sin-theta-sin-theta-cos-theta-end-pmatrix-by-a-geometrical-argument">
+<h3>15. Argue geometrically that every matrix of the form <span class="math notranslate nohighlight">\(\begin{pmatrix} cos(\theta) &amp; sin(\theta) \\ -sin(\theta) &amp; cos(\theta) \end{pmatrix}\)</span> has a multiplicative inverse.  Can you determine the inverse of <span class="math notranslate nohighlight">\(\begin{pmatrix} cos(\theta) &amp; sin(\theta) \\ -sin(\theta) &amp; cos(\theta) \end{pmatrix}\)</span> by a geometrical argument?<a class="headerlink" href="#argue-geometrically-that-every-matrix-of-the-form-begin-pmatrix-cos-theta-sin-theta-sin-theta-cos-theta-end-pmatrix-has-a-multiplicative-inverse-can-you-determine-the-inverse-of-begin-pmatrix-cos-theta-sin-theta-sin-theta-cos-theta-end-pmatrix-by-a-geometrical-argument" title="Link to this heading">#</a></h3>
+<p>As we have seen matrices in this form used as a transform rotate a polygon by <span class="math notranslate nohighlight">\(\theta\)</span> radians counter-clockwise.  A matrix that rotates a polygon by the same amount in the clockwise direction would undo the transformation.  This effectively would be the same as transforming the original polygon with the matrix <span class="math notranslate nohighlight">\(\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}\)</span> , or the identity matrix.  As we showed above, in Problem #12, the clockwise rotation matrix for <span class="math notranslate nohighlight">\(\theta\)</span> radians is <span class="math notranslate nohighlight">\(\begin{pmatrix} cos(-\theta) &amp; sin(-\theta) \\ -sin(-\theta) &amp; cos(-\theta) \end{pmatrix}\)</span></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="3_1_elementary_polygraphic_substitution_ciphers.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">3.1 Elementary Polygraphic Substitution Ciphers</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="3_3_hills_system.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">3.3 Hill’s System</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-3-2">Exercises 3.2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-the-following-matrix-operations">1. Perform the following matrix operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a">(a)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b">(b)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c">(c)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d">(d)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e">(e)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f">(f)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#g">(g)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determine-the-additive-inverse-of-the-matrix">2. Determine the additive inverse of the matrix:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-the-multiplicative-inverses-if-they-exist-of-the-following-matrices">3. Fine the multiplicative inverses (if they exist) of the following matrices</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">(a)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">(b)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">(c)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">(d)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#show-that-if-the-product-of-two-matrices-is-the-zero-matrix-then-it-is-not-necessarily-true-that-one-of-them-must-be-the-zero-matrix">4. Show that if the product of two matrices is the zero matrix, then it is not necessarily true that one of them must be the zero matrix.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suppose-a-b-and-c-are-square-matrices-of-the-same-dimension-and-that-a-times-b-a-times-c-does-b-c-always-sometimes-or-never-justify-your-answer">5. Suppose <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span>, and <span class="math notranslate nohighlight">\(C\)</span> are square matrices of the same dimension and that <span class="math notranslate nohighlight">\(A \times B = A \times C\)</span>.  Does <span class="math notranslate nohighlight">\(B = C\)</span> always, sometimes, or never? Justify your answer.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#find-two-2-times-2-matrices-whoe-elements-are-integers-and-whose-multiplicative-inverses-are-also-matrices-of-integers">6. Find two <span class="math notranslate nohighlight">\(2 \times 2\)</span> matrices whoe elements are integers and whose multiplicative inverses are also matrices of integers.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-the-solution-to-the-system-of-equations-in-this-section-to-deduce-that-e-frac-d-ad-bc-and-g-frac-c-ad-bc">7. Complete the solution to the system of equations in this section to deduce that <span class="math notranslate nohighlight">\(e = \frac{d}{ad - bc}\)</span> and <span class="math notranslate nohighlight">\(g = \frac{-c}{ad-bc}\)</span>.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solve-the-following-systems-of-equations">10. Solve the following systems of equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">(a)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">(b)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">(c)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-triangle-with-vertices-0-7-7-0-3-3-is-rotated-135-degress-counter-clockwise-about-the-origin-what-are-its-new-coordinates">11. A triangle with vertices <span class="math notranslate nohighlight">\(\{(0,7), (7,0), (-3,-3)\}\)</span> is rotated 135 degress counter-clockwise about the origin.  What are its new coordinates?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-pentegon-with-vertices-2-2-2-2-2-2-0-6-2-2-is-rotated-45-degrees-clockwise-about-the-origin-what-are-its-new-coordinates">12. A pentegon with vertices <span class="math notranslate nohighlight">\(\{(2,2), (-2,2), (-2,-2), (0,-6), (2,-2)\}\)</span> is rotated 45 degrees clockwise about the origin.  What are its new coordinates.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiply-the-matrices-s-and-sr-of-example-3-10-on-the-right-by-the-matrix-begin-pmatrix-1-0-0-1-end-pmatrix-and-apply-the-drawing-algorithm-to-each-of-the-two-resulting-polygons-what-in-general-do-you-think-happens-when-you-multiply-the-vertices-of-a-polygon-by-begin-pmatrix-1-0-0-1-end-pmatrix">13. Multiply the matrices <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(SR\)</span> of Example 3.10 on the right by the matrix <span class="math notranslate nohighlight">\(\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\)</span> and apply the drawing algorithm to each of the two resulting polygons.   What, in general, do  you think happens when you multiply the vertices of a polygon by <span class="math notranslate nohighlight">\(\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\)</span>?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repeat-problem-13-for-the-two-matrices-p-and-pq-of-example-3-11">14. Repeat Problem #13 for the two matrices <span class="math notranslate nohighlight">\(P\)</span> and <span class="math notranslate nohighlight">\(PQ\)</span> of Example 3.11</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#argue-geometrically-that-every-matrix-of-the-form-begin-pmatrix-cos-theta-sin-theta-sin-theta-cos-theta-end-pmatrix-has-a-multiplicative-inverse-can-you-determine-the-inverse-of-begin-pmatrix-cos-theta-sin-theta-sin-theta-cos-theta-end-pmatrix-by-a-geometrical-argument">15. Argue geometrically that every matrix of the form <span class="math notranslate nohighlight">\(\begin{pmatrix} cos(\theta) &amp; sin(\theta) \\ -sin(\theta) &amp; cos(\theta) \end{pmatrix}\)</span> has a multiplicative inverse.  Can you determine the inverse of <span class="math notranslate nohighlight">\(\begin{pmatrix} cos(\theta) &amp; sin(\theta) \\ -sin(\theta) &amp; cos(\theta) \end{pmatrix}\)</span> by a geometrical argument?</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Dan Douglas
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

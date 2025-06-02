@@ -1,0 +1,1189 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.2 Permutations and Combinations &#8212; Cryptological Mathematics Exercises</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/crypto-book.css?v=761dc443" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/2_2_permutations_and_combinations';</script>
+    <script src="../_static/sidebar-togle.js?v=2b3ca58f"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.3 Probability" href="../markdown/2_3_probability.html" />
+    <link rel="prev" title="2.1 The Multiplication Principle" href="../markdown/2_1_multiplication_principle.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../markdown/intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Cryptological Mathematics Exercises</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../markdown/intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Monoalphabetic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/1_1_induction.html">1.1 Induction Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_2_primes_gcd.html">1.2 Prime Numbers, Division Algorithm, Greatest Common Divisor Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_3_relative_primes.html">1.3 Relatively Prime Integers, Fundamental Theorem of Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_4_modular_arithmatic.html">1.4 Modular Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_5_simple_ciphers.html">1.5 Simple Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_6_cryptoanalysis_monoalphabetic_substitution_ciphers.html">1.6 Cryptoanalysis of Monoalphabetic Substitution Ciphers</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Polyalphabetic Substitution Ciphers</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_1_multiplication_principle.html">2.1 The Multiplication Principle</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2.2 Permutations and Combinations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_3_probability.html">2.3 Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_4_independent_events_expected_number.html">2.4 Independent Events and Expected Number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_5_disguising_the_frequencies.html">2.5 Disguising the Frequencies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Polygraphic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3_1_elementary_polygraphic_substitution_ciphers.html">3.1 Elementary Polygraphic Substitution Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_2_elementary_matrix_theory.html">3.2 Elementary Matrix Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_3_hills_system.html">3.3 Hill’s System</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Public Key Cryptography</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="4_1_more_number_theory.html">4.1 More Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_2_rsa_algorithm.html">4.2 The RSA Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_3_two_examples.html">4.3 Two Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_4_other_pk_cryptography.html">4.4 Other Illustrations of Public Key Cryptography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/2_2_permutations_and_combinations.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2.2 Permutations and Combinations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-2-2">Exercises 2.2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-computer-function-either-recursive-or-iterative-that-computes-n-then-incorporate-this-function-into-a-program-that-computes-p-n-r-and-c-n-r-for-any-legitimate-values-of-n-and-r-legitimate-values-of-n-are-non-negative-integers-and-legitimate-values-of-r-are-those-non-negative-integers-that-are-less-than-or-equal-to-n">16. Write a computer function (either recursive or iterative) that computes <span class="math notranslate nohighlight">\(n!\)</span>. Then incorporate this function into a program that computes <span class="math notranslate nohighlight">\(P(n, r)\)</span> and <span class="math notranslate nohighlight">\(C(n, r)\)</span> for any legitimate values of <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(r\)</span>. (Legitimate values of <span class="math notranslate nohighlight">\(n\)</span> are non-negative integers and legitimate values of <span class="math notranslate nohighlight">\(r\)</span> are those non-negative integers that are less than or equal to <span class="math notranslate nohighlight">\(n\)</span>.)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-each-of-the-following-expressions">1. Evaluate each of the following expressions:</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-p-12-3">(a) <span class="math notranslate nohighlight">\(P(12, 3)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-c-12-3">(b) <span class="math notranslate nohighlight">\(C(12, 3)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-p-9-0">(c) <span class="math notranslate nohighlight">\(P(9, 0)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-c-9-0">(d) <span class="math notranslate nohighlight">\(C(9, 0)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-p-8-7">(e) <span class="math notranslate nohighlight">\(P(8, 7)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#f-c-8-7">(f) <span class="math notranslate nohighlight">\(C(8, 7)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#g-p-75-75">(g) <span class="math notranslate nohighlight">\(P(75, 75)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#h-c-75-75">(h) <span class="math notranslate nohighlight">\(C(75, 75)\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-c-7-5-andc-7-2-explain-why-you-get-the-same-answer-for-both-expressions-generalize-your-discovery-to-c-n-r-and-c-n-n-r">2. Evaluate <span class="math notranslate nohighlight">\(C(7, 5)\)</span> and<span class="math notranslate nohighlight">\(C(7, 2)\)</span>. Explain why you get the same answer for both expressions. Generalize your discovery to <span class="math notranslate nohighlight">\(C(n, r\)</span> and <span class="math notranslate nohighlight">\(C(n, n-r)\)</span>.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-p-7-5-and-p-7-2-explain-why-you-do-not-get-the-same-answer-for-both-expressions">3. Evaluate <span class="math notranslate nohighlight">\(P(7, 5)\)</span> and <span class="math notranslate nohighlight">\(P(7, 2)\)</span>. Explain why you do not get the same answer for both expressions.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#there-are-24-letters-in-the-greek-alphabet-if-a-fraternity-or-sorority-name-consists-of-three-of-these-letters-how-many-names-are-possible">4. There are 24 letters in the Greek alphabet. If a fraternity or sorority name consists of three of these letters, how many names are possible?</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-no-letter-may-be-used-more-than-once-in-a-name">(a) no letter may be used more than once in a name,</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-letters-may-be-repeated-within-a-name">(b) letters may be repeated within a name.</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-many-basketball-lineups-consisting-of-5-members-can-be-chosen-from-a-team-consisting-of-13-players">5. How many basketball lineups (consisting of 5 members) can be chosen from a team consisting of 13 players?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-basketball-team-consists-of-two-guards-two-forwards-and-a-center-suppose-a-team-has-6-players-who-can-play-the-guard-position-8-who-can-play-forward-and-3-centers-now-how-many-lineups-are-possible">6. A basketball team consists of two guards, two forwards, and a center. Suppose a team has 6 players who can play the guard position, 8 who can play forward, and 3 centers. Now how many lineups are possible?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suppose-a-computer-network-requires-you-to-obtain-a-password-consisting-of-either-5-6-or-7-characters-the-characters-must-be-selected-from-either-the-twenty-six-letters-of-the-alphabet-or-the-ten-digits">7. Suppose a computer network requires you to obtain a password consisting of either 5, 6, or 7 characters. The characters must be selected from either the twenty-six letters of the alphabet or the ten digits.</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-assuming-no-character-may-be-used-more-than-once-in-a-password-how-many-passwords-are-possible-using-this-scheme">(a) Assuming no character may be used more than once in a password, how many passwords are possible using this scheme?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-how-many-passwords-are-possible-if-characters-may-be-used-more-than-once">(b) How many passwords are possible if characters may be used more than once?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-what-if-repetition-of-characters-is-allowed-and-the-first-character-must-be-alphabetic">(e) What if repetition of characters is allowed and the first character must be alphabetic?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-isbn-code-number-for-a-book-has-the-format-x-xx-xxxxxx-x-where-each-x-is-a-digit">8. An ISBN code number for a book has the format <code class="docutils literal notranslate"><span class="pre">X-XX-XXXXXX-X</span></code> where each X is a digit.</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-how-many-isbn-codes-are-possible">(a) How many ISBN codes are possible?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-how-many-of-those-codes-consist-of-numbers-not-used-more-than-once">(b) How many of those codes consist of numbers not used more than once?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#oscar-is-packing-for-his-new-assignment-he-has-3-shirts-4-ties-6-pairs-of-pants-1-pair-of-shoes-2-belts-and-8-pairs-of-socks-he-s-decided-to-pack-2-shirts-2-ties-3-pairs-of-pants-1-pair-of-shoes-2-belts-and-5-pairs-of-socks-in-how-many-different-ways-can-he-make-these-selections">9. Oscar is packing for his new assignment. He has 3 shirts, 4 ties, 6 pairs of pants, 1 pair of shoes, 2 belts, and 8 pairs of socks. He’s decided to pack 2 shirts, 2 ties, 3 pairs of pants, 1 pair of shoes, 2 belts, and 5 pairs of socks. In how many different ways can he make these selections?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stephanie-stops-at-the-cafeteria-to-get-a-double-dip-ice-cream-cone-the-cafeteria-has-7-flavors-from-which-to-choose">10. Stephanie stops at the cafeteria to get a double dip ice cream cone. The cafeteria has 7 flavors from which to choose.</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-assume-stephanie-doesn-t-care-which-flavor-is-on-the-bottom-and-which-is-on-the-top-if-she-gets-two-different-flavors-how-many-choices-does-she-have">(a) Assume Stephanie doesn’t care which flavor is on the bottom and which is on the top. If she gets two different flavors, how many choices does she have?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-what-if-it-does-make-a-difference-to-stephanie-which-flavor-is-on-the-bottom-and-which-is-on-the-top-that-is-what-if-she-considers-vanilla-on-top-of-chocolate-to-be-different-from-chocolate-on-top-of-vanilla-now-how-many-choices-does-she-have-if-she-gets-two-different-flavors">(b) What if it does make a difference to Stephanie which flavor is on the bottom and which is on the top. That is, what if she considers vanilla on top of chocolate to be different from chocolate on top of vanilla. Now how many choices does she have if she gets two different flavors?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-what-if-order-doesn-t-matter-and-she-doesn-t-insist-that-the-two-scoops-be-different-flavors">(c) What if order doesn’t matter and she doesn’t insist that the two scoops be different flavors?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beth-stephanie-molly-and-oscar-find-themselves-thrown-together-in-a-social-situation-and-each-shakes-hands-with-each-other-how-many-handshakes-are-exchanged-how-many-handshakes-would-be-exchanged-if-each-of-15-people-in-a-room-shook-hands-with-each-other-what-if-there-were-n-people-in-the-room">11. Beth, Stephanie, Molly and Oscar find themselves thrown together in a social situation and each shakes hands with each other. How many handshakes are exchanged? How many handshakes would be exchanged if each of 15 people in a room shook hands with each other? What if there were n people in the room?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-basketball-conference-has-8-member-teams-if-each-team-plays-each-other-team-twice-during-the-season-how-many-games-are-played">12. A basketball conference has 8 member teams. If each team plays each other team twice during the season, how many games are played?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suppose-a-lottery-ticket-contains-6-numbers-chosen-from-the-integers-between-0-and-39-inclusive-how-many-different-tickets-are-possible-assuming">13. Suppose a lottery ticket contains 6 numbers chosen from the integers between 0 and 39 inclusive. How many different tickets are possible assuming</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-the-order-of-the-numbers-on-the-ticket-is-irrelevant">(a) the order of the numbers on the ticket is irrelevant,</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-the-order-of-the-numbers-on-the-tickets-is-relevant">(b) the order of the numbers on the tickets is relevant.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-pre-season-soccer-poll-will-rank-the-top-25-teams-from-the-830-teams-in-the-country-how-many-different-rankings-are-possible">14. A pre-season soccer poll will rank the top 25 teams from the 830 teams in the country. How many different rankings are possible?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#of-the-52-cards-in-a-deck-of-cards-13-are-hearts-13-are-diamonds-13-are-spades-and-13-are-clubs">15. Of the 52 cards in a deck of cards, 13 are hearts, 13 are diamonds, 13 are spades, and 13 are clubs.</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-how-many-poker-hands-consisting-of-5-cards-will-contain-2-hearts-1-diamond-and-2-clubs">(a) How many poker hands (consisting of 5 cards) will contain 2 hearts, 1 diamond, and 2 clubs?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-how-many-bridge-hands-consisting-of-13-cards-will-contain-7-spades-and-6-diamonds">(b) How many bridge hands (consisting of 13 cards) will contain 7 spades and 6 diamonds?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-how-many-bridge-hands-will-contain-3-hearts-3-diamonds-5-clubs-and-2-spades">(c) How many bridge hands will contain 3 hearts, 3 diamonds, 5 clubs, and 2 spades?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-how-many-bridge-hands-will-contain-all-spades">(d) How many bridge hands will contain all spades?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-how-many-bridge-hands-will-contain-cards-all-of-the-same-suit">(e) How many bridge hands will contain cards all of the same suit?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="permutations-and-combinations">
+<h1>2.2 Permutations and Combinations<a class="headerlink" href="#permutations-and-combinations" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="exercises-2-2">
+<h2>Exercises 2.2<a class="headerlink" href="#exercises-2-2" title="Link to this heading">#</a></h2>
+<section id="write-a-computer-function-either-recursive-or-iterative-that-computes-n-then-incorporate-this-function-into-a-program-that-computes-p-n-r-and-c-n-r-for-any-legitimate-values-of-n-and-r-legitimate-values-of-n-are-non-negative-integers-and-legitimate-values-of-r-are-those-non-negative-integers-that-are-less-than-or-equal-to-n">
+<h3>16. Write a computer function (either recursive or iterative) that computes <span class="math notranslate nohighlight">\(n!\)</span>. Then incorporate this function into a program that computes <span class="math notranslate nohighlight">\(P(n, r)\)</span> and <span class="math notranslate nohighlight">\(C(n, r)\)</span> for any legitimate values of <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(r\)</span>. (Legitimate values of <span class="math notranslate nohighlight">\(n\)</span> are non-negative integers and legitimate values of <span class="math notranslate nohighlight">\(r\)</span> are those non-negative integers that are less than or equal to <span class="math notranslate nohighlight">\(n\)</span>.)<a class="headerlink" href="#write-a-computer-function-either-recursive-or-iterative-that-computes-n-then-incorporate-this-function-into-a-program-that-computes-p-n-r-and-c-n-r-for-any-legitimate-values-of-n-and-r-legitimate-values-of-n-are-non-negative-integers-and-legitimate-values-of-r-are-those-non-negative-integers-that-are-less-than-or-equal-to-n" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_validate_n</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Values must be non-negative, not </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_validate</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">_validate_n</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Values for r must be non-negative, and &lt;= </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> not </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute n!</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_validate_n</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">permutations</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute P(n, r)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_validate</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">//</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">r</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">combinations</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute C(n, r)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_validate</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">//</span> <span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">r</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="evaluate-each-of-the-following-expressions">
+<h3>1. Evaluate each of the following expressions:<a class="headerlink" href="#evaluate-each-of-the-following-expressions" title="Link to this heading">#</a></h3>
+<section id="a-p-12-3">
+<h4>(a) <span class="math notranslate nohighlight">\(P(12, 3)\)</span><a class="headerlink" href="#a-p-12-3" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">permutations</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1320
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="b-c-12-3">
+<h4>(b) <span class="math notranslate nohighlight">\(C(12, 3)\)</span><a class="headerlink" href="#b-c-12-3" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>220
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="c-p-9-0">
+<h4>(c) <span class="math notranslate nohighlight">\(P(9, 0)\)</span><a class="headerlink" href="#c-p-9-0" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">permutations</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="d-c-9-0">
+<h4>(d) <span class="math notranslate nohighlight">\(C(9, 0)\)</span><a class="headerlink" href="#d-c-9-0" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="e-p-8-7">
+<h4>(e) <span class="math notranslate nohighlight">\(P(8, 7)\)</span><a class="headerlink" href="#e-p-8-7" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">permutations</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40320
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="f-c-8-7">
+<h4>(f) <span class="math notranslate nohighlight">\(C(8, 7)\)</span><a class="headerlink" href="#f-c-8-7" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="g-p-75-75">
+<h4>(g) <span class="math notranslate nohighlight">\(P(75, 75)\)</span><a class="headerlink" href="#g-p-75-75" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">permutations</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="mi">75</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24809140811395398091946477116594033660926243886570122837795894512655842677572867409443815424000000000000000000
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="h-c-75-75">
+<h4>(h) <span class="math notranslate nohighlight">\(C(75, 75)\)</span><a class="headerlink" href="#h-c-75-75" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="mi">75</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="evaluate-c-7-5-andc-7-2-explain-why-you-get-the-same-answer-for-both-expressions-generalize-your-discovery-to-c-n-r-and-c-n-n-r">
+<h3>2. Evaluate <span class="math notranslate nohighlight">\(C(7, 5)\)</span> and<span class="math notranslate nohighlight">\(C(7, 2)\)</span>. Explain why you get the same answer for both expressions. Generalize your discovery to <span class="math notranslate nohighlight">\(C(n, r\)</span> and <span class="math notranslate nohighlight">\(C(n, n-r)\)</span>.<a class="headerlink" href="#evaluate-c-7-5-andc-7-2-explain-why-you-get-the-same-answer-for-both-expressions-generalize-your-discovery-to-c-n-r-and-c-n-n-r" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21
+</pre></div>
+</div>
+</div>
+</div>
+<p>Intuitively, choosing <span class="math notranslate nohighlight">\(5\)</span> elements from <span class="math notranslate nohighlight">\(7\)</span> is the same as choosing the <span class="math notranslate nohighlight">\(2\)</span> that are excluded.</p>
+<p>Generally, this looks like</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+C(n, r) &amp;= \frac{n!}{r!(n-r)!} \\
+ &amp;= \frac{n!}{(n-r)!r!} \\
+ &amp;= \frac{n!}{(n-r)!(n-(n-r))!} \\
+ &amp;= C(n, n-r)
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="evaluate-p-7-5-and-p-7-2-explain-why-you-do-not-get-the-same-answer-for-both-expressions">
+<h3>3. Evaluate <span class="math notranslate nohighlight">\(P(7, 5)\)</span> and <span class="math notranslate nohighlight">\(P(7, 2)\)</span>. Explain why you do not get the same answer for both expressions.<a class="headerlink" href="#evaluate-p-7-5-and-p-7-2-explain-why-you-do-not-get-the-same-answer-for-both-expressions" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">permutations</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2520
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">permutations</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42
+</pre></div>
+</div>
+</div>
+</div>
+<p>Intuitively, there are many more ways to permute <span class="math notranslate nohighlight">\(5\)</span> elements than <span class="math notranslate nohighlight">\(2\)</span> elements.</p>
+<p><span class="math notranslate nohighlight">\(P(7, 5) = 7 \cdot 6 \cdot 5 \cdot 4 \cdot 3\)</span></p>
+<p>whereas</p>
+<p><span class="math notranslate nohighlight">\(P(7, 2) = 7 \cdot 6 \)</span></p>
+</section>
+<section id="there-are-24-letters-in-the-greek-alphabet-if-a-fraternity-or-sorority-name-consists-of-three-of-these-letters-how-many-names-are-possible">
+<h3>4. There are 24 letters in the Greek alphabet. If a fraternity or sorority name consists of three of these letters, how many names are possible?<a class="headerlink" href="#there-are-24-letters-in-the-greek-alphabet-if-a-fraternity-or-sorority-name-consists-of-three-of-these-letters-how-many-names-are-possible" title="Link to this heading">#</a></h3>
+<section id="a-no-letter-may-be-used-more-than-once-in-a-name">
+<h4>(a) no letter may be used more than once in a name,<a class="headerlink" href="#a-no-letter-may-be-used-more-than-once-in-a-name" title="Link to this heading">#</a></h4>
+<p>If no letter may be used more than once, then this is <span class="math notranslate nohighlight">\(P(24, 3)\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">permutations</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12144
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="b-letters-may-be-repeated-within-a-name">
+<h4>(b) letters may be repeated within a name.<a class="headerlink" href="#b-letters-may-be-repeated-within-a-name" title="Link to this heading">#</a></h4>
+<p>If letters may be repeated, then this is <span class="math notranslate nohighlight">\(24^3\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13824
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="how-many-basketball-lineups-consisting-of-5-members-can-be-chosen-from-a-team-consisting-of-13-players">
+<h3>5. How many basketball lineups (consisting of 5 members) can be chosen from a team consisting of 13 players?<a class="headerlink" href="#how-many-basketball-lineups-consisting-of-5-members-can-be-chosen-from-a-team-consisting-of-13-players" title="Link to this heading">#</a></h3>
+<p>This is <span class="math notranslate nohighlight">\(C(13, 5)\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1287
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="a-basketball-team-consists-of-two-guards-two-forwards-and-a-center-suppose-a-team-has-6-players-who-can-play-the-guard-position-8-who-can-play-forward-and-3-centers-now-how-many-lineups-are-possible">
+<h3>6. A basketball team consists of two guards, two forwards, and a center. Suppose a team has 6 players who can play the guard position, 8 who can play forward, and 3 centers. Now how many lineups are possible?<a class="headerlink" href="#a-basketball-team-consists-of-two-guards-two-forwards-and-a-center-suppose-a-team-has-6-players-who-can-play-the-guard-position-8-who-can-play-forward-and-3-centers-now-how-many-lineups-are-possible" title="Link to this heading">#</a></h3>
+<p>The number of lineups is the product of the number of position assignments:</p>
+<p><span class="math notranslate nohighlight">\(C(6, 2) \cdot C(8, 2) \cdot C(3, 1)\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">combinations</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">combinations</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1260
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="suppose-a-computer-network-requires-you-to-obtain-a-password-consisting-of-either-5-6-or-7-characters-the-characters-must-be-selected-from-either-the-twenty-six-letters-of-the-alphabet-or-the-ten-digits">
+<h3>7. Suppose a computer network requires you to obtain a password consisting of either 5, 6, or 7 characters. The characters must be selected from either the twenty-six letters of the alphabet or the ten digits.<a class="headerlink" href="#suppose-a-computer-network-requires-you-to-obtain-a-password-consisting-of-either-5-6-or-7-characters-the-characters-must-be-selected-from-either-the-twenty-six-letters-of-the-alphabet-or-the-ten-digits" title="Link to this heading">#</a></h3>
+<p>For this exercise, assume that the password only uses lowercase letters.  That leaves a set of 36 characters.</p>
+<section id="a-assuming-no-character-may-be-used-more-than-once-in-a-password-how-many-passwords-are-possible-using-this-scheme">
+<h4>(a) Assuming no character may be used more than once in a password, how many passwords are possible using this scheme?<a class="headerlink" href="#a-assuming-no-character-may-be-used-more-than-once-in-a-password-how-many-passwords-are-possible-using-this-scheme" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\(P(36, 5) + P(36, 6) + P(36, 7)\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">permutations</span><span class="p">(</span><span class="mi">36</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="n">permutations</span><span class="p">(</span><span class="mi">36</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="o">+</span> <span class="n">permutations</span><span class="p">(</span><span class="mi">36</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>43519956480
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="b-how-many-passwords-are-possible-if-characters-may-be-used-more-than-once">
+<h4>(b) How many passwords are possible if characters may be used more than once?<a class="headerlink" href="#b-how-many-passwords-are-possible-if-characters-may-be-used-more-than-once" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\(36^5 + 36^6 + 36^7\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">36</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">36</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">36</span><span class="p">,</span> <span class="mi">7</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>80601412608
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="e-what-if-repetition-of-characters-is-allowed-and-the-first-character-must-be-alphabetic">
+<h4>(e) What if repetition of characters is allowed and the first character must be alphabetic?<a class="headerlink" href="#e-what-if-repetition-of-characters-is-allowed-and-the-first-character-must-be-alphabetic" title="Link to this heading">#</a></h4>
+<p>The first character comes from a set of 26 characters and then is added to the the <span class="math notranslate nohighlight">\(4\)</span>, <span class="math notranslate nohighlight">\(5\)</span>, or <span class="math notranslate nohighlight">\(6\)</span> characters that make up the rest of the password.</p>
+<p><span class="math notranslate nohighlight">\(26 \cdot 36^4 + 26 \cdot 36^5 + 26 \cdot 36^6\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">26</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">36</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="mi">26</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">36</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">26</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">36</span><span class="p">,</span> <span class="mi">6</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>58212131328
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="an-isbn-code-number-for-a-book-has-the-format-x-xx-xxxxxx-x-where-each-x-is-a-digit">
+<h3>8. An ISBN code number for a book has the format <code class="docutils literal notranslate"><span class="pre">X-XX-XXXXXX-X</span></code> where each X is a digit.<a class="headerlink" href="#an-isbn-code-number-for-a-book-has-the-format-x-xx-xxxxxx-x-where-each-x-is-a-digit" title="Link to this heading">#</a></h3>
+<section id="a-how-many-isbn-codes-are-possible">
+<h4>(a) How many ISBN codes are possible?<a class="headerlink" href="#a-how-many-isbn-codes-are-possible" title="Link to this heading">#</a></h4>
+<p>There are 10 <code class="docutils literal notranslate"><span class="pre">X</span></code> in the ISBN and 10 possible digits for each, so this is <span class="math notranslate nohighlight">\(10^10\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10000000000
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="b-how-many-of-those-codes-consist-of-numbers-not-used-more-than-once">
+<h4>(b) How many of those codes consist of numbers not used more than once?<a class="headerlink" href="#b-how-many-of-those-codes-consist-of-numbers-not-used-more-than-once" title="Link to this heading">#</a></h4>
+<p>This is just <span class="math notranslate nohighlight">\(P(10,10) = 10!\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">permutations</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3628800
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="oscar-is-packing-for-his-new-assignment-he-has-3-shirts-4-ties-6-pairs-of-pants-1-pair-of-shoes-2-belts-and-8-pairs-of-socks-he-s-decided-to-pack-2-shirts-2-ties-3-pairs-of-pants-1-pair-of-shoes-2-belts-and-5-pairs-of-socks-in-how-many-different-ways-can-he-make-these-selections">
+<h3>9. Oscar is packing for his new assignment. He has 3 shirts, 4 ties, 6 pairs of pants, 1 pair of shoes, 2 belts, and 8 pairs of socks. He’s decided to pack 2 shirts, 2 ties, 3 pairs of pants, 1 pair of shoes, 2 belts, and 5 pairs of socks. In how many different ways can he make these selections?<a class="headerlink" href="#oscar-is-packing-for-his-new-assignment-he-has-3-shirts-4-ties-6-pairs-of-pants-1-pair-of-shoes-2-belts-and-8-pairs-of-socks-he-s-decided-to-pack-2-shirts-2-ties-3-pairs-of-pants-1-pair-of-shoes-2-belts-and-5-pairs-of-socks-in-how-many-different-ways-can-he-make-these-selections" title="Link to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(C(3, 2) \cdot C(4, 2) \cdot C(6, 3) \cdot C(1, 1) \cdot C(2, 2) \cdot C(8, 5)\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">combinations</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">combinations</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">combinations</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">combinations</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">combinations</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20160
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="stephanie-stops-at-the-cafeteria-to-get-a-double-dip-ice-cream-cone-the-cafeteria-has-7-flavors-from-which-to-choose">
+<h3>10. Stephanie stops at the cafeteria to get a double dip ice cream cone. The cafeteria has 7 flavors from which to choose.<a class="headerlink" href="#stephanie-stops-at-the-cafeteria-to-get-a-double-dip-ice-cream-cone-the-cafeteria-has-7-flavors-from-which-to-choose" title="Link to this heading">#</a></h3>
+<section id="a-assume-stephanie-doesn-t-care-which-flavor-is-on-the-bottom-and-which-is-on-the-top-if-she-gets-two-different-flavors-how-many-choices-does-she-have">
+<h4>(a) Assume Stephanie doesn’t care which flavor is on the bottom and which is on the top. If she gets two different flavors, how many choices does she have?<a class="headerlink" href="#a-assume-stephanie-doesn-t-care-which-flavor-is-on-the-bottom-and-which-is-on-the-top-if-she-gets-two-different-flavors-how-many-choices-does-she-have" title="Link to this heading">#</a></h4>
+<p>This is <span class="math notranslate nohighlight">\(C(7,2)\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="b-what-if-it-does-make-a-difference-to-stephanie-which-flavor-is-on-the-bottom-and-which-is-on-the-top-that-is-what-if-she-considers-vanilla-on-top-of-chocolate-to-be-different-from-chocolate-on-top-of-vanilla-now-how-many-choices-does-she-have-if-she-gets-two-different-flavors">
+<h4>(b) What if it does make a difference to Stephanie which flavor is on the bottom and which is on the top. That is, what if she considers vanilla on top of chocolate to be different from chocolate on top of vanilla. Now how many choices does she have if she gets two different flavors?<a class="headerlink" href="#b-what-if-it-does-make-a-difference-to-stephanie-which-flavor-is-on-the-bottom-and-which-is-on-the-top-that-is-what-if-she-considers-vanilla-on-top-of-chocolate-to-be-different-from-chocolate-on-top-of-vanilla-now-how-many-choices-does-she-have-if-she-gets-two-different-flavors" title="Link to this heading">#</a></h4>
+<p>This is <span class="math notranslate nohighlight">\(P(7, 2)\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">permutations</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="c-what-if-order-doesn-t-matter-and-she-doesn-t-insist-that-the-two-scoops-be-different-flavors">
+<h4>(c) What if order doesn’t matter and she doesn’t insist that the two scoops be different flavors?<a class="headerlink" href="#c-what-if-order-doesn-t-matter-and-she-doesn-t-insist-that-the-two-scoops-be-different-flavors" title="Link to this heading">#</a></h4>
+<p>Well, since repeats are allowed, there are <span class="math notranslate nohighlight">\(7^2 = 49\)</span> ways of choosing the flavors.  There are <span class="math notranslate nohighlight">\(7\)</span> ways of choosing the same flavor twice.  That means there are <span class="math notranslate nohighlight">\(42\)</span> ways of choosing two different flavors, but each of these is counted twice and since order doesn’t matter, we need to halve that number, leaving us with <span class="math notranslate nohighlight">\(21\)</span>, so the answer is</p>
+<div class="math notranslate nohighlight">
+\[
+ 7 + \frac{42}{2} = 28
+\]</div>
+</section>
+</section>
+<section id="beth-stephanie-molly-and-oscar-find-themselves-thrown-together-in-a-social-situation-and-each-shakes-hands-with-each-other-how-many-handshakes-are-exchanged-how-many-handshakes-would-be-exchanged-if-each-of-15-people-in-a-room-shook-hands-with-each-other-what-if-there-were-n-people-in-the-room">
+<h3>11. Beth, Stephanie, Molly and Oscar find themselves thrown together in a social situation and each shakes hands with each other. How many handshakes are exchanged? How many handshakes would be exchanged if each of 15 people in a room shook hands with each other? What if there were n people in the room?<a class="headerlink" href="#beth-stephanie-molly-and-oscar-find-themselves-thrown-together-in-a-social-situation-and-each-shakes-hands-with-each-other-how-many-handshakes-are-exchanged-how-many-handshakes-would-be-exchanged-if-each-of-15-people-in-a-room-shook-hands-with-each-other-what-if-there-were-n-people-in-the-room" title="Link to this heading">#</a></h3>
+<p>There are four people, so the number of ways to shake hands is <span class="math notranslate nohighlight">\(C(4, 2) = 6\)</span></p>
+<p>If there were 15 people, it would be <span class="math notranslate nohighlight">\(C(15, 2) = 105\)</span></p>
+<p>In the general case, for <span class="math notranslate nohighlight">\(n \ge 2\)</span> it is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+C(n, 2) &amp;= \frac{n!}{2!(n-2)!} \\
+ &amp;= \frac{n(n-1)}{2}
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="a-basketball-conference-has-8-member-teams-if-each-team-plays-each-other-team-twice-during-the-season-how-many-games-are-played">
+<h3>12. A basketball conference has 8 member teams. If each team plays each other team twice during the season, how many games are played?<a class="headerlink" href="#a-basketball-conference-has-8-member-teams-if-each-team-plays-each-other-team-twice-during-the-season-how-many-games-are-played" title="Link to this heading">#</a></h3>
+<p>This is</p>
+<p><span class="math notranslate nohighlight">\(2 \cdot C(8, 2) = 56\)</span></p>
+</section>
+<section id="suppose-a-lottery-ticket-contains-6-numbers-chosen-from-the-integers-between-0-and-39-inclusive-how-many-different-tickets-are-possible-assuming">
+<h3>13. Suppose a lottery ticket contains 6 numbers chosen from the integers between 0 and 39 inclusive. How many different tickets are possible assuming<a class="headerlink" href="#suppose-a-lottery-ticket-contains-6-numbers-chosen-from-the-integers-between-0-and-39-inclusive-how-many-different-tickets-are-possible-assuming" title="Link to this heading">#</a></h3>
+<section id="a-the-order-of-the-numbers-on-the-ticket-is-irrelevant">
+<h4>(a) the order of the numbers on the ticket is irrelevant,<a class="headerlink" href="#a-the-order-of-the-numbers-on-the-ticket-is-irrelevant" title="Link to this heading">#</a></h4>
+<p>Well, there are 40 numbers, so there are <span class="math notranslate nohighlight">\(C(40, 6)\)</span> ways of choosing the numbers</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3838380
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="b-the-order-of-the-numbers-on-the-tickets-is-relevant">
+<h4>(b) the order of the numbers on the tickets is relevant.<a class="headerlink" href="#b-the-order-of-the-numbers-on-the-tickets-is-relevant" title="Link to this heading">#</a></h4>
+<p>This is <span class="math notranslate nohighlight">\(P(40, 6)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">permutations</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2763633600
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="a-pre-season-soccer-poll-will-rank-the-top-25-teams-from-the-830-teams-in-the-country-how-many-different-rankings-are-possible">
+<h4>14. A pre-season soccer poll will rank the top 25 teams from the 830 teams in the country. How many different rankings are possible?<a class="headerlink" href="#a-pre-season-soccer-poll-will-rank-the-top-25-teams-from-the-830-teams-in-the-country-how-many-different-rankings-are-possible" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\(P(830, 25)\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">permutations</span><span class="p">(</span><span class="mi">830</span><span class="p">,</span> <span class="mi">25</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6582800300205286974486467442495694539641963287074348938433302495232000000
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="of-the-52-cards-in-a-deck-of-cards-13-are-hearts-13-are-diamonds-13-are-spades-and-13-are-clubs">
+<h3>15. Of the 52 cards in a deck of cards, 13 are hearts, 13 are diamonds, 13 are spades, and 13 are clubs.<a class="headerlink" href="#of-the-52-cards-in-a-deck-of-cards-13-are-hearts-13-are-diamonds-13-are-spades-and-13-are-clubs" title="Link to this heading">#</a></h3>
+<section id="a-how-many-poker-hands-consisting-of-5-cards-will-contain-2-hearts-1-diamond-and-2-clubs">
+<h4>(a) How many poker hands (consisting of 5 cards) will contain 2 hearts, 1 diamond, and 2 clubs?<a class="headerlink" href="#a-how-many-poker-hands-consisting-of-5-cards-will-contain-2-hearts-1-diamond-and-2-clubs" title="Link to this heading">#</a></h4>
+<p>This is <span class="math notranslate nohighlight">\(C(13, 2) \cdot C(13, 1) \cdot C(13,2)\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">combinations</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">combinations</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>79092
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="b-how-many-bridge-hands-consisting-of-13-cards-will-contain-7-spades-and-6-diamonds">
+<h4>(b) How many bridge hands (consisting of 13 cards) will contain 7 spades and 6 diamonds?<a class="headerlink" href="#b-how-many-bridge-hands-consisting-of-13-cards-will-contain-7-spades-and-6-diamonds" title="Link to this heading">#</a></h4>
+<p>This is <span class="math notranslate nohighlight">\(C(13, 7) \cdot C(13, 6)\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span> <span class="o">*</span> <span class="n">combinations</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2944656
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="c-how-many-bridge-hands-will-contain-3-hearts-3-diamonds-5-clubs-and-2-spades">
+<h4>(c) How many bridge hands will contain 3 hearts, 3 diamonds, 5 clubs, and 2 spades?<a class="headerlink" href="#c-how-many-bridge-hands-will-contain-3-hearts-3-diamonds-5-clubs-and-2-spades" title="Link to this heading">#</a></h4>
+<p>This is <span class="math notranslate nohighlight">\(C(13, 3) \cdot C(13, 3) \cdot C(13, 5) \cdot C(13, 2)\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">combinations</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">combinations</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="n">combinations</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8211173256
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="d-how-many-bridge-hands-will-contain-all-spades">
+<h4>(d) How many bridge hands will contain all spades?<a class="headerlink" href="#d-how-many-bridge-hands-will-contain-all-spades" title="Link to this heading">#</a></h4>
+<p>This is <span class="math notranslate nohighlight">\(C(13, 13) = 1\)</span></p>
+</section>
+<section id="e-how-many-bridge-hands-will-contain-cards-all-of-the-same-suit">
+<h4>(e) How many bridge hands will contain cards all of the same suit?<a class="headerlink" href="#e-how-many-bridge-hands-will-contain-cards-all-of-the-same-suit" title="Link to this heading">#</a></h4>
+<p>This is <span class="math notranslate nohighlight">\(C(13, 13) + C(13, 13) + C(13, 13) + C(13, 13) = 4\)</span></p>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../markdown/2_1_multiplication_principle.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">2.1 The Multiplication Principle</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../markdown/2_3_probability.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2.3 Probability</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-2-2">Exercises 2.2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-computer-function-either-recursive-or-iterative-that-computes-n-then-incorporate-this-function-into-a-program-that-computes-p-n-r-and-c-n-r-for-any-legitimate-values-of-n-and-r-legitimate-values-of-n-are-non-negative-integers-and-legitimate-values-of-r-are-those-non-negative-integers-that-are-less-than-or-equal-to-n">16. Write a computer function (either recursive or iterative) that computes <span class="math notranslate nohighlight">\(n!\)</span>. Then incorporate this function into a program that computes <span class="math notranslate nohighlight">\(P(n, r)\)</span> and <span class="math notranslate nohighlight">\(C(n, r)\)</span> for any legitimate values of <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(r\)</span>. (Legitimate values of <span class="math notranslate nohighlight">\(n\)</span> are non-negative integers and legitimate values of <span class="math notranslate nohighlight">\(r\)</span> are those non-negative integers that are less than or equal to <span class="math notranslate nohighlight">\(n\)</span>.)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-each-of-the-following-expressions">1. Evaluate each of the following expressions:</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-p-12-3">(a) <span class="math notranslate nohighlight">\(P(12, 3)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-c-12-3">(b) <span class="math notranslate nohighlight">\(C(12, 3)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-p-9-0">(c) <span class="math notranslate nohighlight">\(P(9, 0)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-c-9-0">(d) <span class="math notranslate nohighlight">\(C(9, 0)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-p-8-7">(e) <span class="math notranslate nohighlight">\(P(8, 7)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#f-c-8-7">(f) <span class="math notranslate nohighlight">\(C(8, 7)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#g-p-75-75">(g) <span class="math notranslate nohighlight">\(P(75, 75)\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#h-c-75-75">(h) <span class="math notranslate nohighlight">\(C(75, 75)\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-c-7-5-andc-7-2-explain-why-you-get-the-same-answer-for-both-expressions-generalize-your-discovery-to-c-n-r-and-c-n-n-r">2. Evaluate <span class="math notranslate nohighlight">\(C(7, 5)\)</span> and<span class="math notranslate nohighlight">\(C(7, 2)\)</span>. Explain why you get the same answer for both expressions. Generalize your discovery to <span class="math notranslate nohighlight">\(C(n, r\)</span> and <span class="math notranslate nohighlight">\(C(n, n-r)\)</span>.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-p-7-5-and-p-7-2-explain-why-you-do-not-get-the-same-answer-for-both-expressions">3. Evaluate <span class="math notranslate nohighlight">\(P(7, 5)\)</span> and <span class="math notranslate nohighlight">\(P(7, 2)\)</span>. Explain why you do not get the same answer for both expressions.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#there-are-24-letters-in-the-greek-alphabet-if-a-fraternity-or-sorority-name-consists-of-three-of-these-letters-how-many-names-are-possible">4. There are 24 letters in the Greek alphabet. If a fraternity or sorority name consists of three of these letters, how many names are possible?</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-no-letter-may-be-used-more-than-once-in-a-name">(a) no letter may be used more than once in a name,</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-letters-may-be-repeated-within-a-name">(b) letters may be repeated within a name.</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-many-basketball-lineups-consisting-of-5-members-can-be-chosen-from-a-team-consisting-of-13-players">5. How many basketball lineups (consisting of 5 members) can be chosen from a team consisting of 13 players?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-basketball-team-consists-of-two-guards-two-forwards-and-a-center-suppose-a-team-has-6-players-who-can-play-the-guard-position-8-who-can-play-forward-and-3-centers-now-how-many-lineups-are-possible">6. A basketball team consists of two guards, two forwards, and a center. Suppose a team has 6 players who can play the guard position, 8 who can play forward, and 3 centers. Now how many lineups are possible?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suppose-a-computer-network-requires-you-to-obtain-a-password-consisting-of-either-5-6-or-7-characters-the-characters-must-be-selected-from-either-the-twenty-six-letters-of-the-alphabet-or-the-ten-digits">7. Suppose a computer network requires you to obtain a password consisting of either 5, 6, or 7 characters. The characters must be selected from either the twenty-six letters of the alphabet or the ten digits.</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-assuming-no-character-may-be-used-more-than-once-in-a-password-how-many-passwords-are-possible-using-this-scheme">(a) Assuming no character may be used more than once in a password, how many passwords are possible using this scheme?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-how-many-passwords-are-possible-if-characters-may-be-used-more-than-once">(b) How many passwords are possible if characters may be used more than once?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-what-if-repetition-of-characters-is-allowed-and-the-first-character-must-be-alphabetic">(e) What if repetition of characters is allowed and the first character must be alphabetic?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-isbn-code-number-for-a-book-has-the-format-x-xx-xxxxxx-x-where-each-x-is-a-digit">8. An ISBN code number for a book has the format <code class="docutils literal notranslate"><span class="pre">X-XX-XXXXXX-X</span></code> where each X is a digit.</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-how-many-isbn-codes-are-possible">(a) How many ISBN codes are possible?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-how-many-of-those-codes-consist-of-numbers-not-used-more-than-once">(b) How many of those codes consist of numbers not used more than once?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#oscar-is-packing-for-his-new-assignment-he-has-3-shirts-4-ties-6-pairs-of-pants-1-pair-of-shoes-2-belts-and-8-pairs-of-socks-he-s-decided-to-pack-2-shirts-2-ties-3-pairs-of-pants-1-pair-of-shoes-2-belts-and-5-pairs-of-socks-in-how-many-different-ways-can-he-make-these-selections">9. Oscar is packing for his new assignment. He has 3 shirts, 4 ties, 6 pairs of pants, 1 pair of shoes, 2 belts, and 8 pairs of socks. He’s decided to pack 2 shirts, 2 ties, 3 pairs of pants, 1 pair of shoes, 2 belts, and 5 pairs of socks. In how many different ways can he make these selections?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stephanie-stops-at-the-cafeteria-to-get-a-double-dip-ice-cream-cone-the-cafeteria-has-7-flavors-from-which-to-choose">10. Stephanie stops at the cafeteria to get a double dip ice cream cone. The cafeteria has 7 flavors from which to choose.</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-assume-stephanie-doesn-t-care-which-flavor-is-on-the-bottom-and-which-is-on-the-top-if-she-gets-two-different-flavors-how-many-choices-does-she-have">(a) Assume Stephanie doesn’t care which flavor is on the bottom and which is on the top. If she gets two different flavors, how many choices does she have?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-what-if-it-does-make-a-difference-to-stephanie-which-flavor-is-on-the-bottom-and-which-is-on-the-top-that-is-what-if-she-considers-vanilla-on-top-of-chocolate-to-be-different-from-chocolate-on-top-of-vanilla-now-how-many-choices-does-she-have-if-she-gets-two-different-flavors">(b) What if it does make a difference to Stephanie which flavor is on the bottom and which is on the top. That is, what if she considers vanilla on top of chocolate to be different from chocolate on top of vanilla. Now how many choices does she have if she gets two different flavors?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-what-if-order-doesn-t-matter-and-she-doesn-t-insist-that-the-two-scoops-be-different-flavors">(c) What if order doesn’t matter and she doesn’t insist that the two scoops be different flavors?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beth-stephanie-molly-and-oscar-find-themselves-thrown-together-in-a-social-situation-and-each-shakes-hands-with-each-other-how-many-handshakes-are-exchanged-how-many-handshakes-would-be-exchanged-if-each-of-15-people-in-a-room-shook-hands-with-each-other-what-if-there-were-n-people-in-the-room">11. Beth, Stephanie, Molly and Oscar find themselves thrown together in a social situation and each shakes hands with each other. How many handshakes are exchanged? How many handshakes would be exchanged if each of 15 people in a room shook hands with each other? What if there were n people in the room?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-basketball-conference-has-8-member-teams-if-each-team-plays-each-other-team-twice-during-the-season-how-many-games-are-played">12. A basketball conference has 8 member teams. If each team plays each other team twice during the season, how many games are played?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suppose-a-lottery-ticket-contains-6-numbers-chosen-from-the-integers-between-0-and-39-inclusive-how-many-different-tickets-are-possible-assuming">13. Suppose a lottery ticket contains 6 numbers chosen from the integers between 0 and 39 inclusive. How many different tickets are possible assuming</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-the-order-of-the-numbers-on-the-ticket-is-irrelevant">(a) the order of the numbers on the ticket is irrelevant,</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-the-order-of-the-numbers-on-the-tickets-is-relevant">(b) the order of the numbers on the tickets is relevant.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-pre-season-soccer-poll-will-rank-the-top-25-teams-from-the-830-teams-in-the-country-how-many-different-rankings-are-possible">14. A pre-season soccer poll will rank the top 25 teams from the 830 teams in the country. How many different rankings are possible?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#of-the-52-cards-in-a-deck-of-cards-13-are-hearts-13-are-diamonds-13-are-spades-and-13-are-clubs">15. Of the 52 cards in a deck of cards, 13 are hearts, 13 are diamonds, 13 are spades, and 13 are clubs.</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-how-many-poker-hands-consisting-of-5-cards-will-contain-2-hearts-1-diamond-and-2-clubs">(a) How many poker hands (consisting of 5 cards) will contain 2 hearts, 1 diamond, and 2 clubs?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-how-many-bridge-hands-consisting-of-13-cards-will-contain-7-spades-and-6-diamonds">(b) How many bridge hands (consisting of 13 cards) will contain 7 spades and 6 diamonds?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-how-many-bridge-hands-will-contain-3-hearts-3-diamonds-5-clubs-and-2-spades">(c) How many bridge hands will contain 3 hearts, 3 diamonds, 5 clubs, and 2 spades?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-how-many-bridge-hands-will-contain-all-spades">(d) How many bridge hands will contain all spades?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-how-many-bridge-hands-will-contain-cards-all-of-the-same-suit">(e) How many bridge hands will contain cards all of the same suit?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Dan Douglas
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
