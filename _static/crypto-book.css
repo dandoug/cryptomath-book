@@ -50,3 +50,12 @@ body.sidebar-hidden .bd-article-container {
 .bd-article-container {
     transition: all 0.3s ease-in-out;
 }
+
+/* Mermaid diagram theme compatibility */
+.mermaid svg {
+    background-color: transparent !important;
+}
+
+html[data-theme="dark"] .mermaid svg {
+    filter: invert(0.85);
+}

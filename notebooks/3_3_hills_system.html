@@ -1,0 +1,1509 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3.3 Hill’s System &#8212; Cryptological Mathematics Exercises</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/crypto-book.css?v=761dc443" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/3_3_hills_system';</script>
+    <script src="../_static/sidebar-togle.js?v=2b3ca58f"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="3.2 Elementary Matrix Theory" href="3_2_elementary_matrix_theory.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../markdown/intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Cryptological Mathematics Exercises</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../markdown/intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Monoalphabetic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/1_1_induction.html">1.1 Induction Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_2_primes_gcd.html">1.2 Prime Numbers, Division Algorithm, Greatest Common Divisor Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_3_relative_primes.html">1.3 Relatively Prime Integers, Fundamental Theorem of Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_4_modular_arithmatic.html">1.4 Modular Arithmatic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_5_simple_ciphers.html">1.5 Simple Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_6_cryptoanalysis_monoalphabetic_substitution_ciphers.html">1.6 Cryptoanalysis of Monoalphabetic Substitution Ciphers</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Polyalphabetic Substitution Ciphers</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_1_multiplication_principle.html">2.1 The Multiplication Principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_2_permutations_and_combinations.html">2.2 Permutations and Combinations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_3_probability.html">2.3 Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown/2_4_independent_events_expected_number.html">2.4 Independent Events and Expected Number</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_5_disguising_the_frequencies.html">2.5 Disguising the Frequencies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Polygraphic Substitution Ciphers</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3_1_elementary_polygraphic_substitution_ciphers.html">3.1 Elementary Polygraphic Substitution Ciphers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_2_elementary_matrix_theory.html">3.2 Elementary Matrix Theory</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3.3 Hill’s System</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/3_3_hills_system.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>3.3 Hill’s System</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-3-3">Exercises 3.3</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-computer-program-to-both-encipher-and-decipher-a-message-using-hill-s-digraph-system">5. Write a computer program to both encipher and decipher a message using Hill’s (digraph) System.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-hill-s-system-with-key-begin-pmatrix-6-3-7-8-end-pmatrix-encipher-the-message">1. Using Hill’s System with <span class="math notranslate nohighlight">\(key = \begin{pmatrix} 6 &amp; 3 \\ 7 &amp; 8 \end{pmatrix}\)</span> encipher the message:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decipher-the-following-message-that-was-enciphered-using-hill-s-system-with-key-begin-pmatrix-3-2-8-5-end-pmatrix">2. Decipher the following message that was enciphered using Hill’s System with <span class="math notranslate nohighlight">\(key = \begin{pmatrix} 3 &amp; 2 \\ 8 &amp; 5 \end{pmatrix}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-extending-hill-s-digraph-system-to-a-trigraph-system-that-is-rather-than-enciphering-and-deciphering-characters-in-pairs-you-wish-to-encipher-them-three-at-a-time-describe-how-you-would-proceed-be-sure-to-consider-whatever-restrictions-are-necessary-to-impose-on-the-key-to-assure-that-a-message-is-decipherable-hint-see-exercises-3-2-9">4. Consider extending Hill’s (digraph) System to a trigraph system. That is, rather than enciphering and deciphering characters in pairs, you wish to encipher them three at a time. Describe how you would proceed. Be sure to consider whatever restrictions are necessary to impose on the key to assure that a message is decipherable. (Hint: See Exercises 3.2, #9.)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#molly-has-intercepted-the-following-message-that-was-enciphered-using-hill-s-system-digraph-version">3. Molly has intercepted the following message that was enciphered using Hill’s System (digraph version):</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="hill-s-system">
+<h1>3.3 Hill’s System<a class="headerlink" href="#hill-s-system" title="Link to this heading">#</a></h1>
+<section id="exercises-3-3">
+<h2>Exercises 3.3<a class="headerlink" href="#exercises-3-3" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span><span class="p">))</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">npt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.hills_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">matrix_inverse_mod26</span><span class="p">,</span> <span class="n">validate_hills_key</span><span class="p">,</span> <span class="n">is_invertible_mod_26</span><span class="p">,</span> <span class="n">TopResults</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">CHARACTERS</span><span class="p">,</span> <span class="n">strip_text</span><span class="p">,</span> <span class="n">format_ciphertext</span><span class="p">,</span> <span class="n">format_plaintext</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">char_at</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.ngrams_data.top_ngrams</span><span class="w"> </span><span class="kn">import</span> <span class="n">TOP_ENGLISH_QUINTGRAMS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.ngrams_scorer</span><span class="w"> </span><span class="kn">import</span> <span class="n">NgramScorer</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="write-a-computer-program-to-both-encipher-and-decipher-a-message-using-hill-s-digraph-system">
+<h3>5. Write a computer program to both encipher and decipher a message using Hill’s (digraph) System.<a class="headerlink" href="#write-a-computer-program-to-both-encipher-and-decipher-a-message-using-hill-s-digraph-system" title="Link to this heading">#</a></h3>
+<p>We implement the general case which includes <span class="math notranslate nohighlight">\(2\times2\)</span> (digraph).  See <a class="reference external" href="https://github.com/dandoug/cryptomath-book/blob/main/src/hills_system.py">hills_system.py</a> for the validation logic and the computation of the inverse key.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">hills_transform</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">],</span> <span class="n">input_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This is the heart of the Hill&#39;s cipher system.  It takes a key and a string and returns the encrypted/decrypted string.</span>
+<span class="sd">    No validation or cleanup is done here.  This method is intended to be wrapped by other code that does any</span>
+<span class="sd">    necessary checking or preparation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">output_chars</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_str</span><span class="p">),</span> <span class="n">n</span><span class="p">):</span>
+        <span class="n">input_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">pos</span><span class="p">(</span><span class="n">c</span><span class="p">)]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">input_str</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">n</span><span class="p">]])</span>
+        <span class="n">output_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">input_vector</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">output_vector</span><span class="p">:</span>
+            <span class="n">output_chars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">char_at</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_chars</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">HillsCipher</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">pad_char</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;q&#39;</span><span class="p">):</span>
+        <span class="n">validate_hills_key</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inv_key</span> <span class="o">=</span> <span class="n">matrix_inverse_mod26</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Key is not invertible mod 26&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pad_char</span> <span class="o">=</span> <span class="n">pad_char</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pad_char</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">pad_char</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CHARACTERS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;pad_char must be a single character&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">encipher</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plaintext</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Encipher a message using Hill&#39;s cipher system.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">plaintext</span> <span class="o">=</span> <span class="n">strip_text</span><span class="p">(</span><span class="n">plaintext</span><span class="p">)</span>
+        <span class="c1">#  pad plaintext if the length is a multiple of n</span>
+        <span class="n">padding_length</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">-</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">plaintext</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">))</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span>
+        <span class="n">plaintext</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pad_char</span> <span class="o">*</span> <span class="n">padding_length</span>
+        <span class="n">ciphertext</span> <span class="o">=</span> <span class="n">hills_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">plaintext</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ciphertext</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">decipher</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ciphertext</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deciphers the given ciphertext using Hill cipher decryption.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ciphertext</span> <span class="o">=</span> <span class="n">strip_text</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Ciphertext length must be a multiple of n&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">hills_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inv_key</span><span class="p">,</span> <span class="n">ciphertext</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-hill-s-system-with-key-begin-pmatrix-6-3-7-8-end-pmatrix-encipher-the-message">
+<h3>1. Using Hill’s System with <span class="math notranslate nohighlight">\(key = \begin{pmatrix} 6 &amp; 3 \\ 7 &amp; 8 \end{pmatrix}\)</span> encipher the message:<a class="headerlink" href="#using-hill-s-system-with-key-begin-pmatrix-6-3-7-8-end-pmatrix-encipher-the-message" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="n">It</span> <span class="ow">is</span> <span class="n">lonely</span> <span class="n">at</span> <span class="n">the</span> <span class="n">top</span><span class="p">;</span> <span class="n">but</span> <span class="n">you</span> <span class="n">eat</span> <span class="n">better</span><span class="o">.</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cipher_1</span> <span class="o">=</span> <span class="n">HillsCipher</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]]))</span>
+<span class="n">plaintext_1</span> <span class="o">=</span> <span class="s2">&quot;It is lonely at the top; but you eat better.&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ciphertext_1</span> <span class="o">=</span> <span class="n">cipher_1</span><span class="o">.</span><span class="n">encipher</span><span class="p">(</span><span class="n">plaintext_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">format_ciphertext</span><span class="p">(</span><span class="n">ciphertext_1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>JOGGM VUHQX NKNVL MHYWZ MBWMG QVZLM EXCB
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="decipher-the-following-message-that-was-enciphered-using-hill-s-system-with-key-begin-pmatrix-3-2-8-5-end-pmatrix">
+<h3>2. Decipher the following message that was enciphered using Hill’s System with <span class="math notranslate nohighlight">\(key = \begin{pmatrix} 3 &amp; 2 \\ 8 &amp; 5 \end{pmatrix}\)</span><a class="headerlink" href="#decipher-the-following-message-that-was-enciphered-using-hill-s-system-with-key-begin-pmatrix-3-2-8-5-end-pmatrix" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="n">MUBYA</span> <span class="n">QIQGN</span> <span class="n">AEWOS</span> <span class="n">RZQJI</span> <span class="n">RZQKC</span> <span class="n">LIZAG</span> <span class="n">SXCJA</span> <span class="n">AQFRM</span> <span class="n">HO</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cipher_2</span> <span class="o">=</span> <span class="n">HillsCipher</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]))</span>
+<span class="n">ciphertext_2</span> <span class="o">=</span> <span class="s2">&quot;MUBYA QIQGN AEWOS RZQJI RZQKC LIZAG SXCJA AQFRM HO&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plaintext_2</span> <span class="o">=</span> <span class="n">cipher_2</span><span class="o">.</span><span class="n">decipher</span><span class="p">(</span><span class="n">ciphertext_2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">plaintext_2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>consciousnessisthatannoyingtimebetweennaps
+</pre></div>
+</div>
+</div>
+</div>
+<p>which yields</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">consciousness</span> <span class="ow">is</span> <span class="n">that</span> <span class="n">annoying</span> <span class="n">time</span> <span class="n">between</span> <span class="n">naps</span>
+</pre></div>
+</div>
+</section>
+<section id="consider-extending-hill-s-digraph-system-to-a-trigraph-system-that-is-rather-than-enciphering-and-deciphering-characters-in-pairs-you-wish-to-encipher-them-three-at-a-time-describe-how-you-would-proceed-be-sure-to-consider-whatever-restrictions-are-necessary-to-impose-on-the-key-to-assure-that-a-message-is-decipherable-hint-see-exercises-3-2-9">
+<h3>4. Consider extending Hill’s (digraph) System to a trigraph system. That is, rather than enciphering and deciphering characters in pairs, you wish to encipher them three at a time. Describe how you would proceed. Be sure to consider whatever restrictions are necessary to impose on the key to assure that a message is decipherable. (Hint: See Exercises 3.2, #9.)<a class="headerlink" href="#consider-extending-hill-s-digraph-system-to-a-trigraph-system-that-is-rather-than-enciphering-and-deciphering-characters-in-pairs-you-wish-to-encipher-them-three-at-a-time-describe-how-you-would-proceed-be-sure-to-consider-whatever-restrictions-are-necessary-to-impose-on-the-key-to-assure-that-a-message-is-decipherable-hint-see-exercises-3-2-9" title="Link to this heading">#</a></h3>
+<p>The determinent of the <span class="math notranslate nohighlight">\(3 \times 3\)</span> matrix must be coprime to 26.  Plaintext must be padded to multiple of 3.  See general implementation above which will work for trigraph systems.</p>
+</section>
+<section id="molly-has-intercepted-the-following-message-that-was-enciphered-using-hill-s-system-digraph-version">
+<h3>3. Molly has intercepted the following message that was enciphered using Hill’s System (digraph version):<a class="headerlink" href="#molly-has-intercepted-the-following-message-that-was-enciphered-using-hill-s-system-digraph-version" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="n">KFHYY</span> <span class="n">GIGMC</span> <span class="n">EJSST</span> <span class="n">EBOEU</span> <span class="n">GRWJT</span> <span class="n">SDVYK</span> <span class="n">ZOZLI</span> <span class="n">ZKFHX</span> <span class="n">KUUIC</span> <span class="n">WXFWJ</span>
+ <span class="n">GAXQP</span> <span class="n">BQAGV</span> <span class="n">GXDVD</span> <span class="n">GUEVG</span> <span class="n">MIGYK</span> <span class="n">QQPIP</span> <span class="n">SCLLF</span> <span class="n">YPMUL</span> <span class="n">KFHXP</span> <span class="n">MHGME</span>
+ <span class="n">VDKAV</span> <span class="n">YQCEG</span> <span class="n">UEALY</span> <span class="n">YYZSZ</span> <span class="n">MPXZO</span> <span class="n">CTXTR</span> <span class="n">IMDID</span> <span class="n">VDGSX</span> <span class="n">OZFFT</span> <span class="n">SMEDV</span>
+ <span class="n">MEIMD</span> <span class="n">VMPKO</span> <span class="n">UJKOD</span> <span class="n">UBOAX</span> <span class="n">BOORS</span> <span class="n">LPZCW</span> <span class="n">IMDVY</span> <span class="n">GJWMI</span> <span class="n">FQ</span>
+</pre></div>
+</div>
+<p>Help her cryptanalyze and decipher it.</p>
+<p>We base our attack on a message encrypted with Hill’s System on the assumption that English text will contain common quintgrams.  Finding two pairs of digraphs is enough to determine the decrypt key.  So we “slide” common quintgrams across the cipher text, identify the two pairs of plaintext-ciphertext digrams implied at each position as the quintgraph moves along the ciphertext.</p>
+<p>With those pairs of digraphs, we can solve for a candidate decryption key.  With this candidate encryption key, we can “decrypt” the ciphertext to get a possible plaintext.   To automate the process of checking each possible plaintext for  being an ineligible message, we compute an ngram score.  The higher the score, the more like English is the candidate plaintext.  We save the best scoring candidates to investigate manually.  Hopefully, one of those is actual plaintext.</p>
+<p>For more details, see <a class="reference external" href="http://practicalcryptography.com/cryptanalysis/stochastic-searching/cryptanalysis-hill-cipher/">here</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ciphertext_3</span> <span class="o">=</span> <span class="s2">&quot;KFHYY GIGMC EJSST EBOEU GRWJT SDVYK ZOZLI ZKFHX KUUIC WXFWJ &quot;</span> <span class="o">+</span> \
+               <span class="s2">&quot;GAXQP BQAGV GXDVD GUEVG MIGYK QQPIP SCLLF YPMUL KFHXP MHGME &quot;</span> <span class="o">+</span> \
+               <span class="s2">&quot;VDKAV YQCEG UEALY YYZSZ MPXZO CTXTR IMDID VDGSX OZFFT SMEDV &quot;</span> <span class="o">+</span> \
+               <span class="s2">&quot;MEIMD VMPKO UJKOD UBOAX BOORS LPZCW IMDVY GJWMI FQ&quot;</span>
+<span class="n">ciphertext_3</span> <span class="o">=</span> <span class="n">strip_text</span><span class="p">(</span><span class="n">ciphertext_3</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="c1"># remove the non-letter chars keep uppercase</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">decrypt_keys_examined</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">top_results</span> <span class="o">=</span> <span class="n">TopResults</span><span class="p">(</span><span class="n">max_size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>  <span class="c1"># only keep the top results</span>
+<span class="n">scorer</span> <span class="o">=</span> <span class="n">NgramScorer</span><span class="p">(</span><span class="s1">&#39;english_quintgrams.txt.zip&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">quint</span> <span class="ow">in</span> <span class="n">TOP_ENGLISH_QUINTGRAMS</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ciphertext_3</span><span class="p">)</span> <span class="o">-</span> <span class="mi">5</span><span class="p">):</span>
+        <span class="c1"># Depending on whether the window is on an even boundary, we lie up either the</span>
+        <span class="c1"># first four characters or the last four characters of the quint</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">p_dg_1</span> <span class="o">=</span> <span class="n">quint</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">p_dg_2</span> <span class="o">=</span> <span class="n">quint</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+            <span class="n">c_dg_1</span> <span class="o">=</span> <span class="n">ciphertext_3</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">c_dg_2</span> <span class="o">=</span> <span class="n">ciphertext_3</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">4</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">p_dg_1</span> <span class="o">=</span> <span class="n">quint</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+            <span class="n">p_dg_2</span> <span class="o">=</span> <span class="n">quint</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+            <span class="n">c_dg_1</span> <span class="o">=</span> <span class="n">ciphertext_3</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span>
+            <span class="n">c_dg_2</span> <span class="o">=</span> <span class="n">ciphertext_3</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">5</span><span class="p">]</span>
+        <span class="c1"># Given the candidate digraph pairs, solve for the candidate decrypt key</span>
+        <span class="n">c_col_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">pos</span><span class="p">(</span><span class="n">c_dg_1</span><span class="p">[</span><span class="mi">0</span><span class="p">])],</span> <span class="p">[</span><span class="n">pos</span><span class="p">(</span><span class="n">c_dg_1</span><span class="p">[</span><span class="mi">1</span><span class="p">])]])</span>
+        <span class="n">c_col_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">pos</span><span class="p">(</span><span class="n">c_dg_2</span><span class="p">[</span><span class="mi">0</span><span class="p">])],</span> <span class="p">[</span><span class="n">pos</span><span class="p">(</span><span class="n">c_dg_2</span><span class="p">[</span><span class="mi">1</span><span class="p">])]])</span>
+        <span class="n">c_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">c_col_1</span><span class="p">,</span> <span class="n">c_col_2</span><span class="p">))</span>
+        <span class="c1"># need to check if c_matrix is invertible</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_invertible_mod_26</span><span class="p">(</span><span class="n">c_matrix</span><span class="p">):</span>
+            <span class="k">continue</span>   <span class="c1"># no need to check more</span>
+        <span class="n">c_matrix_inv</span> <span class="o">=</span> <span class="n">matrix_inverse_mod26</span><span class="p">(</span><span class="n">c_matrix</span><span class="p">)</span>
+        <span class="c1"># set up for solving for the decryption key</span>
+        <span class="n">p_col_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">pos</span><span class="p">(</span><span class="n">p_dg_1</span><span class="p">[</span><span class="mi">0</span><span class="p">])],</span> <span class="p">[</span><span class="n">pos</span><span class="p">(</span><span class="n">p_dg_1</span><span class="p">[</span><span class="mi">1</span><span class="p">])]])</span>
+        <span class="n">p_col_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">pos</span><span class="p">(</span><span class="n">p_dg_2</span><span class="p">[</span><span class="mi">0</span><span class="p">])],</span> <span class="p">[</span><span class="n">pos</span><span class="p">(</span><span class="n">p_dg_2</span><span class="p">[</span><span class="mi">1</span><span class="p">])]])</span>
+        <span class="n">p_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">p_col_1</span><span class="p">,</span> <span class="n">p_col_2</span><span class="p">))</span>
+        <span class="c1"># compute the decryption key implied by this pair choice</span>
+        <span class="n">inv_key</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">p_matrix</span><span class="p">,</span> <span class="n">c_matrix_inv</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span>
+        <span class="n">inv_key_tuple</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">inv_key</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">inv_key_tuple</span> <span class="ow">in</span> <span class="n">decrypt_keys_examined</span><span class="p">:</span>
+            <span class="k">continue</span>  <span class="c1"># no need to check a key twice</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">decrypt_keys_examined</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">inv_key_tuple</span><span class="p">)</span>
+        <span class="c1"># Now with the candidate decryption key, decrypt the text and score the key</span>
+        <span class="n">ptext</span> <span class="o">=</span> <span class="n">hills_transform</span><span class="p">(</span><span class="n">inv_key</span><span class="p">,</span> <span class="n">ciphertext_3</span><span class="p">)</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">scorer</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">ptext</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+        <span class="n">top_results</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">inv_key_tuple</span><span class="p">,</span> <span class="n">ptext</span><span class="p">)</span>  <span class="c1"># add to heap, will only save teh top ones</span>
+
+<span class="c1"># After all that, print out the top results and see if any look viable</span>
+<span class="n">best_results</span> <span class="o">=</span> <span class="n">top_results</span><span class="o">.</span><span class="n">get_best</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">rank</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">best_results</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rank: </span><span class="si">{</span><span class="n">rank</span><span class="si">}</span><span class="s2"> Score: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, Key: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Plaintext:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">format_plaintext</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">plaintext</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rank: 1 Score: -1683.0868, Key: (np.int64(7), np.int64(10), np.int64(6), np.int64(1))
+Plaintext:
+gttukaciqcenkchuhakyuharrintyetoplkbgtjtaiceqottargqzebtyyil
+cnntteoapiyimomesnorgmvffiheghgtjthevckelfionasaakoawrisstcj
+qplneopnhhkongntteihalxprikentkekontqpscmfscdshamdhaydsvhrqo
+kontkaneyida
+
+
+Rank: 2 Score: -1743.3555, Key: (np.int64(6), np.int64(1), np.int64(13), np.int64(17))
+Plaintext:
+tkuiabibclnacxugauyfhgraiktjeroulvbmtktrifejontxraqdecthydlw
+netjeoatioijovepnyrymlfviiemhitktremcoetfpodaialkbatrisvtmjm
+pynzolnrhtozgwtjeohelmpxikettjetoztjpychfachssaudeaudgvirzon
+oztjabeaijac
+
+
+Rank: 3 Score: -1748.6046, Key: (np.int64(15), np.int64(21), np.int64(6), np.int64(1))
+Plaintext:
+etuubavixcynhcougavyohirwibthecorlebetzthijehortirvqoevtpyul
+knbtyedaiitifobesncrjmpfqiseuhetztsegcnexfdowafankdagrpsktyj
+kpvnboxnbhroogbtyeihqlhpwinebtnerobtkplceflcgsgaydgaedqvfrho
+robtbaietiea
+
+
+Rank: 4 Score: -1759.8724, Key: (np.int64(18), np.int64(20), np.int64(19), np.int64(14))
+Plaintext:
+fgthrapihcdatcrhxnpyrupelvrttenbflfofgzttiletoftpepqrrptnyty
+hartdrjapvxiborebanelmnfjvbrtufgztbrxpvehfjolnbavkjaxenshgdw
+hcpnrohnrhfortrtdrpujytplvvertveforthcdcfsdcxfxndqxnfqjibrto
+fortraprxifn
+
+
+Rank: 5 Score: -1765.1636, Key: (np.int64(19), np.int64(14), np.int64(18), np.int64(16))
+Plaintext:
+ghhxapincvapcvhxnpyjuxebvnthebbfljofghthinebofthebqlrbthyjyj
+apthrbapvninofebapebmzfrvnrbuxghthrbpvebfrofnpapktapebsrghwd
+cvnpofnphxofththrbuxyjpvvnebthebofthcvcvsrcvfrnpqlnpqlinrbof
+ofthaprbinnp
+
+
+Rank: 6 Score: -1777.7638, Key: (np.int64(11), np.int64(22), np.int64(15), np.int64(5))
+Plaintext:
+smnkmtsnaboucprmnawxemeenehnwnrwdhuesmrfkjmvsdfzeeufnclpazog
+gqhnpqcbfacfcvapswigonffrgtsaksmrftshyslrlmnlmsjafcbowsfokay
+aodvwftdrzurhahnpqioiqppneslhnslurhnaoifiaiflinasenaocegtfsd
+urhnmtrecfxs
+
+
+Rank: 7 Score: -1779.3005, Key: (np.int64(19), np.int64(14), np.int64(2), np.int64(0))
+Plaintext:
+gvhpaxirczajclhnndyjunetvnthexbzlzorgvtpivepoftvetqnrvtfyhyn
+anthrhapvrizonevahermlfxvlrfupgvtprfppezfrovnrahkjapebsxgxwl
+cznvodnnhnorththrhulydplvnezthezorthczcvspcvfhndqbndqdilrfof
+orthaxrtiznl
+
+
+Rank: 8 Score: -1784.9453, Key: (np.int64(19), np.int64(14), np.int64(16), np.int64(14))
+Plaintext:
+gzhjadihcpalcxhznhyjuzenvnthehbbllongztvibetoftzenqvrxtxyzyd
+afthrfapvhivotexabedmhfvvdrvujgztvrvprerfrohnzabkvapebsvgjwr
+cpntovnfhzonththrfupyfpxvnertheronthcpcvshcvftnhqnnhqxidrvof
+onthadrnivnv
+
+
+Rank: 9 Score: -1787.9252, Key: (np.int64(11), np.int64(22), np.int64(16), np.int64(1))
+Plaintext:
+sznwmqsuacolckrmnuwwezennahhwurodlunszrvkomgssfzenuinklxamod
+gfhhpsccfucicgaksbidoufvrqtiajszrvtiheserrmulmsoaiccobsiojar
+apdtwitfrzuahuhhpsipifpxnasehhseuahhapiiihiilgnusnnuoxedtvss
+uahhmqracixi
+
+
+Rank: 10 Score: -1792.1429, Key: (np.int64(11), np.int64(22), np.int64(10), np.int64(11))
+Plaintext:
+stnqmoskagodciruncwuehebnshvwgridbulstrfkcmwswftebucnklzayoz
+gvhvpmcefkcucgakshifoofrrwtqadstrftqhascrdmqlasuawceolseopah
+atdfwatvrhuyhihvpmilitpvnsschvscuyhvatioihiolkncsnncojejtdsw
+uyhvmorocuxm
+
+
+Rank: 11 Score: -1799.0828, Key: (np.int64(9), np.int64(6), np.int64(6), np.int64(9))
+Plaintext:
+epnmgesmeaapyybidqokovgthelneoletdcbephdquiyiqrpgtqyfkzjcgmf
+yxlnzikofmocegskolupgkxxvaneazephdnejgqsnlawjsoyiokocjkkqtoj
+enhnwmlxbvcolalnzicrelllheqslnqscolnengsohgsfedqwndqirinnriq
+colngetgoczg
+
+
+Rank: 12 Score: -1810.7395, Key: (np.int64(6), np.int64(1), np.int64(0), np.int64(14))
+Plaintext:
+tfulatitcpnjcfurabyhhrrjiftvexobllbztftxihevojtfrjqnedtbynlv
+nxtvetaritivolednprpmpflilezhltftxezcterfdonalapktarrlsltzjz
+ppnzopnxhrozgvtvethxlzpfifertveroztvppcbfjcbshabdxabdrvlrzoj
+oztvatejivad
+
+
+Rank: 13 Score: -1811.3516, Key: (np.int64(22), np.int64(1), np.int64(21), np.int64(16))
+Plaintext:
+nosvkmwocipeuacfgvaypsvsqvftoyofljpgnorfcucmkonbvsygyvpdkite
+vkftqnyawbiawayizofceepbafaxfinorfaxateotfimodmomiyahecodebi
+pihjuyvxpfcgstftqnzcrchnqveofteocgftpiwcdcwcedgvtogvjensnxko
+cgftkmifiash
+
+
+Rank: 14 Score: -1811.8217, Key: (np.int64(14), np.int64(9), np.int64(3), np.int64(9))
+Plaintext:
+ziyowhglandautmagkyvzavciwtbgreeddvazipfenknohzvvccduqhnmhjk
+bctbowadgycpkludrmjogfpnwicilozipfcisisffxgpmeezczadrgcnlwfe
+naxtctbpzningotbownmbshtiwsftbsfintbnacltwclksgkvkgkhyjipvoh
+intbwhiccpco
+
+
+Rank: 15 Score: -1812.1595, Key: (np.int64(6), np.int64(1), np.int64(18), np.int64(2))
+Plaintext:
+tbulavitcfnfcpufanybhfrrihtledodlxbftbtjifefovtbrrqxextfyvln
+nrtlehaxitirotexnzrlmjffibebhltbtjebcbejfnoradazkzaxrpsfthjd
+pfnpopnrhfofgltlehhzljppihejtlejoftlpfctfhctsjandnandtvbrbov
+oftlaveriral
+
+
+Rank: 16 Score: -1818.0231, Key: (np.int64(6), np.int64(15), np.int64(9), np.int64(15))
+Plaintext:
+zggeurcdsfxminmucigvzubsowpbczqqxxbczgrpqxalyhztbsezicvrmlhc
+lgpbyksdcqeravipdchichrbumeatezgrpeawuwjjxcjmaqpetsddgebtqjo
+fsnhexltzhopcopbykfklevnowwjpbwjoppbfselpaelamcibecivohmrnyh
+oppburoserew
+
+
+Rank: 17 Score: -1821.5644, Key: (np.int64(13), np.int64(14), np.int64(11), np.int64(22))
+Plaintext:
+sslngmgscawoscrrbnuweewefnvhkwbrldmussxrukimwsffweaudnblaaio
+kgvhtpectficycqacscicolflrztyassxrztthesdramllcsgaecyoysmoma
+cazdcwxtrrmuvhvhtpkimifpfnesvhesmuvhcaoiwioihlbnksbneoyeztws
+muvhgmjricdx
+
+
+Rank: 18 Score: -1826.1680, Key: (np.int64(9), np.int64(11), np.int64(9), np.int64(8))
+Plaintext:
+iqilpubgtkyupkalahpeayeaytrdhaipbrcciqxdrgbatcvdeavsmnjdhese
+ourdinjuothgzczaquwavmfvqtaniyiqxdansxpahvfcehdurwjukafiqqoo
+gkhhlcbhnlpcedrdinsyeepxytpardpapcrdgkdkmidkgvahmsahusqgnntc
+pcrdpuenhggh
+
+
+Rank: 19 Score: -1827.9380, Key: (np.int64(8), np.int64(18), np.int64(19), np.int64(14))
+Plaintext:
+ngthnapibclazcphznbypuzehvlthejbhltongbtxirevontzevqdrhtxyjy
+taltbrxapvfilodehavexmzfdvxrtungbtxrhplenfbobnhajkxapezsrgvw
+bcjnrotnphtoltltbrlupyzphvleltletoltbctcjstctfznxqznbqdixrvo
+toltnazrfipn
+
+
+Rank: 20 Score: -1828.9313, Key: (np.int64(2), np.int64(5), np.int64(17), np.int64(18))
+Plaintext:
+zikngeasoohecomnarkuzaryefnvaywjhhrwzifvwsiyqwzvrysgclpvmutu
+denvqloeafssiwcyjetyamfdgfslxazifvslybyyldawmrwescoejysqxilk
+bovrswdrznewavnvqlbadupbefyynvyyewnvbosonqsoidarrgarpgtsflqw
+ewnvgeelsssr
+
+
+Rank: 21 Score: -1830.0998, Key: (np.int64(18), np.int64(3), np.int64(3), np.int64(12))
+Plaintext:
+haklccagiwpeiykpcdwgxcbgabhpoysxjnfahahzayoosyhnbgygophtwkjy
+pwhporcsataqsiocpibkmorxafovxyhahzovidourjsscbcigucsbqekhwde
+vwptscpjxpsauphporxgjsvlabouhpousahpvwieraieedcdlecdlansbvsy
+sahpccotaqcn
+
+
+Rank: 22 Score: -1832.5768, Key: (np.int64(19), np.int64(17), np.int64(19), np.int64(14))
+Plaintext:
+ygehvadilceahcwhgnjywuieavhtleubvlooygnttifefoltietqqrztbymy
+uahtmrpaqvjilodewaaevmpfsvereuygnterkpterfroknjafkpaoepsggww
+ycnnxohnjhbouthtmrouyyhpavtehttebohtycvcwsvcqfgnkqgnsqsirrfo
+bohtvairjimn
+
+
+Rank: 23 Score: -1832.7192, Key: (np.int64(11), np.int64(16), np.int64(20), np.int64(22))
+Plaintext:
+inthwdcvinghsrnpbfapapwddlfrinfrjduxindlofktktvnwdofpvzzuxmz
+srfrzzyjpvapincvapqlwdljxtthghindlthrbofthghrbapktyjuxyjofap
+indlebfrnpuxfrfrzzuxinfrdloffrofuxfrinwdapwdpvbfebbfktktthkt
+uxfrwdjdapzz
+
+
+Rank: 24 Score: -1834.4154, Key: (np.int64(9), np.int64(11), np.int64(5), np.int64(2))
+Plaintext:
+ioilpibgtsyspcafanpoaseeyhrlhqidbxcsioxjrsbstivbeevkmxjfhisa
+oerlihjkothezgzkqmwyvwffqbabiyioxjabsbpwhnfeeddmrmjkkcfsquoq
+gshplcbrnfpselrlihsmewppyhpwrlpwpsrlgsdgmudggjanmaanugqonbti
+psrlpierhegl
+
+
+Rank: 25 Score: -1834.8436, Key: (np.int64(4), np.int64(7), np.int64(21), np.int64(16))
+Plaintext:
+hoyvsmgouileaakfivkyxsfsevntuyaffjjghorfiuqmqohbfsiggvzdwize
+nkntmnoagbkauagixorcsebbqfyxlihorfyxctiolfymcdkoqioajeoovexi
+hirjcynxxfwgatntmnjchcnneviontiowgnthiscxcscgdivpoivdedslxqo
+wgntsmsfkamh
+
+
+Rank: 26 Score: -1835.8946, Key: (np.int64(11), np.int64(22), np.int64(25), np.int64(19))
+Plaintext:
+synymdstaroccdrwnwwdeweknchxwbrydtuqsyrfkxmtsrflekulnmlvabou
+gghxpycvfgcbczazsaiiolfhratwaysyrftwhusdrbmhlksnaxcvosshoaag
+aedbwpttrjudhkhxpyiuikpdncsdhxsdudhxaeiniminlenwsmnwooeatjsr
+udhxmdrkcbxe
+
+
+Rank: 27 Score: -1837.4944, Key: (np.int64(7), np.int64(10), np.int64(16), np.int64(21))
+Plaintext:
+gptckaceqkedkahihikauvafrqnfygtcprkngpjhasceqktpafgczmblygib
+crnftcoypeygmmmmsjolgcvbfwhigpgpjhhivokaltionsswasoywhiosjcr
+qxlteqprhvkansnftcibafxnrqkanfkakanfqxswmzswdkhimzhiytsjhvqk
+kanfkansygdk
+
+
+Rank: 28 Score: -1839.5688, Key: (np.int64(17), np.int64(19), np.int64(24), np.int64(19))
+Plaintext:
+onmqlezkreoxhkscgupyspinyirtjcyyttwhontxnmhytobninhecoxfvkqn
+czrtsujamkbovspoujozpspveuygmdontxygimdqhfxwqohwjsjakrpiibkn
+errdzapzfpjuegrtsuybuvhxyidqrtdqjurterdcardcyaguelguyzehltto
+jurtleiaboiy
+
+
+Rank: 29 Score: -1842.5153, Key: (np.int64(6), np.int64(14), np.int64(11), np.int64(18))
+Plaintext:
+tuhrnkvqponapehxnflqhkrqvptxrebjlhbututzvercbethrqdqrxtdlwle
+notxrnnivdvsbgrkngrwzcfjvvrthetutzrtpfryfbbinpngxynirsfwtoja
+pondbknbhxbutxtxrnhqliprvprytxrybutxpopafupaffnfdanfduvirtbe
+butxnkrdvsnh
+
+
+Rank: 30 Score: -1842.5265, Key: (np.int64(3), np.int64(20), np.int64(18), np.int64(3))
+Plaintext:
+whdkgckauigpuidktcswqxibxajhionsfjafwhjhkaioasjhiboyvojhswsj
+gpjhvogcxakaasiogpibmmprxavoqxwhjhvohiioprastcgcyggcibcewhed
+uvtpastpdxasjujhvoqxsjhvxaiojhioasjhuvuicruipetcoltcolknvbas
+asjhgcvokatc
+
+
+Rank: 31 Score: -1844.9528, Key: (np.int64(3), np.int64(9), np.int64(5), np.int64(20))
+Plaintext:
+isothelcnuaqtgarkxvcaeccwlbrrgendfasisfzngnyhgvfccdcqrnphakg
+cubrwddwyppklodemooafynnijibogisfzibixfixhpwelzozidwgknawueq
+autptephnrnsorbrwdmcswttwlfibrfinsbraulqwslqsxkxkqkxysiwvbhg
+nsbrhecppkof
+
+
+Rank: 32 Score: -1845.5435, Key: (np.int64(1), np.int64(16), np.int64(6), np.int64(3))
+Plaintext:
+cfrsgoqwiiihkovehecoirallurlsafsjjibcfbpiyiwgipfalwsjmvxgaud
+ajrllswkdwaaqmwmmtexosvdpgpeefcfbppepqoohnaqfymgmywkkpiqytsj
+ivxnkunjvrioryrllsmdolxbluoorlooiorlivqgyzqgbiheuzheqnctprgi
+iorlgonyaari
+
+
+Rank: 33 Score: -1847.0113, Key: (np.int64(6), np.int64(1), np.int64(20), np.int64(0))
+Plaintext:
+tludafixcznvcpujanyvhjrrijtbefozlzbxtltdiledohtlrrqjelthyblj
+njtbebadixizojelnbrxmpffipehhdtltdehcdezfxolaxabkvadrtsftfjp
+pznlonnjhjoxgbtbebhplnppijeztbezoxtbpzclfdclsbandtandnvprhoh
+oxtbaferizap
+
+
+Rank: 34 Score: -1847.1670, Key: (np.int64(15), np.int64(0), np.int64(8), np.int64(11))
+Plaintext:
+ixpakqesmgwtywngdywkatghnehnkizizbetixppigcgsqvxghaovoftuqal
+ahhnhecorsmuasiouzenycxtlkfkcnixppfkpkmcrliuriumwmcoojkgkryv
+mtvjqwnhnteghahnheyzqpljnemchnmceghnmtiscrishcdyoldyqfyxfxsq
+eghnkqtumula
+
+
+Rank: 35 Score: -1847.3930, Key: (np.int64(16), np.int64(11), np.int64(22), np.int64(20))
+Plaintext:
+hxmzinmzghhxsrktofyjxtjdinthapinbfnphxbfqlsrofhxjdsryjrbwdpv
+ljthktapmzuxwdyjfrhxyjljghinzzhxbfinwdcvfrebcvsrapaprbyjjdrb
+ththmzljxtapghthktvnfrfrincvthcvapththcvdlcvinofthofvnthvnof
+apthinwduxwd
+
+
+Rank: 36 Score: -1847.6597, Key: (np.int64(16), np.int64(9), np.int64(5), np.int64(2))
+Plaintext:
+vooluiygasnsgcafknionspewhbleqeddxnsvofjasasuivbpeqkqxnfuixa
+peblwhqkytceygqkzmbyswnfibibbyvofjibibswxnceedmmmmqktcasjurq
+nstpgcprnfasolblwhzmfwtpwhswblswasblnsygjuygsjknxaknlgvovbui
+asbluicrceol
+
+
+Rank: 37 Score: -1849.0593, Key: (np.int64(14), np.int64(7), np.int64(1), np.int64(24))
+Plaintext:
+nyajiksuugjkigcjcxiopwbcwhblkcavfbvinytlouscuinlbcaempdlkoro
+fkblapqkshkumimclkdcamrnyhcpnwnytlcpeticxneioxykoqqktcealyfs
+hgxxwifxpjiiolblaprwbovtwhicbliciiblhgygzayguncxzecxxeluppui
+iiblikopkuux
+
+
+Rank: 38 Score: -1849.6838, Key: (np.int64(15), np.int64(20), np.int64(19), np.int64(14))
+Plaintext:
+ygvhuaoiucoaocjhrnaywuyedvftwenbfleoygbtmiaekoltyeuqxrttoyyy
+maftrryabvkigokecamegmdfrvfriuygbtfrzpietfcoxncagkyaueqskgyw
+ucvnyoznjheoftftrrkuqybpdvieftieeoftucwcuswclfrnaqrnmqeifrko
+eoftualrkinn
+
+
+Rank: 39 Score: -1854.0730, Key: (np.int64(17), np.int64(21), np.int64(11), np.int64(22))
+Plaintext:
+asknzmnsxaiotccrknfwceceknjhfwcrrdwuasprdkzmnsnfcejuknblxaio
+ygjhgptcaftctcxaasuivonfcrytkaasprytwhnsprzmolnsxatcionsioka
+kardfwltprjuwhjhgpuiuitpknnsjhnsjujhkahiuihiolknasknioceltns
+jujhzmcrtcqx
+
+
+Rank: 40 Score: -1856.2549, Key: (np.int64(25), np.int64(2), np.int64(16), np.int64(11))
+Plaintext:
+ahpmoiemsgohsspkbokycxwjrintwadixbqnahnbeqwsqonhwjusjynrkwkp
+olntjkoarmeuqwwyofwhmyllrgjiczahnbjifwwclfqebcosiaoawryyajgr
+stbtqmblpxqangntjkcvkfffriwcntwcqantstscydscliboutbouvetjvqo
+qantoijweubw
+
+
+Rank: 41 Score: -1860.5337, Key: (np.int64(17), np.int64(19), np.int64(2), np.int64(1))
+Plaintext:
+obmolezyrcothessgspesfidygrdjiyotlwrobtnnqhytcbbidhocmxhviqj
+clrdsojumybivmpmuxohpopjekysmbobtnysiwdehvxwqqhkjqjuknpwixkl
+eprvzgplffjeeqrdsoyjudhrygderddejerdepdkazdkycgsezgsyvexlftc
+jerdleiqbiic
+
+
+Rank: 42 Score: -1861.3587, Key: (np.int64(3), np.int64(20), np.int64(22), np.int64(8))
+Plaintext:
+wddlghktuxghuxdlthsrqlinxtjdinnpfrapwdjdktinapjdinofvnjdsrsr
+ghjdvnghxtktapinghinmzpvxtvnqlwdjdvnhxinpvapthghyjghincvwdeb
+uxthapthdlapjdjdvnqlsrhxxtinjdinapjduxuxcvuxpvthofthofktvnap
+apjdghvnktth
+
+
+Rank: 43 Score: -1863.2900, Key: (np.int64(19), np.int64(18), np.int64(3), np.int64(21))
+Plaintext:
+ecdccnkroxoqanbivienoisstqdfwtjchroaeclhoforcxrpssuphmblctio
+sedftculxestkzuzmwqyypbbrwriqceclhriroynvtsbjsmjmfulauobgwwe
+okntadfrbvondsdftcmoysnntqyndfynondfokkjgmkjlkviimvikgewrvcx
+ondfcnfsstdk
+
+
+Rank: 44 Score: -1865.6525, Key: (np.int64(6), np.int64(9), np.int64(12), np.int64(7))
+Plaintext:
+prmkekmaaupzywioqykyvbtheintomeadfbdprddusycqoprthymkqjxgcfd
+xrntisoamackgykqldplkoxtamewzxprddewgosilfwiswyqoeoajrkgtnjt
+nhnbmsxrvboqagntisrflxljeisintsioqntnhschjscemqynxqyrtnzrjqo
+oqntekguckgi
+
+
+Rank: 45 Score: -1866.2890, Key: (np.int64(6), np.int64(15), np.int64(6), np.int64(14))
+Plaintext:
+ztghuncvspxnipmhcnglzhbrovptcrqbxlbbztrtqvarybztbredirvtmlhl
+lnptyrsncvevabirdnhrczrfuverthztrterwpwrjfcbmnqnexsndrefttjj
+fpnneblnzhobctptyrfhllvpovwrptwrobptfpeppfepafcnbdcnvdhvrryb
+obptunoreven
+
+
+Rank: 46 Score: -1866.9113, Key: (np.int64(19), np.int64(4), np.int64(22), np.int64(17))
+Plaintext:
+yfrcisqeyyetumjetmwywriznihtyihuvvopyfnlgasqsolfizgodkzvoamh
+uphtzycadewwygqkwvabiapzfkraepyfnlraxiggrfeyxywisucaorcmgdwb
+ylnhkqhpjrochghtzyotyrhznigghtggochtylicwhicdctmkntmslsxrnso
+ochtisvmwwze
+
+
+Rank: 47 Score: -1867.9580, Key: (np.int64(10), np.int64(1), np.int64(3), np.int64(17))
+Plaintext:
+leagwlspclhcapwoiashjofeksjvaboulvlalezpazkhajlrfeslwwfdopne
+pmjvuagrscijqdwjdkbmkdbfgaqinglezpqiimetpdgxkwqxedgrvyofpwhe
+pyftwrpzjbynwijvuafwtsnpksetjvetynjvpyublyubieiahuialmtadvaj
+ynjvwlseijyu
+
+
+Rank: 48 Score: -1868.0129, Key: (np.int64(24), np.int64(11), np.int64(17), np.int64(19))
+Plaintext:
+roymalgzgrvoohosegmpbslimyzrsjiybthwrontanehmtrbliwhicpxcvtq
+pczrqsmjgmubavipluboupdpcegylmrontgyiicdzhoxwqyhojmjzkqpbink
+tedrczppbfujmezrqsryvubhmycdzrcdujzrtemdpamdoyegbeeglypetlmt
+ujzralyiubsi
+
+
+Rank: 49 Score: -1868.1741, Key: (np.int64(2), np.int64(1), np.int64(2), np.int64(5))
+Plaintext:
+bzokegyacothecsmsaekfzdrgedniaowlhrrbznfqwyicqbzdrosmchpimjt
+lddnoquoyaismimcxjhtoajfkgssbxbznfsswyeyvlwaqmkwqsuonjwsxxll
+pbvvgsldfzeeqadnoqjbddrpgeeydneyeednpbksznkscisazrsavpxtffcq
+eednegqeiscs
+
+
+Rank: 50 Score: -1868.8837, Key: (np.int64(23), np.int64(22), np.int64(2), np.int64(7))
+Plaintext:
+ulfiauwoauwbwoxwleeakjultqdfkwradfyruljbmmeackhlulaupkvtwoul
+mzdfleuyjockigckopmzigtdledssvuljbdszmsivtocpkociguyahgqcxul
+ahfvuyzzxjyedsdflecxgdjbtqsidfsiyedfahkwahkwhyleenlemzyrdfck
+yedfauhyckra
+
+
+Rank: 51 Score: -1869.3682, Key: (np.int64(23), np.int64(20), np.int64(20), np.int64(17))
+Plaintext:
+ijhmmuimuycjkanqhiooadafhulloknufvyxijnvwemaiivjafyahorpusct
+qbllxqkkvmkwksuoingjcovbnyduuzijnvdulsignnmcrgiaukkkcpiocfup
+ulflomdbndyklyllxqghgnxnhuiglligykllulgggrggruhiilhichaldhii
+ykllmunskwjs
+
+
+Rank: 52 Score: -1869.5410, Key: (np.int64(23), np.int64(21), np.int64(14), np.int64(7))
+Plaintext:
+ongatipsxumjdiscwcjispkbawhbzkcarfyvonltrovsfubnkbzaymtdvkyr
+ofhbeapqcstkjmlmylwdfahrmyqcgnonltqcsenirxneqolybopqothecluf
+khfxrwbffpliuohbeaergbdvawnihbnilihbkhvyqzvymuwcgzwcuxmldpfu
+lihbtikotkau
+
+
+Rank: 53 Score: -1869.9799, Key: (np.int64(16), np.int64(1), np.int64(9), np.int64(6))
+Plaintext:
+zewnqguscelakymbudwozongahhlueolltnczevhoqgisizrngiqkfxzmcdm
+fyhlszckufiogeksboduugvxqvinjazevhinejeqrnuamjooiickbcikjqro
+pethiwflzbaculhlszpcfexlaheqhleqachlpeighoiggfudnwudxidivnsi
+achlqgatioiz
+
+
+Rank: 54 Score: -1870.6142, Key: (np.int64(16), np.int64(7), np.int64(22), np.int64(8))
+Plaintext:
+jdqlghktuxthuxqlghsrdlvnktjdinapfrnpjdjdktinapjdvnofinjdsrfr
+thjdinghktktapinthvnmzpvktindljdjdinuxinpvapghghyjghvncvjdrb
+hxthapthdlapwdjdindlfrhxktinjdinapjdhxuxpvuxcvghbfghbfxtvnap
+apjdghinktgh
+
+
+Rank: 55 Score: -1870.6774, Key: (np.int64(5), np.int64(16), np.int64(14), np.int64(21))
+Plaintext:
+utxmccamikctioxupewqkholnchxoifcjrsvuthrawoosehtolyobqhfwywn
+cdhxbucinmagsyoqcbotmqrdnkbckzuthrbcvyoarbsspacogiciofequlqf
+ixpxsmpdxhsihkhxbukpwbvbncoahxoasihxixiaejiarcpeyxpeypaxbpse
+sihxccbyagpy
+
+
+Rank: 56 Score: -1870.8171, Key: (np.int64(5), np.int64(2), np.int64(23), np.int64(18))
+Plaintext:
+owljiygusosicyfdndoysqeghvltqsdjxhsyowjrsgsuiobjegkwxzfnisak
+eulthjkathesgmkmmcyawwfxbpbdywowjrbdbxwynfekdtmcmgkaceskucqu
+sopfcirhfdsyltlthjmkwgplhvwyltwysyltsogcumgcjbndamndgsocbdio
+syltiyrteslb
+
+
+Rank: 57 Score: -1872.4614, Key: (np.int64(11), np.int64(9), np.int64(25), np.int64(2))
+Plaintext:
+saapzofensoopsepabjkecewarhnjweddxuqsarnxezwfqfnewhuajlnnkok
+gohncjposrpepqnwsoiwbmflergjacsarngjuffwrlzqybfonipoowfyoaag
+asdbjqtbrphqunhncjicikpfarfwhnfwhqhnasvsiyvsylabsuaboueetjfq
+hqhnzoejpekb
+
+
+Rank: 58 Score: -1873.5993, Key: (np.int64(19), np.int64(16), np.int64(11), np.int64(10))
+Plaintext:
+syfzogwmiquyoirjrpoeewyohtldauftjpousyppyswiicflyosizrxnaoqk
+weldfjkujzaymomegikysedrtdrtsmsypprtdboknvqalxgiyukucaqegowa
+iqndumjrrjouldldfjqgyibvhtokldokouldiqgkmsgkvtrpmqrpaggqrtic
+ouldoglbayvb
+
+
+Rank: 59 Score: -1874.0334, Key: (np.int64(24), np.int64(7), np.int64(1), np.int64(23))
+Plaintext:
+tsckydenudhaqnuewigthexsoopparagfphitsvnuzutyltfxssdsyhjynjs
+xmppoisfeaklejslzupmijhbgigcpktsvngcgmixjjkhaymhmjsfdqubbyns
+hqdxqfxzhruvccppoizyvodnooixppixuvpphqerbqeriswijgwirmtitpyl
+uvppydksklcg
+
+
+Rank: 60 Score: -1874.9659, Key: (np.int64(19), np.int64(24), np.int64(24), np.int64(3))
+Plaintext:
+ovxgswacgiwtksfahoaasnajdqffkivsbjohovzdkoqkkkbvajaofcnziukz
+gfffjmyyncuaeiscenidqwvllkrgktovzdrghecottygdeeackyyuhiygbwn
+gvndsetffnoufsffjmahyvxfdqcoffcoouffgvwwonwwhchowrhooxyxrtkk
+ouffswnwuabm
+
+
+Rank: 61 Score: -1875.2369, Key: (np.int64(19), np.int64(4), np.int64(5), np.int64(3))
+Plaintext:
+yurkipqnyvecuvjktcwjwkionahhybhsvjosyunhgnsbsflhiogldozhojmw
+uchhzocpdawnyfqbwcaoizprfaroekyunhroxigbrrefxcwpstcpoocrguwq
+yinpkfhpjxofhuhhzookywhvnagbhhgbofhhyiivweivdetckytcsysarbsf
+ofhhipvownzc
+
+
+Rank: 62 Score: -1875.5710, Key: (np.int64(22), np.int64(23), np.int64(7), np.int64(4))
+Plaintext:
+pwwziuumqybwwaidyvuovqhsshvlwkghpvpkpwzvwesawipjhsuaibhpgsjg
+dovlodekuzywasionatwsotbelahjmpwzvahyfkgdnecstaakkeklcgodsbc
+dyhlimdbvdckilvlodhurajnshkgvlkgckvldyogpeogyhyvbyyvpurynhwi
+ckvliuufywcf
+
+
+Rank: 63 Score: -1875.8491, Key: (np.int64(15), np.int64(22), np.int64(23), np.int64(11))
+Plaintext:
+kgtqibcxatiqavtuvcqhgusopsxvstridbeykgxfcpsjejxtsowpfkxzqlqm
+iixvfmirpkchetsxiussmbbrpwfqgqkgxffqnaspbdedvaihujirsyorkcyu
+agvfenvvthelxixvfmgyqgnvpsspxvspelxvagabouabbkvcwavcwwcwfdej
+elxvibfochvm
+
+
+Rank: 64 Score: -1877.8066, Key: (np.int64(9), np.int64(24), np.int64(6), np.int64(15))
+Plaintext:
+izvgcuocgsyxcinmnccgazeblorpucvqbxcbizxreqoagyvzebiezijvumsh
+olrpvywsbcuemamiqdwhicfrduneitizxrnefwcwhjscrmqqeewskdseqtoj
+gfhnyeblnzcorcrpvysfelpvlocwrpcwcorpgfqempqetancmbncuvqhnrgy
+corpcurouete
+
+
+Rank: 65 Score: -1877.8108, Key: (np.int64(22), np.int64(8), np.int64(9), np.int64(11))
+Plaintext:
+dilihptbxthyxplaharplanetydrnhpirbpcdidxtrnbptdvnefvnmdjrhrs
+hodrnihjtothpznzhqnwzvvftqnalididxnaxsnpvhpfhehdjrhjnkvfdqbo
+xghhplhblnppdedrnilsrexptynpdrnpppdrxgxdvmxdvghafmhafutqnnpt
+ppdrhpnethhg
+
+
+Rank: 66 Score: -1879.1547, Key: (np.int64(25), np.int64(2), np.int64(5), np.int64(3))
+Plaintext:
+aupkopensvocsvpkbckjckworanhwbdsxjqsaunhenwbqfnhwouljonhkjkw
+ocnhjoopraenqfwbocwomzlrrajockaunhjofiwblrqfbcopitopwoyraugq
+sibpqfbppxqfnunhjockkwfvrawbnhwbqfnhsisvyesvlebcuybcuyeajbqf
+qfnhopjoenbc
+
+
+Rank: 67 Score: -1879.4020, Key: (np.int64(7), np.int64(3), np.int64(18), np.int64(3))
+Plaintext:
+qhakncfavimphiykgctwyxiboaphzossjjkfqhxhjarolsdhibzykonhrwkj
+qpphwofcsanatsxokpgblmprmauoaxqhxhuoyibojrbsucxcdgfcqbpeshcd
+ivlpjsdplxxscuphwowxajhvoabophboxsphivriurrimegcalgcclmnhbls
+xsphncionaoc
+
+
+Rank: 68 Score: -1879.5095, Key: (np.int64(2), np.int64(5), np.int64(5), np.int64(11))
+Plaintext:
+zqkcgtarothecrmyaskvzyrqewnbalwihbrszqfrwzivqhzdrqstcupxmrtq
+dmnbqsodaeshixchjatmaxfjgssoxczqfrsoymyplxanmuwnsxodjgsjxulq
+bgvpsddzzlefaonbqsbudwprewypnbypefnbbgslngsliqasriaspmtsfbqh
+efnbgteqshsi
+
+
+Rank: 69 Score: -1879.9136, Key: (np.int64(17), np.int64(0), np.int64(23), np.int64(8))
+Plaintext:
+eoftigwcmkgmkqbfhjgwosakbnphimzpzrwyeofleesiysrbakomrlltcioy
+oophprscjpmgoweycywwksvhxzldsgeoflldffmajreajdcygoscqoiuicku
+mkrfuebbbfwyphphprkeugxdbnmaphmawyphmkeisqeipzhjqghjuukmldys
+wyphignxmgxn
+
+
+Rank: 70 Score: -1882.3901, Key: (np.int64(9), np.int64(11), np.int64(3), np.int64(22))
+Plaintext:
+iiibpubytayapganaxpiaaecyjrbheirbdcaiixfrabatuvvecvqmdjnhusk
+ocrbijjqolhczyzqqmwovsfnqvavioiixfavsvpshxfcerdmrmjqkgfaqwoe
+gahtlgbpnnpaebrbijsmesptyjpsrbpsparbgadymwdygfaxmkaxuyqinvtu
+parbpuephcgb
+
+
+Rank: 71 Score: -1882.6719, Key: (np.int64(23), np.int64(22), np.int64(25), np.int64(11))
+Plaintext:
+ucfgazwpatwawhxilgerkiuitgddkrridbyqucjvmlezcphpuiadpgvfwtua
+mwddluuhjcchihctocmkintplidwsgucjvdwzqspvvozpsopituhaagpcaug
+agfburzjxvyddqddluckgkjhtgspddspydddagkxakkxhslgeclgmayidjcp
+ydddazhichry
+
+
+Rank: 72 Score: -1883.1982, Key: (np.int64(3), np.int64(21), np.int64(24), np.int64(3))
+Plaintext:
+cvcgnwrcxiqtnsiaionainsjqqffticsrjahcvhdforkxkpvsjpomclztuoz
+efffcmlyectazizcwnydpwblwkigctcvhdigoenottbgsejafklyuhbywben
+kvtdderfvnnussffcmohsvnfqqnoffnonuffkvjwmnjwkciomriogxwxvtxk
+nuffnwswtakm
+
+
+Rank: 73 Score: -1884.0470, Key: (np.int64(22), np.int64(23), np.int64(21), np.int64(1))
+Plaintext:
+pcwkilunqpbkwbiiyeuvvihyswvbwpgoplpgpczjwrshwhpphyuriahzgtjm
+dovbomeduayvapinnitwsltdeuakjkpczjakyskrdxexssavkhedlggddebi
+dchjifdbvvctiovbomhgrcjbswkrvbkrctvbdcolpiolyayebsyepurunxwh
+ctvbiluyyvcm
+
+
+Rank: 74 Score: -1884.3081, Key: (np.int64(15), np.int64(5), np.int64(3), np.int64(9))
+Plaintext:
+mikothnlbnuaptmaakxvmaecewnbnrwehdeamiffjnvndhzvecfdcqpnzhgk
+qcnbqwbdayfpvlpdwmgonffngisikomiffsiyilflxnpmejzfzbdwgfnkwye
+oavtftdpznrnaonbqwomqsptewlfnblfrnnboaflawflisakekakcygifvdh
+rnnbthecfpso
+
+
+Rank: 75 Score: -1884.6328, Key: (np.int64(15), np.int64(6), np.int64(1), np.int64(5))
+Plaintext:
+sojcahurebecijrspysfesouxkjjyblwtheisodxelenanfbouglterzavcm
+owjjxmgtheofubgrmswkqhrtfafcwcsodxfcfqqlppoplqmfmngtiietkyys
+eovxidbjrfevjwjjxmmiqovjxkqljjqlevjjeouhksuhdepycqpyuasafpan
+evjjahbuofjm
+
+
+Rank: 76 Score: -1885.5351, Key: (np.int64(20), np.int64(1), np.int64(1), np.int64(9))
+Plaintext:
+rmcymjetcnfqihomcgqlbmbicixtqtoeldxirmbpgrmxebrzbikpcujhczfw
+hoxtioinegipixchrenwstrpowucpyrmbpucksefbfmtwmercpinfeepfyps
+palxqphbbzkvkgxtionanovhciefxtefkvxtpaapngapwkcgricgfubwhpeb
+kvxtmjoiipgc
+
+
+Rank: 77 Score: -1885.6611, Key: (np.int64(3), np.int64(5), np.int64(18), np.int64(17))
+Plaintext:
+knswfwjubymzvogccepegpolygrdzmwuhvafknnfhidktcxnolzmasfjdkaf
+knrduijuwufwpensafcrtcrdmmiosjknnfiogclghvlgionsxajuknrqwhed
+oltphixntpnseqrduiuvsjvbyglgrdlgnsrdoldkibdkmmcesjceedmzvbtc
+nsrdfwoyfwyg
+
+
+Rank: 78 Score: -1885.6804, Key: (np.int64(6), np.int64(3), np.int64(18), np.int64(20))
+Plaintext:
+ffstorwpihhdoterexoprrlpullratsnjfbfffpzytwlitfflpspmrxpandt
+jhlrsdkjwpaxmbmrtbxnsldngjebftffpzebqxovnhqjylgbyvkjpxqnthjd
+vhnpurjhrrofyrlrsddpljbtulovlrovoflrvhgdzfgdixexzdexnftjrbit
+oflrorypaxif
+
+
+Rank: 79 Score: -1885.7634, Key: (np.int64(3), np.int64(3), np.int64(8), np.int64(3))
+Plaintext:
+ybuirmvovisrjawsyizywfufmiztdyssjjatybrfrulmzolbufxgsibdbiir
+oxztgazaionarafiubwpnetbosikuvybrfiksgbozfjmkqhojizamrtowrev
+ivtjbybxjfngmgztgaypspjnmiboztbongztivzcopzcwqyiwbyiurofvxzo
+ngztrmusnaqu
+
+
+Rank: 80 Score: -1885.9163, Key: (np.int64(3), np.int64(17), np.int64(17), np.int64(10))
+Plaintext:
+emgvlapolqccpsozabhiomewsjvbboutvpawemplzghejurzewlywfdfpmea
+muvbahrqcbjydejskgmadoflanilgiemplilmxtkdxxowzxgdyrqygfywiek
+yqtrryzhbznwibvbahwqsupfsjtkvbtknwvbyqbyyobyerabuwabmsaavlju
+nwvblaejjyul
+
+
+Rank: 81 Score: -1886.0424, Key: (np.int64(6), np.int64(9), np.int64(22), np.int64(23))
+Plaintext:
+ppmweimuaqpbywiiqykuvvthesnvowegdpbpppdzuwysqwppthyukijhggfj
+xdnviooemucygakilnptksxtaeeazjppdzeagyskldwessyaokoejlkgtdjb
+ndnhmixdvvocainviorhlrljessknvskocnvndsohpsoeyqynbqyrpnrrnqw
+ocnveigucygc
+
+
+Rank: 82 Score: -1886.7587, Key: (np.int64(20), np.int64(1), np.int64(3), np.int64(19))
+Plaintext:
+rqcemzedcrfwiboyceqxbybycexnqxoyltxarqblgpmzedrdbykncejhcrfw
+hixnioibeqibibcrrqnssjrdoyuiperqbluikaedblmzwuedcribfwedfwpe
+peltqxhvblknkaxnionsnsvbceedxnedknxnpeafnsafwucerqcefwbyhved
+knxnmzoyibgc
+
+
+Rank: 83 Score: -1887.0902, Key: (np.int64(3), np.int64(20), np.int64(9), np.int64(11))
+Plaintext:
+widigpkbutgyupdataspqaiexyjrihnifbacwijxkribatjvieovvmjjshss
+gojrvigjxokhazizgqiwmvpfxqvaqiwijxvahsipphaftegdyrgjikcfwqeo
+ugthaltbdnapjejrviqssehpxyipjripapjrugudcmudpgtaomtaoukqvnat
+apjrgpvekhtg
+
+
+Rank: 84 Score: -1887.1074, Key: (np.int64(1), np.int64(9), np.int64(9), np.int64(11))
+Plaintext:
+miyijptbntqyhpmagalpmaieiytrtheidbicmipxrrxbbtzviepvumhjzhws
+ootroinjgophxzhzeqwwtvpfwqcayimipxcassfpfhtfmerdprnjekpfyqso
+agxhplbbznvpgetroiasoehpiyfptrfpvptragpdgmpdkggaimgauuwqpnbt
+vptrjpiephcg
+
+
+Rank: 85 Score: -1887.1182, Key: (np.int64(9), np.int64(8), np.int64(4), np.int64(7))
+Plaintext:
+qhlyusggkuulkalkhiekyxaftednauparfcjqhdrgiaqcqdhafsingdzewez
+undnnmuotggkcuaguxarmsvbtqnyylqhdrnyxcaivlcyhcukwquoajioqvox
+khhrcchnlxcwdadnnmyjehxnteaidnaicwdnkhksixksvghisphisdgdnlcq
+cwdnusnsgkhm
+
+
+Rank: 86 Score: -1887.5414, Key: (np.int64(11), np.int64(19), np.int64(16), np.int64(25))
+Plaintext:
+anqyrcxgrwkrxyccuqlgcpatiotppyyktnunanxzzylobynnatrgocftxkal
+mjtpuenskgbqfibcwvmxfovxusgiqlanxzgimqdufjjsoojifunsedvkojar
+ejdtnczjpphagctpueotifxliodutpduhatpejpeenpeaquqyruqmnuftvby
+hatprcagbqya
+
+
+Rank: 87 Score: -1888.8657, Key: (np.int64(15), np.int64(22), np.int64(13), np.int64(1))
+Plaintext:
+kstyitctapiwaftevoqhgeswpsxvsxrodlemksxxchsvejxfswwnfqxbqnqi
+ikxvfgirpgcvelsdicscmpblpyfmgyksxxfmngsrbdenvyiputirsyolkmym
+acvzepvxtrezxixvfggkqmnfpssrxvsrezxvacabowabbuvowkvowecyfzej
+ezxvitfwcvvq
+
+
+Rank: 88 Score: -1889.0710, Key: (np.int64(8), np.int64(4), np.int64(8), np.int64(3))
+Plaintext:
+hbhitmvolibrtaxsxityxfpfbiptjyhsvjtthbdfpuvmlohbpfhgzifdjinr
+vxpthafavojazazirbfphenbrsxkhvhbdfxkngtojfnmpqropifadrnorrvv
+lvjjbyvxxftgpgpthanppptnbitopttotgptlvrczprclqxizbxijrrfxxlo
+tgpttmpsjalu
+
+
+Rank: 89 Score: -1889.5043, Key: (np.int64(25), np.int64(22), np.int64(6), np.int64(9))
+Plaintext:
+qpvmyeomaagpiylipqokyvothelnioreddqbqpzdiuuyiqdpotoylkbjegif
+axlntikobmccwgykwlepukrxxajeizqpzdjepgssnlkwhswysokocjekatgj
+anbnymnxlvqolalntiorklvlhesslnssqolnangsqhgspepqgnpqqrknjriq
+qolnyebgccdg
+
+
+Rank: 90 Score: -1889.5730, Key: (np.int64(12), np.int64(21), np.int64(6), np.int64(9))
+Plaintext:
+xpwmeeumkajpcygiaqgktvrtoepnkocerddbxpbdauyyyqxprtayukzjqgzf
+pxpnmisoumgckguktlbpekfxyawejzxpbdweigasjlwwisgyyosodjsknttj
+xnbnimpxtvqocapnmidrxlploeaspnasqopnxnesthesueaqvnaqlrlnjryq
+qopneeeggcmg
+
+
+Rank: 91 Score: -1889.5786, Key: (np.int64(11), np.int64(7), np.int64(2), np.int64(21))
+Plaintext:
+grculorihkulduuowgtiubkvowpbnuacfrurgrvzhuhwlutrkvfisohvlcwh
+kxpboyfqeixgrsfomfcpvwhpgqgschgrvzgsggvajxxqawzszafqqthcoxal
+uxdvdoxxhbhecopboymviddhowvapbvahepbuxryorryigwgwlwgergdtflu
+hepblokixgce
+
+
+Rank: 92 Score: -1890.1892, Key: (np.int64(11), np.int64(18), np.int64(7), np.int64(14))
+Plaintext:
+uerpkmqeocaseixbfpqqkoqoppxxeqjbhlukuezbegcmeehrqoqkxpdjwces
+ouxxnviidrsigikcgewacsjrvbthecuezbthfxyebbimpjgeyciissweosac
+ocdlkqbhxbukxxxxnvqaiarvppyexxyeukxxocaauaaafjfpaefpusiothee
+ukxxkmdbsiht
+
+
+Rank: 93 Score: -1891.1309, Key: (np.int64(24), np.int64(13), np.int64(23), np.int64(0))
+Plaintext:
+dswbocuymmpkauyritcklefiyrrnocmzzzhydsjbqswogqdffiyeqftdeale
+lernenwoulmmyeqsrahyaubpahgdjodsjbgdwbmmhlqsuleackwoxwocbcnu
+zmdfiglrlruyenrnennuvgnhyrmmrnmmuyrnzmqsjoqsenitxwitvgnutdgq
+uyrnocsvmmah
+
+
+Rank: 94 Score: -1891.3059, Key: (np.int64(6), np.int64(9), np.int64(9), np.int64(18))
+Plaintext:
+pymbemmyaopqysijqbkgvwtwebnpogejdhbcpydjuiymqypltwyckbjxgofq
+xanpifosmlcsgskolypekqxlajenzopydjengpsyljwmsxyyooosjqkytqjo
+nonhmgxnvjocapnpifrelelfebsynpsyocnpnoseheseexqbnyqbrqnwrnqy
+ocnpemgjcsgv
+
+
+Rank: 95 Score: -1891.7857, Key: (np.int64(15), np.int64(22), np.int64(7), np.int64(11))
+Plaintext:
+kmtsircjatioadtmvwqfgmskpkxjsjridbekkmxhcvslenxzskwhfqxdqzqe
+iaxjfaitpwchelsdiisemjbhpefugskmxhfuncspbpejvmivuhitsiohksyc
+agvlehvntzexxwxjfaggqandpkspxjspexxjagahowahbyvwwkvwwqcefhen
+exxjirfkchvu
+
+
+Rank: 96 Score: -1892.0707, Key: (np.int64(15), np.int64(24), np.int64(3), np.int64(5))
+Plaintext:
+wkrswfqjgbcmmvdgzcgpqgmobyprozvwbheawktnshkdytjxmoyznabfsdia
+ekprtusjdwufcpanoaycstzrnmfieswktnfibgcljhgltionixsjqkmrkwye
+govtkhrxdtenpeprtucuqszvbyclprclenprgoediiedrmzcsszcgeamfvyt
+enprwfzoufdy
+
+
+Rank: 97 Score: -1892.5057, Key: (np.int64(14), np.int64(3), np.int64(15), np.int64(25))
+Plaintext:
+pceqgdqxijvmkfiiuocbvinwyurlszskjnvepcbrinitgvppnwwzwevdgthe
+ncrlyawxqkadqbwrzeroovvlcmcsrqpcbrcsciohhnahssmrmpwxxcillkfy
+vwxvknnpvvireyrlyazabqxfyuohrlohirrlvwqtlsqtomuohquodypmpfgv
+irrlgdawadeu
+
+
+Rank: 98 Score: -1892.6915, Key: (np.int64(3), np.int64(12), np.int64(21), np.int64(17))
+Plaintext:
+auluctgvwleoytpkdkgtckgcboppyjxunvagauzdypovylnhgcghpmtfkjya
+wipprusftiqjizczieksohxnfevkyuauzdvkdautjjsnbcirupsfqqknweei
+wytjcbjvpxatpcpprugascltboutpputatppwyeramerdydkemdkawsevxyl
+atppcttcqjny
+
+
+Rank: 99 Score: -1892.7215, Key: (np.int64(15), np.int64(20), np.int64(16), np.int64(17))
+Plaintext:
+yrvguyocuyopocjoraauwbyrdsfvwonufvenyrbpmmaukwlryruyxwtdocyr
+mzfvrayebckwgqkwcxmzgqdfrafiityrbpfizmigtdckxwckgqyeulqskjyr
+ulvtyezzjbeafifvrakjqfbpdsigfvigeafvulwoulwoleraahramzenfvkw
+eafvuylekwnu
+
+
+Rank: 100 Score: -1892.7578, Key: (np.int64(24), np.int64(11), np.int64(7), np.int64(23))
+Plaintext:
+rgygaxgpgdveoxoueumxbulameznsligbphkrgnjanepmdrtlawtimpbclti
+pcznqgmbgculazizlsboutdvcsgulgrgnjguiicxzlovwayfonmbzwqvbsnc
+tqdlcrppbhuxmaznqgrivabxmecxzncxuxzntqmfpmmfoqeubmeulypsthmd
+uxznaxyaulsq
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="3_2_elementary_matrix_theory.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">3.2 Elementary Matrix Theory</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-3-3">Exercises 3.3</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-computer-program-to-both-encipher-and-decipher-a-message-using-hill-s-digraph-system">5. Write a computer program to both encipher and decipher a message using Hill’s (digraph) System.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-hill-s-system-with-key-begin-pmatrix-6-3-7-8-end-pmatrix-encipher-the-message">1. Using Hill’s System with <span class="math notranslate nohighlight">\(key = \begin{pmatrix} 6 &amp; 3 \\ 7 &amp; 8 \end{pmatrix}\)</span> encipher the message:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decipher-the-following-message-that-was-enciphered-using-hill-s-system-with-key-begin-pmatrix-3-2-8-5-end-pmatrix">2. Decipher the following message that was enciphered using Hill’s System with <span class="math notranslate nohighlight">\(key = \begin{pmatrix} 3 &amp; 2 \\ 8 &amp; 5 \end{pmatrix}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-extending-hill-s-digraph-system-to-a-trigraph-system-that-is-rather-than-enciphering-and-deciphering-characters-in-pairs-you-wish-to-encipher-them-three-at-a-time-describe-how-you-would-proceed-be-sure-to-consider-whatever-restrictions-are-necessary-to-impose-on-the-key-to-assure-that-a-message-is-decipherable-hint-see-exercises-3-2-9">4. Consider extending Hill’s (digraph) System to a trigraph system. That is, rather than enciphering and deciphering characters in pairs, you wish to encipher them three at a time. Describe how you would proceed. Be sure to consider whatever restrictions are necessary to impose on the key to assure that a message is decipherable. (Hint: See Exercises 3.2, #9.)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#molly-has-intercepted-the-following-message-that-was-enciphered-using-hill-s-system-digraph-version">3. Molly has intercepted the following message that was enciphered using Hill’s System (digraph version):</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Dan Douglas
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
