@@ -18,14 +18,14 @@ However, we can use the _Well-Ordering Axiom_ to prove that any non-empty subset
 > By the _**Well-Ordering Axiom**_, $S'$ contains a least element.  Let's call that element, $n'$.  Thus,
 > 
 > $$
-  n' \le k', \quad \forall \ k' \in S'
-> $$
+  n' \le k', \quad \forall \ k' \in S' 
+$$
 > 
 > But, multiplying each side of that inequality by $-1$  means that
 > 
 > $$
   n \ge k, \quad \forall  \ k \in S 
-> $$
+$$
 > 
 > and so, $n$ is the greatest element in $S$.
 
