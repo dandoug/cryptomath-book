@@ -2,3 +2,6 @@
 _build
 .idea
 __pycache__
+.secrets
+.coverage
+coverage.xml

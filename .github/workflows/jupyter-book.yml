@@ -1,0 +1,48 @@
+name: Jupyter Book Build and Publish CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  build:
+    runs-on:
+      - ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.2.2
+
+      - name: Set up Python
+        uses: actions/setup-python@v5.5.0
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade --no-cache-dir pip
+          pip install --no-cache-dir -r requirements.txt
+
+      - name: Run pytest with coverage
+        run: |
+          pytest --cov=src --cov-report=xml --cov-fail-under=70
+          COVERAGE=$(grep -oE 'line-rate="[0-9]+\.[0-9]+"' coverage.xml | grep -oE '[0-9]+\.[0-9]+' | head -n 1 | awk '{printf "%.2f\n", $1 * 100}')
+          echo "PYTEST_COVERAGE=$COVERAGE" >> $GITHUB_ENV
+
+      - name: Run jupyter book
+        run: |
+          jupyter-book clean .
+          jupyter-book build .
+
+      - name: Publish updated reports and book to github pages
+        run: |
+          .github/scripts/move_reports_to_gh_pages.sh  

@@ -29,3 +29,12 @@ jupyter-book build  .
 ```
 
 The book will be available in the `_build/html/index.html` file after building.
+
+## Running the github workflow locally
+
+The local-only `.secrets` file should have a single line, `GITHUB_TOKEN=...` with the PAT token for committing the gh-pages update.
+
+```bash
+act -P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-latest --secret-file .secrets
+```
+
