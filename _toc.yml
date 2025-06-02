@@ -5,3 +5,4 @@ format: jb-book
 root: markdown/intro
 chapters:
 - file: markdown/1_1_induction
+- file: notebooks/1_2_primes_gcd.ipynb

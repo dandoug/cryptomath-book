@@ -12,9 +12,18 @@ only_build_toc_files: true
 execute:
   execute_notebooks: force
 
+parse:
+  myst_enable_extensions:
+    - colon_fence
+    - dollarmath
+
 sphinx:
   extra_extensions:
     - sphinx_proof
+  config:
+    myst_enable_extensions:
+      - colon_fence
+      - dollarmath
 
 # Define the name of the latex output file for PDF builds
 latex:
