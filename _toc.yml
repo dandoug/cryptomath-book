@@ -6,3 +6,4 @@ root: markdown/intro
 chapters:
 - file: markdown/1_1_induction
 - file: notebooks/1_2_primes_gcd.ipynb
+- file: notebooks/1_3_relative_primes.ipynb

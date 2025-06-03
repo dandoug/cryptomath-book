@@ -16,6 +16,9 @@ parse:
   myst_enable_extensions:
     - colon_fence
     - dollarmath
+    - amsmath
+    - html_image
+    - html_admonition
 
 sphinx:
   extra_extensions:
@@ -24,6 +27,10 @@ sphinx:
     myst_enable_extensions:
       - colon_fence
       - dollarmath
+      - amsmath
+      - html_image
+      - html_admonition
+
 
 # Define the name of the latex output file for PDF builds
 latex:
