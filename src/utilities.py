@@ -47,6 +47,14 @@ def display_prime_factors_table(inputs, outputs):
     display(Math(latex_table))
 
 
+def display_quotient_and_remainders_table(pairs, quotients_and_remainders):
+    latex_table = _get_quotient_and_remainders_table(pairs, quotients_and_remainders)
+    display(Math(latex_table))
+
+def display_gcd_table(pairs, gcds):
+    latex_table = _get_gcd_table(pairs, gcds)
+    display(Math(latex_table))
+
 def _get_prime_factors_table(inputs, outputs):
     """
     Create LaTeX content for a table displaying prime factorizations
@@ -75,3 +83,25 @@ def _add_factor_to_rexpression(expression, factor, exp):
     else:
         expression += str(factor)
     return expression
+
+def _get_quotient_and_remainders_table(pairs, quotients_and_remainders):
+    latex_content = "\\begin{array}{c|c|c|c}\n"
+    latex_content += ("\\text{dividend} & \\text{divisor} & " +
+                      "\\text{quotient} & \\text{remainder} \\\\\n\\hline\n")
+
+    for p, qr in zip(pairs, quotients_and_remainders):
+        latex_content += f"{p[0]} & {p[1]} & {qr[0]} & {qr[1]} \\\\\n"
+
+    latex_content += "\\end{array}"
+    return latex_content
+
+def _get_gcd_table(pairs, gcds):
+    latex_content = "\\begin{array}{c|c|c}\n"
+    latex_content += ("x & y & " +
+                      "\\text{gcd(} x , y \\text{)} \\\\\n\\hline\n")
+
+    for p, gcd in zip(pairs, gcds):
+        latex_content += f"{p[0]} & {p[1]} & {gcd} \\\\\n"
+
+    latex_content += "\\end{array}"
+    return latex_content
