@@ -55,6 +55,14 @@ def display_gcd_table(pairs, gcds):
     latex_table = _get_gcd_table(pairs, gcds)
     display(Math(latex_table))
 
+def display_mod_inverse_table(a_and_n, inv_mod_n):
+    latex_table = _get_mod_inverse_table(a_and_n, inv_mod_n)
+    display(Math(latex_table))
+
+def display_sum_prod_mod_table(a_b_n, sum_prod_mod_n):
+    latex_table = _get_sum_prod_mod_table(a_b_n, sum_prod_mod_n)
+    display(Math(latex_table))
+
 def _get_prime_factors_table(inputs, outputs):
     """
     Create LaTeX content for a table displaying prime factorizations
@@ -102,6 +110,29 @@ def _get_gcd_table(pairs, gcds):
 
     for p, gcd in zip(pairs, gcds):
         latex_content += f"{p[0]} & {p[1]} & {gcd} \\\\\n"
+
+    latex_content += "\\end{array}"
+    return latex_content
+
+def _get_mod_inverse_table(a_and_n, inv_mod_n):
+    latex_content = "\\begin{array}{c|c|c}\n"
+    latex_content += ("a & n & " +
+                      "\\text{additive inverse of}\\ a \\pmod{n} \\\\\n\\hline\n")
+
+    for p, inv in zip(a_and_n, inv_mod_n):
+        latex_content += f"{p[0]} & {p[1]} & {inv} \\\\\n"
+
+    latex_content += "\\end{array}"
+    return latex_content
+
+
+def _get_sum_prod_mod_table(a_b_n, sum_prod_mod_n):
+    latex_content = "\\begin{array}{c|c|c|c|c}\n"
+    latex_content += ("a & b & n & " +
+                      "a +_n b & a \\times_n b \\\\\n\\hline\n")
+
+    for p, ans in zip(a_b_n, sum_prod_mod_n):
+        latex_content += f"{p[0]} & {p[1]} & {p[2]} & {ans[0]} & {ans[1]} \\\\\n"
 
     latex_content += "\\end{array}"
     return latex_content
