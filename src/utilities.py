@@ -63,6 +63,10 @@ def display_sum_prod_mod_table(a_b_n, sum_prod_mod_n):
     latex_table = _get_sum_prod_mod_table(a_b_n, sum_prod_mod_n)
     display(Math(latex_table))
 
+def display_key_inv_table(keys, inv_keys):
+    latex_table = _get_key_inv_table(keys, inv_keys)
+    display(Math(latex_table))
+
 def _get_prime_factors_table(inputs, outputs):
     """
     Create LaTeX content for a table displaying prime factorizations
@@ -133,6 +137,17 @@ def _get_sum_prod_mod_table(a_b_n, sum_prod_mod_n):
 
     for p, ans in zip(a_b_n, sum_prod_mod_n):
         latex_content += f"{p[0]} & {p[1]} & {p[2]} & {ans[0]} & {ans[1]} \\\\\n"
+
+    latex_content += "\\end{array}"
+    return latex_content
+
+
+def _get_key_inv_table(keys, inv_keys):
+    latex_content = "\\begin{array}{c|c}\n"
+    latex_content += ("k & k^{-1} \pmod{26} \\\\\n\\hline\n")
+
+    for k, i in zip(keys, inv_keys):
+        latex_content += f"{k} & {i} \\\\\n"
 
     latex_content += "\\end{array}"
     return latex_content
