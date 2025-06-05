@@ -23,7 +23,7 @@ def char_at(pos: int) -> str:
     """
     Return the character at position pos in the alphabet
     pos is computed using mod 26 arithmatic and will be in the range 0..25
-    By convention pos 1 is 'a' and pos 26 is 'z', so treat 0 as 26 lookup
+    By convention pos 1 is 'a' and pos 26 is 'z', so treat 0 as 26
     """
     if pos < 0:
         raise ValueError("position out of range")
