@@ -11,3 +11,4 @@ parts:
       - file: notebooks/1_3_relative_primes.ipynb
       - file: notebooks/1_4_modular_arithmatic.ipynb
       - file: notebooks/1_5_simple_ciphers.ipynb
+      - file: notebooks/1_6_cryptoanalysis_monoalphabetic_substitution_ciphers.ipynb
