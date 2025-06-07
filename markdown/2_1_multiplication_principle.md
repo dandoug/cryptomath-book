@@ -40,7 +40,7 @@ $$
 ### 4. A test contains 25 questions including 10 True-False, 10 multiple choice (each with 3 possible answers), and 5 multiple choice (each with 5 possible answers). In how many different ways can the complete test be answered? Of these, how many are completely correct?
 
 $$
-  2^{10} \cdot 3^{10} \cdot 5^{5} = 188956800000
+  2^{10} \cdot 3^{10} \cdot 5^{5} = 188,956,800,000
 $$
 
 Assuming that each question only has one correct answer, then there is only $1$ correct permutation that is completely correct.
