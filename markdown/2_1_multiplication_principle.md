@@ -50,7 +50,7 @@ Assuming that each question only has one correct answer, then there is only $1$ 
 This boils down to the number of permutations of the $25$ people which is
 
 $$
- 25! = 15511210043330985984000000
+ 25! = 15,511,210,043,330,985,984,000,000
 $$
 
 ### 6. Stephanie is trying to communicate with Beth by raising some flags up a flagpole. She has five different flags and a message consists of 3 of these 5 flags raised up the pole in a certain order. How many messages are possible?
@@ -99,6 +99,7 @@ $$
 ### 9. How many different social security numbers would be possible if there were no restrictions on the digits used? (A social security number has the format XXX-XX-XXXX where each X represents a digit.)
 
 Nine digits in the number, so
+
 $$
   10^9 = 1,000,000,000
 $$  
@@ -118,7 +119,7 @@ If grouping by subject matter.  There are two levels of arrangement to consider,
 There are
 
 $$
-  8! + 12! + 6! = 479,042,640
+  8! \cdot 12! \cdot 6! = 13,905,608,048,640,000
 $$
 
 ways of arranging the books within their subject.  and there are $3! = 6$ was of arranging the subjects so there are
