@@ -23,6 +23,7 @@ parse:
 sphinx:
   extra_extensions:
     - sphinx_proof
+    - sphinxcontrib.mermaid
   config:
     myst_enable_extensions:
       - colon_fence
@@ -30,6 +31,20 @@ sphinx:
       - amsmath
       - html_image
       - html_admonition
+    mermaid_init_js: |
+      {
+        "theme": "base",
+        "themeVariables": {
+          "darkMode": true,
+          "primaryTextColor": "var(--pst-color-text-base)",
+          "lineColor": "var(--pst-color-text-base)",
+          "primaryColor": "var(--pst-color-primary)",
+          "secondaryColor": "var(--pst-color-secondary)",
+          "tertiaryColor": "var(--pst-color-text-base)"
+        }
+      }
+
+
 
 
 # Define the name of the latex output file for PDF builds
