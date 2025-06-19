@@ -15,3 +15,4 @@ parts:
   - caption: 2. Polyalphabetic Substitution Ciphers
     chapters:
       - file: markdown/2_1_multiplication_principle.md
+      - file: notebooks/2_2_permutations_and_combinations.ipynb
