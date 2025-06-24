@@ -18,3 +18,4 @@ parts:
       - file: notebooks/2_2_permutations_and_combinations.ipynb
       - file: markdown/2_3_probability.md
       - file: markdown/2_4_independent_events_expected_number.md
+      - file: notebooks/2_5_disguising_the_frequencies.ipynb

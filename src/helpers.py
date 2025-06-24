@@ -4,7 +4,7 @@ Helper functions for working with ciphers
 from IPython.display import display, Math
 
 CHARACTERS = 'abcdefghijklmnopqrstuvwxyz'
-
+NUMBERS = '0123456789'
 
 def pos(c: str) -> int:
     """
@@ -26,11 +26,9 @@ def char_at(pos: int) -> str:
     pos is computed using mod 26 arithmatic and will be in the range 0..25
     By convention pos 1 is 'a' and pos 26 is 'z', so treat 0 as 26
     """
-    if pos < 0:
-        raise ValueError("position out of range")
     ix = pos % 26
-    if ix == 0:
-        ix = 26
+    if ix < 1:
+        ix += 26  # handles negative input and 0->26 = 'z'
     return CHARACTERS[ix-1]
 
 
@@ -93,6 +91,13 @@ def strip_text(text: str) -> str:
     return ''.join(c for c in text.lower() if c in CHARACTERS)
 
 
+def strip_number_text(text: str) -> str:
+    """
+    Clean an input text for decryption by
+    - removing all characters that are not 0...9
+    """
+    return ''.join(c for c in text if c in NUMBERS)
+
 def format_ciphertext(ciphertext: str) -> str:
     """
     Convert ciphertext to uppercase and format into blocks of 5 characters,
@@ -127,6 +132,17 @@ def format_plaintext(plaintext: str) -> str:
         formatted_text.append(plaintext[i:i + 60])
     return '\n'.join(formatted_text)
 
+
+def format_number_ciphertext(ciphertext: str) -> str:
+    """
+    Display encrypted letter-number text in lines of 60 characters
+    """
+    # just to make sure that all numbers and no spaces
+    ciphertext = ''.join(c for c in ciphertext if c in NUMBERS)
+    formatted_text = []
+    for i in range(0, len(ciphertext), 60):
+        formatted_text.append(ciphertext[i:i + 60])
+    return '\n'.join(formatted_text)
 
 def display_fequency_tables(letter_counts: dict[str, int],
                            digraph_counts: dict[str, int],
