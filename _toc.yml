@@ -19,3 +19,6 @@ parts:
       - file: markdown/2_3_probability.md
       - file: markdown/2_4_independent_events_expected_number.md
       - file: notebooks/2_5_disguising_the_frequencies.ipynb
+  - caption: 3. Polygraphic Substitution Ciphers
+    chapters:
+      - file: notebooks/3_1_elementary_polygraphic_substitution_ciphers.ipynb
