@@ -22,3 +22,4 @@ parts:
   - caption: 3. Polygraphic Substitution Ciphers
     chapters:
       - file: notebooks/3_1_elementary_polygraphic_substitution_ciphers.ipynb
+      - file: notebooks/3_2_elementary_matrix_theory.ipynb
