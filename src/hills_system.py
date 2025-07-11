@@ -6,6 +6,8 @@ import signal
 import time
 from itertools import product
 import numpy as np
+import numpy.typing as npt
+from numpy.typing import NDArray
 from sympy import mod_inverse
 
 
@@ -108,6 +110,17 @@ def matrix_inverse_mod26(matrix: np.ndarray) -> np.ndarray:
 
     return inv.astype(int)
 
+
+def validate_hills_key(key: npt.NDArray[np.int_]):
+    """
+    Validate a key for Hill's cipher system (ivertible check done separately)
+    """
+    if not isinstance(key, np.ndarray):
+        raise ValueError("Key must be a numpy array")
+    if key.ndim != 2 or key.shape[0] != key.shape[1]:
+        raise ValueError("Key must be a 2D square matrix")
+    if not np.issubdtype(key.dtype, np.integer):
+        raise ValueError("Key must contain only integers")
 
 class TimeoutException(Exception):
     pass
