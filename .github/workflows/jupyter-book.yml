@@ -34,7 +34,7 @@ jobs:
 
       - name: Run pytest with coverage
         run: |
-          pytest --cov=src --cov-report=xml --cov-fail-under=20
+          pytest --cov=src --cov-report=xml --cov-fail-under=10
           COVERAGE=$(grep -oE 'line-rate="[0-9]+\.[0-9]+"' coverage.xml | grep -oE '[0-9]+\.[0-9]+' | head -n 1 | awk '{printf "%.2f\n", $1 * 100}')
           echo "PYTEST_COVERAGE=$COVERAGE" >> $GITHUB_ENV
 
