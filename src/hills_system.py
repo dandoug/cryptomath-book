@@ -24,9 +24,10 @@ def int_det(a: np.ndarray) -> int:
 
 
 def _mod_26(i: int) -> int:
-    while i < 0:
-        i += 26
-    return i % 26
+    ans = i % 26
+    while ans < 0:
+        ans += 26
+    return ans
 
 
 def is_invertible_mod_26(a: np.ndarray) -> bool:
