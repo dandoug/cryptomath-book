@@ -2,14 +2,14 @@
 Explore some things related to hill's system
 """
 import math
-import signal
 import time
 from itertools import product
+from sympy import mod_inverse
+from heapq import heappush, heappushpop, nlargest
+from dataclasses import dataclass
+from typing import Any, List
 import numpy as np
 import numpy.typing as npt
-from numpy.typing import NDArray
-from sympy import mod_inverse
-
 
 def int_det(a: np.ndarray) -> int:
     """
@@ -37,6 +37,10 @@ def is_invertible_mod_26(a: np.ndarray) -> bool:
     # should check that is square and made of integers, but we'll assume
     det = int_det(a)
     return math.gcd(det, 26) == 1
+
+
+current_count = 0
+keys_checked = 0
 
 
 def count_invertible_keys(n: int) -> int:
@@ -123,37 +127,34 @@ def validate_hills_key(key: npt.NDArray[np.int_]):
     if not np.issubdtype(key.dtype, np.integer):
         raise ValueError("Key must contain only integers")
 
-class TimeoutException(Exception):
-    pass
+
+@dataclass
+class Result:
+    """
+    Represents a result object encapsulating a score, a key, and a plaintext.
+    Used in heap to keey only the best results.
+    """
+    score: float
+    key: tuple
+    plaintext: str
+
+    def __lt__(self, other):
+        # For heap operations, compare by score
+        return self.score < other.score
 
 
-def timeout_handler(signum, frame):
-    global current_count, keys_checked
-    raise TimeoutException(
-        f"\nComputation timed out.\n"
-        f"Keys checked: {keys_checked:,}\n"
-        f"Invertible keys found: {current_count:,}"
-    )
+class TopResults:
+    def __init__(self, max_size: int = 10):
+        self.heap: List[Result] = []
+        self.max_size = max_size
 
+    def add(self, score: float, key: tuple, plaintext: str):
+        result = Result(score, key, plaintext)
+        if len(self.heap) < self.max_size:
+            heappush(self.heap, result)
+        elif score > self.heap[0].score:  # if better than worst score
+            heappushpop(self.heap, result)
 
-if __name__ == "__main__":
-    current_count = 0
-    keys_checked = 0
-    signal.signal(signal.SIGALRM, timeout_handler)
-    signal.alarm(300)  # 5 minutes = 300 seconds
-
-    start_time = time.time()
-    try:
-        result = count_invertible_keys(2)
-        end_time = time.time()
-        print(f"\nCompleted!")
-        print(f"Total keys checked: {keys_checked:,}")
-        print(f"Found invertible keys: {result:,}")
-        print(f"Time taken: {end_time - start_time:.2f} seconds")
-    except TimeoutException as e:
-        end_time = time.time()
-        print(e)
-        print(f"Partial execution time: {end_time - start_time:.2f} seconds")
-    finally:
-        signal.alarm(0)
-
+    def get_best(self):
+        # Returns list sorted by score (highest first)
+        return nlargest(len(self.heap), self.heap)
