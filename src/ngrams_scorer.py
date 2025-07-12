@@ -11,7 +11,7 @@ from src.helpers import strip_text
 DATA_DIR = Path(__file__).parent / 'ngrams_data'
 
 
-def _iter_over_ngram_data_file(ngram_filename: str):
+def iter_over_ngram_data_file(ngram_filename: str):
     """
     Iterates over the contents of an n-gram data file. This function supports both plain text files
     and zipped text files. Each yielded line from the file is returned as a string. The function
@@ -64,7 +64,7 @@ class NgramScorer:
         """
         self.ngrams = {}
         key = ''
-        for line in _iter_over_ngram_data_file(ngram_filename):
+        for line in iter_over_ngram_data_file(ngram_filename):
             key, count = line.split(sep)
             self.ngrams[key] = int(count)
         self.ngram_len = len(key)
