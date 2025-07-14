@@ -39,6 +39,31 @@ def format_factors(factors: list[int]) -> str:
     return expression
 
 
+def factors_as_tuples(factors: list[int]) -> list[tuple[int, int]]:
+    """
+    Converts a given list of integer factors into a list of tuples representing
+    the factors and their corresponding exponents. Each factor is expressed as
+    a tuple of its numerical value and its exponent. If a factor does not have
+    an explicitly mentioned exponent, it is assumed to be 1.
+
+    :param factors: A list of integers representing the factors to be processed.
+    :type factors: list[int]
+    :return: A list of tuples where each tuple represents a factor and its
+        corresponding exponent.
+    :rtype: list[tuple[int, int]]
+    """
+    factor_string = format_factors(factors)
+    factor_strings = factor_string.split(" \\cdot ")
+    result = []
+    for fs in factor_strings:
+        if "^" in fs:
+            factor, exp = fs.split("^")
+            result.append((int(factor), int(exp)))
+        else:
+            result.append((int(fs), 1))
+    return result
+
+
 def display_prime_factors_table(inputs, outputs):
     """
     Generate the table latex and display it

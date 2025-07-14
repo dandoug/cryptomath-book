@@ -24,3 +24,6 @@ parts:
       - file: notebooks/3_1_elementary_polygraphic_substitution_ciphers.ipynb
       - file: notebooks/3_2_elementary_matrix_theory.ipynb
       - file: notebooks/3_3_hills_system.ipynb
+  - caption: 4. Public Key Cryptography
+    chapters:
+      - file: notebooks/4_1_more_number_theory.ipynb
