@@ -27,3 +27,4 @@ parts:
   - caption: 4. Public Key Cryptography
     chapters:
       - file: notebooks/4_1_more_number_theory.ipynb
+      - file: notebooks/4_2_rsa_algorithm.ipynb
