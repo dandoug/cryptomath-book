@@ -132,6 +132,16 @@ def format_plaintext(plaintext: str) -> str:
         formatted_text.append(plaintext[i:i + 60])
     return '\n'.join(formatted_text)
 
+def format_pk_plaintext(plaintext: str) -> str:
+    """
+    Display decrypted plaintext in lines of 60 characters
+    """
+    # just to make sure that all letters and no spaces
+    formatted_text = []
+    for i in range(0, len(plaintext), 60):
+        formatted_text.append(plaintext[i:i + 60])
+    return '\n'.join(formatted_text)
+
 
 def format_number_ciphertext(ciphertext: str) -> str:
     """

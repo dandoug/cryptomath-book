@@ -11,6 +11,7 @@ only_build_toc_files: true
 # See https://jupyterbook.org/content/execute.html
 execute:
   execute_notebooks: force
+  timeout: 300  # Time in seconds (this example sets it to 5 minutes)
 
 parse:
   myst_enable_extensions:
