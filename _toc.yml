@@ -29,3 +29,4 @@ parts:
       - file: notebooks/4_1_more_number_theory.ipynb
       - file: notebooks/4_2_rsa_algorithm.ipynb
       - file: notebooks/4_3_two_examples.ipynb
+      - file: notebooks/4_4_other_pk_cryptography.ipynb
